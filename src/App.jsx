@@ -6,7 +6,7 @@ import Register from "./Pages/Register";
 
 function App() {
   return (
-
+    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
