@@ -25,10 +25,10 @@ const Register = () => {
   };
 
   return (
-    <section>
-      <div className="flex flex-col items-center justify-center mx-auto md:h-screen lg:py-0">
-        <div className="w-full  rounded-lg md:mt-0 sm:max-w-md xl:p-0 ">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+    <section className="flex">
+      <div className="flex flex-col justify-center mx-auto md:h-screen lg:py-0 w-full md:w-1/2">
+        <div className="w-full  rounded-lg md:mt-0 mx-auto sm:max-w-md xl:p-0 ">
+          <div className="p-6 space-y-4">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-indigo-600 md:text-2xl">
               Daftar
             </h1>
@@ -222,6 +222,10 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <div
+        className="hidden md:block w-1/2 bg-cover bg-center"
+        style={{ backgroundImage: `url('/Logo Ruang Edukasi.png')` }}
+      ></div>
     </section>
   );
 };
