@@ -107,7 +107,7 @@ function ResertPassword() {
                     : "border-succes"
                 } border-slate-400 px-5 py-2 w-full rounded-lg focus:outline-none`}
               />
-              {showPassword1 ? (
+              {showPassword2 ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -115,7 +115,7 @@ function ResertPassword() {
                   strokeWidth={1.5}
                   stroke="grey"
                   className="w-5 h-5 absolute right-3 cursor-pointer"
-                  onClick={handleVisibilityPassword}
+                  onClick={handleVisibilityPassword2}
                 >
                   <path
                     strokeLinecap="round"
@@ -154,11 +154,14 @@ function ResertPassword() {
             </button>
           </div>
         </form>
-        {passwordMin  < 8 && passwordMin  >= 1 || passwordMin2  < 8 && passwordMin2  >= 1 ?  (
+        {(passwordMin < 8 && passwordMin >= 1) ||
+        (passwordMin2 < 8 && passwordMin2 >= 1) ? (
           <div className="bg-alert px-3 py-2 text-center text-white w-4/12 rounded-lg">
             Password min 8 Karakter
           </div>
-        ) : ""}
+        ) : (
+          ""
+        )}
       </div>
       <div className="bg-primary w-5/12 flex justify-center items-center">
         <img src={logo} alt="gambar logo" />
