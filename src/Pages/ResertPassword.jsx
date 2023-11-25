@@ -26,11 +26,14 @@ function ResertPassword() {
 
   return (
     <div className="flex min-h-screen w-full">
-      <div className="w-7/12 flex flex-col justify-center items-center">
-        <p className="text-primary font-bold text-3xl w-6/12 mb-5">
+      <div className="w-full md:w-7/12 flex flex-col justify-center items-center">
+        <p className="w-9/12 sm:w-7/12 text-primary font-bold text-3xl md:w-8/12 lg:w-7/12 mb-5 xl:w-6/12">
           Reset Password
         </p>
-        <form action="" className="w-6/12 space-y-5 mb-11">
+        <form
+          action=""
+          className="w-9/12 sm:w-7/12 md:w-8/12 lg:w-7/12 space-y-5 mb-11 xl:w-6/12"
+        >
           <div>
             <label htmlFor="name" className="mb-1 flex justify-between">
               <span className="">Masukkan Password Baru</span>
@@ -47,7 +50,7 @@ function ResertPassword() {
                       ? "border-alert"
                       : "border-slate-400"
                     : "border-succes"
-                } border-slate-400 px-5 py-2 w-full rounded-lg focus:outline-none`}
+                } px-5 py-2 w-full rounded-lg focus:outline-none`}
               />
               {showPassword1 ? (
                 <svg
@@ -163,7 +166,7 @@ function ResertPassword() {
           ""
         )}
       </div>
-      <div className="bg-primary w-5/12 flex justify-center items-center">
+      <div className="bg-primary w-5/12 md:flex justify-center items-center hidden">
         <img src={logo} alt="gambar logo" />
       </div>
     </div>
