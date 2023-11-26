@@ -4,6 +4,7 @@ import HomePage from "./Pages/HomePage";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Sidebar from "./Component/Sidebar.jsx";
+import ResertPassword from "./Pages/ResertPassword";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashbord" element={<Sidebar />} />
+        <Route path="/reset" element={<ResertPassword />} />
       </Routes>
     </BrowserRouter>
   );
