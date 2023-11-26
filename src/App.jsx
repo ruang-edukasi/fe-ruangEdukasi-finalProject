@@ -7,16 +7,14 @@ import ResertPassword from "./Pages/ResertPassword";
 
 function App() {
   return (
-    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/reset" element={<ResertPassword />}/>
+        <Route path="/reset" element={<ResertPassword />} />
       </Routes>
     </BrowserRouter>
-    
   );
 }
 
