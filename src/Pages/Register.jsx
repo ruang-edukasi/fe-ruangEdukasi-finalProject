@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 const Register = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -21,7 +21,7 @@ const Register = () => {
     const password = e.target.value;
     const isValid = password.length >= 8;
     setIsPasswordValid(isValid);
-    setIsPasswordTouched(true); 
+    setIsPasswordTouched(true);
   };
 
   return (
