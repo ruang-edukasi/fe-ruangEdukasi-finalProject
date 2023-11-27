@@ -1,9 +1,14 @@
-import  { useState } from "react";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
+
 const Register = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isPasswordTouched, setIsPasswordTouched] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   const handleEmailChange = (e) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,18 +26,32 @@ const Register = () => {
     const password = e.target.value;
     const isValid = password.length >= 8;
     setIsPasswordValid(isValid);
-    setIsPasswordTouched(true); 
+    setIsPasswordTouched(true);
   };
+
+   const handleRegistration = (e) => {
+     e.preventDefault();
+     setShowNotification(true);
+   };
 
   return (
     <section className="flex">
       <div className="flex flex-col justify-center mx-auto md:h-screen lg:py-0 w-full md:w-1/2">
-        <div className="w-full  rounded-lg md:mt-0 mx-auto sm:max-w-md xl:p-0 ">
-          <div className="p-6 space-y-4">
+        <div className="w-full  rounded-lg md:mt-0 mx-auto sm:max-w-md xl:p-0 p-6 ">
+          <div className=" space-y-4">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-indigo-600 md:text-2xl">
+              <FontAwesomeIcon
+                icon={faArrowLeft}
+                className="mr-2 mb-10 text-gray-700 block sm:hidden"
+              />
               Daftar
             </h1>
-            <form className="space-y-4 md:space-y-4" action="#">
+
+            <form
+              className="space-y-4 md:space-y-4"
+              action="#"
+              onSubmit={handleRegistration}
+            >
               <div>
                 <label
                   htmlFor="name"
@@ -219,13 +238,31 @@ const Register = () => {
                 </button>
               </div>
             )}
+            {showNotification && (
+              <div className="flex justify-center mt-4">
+                <button
+                  className="w-lg text-white bg-green-500 hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center"
+                  style={{ borderRadius: "15px" }}
+                  onClick={() => setShowNotification(false)}
+                >
+                  Kode OTP telah dikirim!
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
       <div
-        className="hidden md:block w-1/2 bg-cover bg-center"
-        style={{ backgroundImage: `url('/Logo Ruang Edukasi.png')` }}
+        className="hidden md:block w-1/3 bg-cover bg-center"
+        style={{ backgroundImage: `url('/Logo Ruang Edukasi (2).png')` }}
       ></div>
+      <style>{`
+        @media (max-width: 640px) {
+          body {
+            background-color: #ebf3fc;
+          }
+        }
+      `}</style>
     </section>
   );
 };
