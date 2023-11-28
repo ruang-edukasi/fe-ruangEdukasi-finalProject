@@ -1,13 +1,17 @@
-import Header from "../Components/Header";
+import Footer from "../Components/Footer/Footer";
+import Header from "../Components/Header/Header";
 import Hero from "../Components/Hero/Hero";
-import Card from "../Components/Slider/Category";
+import Category from "../Components/Slider/Category";
+import Course from "../Components/Slider/Course";
 
 function HomePage() {
   return (
     <>
       <Header />
       <Hero />
-      <Card/>
+      <Category />
+      <Course />
+      <Footer/>
     </>
   );
 }
