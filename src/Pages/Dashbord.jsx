@@ -2,7 +2,6 @@ import { useState } from "react";
 import Button from "../Components/Button/Button";
 import Header from "../Components/Header";
 import Sidebar from "../Components/Sidebar";
-import Card from "../Components/Card/Card";
 
 function Dashbord() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -60,7 +59,6 @@ function Dashbord() {
               />
             </div>
           </div>
-          <Card />
         </div>
       </section>
     </>
