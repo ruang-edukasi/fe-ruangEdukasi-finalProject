@@ -1,6 +1,6 @@
 function Sidebar() {
   return (
-    <div className="p-14 border-red-600">
+    <div className="bg-slate-100 rounded-xl p-6">
       <form action="">
         <div className="flex flex-col gap-1 pb-3">
           <h3 className="text-xl font-bold">Filter</h3>
@@ -70,7 +70,9 @@ function Sidebar() {
           </div>
         </div>
         <div className="py-6 px-14">
-          <button className="text-red-600">Hapus Filter</button>
+          <button className="text-red-600 hover:text-red-800">
+            Hapus Filter
+          </button>
         </div>
       </form>
     </div>
