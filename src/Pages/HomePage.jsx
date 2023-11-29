@@ -28,7 +28,7 @@ function HomePage() {
           </div>
           <Category />
         </section>
-        <section className="container pb-10 px-20">
+        <section className="container mx-auto pb-10 px-20">
           <div className="my-8 mb-0 flex justify-between">
             <h2 className="text-xl font-bold">Kursus Populer</h2>
             <Link to="" className="font-bold text-primary">
