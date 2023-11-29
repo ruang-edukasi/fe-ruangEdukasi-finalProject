@@ -1,5 +1,15 @@
+import Header from "../Components/Header";
+import Hero from "../Components/Hero/Hero";
+import Card from "../Components/Slider/Category";
+
 function HomePage() {
-  return <div className="text-3xl font-bold underline">Hello world!</div>;
+  return (
+    <>
+      <Header />
+      <Hero />
+      <Card />
+    </>
+  );
 }
 
 export default HomePage;

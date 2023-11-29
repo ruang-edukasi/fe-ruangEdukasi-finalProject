@@ -33,7 +33,9 @@ function Login() {
           <div>
             <label htmlFor="name" className="mb-1 flex justify-between">
               <span className="">Password</span>{" "}
-              <a className="text-primary " href="#">Reset Password</a>
+              <a className="text-primary " href="#">
+                Reset Password
+              </a>
             </label>
             <div className="relative flex items-center">
               <input
