@@ -251,10 +251,9 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <div
-        className="hidden md:block w-1/3 bg-cover bg-center"
-        style={{ backgroundImage: `url('/Logo Ruang Edukasi (2).png')` }}
-      ></div>
+      <div className="bg-primary w-5/12 md:flex justify-center items-center hidden">
+        <img src="/logo.svg" alt="gambar logo" className="h-36" />
+      </div>
       <style>{`
         @media (max-width: 640px) {
           body {
