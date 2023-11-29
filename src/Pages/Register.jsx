@@ -2,7 +2,6 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-
 const Register = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -29,10 +28,10 @@ const Register = () => {
     setIsPasswordTouched(true);
   };
 
-   const handleRegistration = (e) => {
-     e.preventDefault();
-     setShowNotification(true);
-   };
+  const handleRegistration = (e) => {
+    e.preventDefault();
+    setShowNotification(true);
+  };
 
   return (
     <section className="flex">
@@ -252,10 +251,9 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <div
-        className="hidden md:block w-1/3 bg-cover bg-center"
-        style={{ backgroundImage: `url('/Logo Ruang Edukasi (2).png')` }}
-      ></div>
+      <div className="bg-primary w-5/12 md:flex justify-center items-center hidden">
+        <img src="/logo.svg" alt="gambar logo" className="h-36" />
+      </div>
       <style>{`
         @media (max-width: 640px) {
           body {

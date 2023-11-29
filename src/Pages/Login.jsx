@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logo_1.png";
 import { useState } from "react";
 
 function Login() {
@@ -33,7 +32,9 @@ function Login() {
           <div>
             <label htmlFor="name" className="mb-1 flex justify-between">
               <span className="">Password</span>{" "}
-              <a className="text-primary " href="#">Reset Password</a>
+              <a className="text-primary " href="#">
+                Reset Password
+              </a>
             </label>
             <div className="relative flex items-center">
               <input
@@ -102,7 +103,7 @@ function Login() {
         )}
       </div>
       <div className="bg-primary w-5/12 md:flex justify-center items-center hidden">
-        <img src={logo} alt="gambar logo" />
+        <img src="/logo.svg" alt="gambar logo" className="h-36" />
       </div>
     </div>
   );
