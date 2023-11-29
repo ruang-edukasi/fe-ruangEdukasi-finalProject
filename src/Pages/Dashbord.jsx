@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../Components/Button/Button";
 import Header from "../Components/Header/Header";
 import Sidebar from "../Components/Sidebar";
+import Card from "../Components/Card/Card";
 
 function Dashbord() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -29,34 +30,41 @@ function Dashbord() {
           </div>
           <div className="flex justify-between">
             <Sidebar />
-            <div className="flex justify-between gap-5">
-              <Button
-                bgColor={
-                  activeFilter === "All"
-                    ? "bg-primary text-white"
-                    : "bg-slate-100"
-                }
-                text="All"
-                onClick={() => handleFilterChange("All")}
-              />
-              <Button
-                bgColor={
-                  activeFilter === "InProgress"
-                    ? "bg-primary text-white"
-                    : "bg-slate-100"
-                }
-                text="In Progress"
-                onClick={() => handleFilterChange("InProgress")}
-              />
-              <Button
-                bgColor={
-                  activeFilter === "Selesai"
-                    ? "bg-primary text-white"
-                    : "bg-slate-100"
-                }
-                text="Selesai"
-                onClick={() => handleFilterChange("Selesai")}
-              />
+            <div className="flex flex-col gap-5">
+              <div className="flex justify-around">
+                <Button
+                  bgColor={
+                    activeFilter === "All"
+                      ? "bg-primary text-white"
+                      : "bg-slate-100"
+                  }
+                  text="All"
+                  onClick={() => handleFilterChange("All")}
+                />
+                <Button
+                  bgColor={
+                    activeFilter === "InProgress"
+                      ? "bg-primary text-white"
+                      : "bg-slate-100"
+                  }
+                  text="In Progress"
+                  onClick={() => handleFilterChange("InProgress")}
+                />
+                <Button
+                  bgColor={
+                    activeFilter === "Selesai"
+                      ? "bg-primary text-white"
+                      : "bg-slate-100"
+                  }
+                  text="Selesai"
+                  onClick={() => handleFilterChange("Selesai")}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <Card />
+                <Card />
+                <Card />
+              </div>
             </div>
           </div>
         </div>
