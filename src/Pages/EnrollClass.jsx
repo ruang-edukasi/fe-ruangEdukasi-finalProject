@@ -1,4 +1,4 @@
-import Header from "../Components/Header";
+import Header from "../Components/Header/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";

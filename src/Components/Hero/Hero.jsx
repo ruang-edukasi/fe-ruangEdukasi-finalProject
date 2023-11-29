@@ -12,7 +12,7 @@ const Hero = () => {
           <h1 className="text-2xl text-left font-bold mb-2">
             Belajar <br /> <span>dari Praktisi Terbaik!</span>
           </h1>
-          <button className="inline-flex items-center justify-center w-64 h-10 gap-2 px-5 text-sm font-bold tracking-wide text-primary transition duration-300 rounded-xl shadow-md whitespace-nowrap bg-white hover:bg-indigo-400 hover:text-white">
+          <button className="inline-flex items-center justify-center w-64 h-10 gap-2 px-5 text-base font-bold tracking-wide text-primary transition duration-300 rounded-2xl whitespace-nowrap bg-white hover:bg-indigo-400 hover:text-white">
             <span>IKUTI KELAS</span>
           </button>
         </div>
