@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../Components/Button/Button";
-import Header from "../Components/Header";
+import Header from "../Components/Header/Header";
 import Sidebar from "../Components/Sidebar";
 
 function Dashbord() {
