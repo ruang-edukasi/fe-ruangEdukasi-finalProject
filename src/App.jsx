@@ -5,6 +5,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Dashbord from "./Pages/Dashbord";
 import ResertPassword from "./Pages/ResertPassword";
+import { Otp } from "./Pages/Otp";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashbord" element={<Dashbord />} />
         <Route path="/reset" element={<ResertPassword />} />
+        <Route path="/otp" element={<Otp />} />
       </Routes>
     </BrowserRouter>
   );

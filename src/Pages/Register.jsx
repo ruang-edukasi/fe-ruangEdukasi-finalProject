@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
+
 const Register = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -16,7 +17,7 @@ const Register = () => {
   };
 
   const handlePhoneChange = (e) => {
-    const phoneRegex = /^\+62\s\.\s\d+$/; // Format: +62 [spasi] . [spasi] [nomor telepon]
+    const phoneRegex = /^\+62\d+$/; // Format: +62[nomor telepon]
     const isValid = phoneRegex.test(e.target.value);
     setIsPhoneValid(isValid);
   };
@@ -28,10 +29,21 @@ const Register = () => {
     setIsPasswordTouched(true);
   };
 
-  const handleRegistration = (e) => {
-    e.preventDefault();
-    setShowNotification(true);
-  };
+ const handleRegistration = (e) => {
+   e.preventDefault();
+   setShowNotification(true);
+
+   setTimeout(() => {
+     setShowNotification(false);
+     // Redirect to the OTP page
+     // Adjust the redirection based on your routing setup
+     window.location.href = "/otp";
+   }, 2000);
+ };
+
+ const goBack = () => {
+   window.history.back();
+ };
 
   return (
     <section className="flex">
@@ -42,6 +54,7 @@ const Register = () => {
               <FontAwesomeIcon
                 icon={faArrowLeft}
                 className="mr-2 mb-10 text-gray-700 block sm:hidden"
+                onClick={goBack}
               />
               Daftar
             </h1>
@@ -86,7 +99,7 @@ const Register = () => {
                   />
                   {isEmailValid && (
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2">
-                      <div className="rounded-full bg-green-500 p-0">
+                      <div className="rounded-full bg-green-500 p-0.5">
                         <svg
                           className="h-5 w-5 text-white"
                           fill="none"
@@ -120,14 +133,14 @@ const Register = () => {
                       isPhoneValid ? "border-green-500" : "border-gray-300"
                     } text-gray-900 sm:text-sm w-full p-2.5`}
                     type="tel"
-                    placeholder="+62 ."
+                    placeholder="+62"
                     style={{ borderRadius: "15px" }}
                     onChange={handlePhoneChange}
                     required
                   />
                   {isPhoneValid && (
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2">
-                      <div className="rounded-full bg-green-500 p-0">
+                      <div className="rounded-full bg-green-500 p-0.5">
                         <svg
                           className="h-5 w-5 text-white"
                           fill="none"
@@ -174,7 +187,7 @@ const Register = () => {
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2">
                       <div className="rounded-full bg-green-500 p-0.5">
                         <svg
-                          className="h-4 w-4 text-white"
+                          className="h-5 w-5 text-white"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -194,7 +207,7 @@ const Register = () => {
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2">
                       <div className="rounded-full bg-red-500 p-0.5">
                         <svg
-                          className="h-4 w-4 text-white"
+                          className="h-5 w-5 text-white"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -214,6 +227,7 @@ const Register = () => {
               </div>
 
               <button
+                href="/otp"
                 type="submit"
                 className="w-full text-white bg-indigo-600 hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center"
                 style={{ borderRadius: "15px" }}
@@ -223,7 +237,7 @@ const Register = () => {
             </form>
             <p className="text-gray-700 text-center">
               Sudah punya akun?{" "}
-              <a href="/register" className="text-indigo-600 hover:opacity-70">
+              <a href="/login" className="text-indigo-600 hover:opacity-70">
                 Masuk di sini
               </a>
             </p>
