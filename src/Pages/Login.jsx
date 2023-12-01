@@ -1,12 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { login } from "../redux/action/authAction";
+import { useDispatch } from "react-redux";
 
 function Login() {
   const [showPassword, setShowpassword] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleVisibilityPassword() {
     setShowpassword(!showPassword);
   }
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    dispatch(login(email, password, navigate));
+  };
 
   return (
     <div className="flex min-h-screen w-full">
@@ -16,6 +28,7 @@ function Login() {
         </p>
         <form
           action=""
+          onSubmit={handleLogin}
           className="w-9/12 sm:w-7/12 md:w-8/12 lg:w-7/12 space-y-5 mb-11 xl:w-6/12"
         >
           <div>
@@ -27,6 +40,8 @@ function Login() {
               name="username"
               placeholder="Contoh: johndoee@gmail.com "
               className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-blue-300"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
@@ -42,6 +57,8 @@ function Login() {
                 name="password"
                 placeholder="Masukkan Password"
                 className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-blue-300"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               {showPassword ? (
                 <svg
