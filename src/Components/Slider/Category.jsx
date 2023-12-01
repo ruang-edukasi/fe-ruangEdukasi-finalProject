@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import Glide from "@glidejs/glide";
 import { Link } from "react-router-dom";
-import "./index.css";
 
 const Category = () => {
   useEffect(() => {
@@ -11,7 +10,7 @@ const Category = () => {
       perView: 5,
       autoplay: 3000,
       animationDuration: 700,
-      gap: 24,
+      gap: 20,
       classNames: {
         nav: {
           active: "[&>*]:bg-wuiSlate-700",
@@ -22,7 +21,7 @@ const Category = () => {
           perView: 2,
         },
         640: {
-          perView: 1,
+          perView: 2,
         },
       },
     }).mount();
@@ -41,7 +40,7 @@ const Category = () => {
               <Link to="">
                 <img
                   src="/category1.svg"
-                  className="m-auto max-h-full w-full max-w-full card"
+                  className="m-auto max-h-full w-full max-w-full transition duration-300 cursor-pointer text-no-underline hover:scale-105"
                 />
                 <p className="text-center font-medium">UI/UX Design</p>
               </Link>
@@ -50,7 +49,7 @@ const Category = () => {
               <Link to="">
                 <img
                   src="/category2.svg"
-                  className="m-auto max-h-full w-full max-w-full card"
+                  className="m-auto max-h-full w-full max-w-full transition duration-300 cursor-pointer text-no-underline hover:scale-105"
                 />
                 <p className="text-center font-medium">Product Management</p>
               </Link>
@@ -59,7 +58,7 @@ const Category = () => {
               <Link to="">
                 <img
                   src="/category3.svg"
-                  className="m-auto max-h-full w-full max-w-full card"
+                  className="m-auto max-h-full w-full max-w-full transition duration-300 cursor-pointer text-no-underline hover:scale-105"
                 />
                 <p className="text-center font-medium">Web Development</p>
               </Link>
@@ -68,7 +67,7 @@ const Category = () => {
               <Link to="">
                 <img
                   src="/category4.svg"
-                  className="m-auto max-h-full w-full max-w-full card"
+                  className="m-auto max-h-full w-full max-w-full transition duration-300 cursor-pointer text-no-underline hover:scale-105"
                 />
                 <p className="text-center font-medium">Android Development</p>
               </Link>
@@ -77,7 +76,7 @@ const Category = () => {
               <Link to="">
                 <img
                   src="/category5.svg"
-                  className="m-auto max-h-full w-full max-w-full card"
+                  className="m-auto max-h-full w-full max-w-full transition duration-300 cursor-pointer text-no-underline hover:scale-105"
                 />
                 <p className="text-center font-medium">IOS Development</p>
               </Link>
@@ -86,7 +85,7 @@ const Category = () => {
               <Link to="">
                 <img
                   src="/category6.svg"
-                  className="m-auto max-h-full w-full max-w-full card"
+                  className="m-auto max-h-full w-full max-w-full transition duration-300 cursor-pointer text-no-underline hover:scale-105"
                 />
                 <p className="text-center font-medium">Data Science</p>
               </Link>

@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 import Glide from "@glidejs/glide";
-import "./index.css";
 import Card from "../Card/Card";
 
 const Course = () => {
   useEffect(() => {
     const slider = new Glide(".glide-02", {
       type: "carousel",
-      focusAt: "center",
       perView: 3,
       autoplay: 3000,
       animationDuration: 700,

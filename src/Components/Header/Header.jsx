@@ -1,17 +1,58 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { profile, logout } from "../../redux/action/authAction";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faBell,
+  faMagnifyingGlass,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, token } = useSelector((state) => state.auth);
+
+  const onlogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    if (token) {
+      dispatch(profile(navigate, null, "/login"));
+    }
+  }, [dispatch, navigate, token]);
+
   return (
     <header className="sticky top-0 z-20 w-full bg-primary shadow-lg shadow-slate-700/20">
-      <div className="relative px-16">
+      <div className="relative px-4 lg:px-16">
         <nav className="flex h-24 items-stretch justify-between font-medium text-slate-700">
           <div className="flex items-center gap-2 py-4">
             <Link to="/">
               <img src="/logo.svg" alt="logo" className="h-16" />
             </Link>
+          </div>
+          <div className="flex items-center gap-2 py-4">
+            <form action="search" className="relative">
+              <input
+                type="text"
+                name="search"
+                placeholder="Cari kursus.."
+                autoComplete="off"
+                className="outline-none font-semibold text-md bg-white border-none ring-2 ring-white focus:ring-indigo-300 rounded-xl border-white px-4 md:py-2 md:w-96"
+              />
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                <button className="text-white bg-primary hover:bg-indigo-400 rounded-lg w-8 h-7 transition duration-300">
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+              </div>
+            </form>
           </div>
           <div
             role="menubar"
@@ -22,31 +63,79 @@ const Header = () => {
                 : "invisible opacity-0"
             }`}
           >
-            <li role="none" className="flex items-stretch">
-              <div className="flex items-center gap-2 py-4 mr-4">
-                <form action="search" className="relative">
-                  <input
-                    type="text"
-                    name="search"
-                    placeholder="Cari kursus"
-                    autoComplete="off"
-                    className="outline-none font-semibold text-md bg-white border-none ring-2 ring-white focus:ring-indigo-400 focus:w-40 sm:focus:w-96 focus:ease-in focus:duration-300 rounded-full border-white px-4 py-1 md:py-2 transition-width duration-300 ease-in-out"
-                  />
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
-                    <button></button>
+            {user ? (
+              <>
+                <li role="none" className="flex items-stretch">
+                  <div className="flex items-center gap-2 py-4">
+                    <button className="inline-flex items-center justify-center h-8 w-28 gap-2 px-5 text-sm font-bold tracking-wide text-white transition duration-300 rounded-xl whitespace-nowrap bg-sky-500 hover:bg-sky-600 hover:text-white">
+                      <span>
+                        <FontAwesomeIcon icon={faBars} />
+                      </span>
+                      Kelas
+                    </button>
                   </div>
-                </form>
-              </div>
-            </li>
-            <li role="none" className="flex items-stretch">
-              <div className="flex items-center gap-2 py-4">
-                <Link to="/login">
-                  <button className="inline-flex items-center justify-center h-10 gap-2 px-5 text-sm font-bold tracking-wide text-primary transition duration-300 rounded-xl whitespace-nowrap bg-white hover:bg-indigo-400 hover:text-white">
-                    <span>MASUK</span>
-                  </button>
-                </Link>
-              </div>
-            </li>
+                </li>
+                <li role="none" className="flex items-stretch">
+                  <div className="flex items-center gap-2 py-4 dropdown dropdown-bottom dropdown-end">
+                    <div
+                      tabIndex={0}
+                      className="btn m-1 bg-transparent hover:bg-indigo-800 focus:bg-indigo-800 border-none"
+                    >
+                      <FontAwesomeIcon
+                        icon={faBell}
+                        className="text-white text-xl"
+                      />
+                    </div>
+                    <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                      <li>
+                        <a>Notification</a>
+                      </li>
+                      <li>
+                        <a>Notification</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li role="none" className="flex items-stretch">
+                  <div className="flex items-center gap-2 py-4 dropdown dropdown-bottom dropdown-end font-bold">
+                    <div
+                      tabIndex={0}
+                      className="btn m-1 bg-transparent hover:bg-indigo-800 focus:bg-indigo-800 border-none"
+                    >
+                      <FontAwesomeIcon
+                        icon={faUser}
+                        className="text-white text-lg"
+                      />
+                    </div>
+                    <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                      <li>
+                        <Link to="/profile" className="justify-center">
+                          My Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          className="mt-1 justify-center text-white bg-alert hover:bg-red-700 hover:text-white transition duration-300"
+                          onClick={onlogout}
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </>
+            ) : (
+              <li role="none" className="flex items-stretch">
+                <div className="flex items-center gap-2 py-4">
+                  <Link to="/login">
+                    <button className="inline-flex items-center justify-center h-10 gap-2 px-5 text-sm font-bold tracking-wide text-primary transition duration-300 rounded-xl whitespace-nowrap bg-white hover:bg-indigo-400 hover:text-white">
+                      <span>MASUK</span>
+                    </button>
+                  </Link>
+                </div>
+              </li>
+            )}
           </div>
           <button
             className={`relative order-10 block h-10 w-10 self-center lg:hidden
