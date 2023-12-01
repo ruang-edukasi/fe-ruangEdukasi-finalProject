@@ -19,29 +19,29 @@ function Login() {
           className="w-9/12 sm:w-7/12 md:w-8/12 lg:w-7/12 space-y-5 mb-11 xl:w-6/12"
         >
           <div>
-            <label htmlFor="name" className="block mb-1 ">
+            <label htmlFor="name" className="block mb-2 text-sm">
               Email/No Telepon
             </label>
             <input
               type="text"
               name="username"
               placeholder="Contoh: johndoee@gmail.com "
-              className="border border-slate-400 px-5 py-2 w-full rounded-lg focus:outline-blue-300"
+              className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-blue-300"
             />
           </div>
           <div>
             <label htmlFor="name" className="mb-1 flex justify-between">
-              <span className="">Password</span>{" "}
-              <a className="text-primary " href="#">
-                Reset Password
-              </a>
+              <span className="block mb-1 text-sm">Password</span>{" "}
+              <Link to={"/reset"} className="text-primary">
+                Lupa Kata Sandi
+              </Link>
             </label>
             <div className="relative flex items-center">
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Masukkan Password"
-                className="border border-slate-400 px-5 py-2 w-full rounded-lg focus:outline-blue-300"
+                className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-blue-300"
               />
               {showPassword ? (
                 <svg
@@ -84,7 +84,7 @@ function Login() {
             </div>
             <button
               type="submit"
-              className="py-2 text-center w-full bg-primary rounded-lg text-white mt-8"
+              className="w-full text-white bg-primary hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center rounded-xl mt-8"
             >
               Masuk
             </button>
@@ -92,7 +92,10 @@ function Login() {
         </form>
         <p className="w-full text-center self-start  mb-10">
           Belum punya akun?{" "}
-          <Link to={"/register"} className="text-primary font-bold ">
+          <Link
+            to={"/register"}
+            className="text-primary font-bold hover:opacity-70"
+          >
             Daftar Disini
           </Link>
         </p>
