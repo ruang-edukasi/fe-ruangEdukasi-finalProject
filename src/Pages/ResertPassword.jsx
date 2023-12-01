@@ -35,7 +35,7 @@ function ResertPassword() {
         >
           <div>
             <label htmlFor="name" className="mb-1 flex justify-between">
-              <span className="">Masukkan Password Baru</span>
+              <span className="block mb-1 text-sm">Masukkan Password Baru</span>
             </label>
             <div className="relative flex items-center">
               <input
@@ -49,7 +49,7 @@ function ResertPassword() {
                       ? "border-alert"
                       : "border-slate-400"
                     : "border-succes"
-                } px-5 py-2 w-full rounded-lg focus:outline-none`}
+                } px-5 py-2 w-full rounded-xl focus:outline-none`}
               />
               {showPassword1 ? (
                 <svg
@@ -93,7 +93,7 @@ function ResertPassword() {
           </div>
           <div>
             <label htmlFor="name" className="mb-1 flex justify-between">
-              <span className="">Ulangi Password Baru</span>
+              <span className="block mb-1 text-sm">Ulangi Password Baru</span>
             </label>
             <div className="relative flex items-center">
               <input
@@ -107,7 +107,7 @@ function ResertPassword() {
                       ? "border-alert"
                       : "border-slate-400"
                     : "border-succes"
-                } border-slate-400 px-5 py-2 w-full rounded-lg focus:outline-none`}
+                } border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-none`}
               />
               {showPassword2 ? (
                 <svg
@@ -150,7 +150,7 @@ function ResertPassword() {
             </div>
             <button
               type="submit"
-              className="py-2 text-center w-full bg-primary rounded-lg text-white mt-8"
+              className="w-full text-white bg-primary hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center rounded-xl mt-8"
             >
               Simpan
             </button>
