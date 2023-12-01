@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Button from "../Components/Button/Button";
 import Header from "../Components/Header/Header";
-import Sidebar from "../Components/Sidebar";
 import Card from "../Components/Card/Card";
+import Sidebar from "../Components/Sidebar/Sidebar";
 
 function Dashbord() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -28,10 +28,10 @@ function Dashbord() {
               />
             </form>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-evenly gap-1">
             <Sidebar />
             <div className="flex flex-col gap-5">
-              <div className="flex justify-around">
+              <div className="flex justify-between">
                 <Button
                   bgColor={
                     activeFilter === "All"
