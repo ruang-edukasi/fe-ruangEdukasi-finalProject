@@ -6,19 +6,23 @@ import Register from "./Pages/Register";
 import Dashbord from "./Pages/Dashbord";
 import ResertPassword from "./Pages/ResertPassword";
 import EnrollClass from "./Pages/EnrollClass";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashbord" element={<Dashbord />} />
-        <Route path="/reset" element={<ResertPassword />} />
-        <Route path="/enroll" element={<EnrollClass />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashbord" element={<Dashbord />} />
+          <Route path="/reset" element={<ResertPassword />} />
+          <Route path="/enroll" element={<EnrollClass />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
