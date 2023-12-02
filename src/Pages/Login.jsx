@@ -16,7 +16,6 @@ function Login() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
     dispatch(login(email, password, navigate));
   };
 

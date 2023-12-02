@@ -3,18 +3,17 @@ import { setToken } from "../reducer/authReducer";
 
 export const login = (email, password, navigate) => async (dispatch) => {
   try {
-    const data = await axios.post(
+    const fetch = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/v1/auth/user/login`,
       {
         email,
         password,
       }
     );
-    const { response } = data.data;
-
+    const { response } = fetch.data;
     const { token } = response;
     dispatch(setToken(token));
-    alert("login succesfully");
+    alert(fetch.data.message);
     navigate("/");
   } catch (error) {
     if (axios.isAxiosError(error)) {
