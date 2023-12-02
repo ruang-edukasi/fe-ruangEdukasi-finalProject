@@ -6,6 +6,7 @@ import Register from "./Pages/Register";
 import Dashbord from "./Pages/Dashbord";
 import ResertPassword from "./Pages/ResertPassword";
 import EnrollClass from "./Pages/EnrollClass";
+import { Otp } from "./Pages/Otp";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/dashbord" element={<Dashbord />} />
           <Route path="/reset" element={<ResertPassword />} />
           <Route path="/enroll" element={<EnrollClass />} />
+          <Route path="/otp" element={<Otp />} />
         </Routes>
       </BrowserRouter>
     </Provider>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setToken } from "../reducer/authReducer";
+import { setToken, setUser } from "../reducer/authReducer";
 
 export const login = (email, password, navigate) => async (dispatch) => {
   try {
@@ -25,3 +25,45 @@ export const login = (email, password, navigate) => async (dispatch) => {
     alert(error?.message);
   }
 };
+
+export const logout = () => (dispatch) => {
+  dispatch(setToken(null));
+  dispatch(setUser(null));
+};
+
+export const profile =
+  (navigate, navigatePathSuccess, navigatePathError) =>
+  async (dispatch, getState) => {
+    try {
+      let { token } = getState().auth;
+
+      const data = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/user/profile`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const { response } = data.data;
+
+      dispatch(setUser(response));
+
+      if (navigatePathSuccess) navigate(navigatePathSuccess);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.data.status === 401) {
+          dispatch(logout());
+
+          if (navigatePathError) navigate(navigatePathError);
+          return;
+        }
+
+        alert(error?.data?.response?.message);
+        return;
+      }
+
+      alert(error?.message);
+    }
+  };
