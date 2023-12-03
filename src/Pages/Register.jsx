@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../redux/action/authAction";
 
-
 const Register = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
