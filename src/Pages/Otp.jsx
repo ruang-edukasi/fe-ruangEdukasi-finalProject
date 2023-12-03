@@ -90,12 +90,6 @@ export const Otp = () => {
         <img src="/logo.svg" alt="gambar logo" className="h-36" />
       </div>
       <style>
-        {`
-        @media (max-width: 640px) {
-          body {
-            background-color: #ebf3fc;
-          }
-  }`}
       </style>
     </section>
   );
