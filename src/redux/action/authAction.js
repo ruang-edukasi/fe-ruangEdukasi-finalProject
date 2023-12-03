@@ -26,3 +26,33 @@ export const login = (email, password, navigate) => async (dispatch) => {
     alert(error?.message);
   }
 };
+
+export const register =
+  (email, full_name, password, phone_number, navigate) => async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/v1/auth/user/register`,
+        {
+          full_name,
+          email,
+          password,
+          phone_number,
+        }
+      );
+      const { data } = response;
+      const  token  = data;
+
+      // Save our token
+      dispatch(setToken(token));
+
+      // Redirect to home
+      navigate("/");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        alert(error?.response?.data?.message);
+        return;
+      }
+
+      alert(error?.message);
+    }
+  };
