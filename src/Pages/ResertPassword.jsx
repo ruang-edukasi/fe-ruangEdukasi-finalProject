@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function ResertPassword() {
   const [showPassword1, setShowpassword1] = useState(false);
@@ -26,7 +29,13 @@ function ResertPassword() {
   return (
     <div className="flex min-h-screen w-full">
       <div className="w-full md:w-7/12 flex flex-col justify-center items-center">
-        <p className="w-9/12 sm:w-7/12 text-primary font-bold text-3xl md:w-8/12 lg:w-7/12 mb-5 xl:w-6/12">
+        <p className="flex flex-col w-9/12 sm:w-7/12 text-primary font-bold text-3xl md:w-8/12 lg:w-7/12 mb-5 xl:w-6/12">
+          <Link to="/login">
+            <FontAwesomeIcon
+              icon={faArrowLeft}
+              className="text-gray-700 text-3xl mb-4"
+            />
+          </Link>
           Reset Password
         </p>
         <form

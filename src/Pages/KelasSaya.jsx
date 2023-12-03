@@ -6,20 +6,19 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-function Dashbord() {
+function KelasSaya() {
   const [activeFilter, setActiveFilter] = useState("All");
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
   };
-
   return (
-    <>
+    <div>
       <Header />
       <section className="bg-blue-100 min-h-screen">
         <div className="container mx-auto px-24">
           <div className="flex justify-between py-10">
-            <h2 className="text-2xl font-bold">Topik Kelas</h2>
+            <h2 className="text-2xl font-bold">Kelas Berjalan</h2>
             <form action="search" className="relative">
               <input
                 type="text"
@@ -50,21 +49,21 @@ function Dashbord() {
                 />
                 <Button
                   bgColor={
-                    activeFilter === "kelasPremium"
+                    activeFilter === "InProgress"
                       ? "bg-primary text-white"
                       : "bg-slate-100"
                   }
-                  text="Kelas Premium"
-                  onClick={() => handleFilterChange("kelasPremium")}
+                  text="In Progress"
+                  onClick={() => handleFilterChange("InProgress")}
                 />
                 <Button
                   bgColor={
-                    activeFilter === "KelasGratis"
+                    activeFilter === "Selesai"
                       ? "bg-primary text-white"
                       : "bg-slate-100"
                   }
-                  text="Kelas Gratis"
-                  onClick={() => handleFilterChange("KelasGratis")}
+                  text="Selesai"
+                  onClick={() => handleFilterChange("Selesai")}
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -76,8 +75,8 @@ function Dashbord() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
-export default Dashbord;
+export default KelasSaya;
