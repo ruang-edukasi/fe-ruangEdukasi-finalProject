@@ -1,6 +1,6 @@
 function Sidebar() {
   return (
-    <div className="bg-slate-100 rounded-xl p-6">
+    <div className="bg-slate-100 rounded-xl w-64 p-6">
       <form action="">
         <div className="flex flex-col gap-1 pb-3">
           <h3 className="text-xl font-bold">Filter</h3>
