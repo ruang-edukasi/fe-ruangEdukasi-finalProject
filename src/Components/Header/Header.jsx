@@ -8,6 +8,7 @@ import {
   faBell,
   faMagnifyingGlass,
   faBars,
+  faArrowRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
@@ -30,29 +31,29 @@ const Header = () => {
   }, [dispatch, navigate, token]);
 
   return (
-    <header className="sticky top-0 z-20 w-full bg-primary shadow-lg shadow-slate-700/20">
+    <header className="sticky top-0 z-20 px-5 w-full bg-primary shadow-lg shadow-slate-700/20">
       <div className="relative px-4 lg:px-16">
         <nav className="flex h-24 items-stretch justify-between font-medium text-slate-700">
-          <div className="flex items-center gap-2 py-4">
+          <div className="flex items-center gap-6 py-4">
             <Link to="/">
               <img src="/logo.svg" alt="logo" className="h-16" />
             </Link>
-          </div>
-          <div className="flex items-center gap-2 py-4">
-            <form action="search" className="relative">
-              <input
-                type="text"
-                name="search"
-                placeholder="Cari kursus.."
-                autoComplete="off"
-                className="outline-none font-semibold text-md bg-white border-none ring-2 ring-white focus:ring-indigo-300 rounded-xl border-white px-4 md:py-2 md:w-96"
-              />
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                <button className="text-white bg-primary hover:bg-indigo-400 rounded-lg w-8 h-7 transition duration-300">
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-              </div>
-            </form>
+            <div className="flex items-center gap-2 py-4 px-6">
+              <form action="search" className="relative">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="Cari Kursus terbaik..."
+                  autoComplete="off"
+                  className="outline-none font-semibold text-md bg-white border-none ring-2 ring-white focus:ring-indigo-300 rounded-xl border-white px-4 md:py-2 md:w-96"
+                />
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                  <button className="text-white bg-primary hover:bg-indigo-400 rounded-lg w-8 h-7 transition duration-300">
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
           <div
             role="menubar"
@@ -67,12 +68,15 @@ const Header = () => {
               <>
                 <li role="none" className="flex items-stretch">
                   <div className="flex items-center gap-2 py-4">
-                    <button className="inline-flex items-center justify-center h-8 w-28 gap-2 px-5 text-sm font-bold tracking-wide text-white transition duration-300 rounded-xl whitespace-nowrap bg-sky-500 hover:bg-sky-600 hover:text-white">
+                    <Link
+                      to="/kelas-saya"
+                      className="inline-flex items-center justify-center h-8 w-28 gap-2 px-5 text-sm font-bold tracking-wide text-white transition duration-300 rounded-xl whitespace-nowrap bg-sky-500 hover:bg-sky-600 hover:text-white"
+                    >
                       <span>
                         <FontAwesomeIcon icon={faBars} />
                       </span>
                       Kelas
-                    </button>
+                    </Link>
                   </div>
                 </li>
                 <li role="none" className="flex items-stretch">
@@ -128,10 +132,12 @@ const Header = () => {
             ) : (
               <li role="none" className="flex items-stretch">
                 <div className="flex items-center gap-2 py-4">
-                  <Link to="/login">
-                    <button className="inline-flex items-center justify-center h-10 gap-2 px-5 text-sm font-bold tracking-wide text-primary transition duration-300 rounded-xl whitespace-nowrap bg-white hover:bg-indigo-400 hover:text-white">
-                      <span>MASUK</span>
-                    </button>
+                  <Link to="/login" className="flex items-center gap-2">
+                    <FontAwesomeIcon
+                      icon={faArrowRightToBracket}
+                      className="text-white text-lg"
+                    />
+                    <span className="text-white">Masuk</span>
                   </Link>
                 </div>
               </li>

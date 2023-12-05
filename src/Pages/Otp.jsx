@@ -29,10 +29,10 @@ export const Otp = () => {
       <div className="md:w-1/2 flex flex-col justify-center mx-auto md:h-screen">
         <div className="w-full rounded-lg md:mt-0 mx-auto md:max-w-md xl:p-0 p-6 ">
           <div className="flex flex-col w-full  mx-auto">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-indigo-600 md:text-2xl">
+            <h1 className="flex flex-col items-start text-xl font-bold leading-tight tracking-tight text-indigo-600 md:text-2xl">
               <FontAwesomeIcon
                 icon={faArrowLeft}
-                className="mr-2 mb-10 text-gray-700 block sm:hidden"
+                className="mb-4 text-gray-700 text-3xl cursor-pointer"
                 onClick={goBack}
               />
               Masukkan OTP
@@ -71,7 +71,7 @@ export const Otp = () => {
             <div className="flex flex-col py-4">
               <button
                 type="button"
-                className="py-3 mt-2 text-lg font-semibold text-white bg-primary hover:opacity-70 rounded-xl hidden md:block"
+                className="w-full text-white bg-primary hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center rounded-xl"
               >
                 Simpan
               </button>
@@ -90,12 +90,6 @@ export const Otp = () => {
         <img src="/logo.svg" alt="gambar logo" className="h-36" />
       </div>
       <style>
-        {`
-        @media (max-width: 640px) {
-          body {
-            background-color: #ebf3fc;
-          }
-  }`}
       </style>
     </section>
   );

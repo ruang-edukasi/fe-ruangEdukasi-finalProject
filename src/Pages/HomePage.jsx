@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Header from "../Components/Header/Header";
 import Hero from "../Components/Hero/Hero";
-import Category from "../Components/Slider/Category";
-import Course from "../Components/Slider/Course";
+import Category from "./Category";
+import Course from "./Course";
 import Button from "../Components/Button/Button";
 import Footer from "../Components/Footer/Footer";
 
@@ -19,20 +19,22 @@ function HomePage() {
       <Header />
       <section>
         <Hero />
-        <section className="container mx-auto px-20 py-4 bg-slate-200 w-full">
-          <div className="flex py-2 justify-between">
-            <h2 className="text-xl font-bold">Kategori Belajar</h2>
-            <Link to="" className="font-bold text-primary">
-              Lihat Semua
-            </Link>
+        <section className="bg-blue-100">
+          <div className="container mx-auto px-20 py-4">
+            <div className="flex py-2 justify-between">
+              <h2 className="text-xl font-bold">Kategori Belajar</h2>
+              <Link to="" className="font-bold text-primary">
+                Lihat Semua
+              </Link>
+            </div>
+            <Category />
           </div>
-          <Category />
         </section>
         <section className="container mx-auto pb-10 px-20">
           <div className="overflow-hidden">
             <div className="my-8 mb-0 flex justify-between">
               <h2 className="text-xl font-bold">Kursus Populer</h2>
-              <Link to="" className="font-bold text-primary">
+              <Link to="/dashbord" className="font-bold text-primary">
                 Lihat Semua
               </Link>
             </div>
