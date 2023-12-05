@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/action/authAdminAction";
 
 function LoginAdmin() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [showPassword, setShowpassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,32 +15,10 @@ function LoginAdmin() {
     setShowpassword(!showPassword);
   }
 
-  const login = async (event) => {
+  const loginAdmin = async (event) => {
     event.preventDefault();
 
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v1/auth/admin/login`,
-        {
-          email,
-          password,
-        }
-      );
-      const { data } = response;
-      const token = data;
-
-      // Save our token
-      localStorage.setItem("token", token);
-
-      //* Redirect to home or reload the home
-      window.location.replace("/dashbord-admin");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        alert(error?.response?.data?.message);
-        return;
-      }
-      alert(error?.message);
-    }
+    dispatch(login(email, password, navigate));
   };
 
   return (
@@ -50,7 +32,7 @@ function LoginAdmin() {
         </p>
         <form
           action=""
-          onSubmit={login}
+          onSubmit={loginAdmin}
           className="w-9/12 sm:w-7/12 md:w-8/12 lg:w-7/12 space-y-5 mb-11 xl:w-6/12"
         >
           <div>
