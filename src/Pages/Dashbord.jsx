@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../Components/Button/Button";
 import Header from "../Components/Header/Header";
-import Card from "../Components/Card/Card";
+import Card from "../Components/Card/CourseItem";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
