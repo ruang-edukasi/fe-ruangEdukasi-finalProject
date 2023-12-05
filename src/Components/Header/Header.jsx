@@ -114,7 +114,7 @@ const Header = () => {
                     <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                       <li>
                         <Link to="/profile" className="justify-center">
-                          My Profile
+                          Profil Saya
                         </Link>
                       </li>
                       <li>
@@ -122,7 +122,7 @@ const Header = () => {
                           className="mt-1 justify-center text-white bg-alert hover:bg-red-700 hover:text-white transition duration-300"
                           onClick={onlogout}
                         >
-                          Logout
+                          Keluar
                         </button>
                       </li>
                     </ul>
