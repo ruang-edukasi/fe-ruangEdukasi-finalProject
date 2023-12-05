@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { login } from "../redux/action/authAction";
+import { login, forgotPassword } from "../redux/action/authAction";
 import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
-  const { errorMessage } = useSelector((state) => state.auth);
+  const { errorMessage, succesMessage } = useSelector((state) => state.auth);
   const [showPassword, setShowpassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,6 +19,9 @@ function Login() {
     event.preventDefault();
     dispatch(login(email, password, navigate));
   };
+  function handleForgot() {
+    dispatch(forgotPassword(email));
+  }
 
   return (
     <div className="flex min-h-screen w-full">
@@ -51,9 +54,12 @@ function Login() {
           <div>
             <label htmlFor="name" className="mb-1 flex justify-between">
               <span className="block mb-1 text-sm">Password</span>{" "}
-              <Link to={"/reset"} className="text-primary">
+              <span
+                className="text-primary cursor-pointer"
+                onClick={handleForgot}
+              >
                 Lupa Kata Sandi
-              </Link>
+              </span>
             </label>
             <div className="relative flex items-center">
               <input
@@ -128,6 +134,13 @@ function Login() {
         {errorMessage ? (
           <div className="bg-alert px-3 py-2 text-center text-white w-4/12 rounded-lg">
             {errorMessage}
+          </div>
+        ) : (
+          ""
+        )}
+        {succesMessage ? (
+          <div className="bg-succes px-3 py-2 text-center text-white w-4/12 rounded-lg">
+            {succesMessage}
           </div>
         ) : (
           ""

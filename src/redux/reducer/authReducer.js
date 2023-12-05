@@ -4,6 +4,7 @@ const initialState = {
   token: localStorage.getItem("token") || null,
   user: null,
   errorMessage: "",
+  succesMessage: "",
 };
 
 const authSlice = createSlice({
@@ -21,10 +22,13 @@ const authSlice = createSlice({
     setError: (state, action) => {
       state.errorMessage = action.payload;
     },
+    setSucces: (state, action) => {
+      state.succesMessage = action.payload;
+    },
     setUser: (state, action) => {
       state.user = action.payload;
     },
   },
 });
-export const { setToken, setUser, setError } = authSlice.actions;
+export const { setToken, setUser, setError, setSucces } = authSlice.actions;
 export default authSlice.reducer;
