@@ -1,13 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { login } from "../redux/action/authAction";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/action/authAdminAction";
 
-function Login() {
-  const { errorMessage } = useSelector((state) => state.auth);
-  const [showPassword, setShowpassword] = useState(false);
+function LoginAdmin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [showPassword, setShowpassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,35 +15,35 @@ function Login() {
     setShowpassword(!showPassword);
   }
 
-  const handleLogin = async (event) => {
+  const loginAdmin = async (event) => {
     event.preventDefault();
+
     dispatch(login(email, password, navigate));
   };
 
   return (
     <div className="flex min-h-screen w-full">
+      <div className="bg-primary w-5/12 md:flex justify-center items-center hidden">
+        <img src="/logo.svg" alt="gambar logo" className="h-36" />
+      </div>
       <div className="w-full md:w-7/12 flex flex-col justify-center items-center">
         <p className="w-9/12 sm:w-7/12 text-primary font-bold text-3xl md:w-8/12 lg:w-7/12 mb-5 xl:w-6/12">
-          Masuk
+          Login
         </p>
         <form
           action=""
-          onSubmit={handleLogin}
+          onSubmit={loginAdmin}
           className="w-9/12 sm:w-7/12 md:w-8/12 lg:w-7/12 space-y-5 mb-11 xl:w-6/12"
         >
           <div>
             <label htmlFor="name" className="block mb-2 text-sm">
-              Email/No Telepon
+              Email Admin
             </label>
             <input
               type="text"
-              name="email"
-              placeholder="Contoh: johndoee@gmail.com "
-              className={`border ${
-                errorMessage === "Alamat email tidak terdaftar!"
-                  ? "border-alert"
-                  : "border-slate-400"
-              }  px-5 py-2 w-full rounded-xl focus:outline-none`}
+              name="username"
+              placeholder="Email Admin"
+              className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-blue-300"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -51,7 +51,7 @@ function Login() {
           <div>
             <label htmlFor="name" className="mb-1 flex justify-between">
               <span className="block mb-1 text-sm">Password</span>{" "}
-              <Link to={"/reset"} className="text-primary">
+              <Link to={""} className="text-primary">
                 Lupa Kata Sandi
               </Link>
             </label>
@@ -60,12 +60,7 @@ function Login() {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Masukkan Password"
-                // className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-none"
-                className={`border ${
-                  errorMessage === "Maaf, kata sandi salah"
-                    ? "border-alert"
-                    : "border-slate-400"
-                }  px-5 py-2 w-full rounded-xl focus:outline-none`}
+                className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-blue-300"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -116,7 +111,7 @@ function Login() {
             </button>
           </div>
         </form>
-        <p className="w-full text-center self-start  mb-10">
+        {/* <p className="w-full text-center self-start  mb-10">
           Belum punya akun?{" "}
           <Link
             to={"/register"}
@@ -124,19 +119,14 @@ function Login() {
           >
             Daftar Disini
           </Link>
-        </p>
-        {errorMessage ? (
+        </p> */}
+        {showPassword && (
           <div className="bg-alert px-3 py-2 text-center text-white w-4/12 rounded-lg">
-            {errorMessage}
+            Password min 8 Karakter
           </div>
-        ) : (
-          ""
         )}
-      </div>
-      <div className="bg-primary w-5/12 md:flex justify-center items-center hidden">
-        <img src="/logo.svg" alt="gambar logo" className="h-36" />
       </div>
     </div>
   );
 }
-export default Login;
+export default LoginAdmin;
