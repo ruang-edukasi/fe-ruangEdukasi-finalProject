@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setError, setToken, setUser } from "../reducer/authReducer";
+import { setError, setSucces, setToken, setUser } from "../reducer/authReducer";
 
 export const login = (email, password, navigate) => async (dispatch) => {
   try {
@@ -26,6 +26,30 @@ export const login = (email, password, navigate) => async (dispatch) => {
         dispatch(setError("Alamat email tidak terdaftar!"));
       } else if (error?.response?.data?.message === "Wrong password") {
         dispatch(setError("Maaf, kata sandi salah"));
+      }
+      return;
+    }
+    alert(error?.message);
+  }
+};
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch(setError(""));
+    dispatch(setSucces(""));
+    const fetch = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/v1/auth/user/reset-password`,
+      {
+        email,
+      }
+    );
+    const { message } = fetch.data;
+    dispatch(setSucces("Tautan reset password terkirim"));
+
+    alert(message);
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error?.response?.data?.message === "Email not found") {
+        dispatch(setError("Alamat email tidak terdaftar!"));
       }
       return;
     }
