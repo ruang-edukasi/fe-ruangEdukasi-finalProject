@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { login } from "../redux/action/authAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
+  const { errorMessage } = useSelector((state) => state.auth);
   const [showPassword, setShowpassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,9 +37,13 @@ function Login() {
             </label>
             <input
               type="text"
-              name="username"
+              name="email"
               placeholder="Contoh: johndoee@gmail.com "
-              className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-blue-300"
+              className={`border ${
+                errorMessage === "Alamat email tidak terdaftar!"
+                  ? "border-alert"
+                  : "border-slate-400"
+              }  px-5 py-2 w-full rounded-xl focus:outline-none`}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -55,7 +60,12 @@ function Login() {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Masukkan Password"
-                className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-blue-300"
+                // className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-none"
+                className={`border ${
+                  errorMessage === "Maaf, kata sandi salah"
+                    ? "border-alert"
+                    : "border-slate-400"
+                }  px-5 py-2 w-full rounded-xl focus:outline-none`}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -115,10 +125,12 @@ function Login() {
             Daftar Disini
           </Link>
         </p>
-        {showPassword && (
+        {errorMessage ? (
           <div className="bg-alert px-3 py-2 text-center text-white w-4/12 rounded-lg">
-            Password min 8 Karakter
+            {errorMessage}
           </div>
+        ) : (
+          ""
         )}
       </div>
       <div className="bg-primary w-5/12 md:flex justify-center items-center hidden">
