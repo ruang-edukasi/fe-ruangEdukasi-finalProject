@@ -10,6 +10,7 @@ import { Otp } from "./Pages/Otp";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import KelasSaya from "./Pages/KelasSaya";
+import Profile from "./Pages/Profile";
 import LoginAdmin from "./Admin/Pages/LoginAdmin";
 import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/reset" element={<ResertPassword />} />
           <Route path="/enroll" element={<EnrollClass />} />
           <Route path="/otp" element={<Otp />} />
+          <Route path="/profile" element={<Profile />} />
 
           {/* Admin Pages */}
           <Route path="/login-admin" element={<LoginAdmin />} />
