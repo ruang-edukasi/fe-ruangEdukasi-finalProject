@@ -38,7 +38,7 @@ const Header = () => {
             <Link to="/">
               <img src="/logo.svg" alt="logo" className="h-16" />
             </Link>
-            <div className="flex items-center gap-2 py-4">
+            <div className="flex items-center gap-2 py-4 px-6">
               <form action="search" className="relative">
                 <input
                   type="text"

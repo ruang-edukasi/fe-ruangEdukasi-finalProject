@@ -55,7 +55,7 @@ export const register =
       alert(error?.message);
     }
   };
-  
+
 export const logout = () => (dispatch) => {
   dispatch(setToken(null));
   dispatch(setUser(null));

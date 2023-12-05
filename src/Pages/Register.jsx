@@ -2,9 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { register } from "../redux/action/authAction";
+
 
 const Register = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -13,21 +11,6 @@ const Register = () => {
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
-
-  const onRegis = async (event) => {
-    // Prevent default is to prevent the default behavior
-    event.preventDefault();
-
-    dispatch(register(email, fullName, password, phoneNumber, navigate));
-  };
-
   const handleEmailChange = (e) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = emailRegex.test(e.target.value);
@@ -35,8 +18,8 @@ const Register = () => {
   };
 
   const handlePhoneChange = (e) => {
-    const phoneNumber = e.target.value;
-    const isValid = phoneNumber.length >= 12;
+    const phoneRegex = /^\+62\d+$/; // Format: +62[nomor telepon]
+    const isValid = phoneRegex.test(e.target.value);
     setIsPhoneValid(isValid);
   };
 
@@ -47,21 +30,21 @@ const Register = () => {
     setIsPasswordTouched(true);
   };
 
-  const handleRegistration = (e) => {
-    e.preventDefault();
-    setShowNotification(true);
+ const handleRegistration = (e) => {
+   e.preventDefault();
+   setShowNotification(true);
 
-    setTimeout(() => {
-      setShowNotification(false);
-      // Redirect to the OTP page
-      // Adjust the redirection based on your routing setup
-      //  window.location.href = "/otp";
-    }, 2000);
-  };
+   setTimeout(() => {
+     setShowNotification(false);
+     // Redirect to the OTP page
+     // Adjust the redirection based on your routing setup
+     window.location.href = "/otp";
+   }, 2000);
+ };
 
-  const goBack = () => {
-    window.history.back();
-  };
+ const goBack = () => {
+   window.history.back();
+ };
 
   return (
     <section className="flex">
@@ -79,10 +62,8 @@ const Register = () => {
 
             <form
               className="space-y-4 md:space-y-4"
-              onSubmit={(event) => {
-                handleRegistration(event);
-                onRegis(event);
-              }}
+              action="#"
+              onSubmit={handleRegistration}
             >
               <div>
                 <label htmlFor="name" className="block mb-1 text-sm">
@@ -92,8 +73,6 @@ const Register = () => {
                   className=" border border-gray-300 text-gray-900 sm:text-sm  w-full p-2.5 rounded-xl"
                   type="text"
                   placeholder="Nama Lengkap"
-                  value={fullName}
-                  onChange={(event) => setFullName(event.target.value)}
                   required
                 />
               </div>
@@ -108,11 +87,7 @@ const Register = () => {
                     } text-gray-900 sm:text-sm w-full p-2.5 rounded-xl`}
                     type="email"
                     placeholder="Contoh: johndee@gmail.com"
-                    onChange={(event) => {
-                      handleEmailChange(event);
-                      setEmail(event.target.value);
-                    }}
-                    value={email}
+                    onChange={handleEmailChange}
                     required
                   />
                   {isEmailValid && (
@@ -148,13 +123,9 @@ const Register = () => {
                       isPhoneValid ? "border-green-500" : "border-gray-300"
                     } text-gray-900 sm:text-sm w-full p-2.5 rounded-xl`}
                     type="tel"
-                    placeholder="085"
+                    placeholder="+62"
                     style={{ borderRadius: "15px" }}
-                    onChange={(event) => {
-                      handlePhoneChange(event);
-                      setPhoneNumber(event.target.value);
-                    }}
-                    value={phoneNumber}
+                    onChange={handlePhoneChange}
                     required
                   />
                   {isPhoneValid && (
@@ -195,11 +166,7 @@ const Register = () => {
                     } text-gray-900 sm:text-sm w-full p-2.5 rounded-xl`}
                     type="password"
                     placeholder="Buat Password"
-                    onChange={(event) => {
-                      handlePasswordChange(event);
-                      setPassword(event.target.value);
-                    }}
-                    value={password}
+                    onChange={handlePasswordChange}
                     required
                   />
                   {isPasswordValid && isPasswordTouched && (
@@ -285,6 +252,13 @@ const Register = () => {
       <div className="bg-primary w-5/12 md:flex justify-center items-center hidden">
         <img src="/logo.svg" alt="gambar logo" className="h-36" />
       </div>
+      <style>{`
+        @media (max-width: 640px) {
+          body {
+            background-color: #ebf3fc;
+          }
+        }
+      `}</style>
     </section>
   );
 };
