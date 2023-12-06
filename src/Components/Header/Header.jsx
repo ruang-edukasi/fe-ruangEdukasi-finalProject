@@ -38,7 +38,7 @@ const Header = () => {
             <Link to="/">
               <img src="/logo.svg" alt="logo" className="h-16" />
             </Link>
-            <div className="flex items-center gap-2 py-4 px-6">
+            <div className="hidden lg:flex flex-row items-center gap-2 py-4 px-6">
               <form action="search" className="relative">
                 <input
                   type="text"
@@ -56,7 +56,6 @@ const Header = () => {
             </div>
           </div>
           <div
-            role="menubar"
             aria-label="Select page"
             className={`absolute top-0 left-0 z-[-1] h-96 w-full justify-center overflow-hidden overflow-y-auto overscroll-contain bg-white/90 px-8 pb-12 pt-24 font-medium transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0  lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0  lg:pt-0 lg:opacity-100 ${
               isToggleOpen

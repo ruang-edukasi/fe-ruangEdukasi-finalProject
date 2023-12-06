@@ -2,6 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { register } from "../redux/action/authAction";
+import GoogleLogin from "../Components/GoogleLogin/GoogleLogin";
 
 const Register = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -10,6 +14,21 @@ const Register = () => {
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onRegis = async (event) => {
+    // Prevent default is to prevent the default behavior
+    event.preventDefault();
+
+    dispatch(register(email, fullName, password, phoneNumber, navigate));
+  };
+
   const handleEmailChange = (e) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = emailRegex.test(e.target.value);
@@ -17,8 +36,8 @@ const Register = () => {
   };
 
   const handlePhoneChange = (e) => {
-    const phoneRegex = /^\+62\d+$/; // Format: +62[nomor telepon]
-    const isValid = phoneRegex.test(e.target.value);
+    const phoneNumber = e.target.value;
+    const isValid = phoneNumber.length >= 12;
     setIsPhoneValid(isValid);
   };
 
@@ -29,40 +48,42 @@ const Register = () => {
     setIsPasswordTouched(true);
   };
 
- const handleRegistration = (e) => {
-   e.preventDefault();
-   setShowNotification(true);
+  const handleRegistration = (e) => {
+    e.preventDefault();
+    setShowNotification(true);
 
-   setTimeout(() => {
-     setShowNotification(false);
-     // Redirect to the OTP page
-     // Adjust the redirection based on your routing setup
-     window.location.href = "/otp";
-   }, 2000);
- };
+    setTimeout(() => {
+      setShowNotification(false);
+      // Redirect to the OTP page
+      // Adjust the redirection based on your routing setup
+      //  window.location.href = "/otp";
+    }, 2000);
+  };
 
- const goBack = () => {
-   window.history.back();
- };
+  const goBack = () => {
+    window.history.back();
+  };
 
   return (
     <section className="flex">
       <div className="flex flex-col justify-center mx-auto md:h-screen lg:py-0 w-full md:w-1/2">
         <div className="w-full  rounded-lg md:mt-0 mx-auto sm:max-w-md xl:p-0 p-6 ">
-          <div className=" space-y-4">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-primary md:text-2xl">
+          <div className=" px-4 space-y-4">
+            <p className=" text-primary font-bold text-3xl ">
               <FontAwesomeIcon
                 icon={faArrowLeft}
                 className="mr-2 mb-10 text-gray-700 block sm:hidden"
                 onClick={goBack}
               />
               Daftar
-            </h1>
+            </p>
 
             <form
               className="space-y-4 md:space-y-4"
-              action="#"
-              onSubmit={handleRegistration}
+              onSubmit={(event) => {
+                handleRegistration(event);
+                onRegis(event);
+              }}
             >
               <div>
                 <label htmlFor="name" className="block mb-1 text-sm">
@@ -72,6 +93,8 @@ const Register = () => {
                   className=" border border-gray-300 text-gray-900 sm:text-sm  w-full p-2.5 rounded-xl"
                   type="text"
                   placeholder="Nama Lengkap"
+                  value={fullName}
+                  onChange={(event) => setFullName(event.target.value)}
                   required
                 />
               </div>
@@ -86,7 +109,11 @@ const Register = () => {
                     } text-gray-900 sm:text-sm w-full p-2.5 rounded-xl`}
                     type="email"
                     placeholder="Contoh: johndee@gmail.com"
-                    onChange={handleEmailChange}
+                    onChange={(event) => {
+                      handleEmailChange(event);
+                      setEmail(event.target.value);
+                    }}
+                    value={email}
                     required
                   />
                   {isEmailValid && (
@@ -122,9 +149,13 @@ const Register = () => {
                       isPhoneValid ? "border-green-500" : "border-gray-300"
                     } text-gray-900 sm:text-sm w-full p-2.5 rounded-xl`}
                     type="tel"
-                    placeholder="+62"
+                    placeholder="085"
                     style={{ borderRadius: "15px" }}
-                    onChange={handlePhoneChange}
+                    onChange={(event) => {
+                      handlePhoneChange(event);
+                      setPhoneNumber(event.target.value);
+                    }}
+                    value={phoneNumber}
                     required
                   />
                   {isPhoneValid && (
@@ -165,7 +196,11 @@ const Register = () => {
                     } text-gray-900 sm:text-sm w-full p-2.5 rounded-xl`}
                     type="password"
                     placeholder="Buat Password"
-                    onChange={handlePasswordChange}
+                    onChange={(event) => {
+                      handlePasswordChange(event);
+                      setPassword(event.target.value);
+                    }}
+                    value={password}
                     required
                   />
                   {isPasswordValid && isPasswordTouched && (
@@ -212,13 +247,17 @@ const Register = () => {
               </div>
 
               <button
-                href="/otp"
                 type="submit"
                 className="w-full text-white bg-primary hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center rounded-xl"
               >
                 Daftar
               </button>
             </form>
+
+            <div className="flex justify-center">
+              <GoogleLogin buttonText={"Sign Up With Google"} />
+            </div>
+
             <p className="text-gray-700 text-center">
               Sudah punya akun?{" "}
               <Link
@@ -251,13 +290,6 @@ const Register = () => {
       <div className="bg-primary w-5/12 md:flex justify-center items-center hidden">
         <img src="/logo.svg" alt="gambar logo" className="h-36" />
       </div>
-      <style>{`
-        @media (max-width: 640px) {
-          body {
-            background-color: #ebf3fc;
-          }
-        }
-      `}</style>
     </section>
   );
 };
