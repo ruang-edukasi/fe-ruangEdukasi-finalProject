@@ -26,7 +26,7 @@ function App() {
           <Route path="/kelas-saya" element={<KelasSaya />} />
           <Route path="/reset" element={<ResertPassword />} />
           <Route path="/enroll" element={<EnrollClass />} />
-          <Route path="/otp" element={<Otp />} />
+           <Route path="/otp/:verifId" element={<Otp />} />
           <Route path="/profile" element={<Profile />} />
 
           {/* Admin Pages */}
