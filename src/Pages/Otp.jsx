@@ -118,7 +118,7 @@ export const Otp = () => {
         </div>
       </div>
 
-      <div className="md:w-5/12 bg-primary flex justify-center items-center hidden md:flex">
+      <div className="md:w-5/12 bg-primary lg:flex justify-center items-center hidden md:flex">
         <img src="/logo.svg" alt="gambar logo" className="h-36" />
       </div>
       <style></style>

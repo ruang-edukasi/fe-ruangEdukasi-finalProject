@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { register } from "../redux/action/authAction";
 import GoogleLogin from "../Components/GoogleLogin/GoogleLogin";
 
-
 const Register = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(true);

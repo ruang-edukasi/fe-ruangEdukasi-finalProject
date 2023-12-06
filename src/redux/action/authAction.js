@@ -1,6 +1,61 @@
 import axios from "axios";
-import { setToken, setUser } from "../reducer/authReducer";
+import { setError, setSucces, setToken, setUser } from "../reducer/authReducer";
 
+export const login = (email, password, navigate) => async (dispatch) => {
+  try {
+    dispatch(setError(""));
+    dispatch(setToken(null));
+    const fetch = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/v1/auth/user/login`,
+      {
+        email,
+        password,
+      }
+    );
+    const { response } = fetch.data;
+    const { token } = response;
+    dispatch(setToken(token));
+    alert(fetch.data.message);
+    navigate("/");
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (
+        error?.response?.data?.message ===
+        "Email is not registered in our system"
+      ) {
+        dispatch(setError("Alamat email tidak terdaftar!"));
+      } else if (error?.response?.data?.message === "Wrong password") {
+        dispatch(setError("Maaf, kata sandi salah"));
+      }
+      return;
+    }
+    alert(error?.message);
+  }
+};
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch(setError(""));
+    dispatch(setSucces(""));
+    const fetch = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/v1/auth/user/reset-password`,
+      {
+        email,
+      }
+    );
+    const { message } = fetch.data;
+    dispatch(setSucces("Tautan reset password terkirim"));
+
+    alert(message);
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error?.response?.data?.message === "Email not found") {
+        dispatch(setError("Alamat email tidak terdaftar!"));
+      }
+      return;
+    }
+    alert(error?.message);
+  }
+};
 
 export const register =
   (email, full_name, password, phone_number, navigate) => async (dispatch) => {
@@ -57,35 +112,7 @@ export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
   }
 };
 
-  export const login = (email, password, navigate) => async (dispatch) => {
-    try {
-      const data = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v1/auth/user/login`,
-        {
-          email,
-          password,
-        }
-      );
-      const { response } = data.data;
-
-      const { token } = response;
-      dispatch(setToken(token));
-      alert("login succesfully");
-      navigate("/");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error("errror :", error);
-        alert(error?.data?.response?.message);
-        return;
-      }
-      console.error("errror :", error);
-      alert(error?.message);
-    }
-  };
-
-
-  
-export const logout = () => (dispatch) => {
+ export const logout = () => (dispatch) => {
   dispatch(setToken(null));
   dispatch(setUser(null));
 };

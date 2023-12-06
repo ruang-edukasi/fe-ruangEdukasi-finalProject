@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Header from "../Components/Header/Header";
 import Hero from "../Components/Hero/Hero";
-import Category from "../Components/Slider/Category";
-import Course from "../Components/Slider/Course";
+import Category from "./Category";
+import Course from "./Course";
 import Button from "../Components/Button/Button";
 import Footer from "../Components/Footer/Footer";
 
