@@ -27,26 +27,28 @@ function Course() {
 
   return (
     <>
-      <div className="carousel rounded-box">
-        {course.map((courses) => (
-          <>
-            <div className="carousel-item">
-              <CourseItem
-                key={courses?.id}
-                id={courses?.id}
-                imageURL=""
-                courseName={courses?.courseName}
-                instructorName={courses?.instructorName}
-                courseDescription={courses?.courseDescription}
-                price={courses?.price}
-                rating={courses?.rating}
-                courseType={courses?.courseType}
-                courseCategory={courses?.courseCategory}
-                courseLevel={courses?.courseLevel}
-              />
-            </div>
-          </>
-        ))}
+      <div className="container flex flex-wrap">
+        <div className="carousel rounded-box py-2 gap-5">
+          {course.map((courses) => (
+            <>
+              <div className="carousel-item">
+                <CourseItem
+                  key={courses?.id}
+                  id={courses?.id}
+                  imageURL=""
+                  courseName={courses?.courseName}
+                  instructorName={courses?.instructorName}
+                  courseDescription={courses?.courseDescription}
+                  price={courses?.price}
+                  rating={courses?.rating}
+                  courseType={courses?.courseType}
+                  courseCategory={courses?.courseCategory}
+                  courseLevel={courses?.courseLevel}
+                />
+              </div>
+            </>
+          ))}
+        </div>
       </div>
     </>
   );
