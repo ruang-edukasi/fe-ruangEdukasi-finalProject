@@ -21,21 +21,10 @@ function ResertPassword() {
     setShowpassword2(!showPassword2);
   }
 
-  function handlePassword(e) {
-    const password = e.target.value;
-    setpassword(password);
-  }
-  function handlePassword2(e) {
-    const password = e.target.value;
-    setpassword2(password);
-  }
-
-  const handleReset = async (event) =>{
-    console.log(resetId, password, password2);
+  function handleReset(event) {
     event.preventDefault();
     dispatch(reset(resetId, password, password2));
   }
-
 
   return (
     <div className="flex min-h-screen w-full">
@@ -63,7 +52,7 @@ function ResertPassword() {
                 type={showPassword1 ? "text" : "password"}
                 name="password"
                 placeholder="Masukkan Password"
-                onChange={handlePassword}
+                onChange={(e) => setpassword(e.target.value)}
                 className={`border ${
                   password <= 7
                     ? password >= 1
@@ -121,7 +110,7 @@ function ResertPassword() {
                 type={showPassword2 ? "text" : "password"}
                 name="confirm_password"
                 placeholder="Masukkan Password"
-                onChange={handlePassword2}
+                onChange={(e) => setpassword2(e.target.value)}
                 className={`border ${
                   password2 <= 7
                     ? password2 >= 1
