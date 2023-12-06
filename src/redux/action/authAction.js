@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2"; 
 import { setError, setSucces, setToken, setUser } from "../reducer/authReducer";
 
 export const login = (email, password, navigate) => async (dispatch) => {
@@ -15,8 +16,15 @@ export const login = (email, password, navigate) => async (dispatch) => {
     const { response } = fetch.data;
     const { token } = response;
     dispatch(setToken(token));
-    alert(fetch.data.message);
-    navigate("/");
+    
+    Swal.fire({
+      title: fetch.data.message,
+      icon: "success",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
+    });
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (
@@ -87,7 +95,6 @@ export const register =
 
 export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
   try {
-  
     const verifresponse = await axios.post(
       `${
         import.meta.env.VITE_API_URL
@@ -96,13 +103,19 @@ export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
         otp,
       }
     );
-    const { response} = verifresponse.data;
-    const {token} = response
-   
+    const { response } = verifresponse.data;
+    const { token } = response;
     dispatch(setToken(token));
 
-   
-    navigate("/");
+    // Mengganti alert dengan SweetAlert2
+    Swal.fire({
+      title: verifresponse.data.message,
+      icon: "success",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
+    });
   } catch (error) {
     if (axios.isAxiosError(error)) {
       alert(error?.response?.data?.message);
