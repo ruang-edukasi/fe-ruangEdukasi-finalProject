@@ -56,6 +56,33 @@ export const forgotPassword = (email) => async (dispatch) => {
     alert(error?.message);
   }
 };
+export const reset =
+  (resetId, password, confirm_password) => async (dispatch) => {
+    try {
+      const fetch = await axios.get(
+        `${
+          import.meta.env.VITE_API_URL
+        }/api/v1/auth/user/set-password/${resetId}`,
+        {
+          password,
+          confirm_password,
+        }
+      );
+      
+      const { message } = fetch.data;
+      dispatch(setSucces(message));
+      alert(message);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log(resetId, password, confirm_password);
+        console.log(error.response);
+        alert(error?.response?.data?.message);
+        return;
+      }
+      alert(error?.message);
+      console.error(error);
+    }
+  };
 
 export const register =
   (email, full_name, password, phone_number, navigate) => async (dispatch) => {

@@ -23,7 +23,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashbord" element={<Dashbord />} />
           <Route path="/kelas-saya" element={<KelasSaya />} />
-          <Route path="/reset" element={<ResertPassword />} />
+          <Route path="/SearchAllCourse" element={<KelasSaya />} />
+          <Route path="/user/reset/:resetId" element={<ResertPassword />} />
           <Route path="/enroll" element={<EnrollClass />} />
           <Route path="/otp" element={<Otp />} />
 

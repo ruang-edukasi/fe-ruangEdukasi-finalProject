@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { reset } from "../redux/action/authAction";
 
 function ResertPassword() {
+  const { resetId } = useParams();
+  const dispatch = useDispatch();
   const [showPassword1, setShowpassword1] = useState(false);
   const [showPassword2, setShowpassword2] = useState(false);
-  const [passwordMin, setPasswordMin] = useState(0);
-  const [passwordMin2, setPasswordMin2] = useState(0);
+  const [password, setpassword] = useState("");
+  const [password2, setpassword2] = useState("");
 
   function handleVisibilityPassword() {
     setShowpassword1(!showPassword1);
@@ -19,12 +23,19 @@ function ResertPassword() {
 
   function handlePassword(e) {
     const password = e.target.value;
-    setPasswordMin(password.length);
+    setpassword(password);
   }
   function handlePassword2(e) {
     const password = e.target.value;
-    setPasswordMin2(password.length);
+    setpassword2(password);
   }
+
+  const handleReset = async (event) =>{
+    console.log(resetId, password, password2);
+    event.preventDefault();
+    dispatch(reset(resetId, password, password2));
+  }
+
 
   return (
     <div className="flex min-h-screen w-full">
@@ -41,6 +52,7 @@ function ResertPassword() {
         <form
           action=""
           className="w-9/12 sm:w-7/12 md:w-8/12 lg:w-7/12 space-y-5 mb-11 xl:w-6/12"
+          onSubmit={handleReset}
         >
           <div>
             <label htmlFor="name" className="mb-1 flex justify-between">
@@ -53,8 +65,8 @@ function ResertPassword() {
                 placeholder="Masukkan Password"
                 onChange={handlePassword}
                 className={`border ${
-                  passwordMin <= 7
-                    ? passwordMin >= 1
+                  password <= 7
+                    ? password >= 1
                       ? "border-alert"
                       : "border-slate-400"
                     : "border-succes"
@@ -107,12 +119,12 @@ function ResertPassword() {
             <div className="relative flex items-center">
               <input
                 type={showPassword2 ? "text" : "password"}
-                name="password"
+                name="confirm_password"
                 placeholder="Masukkan Password"
                 onChange={handlePassword2}
                 className={`border ${
-                  passwordMin2 <= 7
-                    ? passwordMin2 >= 1
+                  password2 <= 7
+                    ? password2 >= 1
                       ? "border-alert"
                       : "border-slate-400"
                     : "border-succes"
@@ -165,8 +177,8 @@ function ResertPassword() {
             </button>
           </div>
         </form>
-        {(passwordMin < 8 && passwordMin >= 1) ||
-        (passwordMin2 < 8 && passwordMin2 >= 1) ? (
+        {(password < 8 && password >= 1) ||
+        (password2 < 8 && password2 >= 1) ? (
           <div className="bg-alert px-3 py-2 text-center text-white w-4/12 rounded-lg">
             Password min 8 Karakter
           </div>
