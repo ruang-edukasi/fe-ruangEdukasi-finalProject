@@ -27,19 +27,21 @@ function Category() {
 
   return (
     <>
-      <div className="carousel rounded-box">
-        {category.map((categories) => (
-          <>
-            <div className="carousel-item">
-              <CategoryItem
-                key={categories.id}
-                id={categories?.id}
-                imageURL=""
-                categoryName={categories?.categoryName}
-              />
-            </div>
-          </>
-        ))}
+      <div className="container flex flex-wrap">
+        <div className="carousel rounded-box">
+          {category.map((categories) => (
+            <>
+              <div className="carousel-item overflo">
+                <CategoryItem
+                  key={categories.id}
+                  id={categories?.id}
+                  imageURL=""
+                  categoryName={categories?.categoryName}
+                />
+              </div>
+            </>
+          ))}
+        </div>
       </div>
     </>
   );
