@@ -5,6 +5,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../redux/action/authAction";
+import GoogleLogin from "../Components/GoogleLogin/GoogleLogin";
 
 
 const Register = () => {
@@ -68,15 +69,15 @@ const Register = () => {
     <section className="flex">
       <div className="flex flex-col justify-center mx-auto md:h-screen lg:py-0 w-full md:w-1/2">
         <div className="w-full  rounded-lg md:mt-0 mx-auto sm:max-w-md xl:p-0 p-6 ">
-          <div className=" space-y-4">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-primary md:text-2xl">
+          <div className=" px-4 space-y-4">
+            <p className=" text-primary font-bold text-3xl ">
               <FontAwesomeIcon
                 icon={faArrowLeft}
                 className="mr-2 mb-10 text-gray-700 block sm:hidden"
                 onClick={goBack}
               />
               Daftar
-            </h1>
+            </p>
 
             <form
               className="space-y-4 md:space-y-4"
@@ -247,13 +248,17 @@ const Register = () => {
               </div>
 
               <button
-                href="/otp"
                 type="submit"
                 className="w-full text-white bg-primary hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center rounded-xl"
               >
                 Daftar
               </button>
             </form>
+
+            <div className="flex justify-center">
+              <GoogleLogin buttonText={"Sign Up With Google"} />
+            </div>
+
             <p className="text-gray-700 text-center">
               Sudah punya akun?{" "}
               <Link
