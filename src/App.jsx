@@ -13,6 +13,7 @@ import KelasSaya from "./Pages/KelasSaya";
 import Profile from "./Pages/Profile";
 import LoginAdmin from "./Admin/Pages/LoginAdmin";
 import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
+import SearchCourse from "./Pages/SearchCourse";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/enroll" element={<EnrollClass />} />
           <Route path="/otp" element={<Otp />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/search" element={<SearchCourse />} />
 
           {/* Admin Pages */}
           <Route path="/login-admin" element={<LoginAdmin />} />

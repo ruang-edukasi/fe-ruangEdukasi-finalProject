@@ -13,11 +13,17 @@ import {
 
 const Header = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const [query, setQuery] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { user, token } = useSelector((state) => state.auth);
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    navigate(`/search/?query=${query}`);
+  };
 
   const onlogout = () => {
     dispatch(logout());
@@ -39,13 +45,19 @@ const Header = () => {
               <img src="/logo.svg" alt="logo" className="h-16" />
             </Link>
             <div className="hidden lg:flex flex-row items-center gap-2 py-4 px-6">
-              <form action="search" className="relative">
+              <form
+                action="search"
+                className="relative"
+                onSubmit={handleSearch}
+              >
                 <input
                   type="text"
+                  value={query}
                   name="search"
                   placeholder="Cari Kursus terbaik..."
                   autoComplete="off"
                   className="outline-none font-semibold text-md bg-white border-none ring-2 ring-white focus:ring-indigo-300 rounded-xl border-white px-4 md:py-2 md:w-96"
+                  onChange={(event) => setQuery(event.target.value)}
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
                   <button className="text-white bg-primary hover:bg-indigo-400 rounded-lg w-8 h-7 transition duration-300">

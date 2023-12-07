@@ -4,7 +4,7 @@ const Hero = () => {
       className="relative bg-left bg-no-repeat h-64"
       style={{ backgroundImage: "url('/hero.svg')" }}
     >
-      <div className="w-full h-64 bg-gradient-to-l from-primary to-transparent via-indigo-500 via-35% absolute" />
+      <div className="w-full h-64 bg-gradient-to-l from-primary to-transparent via-indigo-500 via-35% lg:via-60% absolute" />
       <div className="container mx-auto h-full flex items-center justify-end relative z-10">
         <div className="p-4 mx-20 text-right text-white">
           <h1 className="text-2xl text-left font-bold mb-2">

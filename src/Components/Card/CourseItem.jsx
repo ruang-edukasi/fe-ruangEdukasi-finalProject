@@ -10,7 +10,7 @@ import {
 
 function CourseItem({
   id,
-  imageURL,
+  imageUrl,
   courseName,
   instructorName,
   price,
@@ -20,12 +20,8 @@ function CourseItem({
 }) {
   return (
     <>
-      <div className="card w-96 bg-base-100 shadow-md flex justify-between">
-        <img
-          src="/course.svg"
-          alt="course.svg"
-          className="rounded-t-lg w-full"
-        />
+      <div className="card w-80 bg-base-100 shadow-md flex">
+        <img src="/course.svg" className="rounded-t-lg w-full" />
         <div className="p-4">
           <div className="flex justify-between">
             <h3 className="text-primary font-bold">{courseCategory}</h3>
@@ -78,7 +74,7 @@ function CourseItem({
 
 CourseItem.propTypes = {
   id: PropType.number.isRequired,
-  imageURL: PropType.string.isRequired,
+  imageUrl: PropType.string.isRequired,
   courseName: PropType.string.isRequired,
   instructorName: PropType.string.isRequired,
   price: PropType.number.isRequired,
