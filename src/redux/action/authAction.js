@@ -1,5 +1,5 @@
 import axios from "axios";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 import { setError, setSucces, setToken, setUser } from "../reducer/authReducer";
 
 export const login = (email, password, navigate) => async (dispatch) => {
@@ -16,7 +16,7 @@ export const login = (email, password, navigate) => async (dispatch) => {
     const { response } = fetch.data;
     const { token } = response;
     dispatch(setToken(token));
-    
+
     Swal.fire({
       title: fetch.data.message,
       icon: "success",
@@ -64,6 +64,31 @@ export const forgotPassword = (email) => async (dispatch) => {
     alert(error?.message);
   }
 };
+export const reset =
+  (resetId, password, confirm_password) => async (dispatch) => {
+    try {
+      const fetch = await axios.post(
+        `${
+          import.meta.env.VITE_API_URL
+        }/api/v1/auth/user/set-password/${resetId}`,
+        {
+          password,
+          confirm_password,
+        }
+      );
+
+      const { message } = fetch.data;
+      dispatch(setSucces(message));
+      alert(message);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log(resetId, password, confirm_password);
+        alert(error?.response?.data?.message);
+        return;
+      }
+      alert(error?.message);
+    }
+  };
 
 export const register =
   (email, full_name, password, phone_number, navigate) => async (dispatch) => {
@@ -79,10 +104,9 @@ export const register =
         }
       );
       const { response } = registrationResponse.data;
-      const {verifId} = response
+      const { verifId } = response;
       console.log(verifId);
 
-    
       navigate(`/otp/${verifId}`);
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -125,7 +149,7 @@ export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
   }
 };
 
- export const logout = () => (dispatch) => {
+export const logout = () => (dispatch) => {
   dispatch(setToken(null));
   dispatch(setUser(null));
 };
