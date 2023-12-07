@@ -1,16 +1,41 @@
 import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { verificationOTP } from "../redux/action/authAction"; 
+
 
 export const Otp = () => {
   const inputs = Array.from({ length: 6 }, () => useRef(null));
   const [seconds, setSeconds] = useState(60);
+  const [otp, setOtp] = useState("");
+  const { verifId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (index, value) => {
-    if (value && index < inputs.length - 1) {
-      inputs[index + 1].current.focus();
+    if (value) {
+      if (index < inputs.length - 1) {
+        inputs[index + 1].current.focus();
+      }
+    } else {
+      if (index > 0) {
+        inputs[index - 1].current.focus();
+      }
     }
+
+    // Memperbarui nilai OTP pada state
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp.join(""));
   };
+
+    const handleSubmit = () => {
+      
+      dispatch(verificationOTP(otp, verifId, navigate)); 
+    };
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,13 +51,13 @@ export const Otp = () => {
 
   return (
     <section className="flex flex-col md:flex-row">
-      <div className="md:w-1/2 flex flex-col justify-center mx-auto md:h-screen">
+      <div className="md:w-1/2 flex flex-col justify-center px-4 mx-auto md:h-screen">
         <div className="w-full rounded-lg md:mt-0 mx-auto md:max-w-md xl:p-0 p-6 ">
           <div className="flex flex-col w-full  mx-auto">
             <h1 className="flex flex-col items-start text-xl font-bold leading-tight tracking-tight text-indigo-600 md:text-2xl">
               <FontAwesomeIcon
                 icon={faArrowLeft}
-                className="mb-4 text-gray-700 text-3xl cursor-pointer"
+                className="mb-10 text-gray-700 text-3xl cursor-pointer block sm:hidden"
                 onClick={goBack}
               />
               Masukkan OTP
@@ -62,15 +87,22 @@ export const Otp = () => {
                 ))}
               </div>
 
-              <span className="py-4 pb-5 text-lg text-center items-center justify-center flex gap-1">
-                Kirim ulang OTP dalam{" "}
-                <div className="text-indigo-600">{seconds}</div> detik
-              </span>
+              {seconds === 0 ? (
+                <span className="py-4 pb-5 text-lg text-red-500 text-center items-center justify-center flex gap-1">
+                  <a href="">Kirim ulang</a>
+                </span>
+              ) : (
+                <span className="py-4 pb-5 text-lg text-center items-center justify-center flex gap-1">
+                  Kirim ulang OTP dalam{" "}
+                  <div className="text-indigo-600">{seconds}</div> detik
+                </span>
+              )}
             </div>
 
             <div className="flex flex-col py-4">
               <button
                 type="button"
+                onClick={handleSubmit}
                 className="w-full text-white bg-primary hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center rounded-xl"
               >
                 Simpan

@@ -14,6 +14,7 @@ import Profile from "./Pages/Profile";
 import LoginAdmin from "./Admin/Pages/LoginAdmin";
 import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 import SearchCourse from "./Pages/SearchCourse";
+import AllCourse from "./Pages/AllCourse";
 
 function App() {
   return (
@@ -25,11 +26,13 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashbord" element={<Dashbord />} />
           <Route path="/kelas-saya" element={<KelasSaya />} />
-          <Route path="/reset" element={<ResertPassword />} />
+          <Route path="/SearchAllCourse" element={<KelasSaya />} />
+          <Route path="/user/reset/:resetId" element={<ResertPassword />} />
           <Route path="/enroll" element={<EnrollClass />} />
-          <Route path="/otp" element={<Otp />} />
+          <Route path="/otp/:verifId" element={<Otp />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/search" element={<SearchCourse />} />
+          <Route path="/all-course" element={<AllCourse />} />
 
           {/* Admin Pages */}
           <Route path="/login-admin" element={<LoginAdmin />} />
