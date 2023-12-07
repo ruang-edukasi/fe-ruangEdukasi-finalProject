@@ -8,18 +8,12 @@ import { reset } from "../redux/action/authAction";
 function ResertPassword() {
   const { resetId } = useParams();
   const dispatch = useDispatch();
-  const [showPassword1, setShowpassword1] = useState(false);
-  const [showPassword2, setShowpassword2] = useState(false);
+  const [showPassword, setshowPassword] = useState({
+    password1: false,
+    password2: false,
+  });
   const [password, setpassword] = useState("");
   const [password2, setpassword2] = useState("");
-
-  function handleVisibilityPassword() {
-    setShowpassword1(!showPassword1);
-  }
-
-  function handleVisibilityPassword2() {
-    setShowpassword2(!showPassword2);
-  }
 
   function handleReset(event) {
     event.preventDefault();
@@ -49,19 +43,19 @@ function ResertPassword() {
             </label>
             <div className="relative flex items-center">
               <input
-                type={showPassword1 ? "text" : "password"}
+                type={showPassword.password1 ? "text" : "password"}
                 name="password"
                 placeholder="Masukkan Password"
                 onChange={(e) => setpassword(e.target.value)}
                 className={`border ${
-                  password <= 7
-                    ? password >= 1
+                  password.length <= 7
+                    ? password.length >= 1
                       ? "border-alert"
                       : "border-slate-400"
                     : "border-succes"
                 } px-5 py-2 w-full rounded-xl focus:outline-none`}
               />
-              {showPassword1 ? (
+              {showPassword.password1 ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -69,7 +63,12 @@ function ResertPassword() {
                   strokeWidth={1.5}
                   stroke="grey"
                   className="w-5 h-5 absolute right-3 cursor-pointer"
-                  onClick={handleVisibilityPassword}
+                  onClick={() =>
+                    setshowPassword({
+                      ...showPassword,
+                      password1: !showPassword.password1,
+                    })
+                  }
                 >
                   <path
                     strokeLinecap="round"
@@ -85,7 +84,12 @@ function ResertPassword() {
                   strokeWidth={1.5}
                   stroke="grey"
                   className="w-5 h-5 absolute right-3 cursor-pointer"
-                  onClick={handleVisibilityPassword}
+                  onClick={() =>
+                    setshowPassword({
+                      ...showPassword,
+                      password1: !showPassword.password1,
+                    })
+                  }
                 >
                   <path
                     strokeLinecap="round"
@@ -107,19 +111,19 @@ function ResertPassword() {
             </label>
             <div className="relative flex items-center">
               <input
-                type={showPassword2 ? "text" : "password"}
+                type={showPassword.password2 ? "text" : "password"}
                 name="confirm_password"
                 placeholder="Masukkan Password"
                 onChange={(e) => setpassword2(e.target.value)}
                 className={`border ${
-                  password2 <= 7
-                    ? password2 >= 1
+                  password2.length <= 7
+                    ? password2.length >= 1
                       ? "border-alert"
                       : "border-slate-400"
                     : "border-succes"
-                } border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-none`}
+                }  px-5 py-2 w-full rounded-xl focus:outline-none`}
               />
-              {showPassword2 ? (
+              {showPassword.password2 ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -127,7 +131,12 @@ function ResertPassword() {
                   strokeWidth={1.5}
                   stroke="grey"
                   className="w-5 h-5 absolute right-3 cursor-pointer"
-                  onClick={handleVisibilityPassword2}
+                  onClick={() =>
+                    setshowPassword({
+                      ...showPassword,
+                      password2: !showPassword.password2,
+                    })
+                  }
                 >
                   <path
                     strokeLinecap="round"
@@ -143,7 +152,12 @@ function ResertPassword() {
                   strokeWidth={1.5}
                   stroke="grey"
                   className="w-5 h-5 absolute right-3 cursor-pointer"
-                  onClick={handleVisibilityPassword2}
+                  onClick={() =>
+                    setshowPassword({
+                      ...showPassword,
+                      password2: !showPassword.password2,
+                    })
+                  }
                 >
                   <path
                     strokeLinecap="round"
@@ -166,8 +180,8 @@ function ResertPassword() {
             </button>
           </div>
         </form>
-        {(password < 8 && password >= 1) ||
-        (password2 < 8 && password2 >= 1) ? (
+        {(password.length < 8 && password.length >= 1) ||
+        (password2.length < 8 && password2.length >= 1) ? (
           <div className="bg-alert px-3 py-2 text-center text-white w-4/12 rounded-lg">
             Password min 8 Karakter
           </div>
