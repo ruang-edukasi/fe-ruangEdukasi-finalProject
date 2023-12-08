@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { profile, logout } from "../redux/action/authAction";
+import { profile, logout, updateProfile } from "../redux/action/authAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
@@ -19,7 +19,58 @@ const Profile = () => {
 
   const { user, token } = useSelector((state) => state.auth);
 
-  const onlogout = () => {
+  const [full_name, setFullName] = useState(user?.fullName || "");
+  const [phone_number, setPhoneNumber] = useState(user?.phoneNumber || "");
+  const [city, setCity] = useState(user?.city || "");
+  const [country, setCountry] = useState(user?.country || "");
+  const [photo, setPhoto] = useState(null);
+  const [previewPhoto, setPreviewPhoto] = useState(null);
+  const inputPhotoRef = useRef(null);
+
+  useEffect(() => {
+    if (user) {
+      setFullName(user.fullName || "");
+      setPhoneNumber(user.phoneNumber || "");
+      setCity(user.city || "");
+      setCountry(user.country || "");
+      setPhoto(null);
+    }
+  }, [user]);
+
+ useEffect(() => {
+   if (photo) {
+     const reader = new FileReader();
+     reader.onloadend = () => {
+       setPreviewPhoto(reader.result);
+     };
+     reader.readAsDataURL(photo);
+   } else {
+     setPreviewPhoto(user?.imageUrl || null); // Gunakan URL foto yang diperbarui dari Redux
+   }
+ }, [photo, user]);
+
+  const handlePhotoChange = (e) => {
+    setPhoto(e.target.files[0]);
+  };
+
+  const onFrameClick = () => {
+    inputPhotoRef.current.click();
+  };
+
+ const onUpdateProfile = () => {
+   const formData = new FormData();
+   formData.append("full_name", full_name);
+   formData.append("phone_number", phone_number);
+   formData.append("city", city);
+   formData.append("country", country);
+   formData.append("photo", photo);
+
+   dispatch(
+     updateProfile(full_name, phone_number, city, country, photo, navigate)
+   );
+ };
+
+  const onLogout = () => {
     dispatch(logout());
     navigate("/login");
   };
@@ -82,7 +133,7 @@ const Profile = () => {
                       <hr className="my-4" />
                     </div>
                   </button>
-                  <button onClick={onlogout}>
+                  <button onClick={onLogout}>
                     <div className="text-start font-semibold hover:text-primary">
                       <FontAwesomeIcon
                         icon={faArrowRightToBracket}
@@ -94,11 +145,40 @@ const Profile = () => {
                   </button>
                 </div>
                 <div className="flex flex-col w-full">
-                  <div className="avatar placeholder justify-center">
-                    <div className="bg-neutral text-neutral-content rounded-full w-24">
-                      <span className="text-3xl">
-                        <FontAwesomeIcon icon={faUser} className="text-white" />
-                      </span>
+                  <div className="input-wrapper relative flex justify-center items-center">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref={inputPhotoRef}
+                      style={{ display: "none" }}
+                      onChange={handlePhotoChange}
+                    />
+
+                    <div className="group">
+                      <div
+                        className="avatar placeholder flex justify-center items-center cursor-pointer group-hover:border-primary mx-auto"
+                        onClick={onFrameClick}
+                        style={{
+                          width: "90px",
+                          height: "90px",
+                          borderRadius: "50%",
+                          border: "1px solid #3182CE",
+                          backgroundImage: previewPhoto
+                            ? `url(${previewPhoto})`
+                            : "linear-gradient(45deg, #fafafa, #f0f0f0)",
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                      >
+                        {!previewPhoto && (
+                          <span className="text-3xl text-white">
+                            <FontAwesomeIcon icon={faUser} />
+                          </span>
+                        )}
+                      </div>
+                      <div className="  text-primary text-sm mb-3">
+                        Edit Photo Profile
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -106,8 +186,9 @@ const Profile = () => {
                     <input
                       type="text"
                       placeholder={user?.fullName}
-                      className="input input-bordered w-full max-w-xs"
-                      disabled
+                      value={full_name}
+                      onChange={(e) => setFullName(e.target.value)}
+                      className="input input-bordered w-full max-w-xs mb-2 rounded-xl"
                     />
                   </div>
                   <div>
@@ -115,7 +196,7 @@ const Profile = () => {
                     <input
                       type="text"
                       placeholder={user?.email}
-                      className="input input-bordered w-full max-w-xs"
+                      className="input input-bordered w-full max-w-xs mb-2 rounded-xl"
                       disabled
                     />
                   </div>
@@ -124,8 +205,9 @@ const Profile = () => {
                     <input
                       type="text"
                       placeholder={user?.phoneNumber}
-                      className="input input-bordered w-full max-w-xs"
-                      disabled
+                      value={phone_number}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      className="input input-bordered w-full max-w-xs mb-2 rounded-xl"
                     />
                   </div>
                   <div>
@@ -133,8 +215,9 @@ const Profile = () => {
                     <input
                       type="text"
                       placeholder={user?.country}
-                      className="input input-bordered w-full max-w-xs"
-                      disabled
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                      className="input input-bordered w-full max-w-xs mb-2 rounded-xl"
                     />
                   </div>
                   <div>
@@ -142,10 +225,18 @@ const Profile = () => {
                     <input
                       type="text"
                       placeholder={user?.city}
-                      className="input input-bordered w-full max-w-xs"
-                      disabled
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      className="input input-bordered w-full max-w-xs rounded-xl"
                     />
                   </div>
+                  <button
+                    type="submit"
+                    onClick={onUpdateProfile}
+                    className="w-full max-w-xs mt-4 text-white bg-primary hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center rounded-full"
+                  >
+                    Simpan Profile Saya
+                  </button>
                 </div>
               </div>
             </div>

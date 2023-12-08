@@ -1,6 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2"; 
-import { setError, setSucces, setToken, setUser } from "../reducer/authReducer";
+import { setError, setSucces, setToken, setUser, setVerifEmail } from "../reducer/authReducer";
 
 export const login = (email, password, navigate) => async (dispatch) => {
   try {
@@ -68,7 +68,6 @@ export const forgotPassword = (email) => async (dispatch) => {
 export const register =
   (email, full_name, password, phone_number, navigate) => async (dispatch) => {
     try {
-      // Langkah 1: Registrasi pengguna dan mendapatkan verifId
       const registrationResponse = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/v1/auth/user/register`,
         {
@@ -79,11 +78,15 @@ export const register =
         }
       );
       const { response } = registrationResponse.data;
-      const {verifId} = response
-      console.log(verifId);
+      const { verifId, verifEmail } = response;
 
-    
+      console.log(verifEmail);
+      console.log(verifId);
+        dispatch(setVerifEmail(verifEmail));
+     
+     
       navigate(`/otp/${verifId}`);
+
     } catch (error) {
       if (axios.isAxiosError(error)) {
         alert(error?.response?.data?.message);
@@ -125,6 +128,28 @@ export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
   }
 };
 
+export const renewOTP = (verifId, navigate) => async (dispatch) => {
+  try {
+    const renewResponse = await axios.post(
+      `${
+        import.meta.env.VITE_API_URL
+      }/api/v1/auth/user/renew-otp?verification=${verifId}`
+    );
+    const { response } = renewResponse.data;
+
+     Swal.fire({
+       title: renewResponse.data.message,
+       icon: "success",
+     });
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert(error?.response?.data?.message);
+      return;
+    }
+    alert(error?.message);
+  }
+};
+
  export const logout = () => (dispatch) => {
   dispatch(setToken(null));
   dispatch(setUser(null));
@@ -146,9 +171,64 @@ export const profile =
       );
 
       const { response } = data.data;
+  
 
       dispatch(setUser(response));
 
+      if (navigatePathSuccess) navigate(navigatePathSuccess);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.data.status === 401) {
+          dispatch(logout());
+
+          if (navigatePathError) navigate(navigatePathError);
+          return;
+        }
+
+        alert(error?.data?.response?.message);
+        return;
+      }
+
+      alert(error?.message);
+    }
+  };
+
+
+export const updateProfile =
+  (full_name,phone_number,city, country,photo, navigate, navigatePathSuccess, navigatePathError) =>
+  async (dispatch, getState) => {
+    try {
+      let { token } = getState().auth;
+
+       const formData = new FormData();
+       formData.append("full_name", full_name);
+       formData.append("phone_number", phone_number);
+       formData.append("city", city);
+       formData.append("country", country);
+       formData.append("photo", photo);
+
+        const data = await axios.post(
+          `${import.meta.env.VITE_API_URL}/api/v1/user/profile/update`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+      const { response } = data.data;
+        dispatch(setUser(response));
+         
+           Swal.fire({
+             title: data.data.message,
+             icon: "success",
+           }).then((result) => {
+             if (result.isConfirmed) {
+               navigate("/profile");
+             }
+           });
+           
       if (navigatePathSuccess) navigate(navigatePathSuccess);
     } catch (error) {
       if (axios.isAxiosError(error)) {
