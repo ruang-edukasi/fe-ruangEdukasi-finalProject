@@ -31,11 +31,11 @@ function Category() {
         <div className="carousel rounded-box">
           {category.map((categories) => (
             <>
-              <div className="carousel-item overflo">
+              <div className="carousel-item">
                 <CategoryItem
                   key={categories.id}
                   id={categories?.id}
-                  imageURL=""
+                  imageURL={categories?.imageUrl}
                   categoryName={categories?.categoryName}
                 />
               </div>
