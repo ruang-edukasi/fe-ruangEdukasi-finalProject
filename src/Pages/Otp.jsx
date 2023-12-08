@@ -8,7 +8,7 @@ import { verificationOTP,renewOTP } from "../redux/action/authAction";
 
 export const Otp = () => {
   const inputs = Array.from({ length: 6 }, () => useRef(null));
-  const [seconds, setSeconds] = useState(5);
+  const [seconds, setSeconds] = useState(60);
   const [otp, setOtp] = useState("");
   const { verifId } = useParams();
   const dispatch = useDispatch();

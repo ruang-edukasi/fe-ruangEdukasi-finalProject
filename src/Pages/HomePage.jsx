@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Header from "../Components/Header/Header";
 import Hero from "../Components/Hero/Hero";
-import Category from "./Category";
-import Course from "./Course";
+import Course from "../Layout/Course";
 import Button from "../Components/Button/Button";
 import Footer from "../Components/Footer/Footer";
+import Category from "../Layout/Category";
 
 function HomePage() {
   const [activeFilter, setActiveFilter] = useState("UI/UX Design");
@@ -20,21 +20,23 @@ function HomePage() {
       <section>
         <Hero />
         <section className="bg-blue-100">
-          <div className="container mx-auto px-20 py-4">
-            <div className="flex py-2 justify-between">
-              <h2 className="text-xl font-bold">Kategori Belajar</h2>
-              <Link to="" className="font-bold text-primary">
-                Lihat Semua
-              </Link>
+          <div className="container mx-auto px-12 sm:px-16 py-4">
+            <div className="overflow-hidden">
+              <div className="flex py-2 justify-between">
+                <h2 className="text-xl font-bold">Kategori Belajar</h2>
+                <Link to="/dashbord" className="font-bold text-primary">
+                  Lihat Semua
+                </Link>
+              </div>
             </div>
             <Category />
           </div>
         </section>
-        <section className="container mx-auto pb-10 px-20">
+        <section className="container mx-auto pb-10 px-12 sm:px-16">
           <div className="overflow-hidden">
             <div className="my-8 mb-0 flex justify-between">
-              <h2 className="text-xl font-bold">Kursus Populer</h2>
-              <Link to="/dashbord" className="font-bold text-primary">
+              <h2 className="text-xl font-bold mb-4 sm:mb-0">Kursus Populer</h2>
+              <Link to="/all-course" className="font-bold text-primary">
                 Lihat Semua
               </Link>
             </div>
