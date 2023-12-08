@@ -24,20 +24,23 @@ const SearchCourse = () => {
     dispatch(getSearchCourse(setErrors, errors, query));
   }, [dispatch, errors, query, searchParams]);
 
-  if (search.length === 0) {
+  if (!query || (query && search.length === 0)) {
     return (
       <div className="flex flex-row justify-center items-center min-h-screen">
         <div className="font-bold text-3xl italic">
-          Hasil pencarian tidak ditemukan untuk {query}
+          {!query
+            ? "Masukkan kata kunci untuk memulai pencarian."
+            : `Hasil pencarian tidak ditemukan untuk ${query}`}
         </div>
       </div>
     );
   }
+
   return (
     <>
       <Header />
       <section>
-        <div className="container mx-auto px-16 pt-7">
+        <div className="min-h-screen container mx-auto px-16 pt-7">
           <div className="text-base font-medium leading-tight tracking-tight md:text-2xl italic">
             Hasil pencarian untuk {query}
           </div>

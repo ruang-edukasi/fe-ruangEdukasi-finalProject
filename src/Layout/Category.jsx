@@ -35,7 +35,7 @@ function Category() {
                 <CategoryItem
                   key={categories.id}
                   id={categories?.id}
-                  imageURL=""
+                  imageURL={categories?.imageUrl}
                   categoryName={categories?.categoryName}
                 />
               </div>
