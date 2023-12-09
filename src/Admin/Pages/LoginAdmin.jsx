@@ -27,7 +27,7 @@ function LoginAdmin() {
         <img src="/logo.svg" alt="gambar logo" className="h-36" />
       </div>
       <div className="w-full md:w-7/12 flex flex-col justify-center items-center">
-        <p className="w-9/12 sm:w-7/12 text-primary font-bold text-3xl md:w-8/12 lg:w-7/12 mb-5 xl:w-6/12">
+        <p className="w-9/12 sm:w-7/12 text-primary font-bold text-3xl md:w-8/12 lg:w-7/12 mb-5 xl:w-6/12 text-center">
           Login
         </p>
         <form
@@ -111,20 +111,6 @@ function LoginAdmin() {
             </button>
           </div>
         </form>
-        {/* <p className="w-full text-center self-start  mb-10">
-          Belum punya akun?{" "}
-          <Link
-            to={"/register"}
-            className="text-primary font-bold hover:opacity-70"
-          >
-            Daftar Disini
-          </Link>
-        </p> */}
-        {showPassword && (
-          <div className="bg-alert px-3 py-2 text-center text-white w-4/12 rounded-lg">
-            Password min 8 Karakter
-          </div>
-        )}
       </div>
     </div>
   );

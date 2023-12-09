@@ -14,7 +14,6 @@ import Profile from "./Pages/Profile";
 import LoginAdmin from "./Admin/Pages/LoginAdmin";
 import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 import SearchCourse from "./Pages/SearchCourse";
-import AllCourse from "./Pages/AllCourse";
 
 function App() {
   return (
@@ -32,7 +31,6 @@ function App() {
           <Route path="/otp/:verifId" element={<Otp />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/search" element={<SearchCourse />} />
-          <Route path="/all-course" element={<AllCourse />} />
 
           {/* Admin Pages */}
           <Route path="/login-admin" element={<LoginAdmin />} />
