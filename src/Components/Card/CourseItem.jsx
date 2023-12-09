@@ -5,27 +5,27 @@ import {
   faStar,
   faBook,
   faClock,
-  faGem,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function CourseItem({
   id,
-  imageURL,
+  imageUrl,
   courseName,
   instructorName,
   price,
   rating,
   courseCategory,
   courseLevel,
+  courseType,
 }) {
   return (
     <>
-      <div className="card w-96 bg-base-100 shadow-md flex justify-between">
-        <img
-          src="/course.svg"
-          alt="course.svg"
-          className="rounded-t-lg w-full"
-        />
+      <Link
+        to="/detail-course"
+        className="card w-80 bg-base-100 shadow-md flex hover:-translate-y-2"
+      >
+        <img src="/course.svg" className="rounded-t-lg w-full" />
         <div className="p-4">
           <div className="flex justify-between">
             <h3 className="text-primary font-bold">{courseCategory}</h3>
@@ -61,30 +61,30 @@ function CourseItem({
               120 Menit
             </p>
           </div>
-          <button className="inline-flex mt-2 h-7 w-44 px-5 items-center justify-between rounded-2xl bg-blue-500 text-sm font-medium text-white transition duration-300 hover:bg-blue-800">
-            <p>
-              <span>
-                <FontAwesomeIcon icon={faGem} className="text-white mr-1" />
-              </span>
-              Beli
+          <div className="flex justify-between items-center">
+            <p className="text-md font-semibold pt-1 text-red-500">
+              {courseType === "Premium" ? `Rp${price}` : "Mulai Kelas"}
             </p>
-            <p>Rp{price}</p>
-          </button>
+          </div>
+          <p className="absolute top-0 left-0 bg-primary text-white p-1 font-bold text-sm">
+            {courseType}
+          </p>
         </div>
-      </div>
+      </Link>
     </>
   );
 }
 
 CourseItem.propTypes = {
   id: PropType.number.isRequired,
-  imageURL: PropType.string.isRequired,
+  imageUrl: PropType.string.isRequired,
   courseName: PropType.string.isRequired,
   instructorName: PropType.string.isRequired,
   price: PropType.number.isRequired,
   rating: PropType.number.isRequired,
   courseCategory: PropType.string.isRequired,
   courseLevel: PropType.string.isRequired,
+  courseType: PropType.string.isRequired,
 };
 
 export default CourseItem;

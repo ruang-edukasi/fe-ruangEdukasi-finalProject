@@ -1,72 +1,146 @@
 function Sidebar() {
   return (
-    <div className="bg-slate-100 rounded-xl w-64 p-6">
-      <form action="">
-        <div className="flex flex-col gap-1 pb-3">
+    <div className="bg-slate-100 rounded-xl w-72 h-screen p-6">
+      <div className="form-control">
+        <div className="flex flex-col pb-3">
           <h3 className="text-xl font-bold">Filter</h3>
-          <div className="flex items-center gap-4">
-            <input id="palingBaru" type="checkbox" className="w-4 h-4" />
-            <label htmlFor="palingBaru">Paling Baru</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Remember me</span>
+            </label>
           </div>
-          <div className="flex items-center gap-4">
-            <input id="palingPopular" type="checkbox" className="w-4 h-4" />
-            <label htmlFor="palingPopular">Paling Popular</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Paling Popular</span>
+            </label>
           </div>
-          <div className="flex items-center gap-4">
-            <input id="promo" type="checkbox" className="w-4 h-4" />
-            <label htmlFor="promo">Promo</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Promo</span>
+            </label>
           </div>
         </div>
 
-        <div className="flex flex-col gap-1 pb-3">
+        <div className="flex flex-col pb-3">
           <h3 className="text-xl font-bold">Kategori</h3>
-          <div className="flex items-center gap-4">
-            <input id="UIUX" type="checkbox" className="w-4 h-4" />
-            <label htmlFor="UIUX">UI/UX Design</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">UI/UX Design</span>
+            </label>
           </div>
-          <div className="flex items-center gap-4">
-            <input id="webDevelopment" type="checkbox" className="w-4 h-4" />
-            <label htmlFor="webDevelopment">Web Development</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Frontend Development</span>
+            </label>
           </div>
-          <div className="flex items-center gap-4">
-            <input
-              id="androidDevelopment"
-              type="checkbox"
-              className="w-4 h-4"
-            />
-            <label htmlFor="androidDevelopment">Android Development</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Backend Development</span>
+            </label>
           </div>
-          <div className="flex items-center gap-4">
-            <input id="dataScience" type="checkbox" className="w-4 h-4" />
-            <label htmlFor="dataScience">Data Science</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Android Development</span>
+            </label>
           </div>
-          <div className="flex items-center gap-4">
-            <input
-              id="businessIntelligence"
-              type="checkbox"
-              className="w-4 h-4"
-            />
-            <label htmlFor="businessIntelligence">Business Intelligence</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Data Science</span>
+            </label>
+          </div>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Quality Asurance</span>
+            </label>
           </div>
         </div>
 
-        <div className="flex flex-col gap-1 pb-3">
+        <div className="flex flex-col pb-3">
           <h3 className="text-xl font-bold">Level Kesulitan</h3>
-          <div className="flex items-center gap-4">
-            <input id="semuaLevel" type="checkbox" className="w-4 h-4" />
-            <label htmlFor="semuaLevel">Semua Level</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Semua Level</span>
+            </label>
           </div>
-          <div className="flex items-center gap-4">
-            <input id="beginnerLevel" type="checkbox" className="w-4 h-4" />
-            <label htmlFor="beginnerLevel">Beginner Level</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Beginner Level</span>
+            </label>
           </div>
-          <div className="flex items-center gap-4">
-            <input id="intermediateLevel" type="checkbox" className="w-4 h-4" />
-            <label htmlFor="intermediateLevel">Intermediate</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Intermediate Level</span>
+            </label>
           </div>
-          <div className="flex items-center gap-4">
-            <input id="advancedLevel" type="checkbox" className="w-4 h-4" />
-            <label htmlFor="advancedLevel">Advanced Level</label>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input
+                type="checkbox"
+                checked="checked"
+                className="checkbox checkbox-primary"
+              />
+              <span className="label-text text-lg">Advanced Level</span>
+            </label>
           </div>
         </div>
         <div className="py-6 px-14">
@@ -74,7 +148,7 @@ function Sidebar() {
             Hapus Filter
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

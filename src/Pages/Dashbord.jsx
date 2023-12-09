@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCourse } from "../redux/action/courseAction";
 import Button from "../Components/Button/Button";
 import Header from "../Components/Header/Header";
-import Card from "../Components/Card/CourseItem";
+import CourseItem from "../Components/Card/CourseItem";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function Dashbord() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const dispatch = useDispatch();
+  const { course } = useSelector((state) => state.course);
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
   };
+
+  const [errors, setErrors] = useState({
+    isError: false,
+    message: null,
+  });
+
+  useEffect(() => {
+    dispatch(getCourse(setErrors, errors));
+  }, [dispatch, errors]);
 
   return (
     <>
@@ -68,9 +81,21 @@ function Dashbord() {
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <Card />
-                <Card />
-                <Card />
+                {course.map((courses) => (
+                  <CourseItem
+                    key={courses?.id}
+                    id={courses?.id}
+                    imageURL=""
+                    courseName={courses?.courseName}
+                    instructorName={courses?.instructorName}
+                    courseDescription={courses?.courseDescription}
+                    price={courses?.price}
+                    rating={courses?.rating}
+                    courseType={courses?.courseType}
+                    courseCategory={courses?.courseCategory}
+                    courseLevel={courses?.courseLevel}
+                  />
+                ))}
               </div>
             </div>
           </div>

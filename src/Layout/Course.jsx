@@ -5,9 +5,8 @@ import CourseItem from "../Components/Card/CourseItem";
 
 function Course() {
   const dispatch = useDispatch();
-
   const { course } = useSelector((state) => state.course);
-
+  const [sliceCourse, setSliceCourse] = useState([]);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
@@ -17,11 +16,17 @@ function Course() {
     dispatch(getCourse(setErrors, errors));
   }, [dispatch, errors]);
 
+  useEffect(() => {
+    if (course.length > 0) {
+      setSliceCourse(course.slice(0, 9));
+    }
+  }, [course]);
+
   if (errors.isError) {
     return <h1>{errors.message}</h1>;
   }
 
-  if (course.length === 0) {
+  if (sliceCourse.length === 0) {
     return <div className="skeleton w-32 h-32"></div>;
   }
 
@@ -29,7 +34,7 @@ function Course() {
     <>
       <div className="container flex flex-wrap">
         <div className="carousel rounded-box py-2 gap-5">
-          {course.map((courses) => (
+          {sliceCourse.map((courses) => (
             <>
               <div className="carousel-item">
                 <CourseItem
