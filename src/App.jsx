@@ -14,6 +14,8 @@ import Profile from "./Pages/Profile";
 import LoginAdmin from "./Admin/Pages/LoginAdmin";
 import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 import SearchCourse from "./Pages/SearchCourse";
+import DetailCourse from "./Pages/DetailCourse";
+import PaymentSucces from "./Pages/PaymentSucces";
 import Notification from "./Pages/Notification";
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
           <Route path="/otp/:verifId" element={<Otp />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/search" element={<SearchCourse />} />
+          <Route path="/detail-course" element={<DetailCourse />} />
+          <Route path="/payment-succes" element={<PaymentSucces />} />
           <Route path="/notifikasi" element={<Notification />} />
 
           {/* Admin Pages */}

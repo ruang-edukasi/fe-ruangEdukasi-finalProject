@@ -51,9 +51,11 @@ export const forgotPassword = (email) => async (dispatch) => {
       }
     );
     const { message } = fetch.data;
+    Swal.fire({
+      title: fetch.data.message,
+      icon: "success",
+    });
     dispatch(setSucces("Tautan reset password terkirim"));
-
-    alert(message);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error?.response?.data?.message === "Email not found") {
@@ -65,8 +67,10 @@ export const forgotPassword = (email) => async (dispatch) => {
   }
 };
 export const reset =
-  (resetId, password, confirm_password) => async (dispatch) => {
+  (resetId, password, confirm_password, navigate) => async (dispatch) => {
     try {
+      dispatch(setError(""));
+      dispatch(setSucces(""));
       const fetch = await axios.post(
         `${
           import.meta.env.VITE_API_URL
@@ -79,7 +83,14 @@ export const reset =
 
       const { message } = fetch.data;
       dispatch(setSucces(message));
-      alert(message);
+      Swal.fire({
+        title: fetch.data.message,
+        icon: "success",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(resetId, password, confirm_password);
@@ -105,8 +116,6 @@ export const register =
       );
       const { response } = registrationResponse.data;
       const { verifId } = response;
-      console.log(verifId);
-
       navigate(`/otp/${verifId}`);
     } catch (error) {
       if (axios.isAxiosError(error)) {
