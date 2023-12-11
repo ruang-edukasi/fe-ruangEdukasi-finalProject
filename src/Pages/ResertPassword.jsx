@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { reset } from "../redux/action/authAction";
 
 function ResertPassword() {
   const { resetId } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showPassword, setshowPassword] = useState({
     password1: false,
@@ -15,9 +16,23 @@ function ResertPassword() {
   const [password, setpassword] = useState("");
   const [password2, setpassword2] = useState("");
 
+  function handleVisibility(id) {
+    console.log(id);
+    if (id == 1) {
+      setshowPassword({
+        ...showPassword,
+        password1: !showPassword.password1,
+      });
+    } else {
+      setshowPassword({
+        ...showPassword,
+        password2: !showPassword.password2,
+      });
+    }
+  }
   function handleReset(event) {
     event.preventDefault();
-    dispatch(reset(resetId, password, password2));
+    dispatch(reset(resetId, password, password2, navigate));
   }
 
   return (
@@ -63,12 +78,7 @@ function ResertPassword() {
                   strokeWidth={1.5}
                   stroke="grey"
                   className="w-5 h-5 absolute right-3 cursor-pointer"
-                  onClick={() =>
-                    setshowPassword({
-                      ...showPassword,
-                      password1: !showPassword.password1,
-                    })
-                  }
+                  onClick={() => handleVisibility(1)}
                 >
                   <path
                     strokeLinecap="round"
@@ -84,12 +94,7 @@ function ResertPassword() {
                   strokeWidth={1.5}
                   stroke="grey"
                   className="w-5 h-5 absolute right-3 cursor-pointer"
-                  onClick={() =>
-                    setshowPassword({
-                      ...showPassword,
-                      password1: !showPassword.password1,
-                    })
-                  }
+                  onClick={() => handleVisibility(1)}
                 >
                   <path
                     strokeLinecap="round"
@@ -131,12 +136,7 @@ function ResertPassword() {
                   strokeWidth={1.5}
                   stroke="grey"
                   className="w-5 h-5 absolute right-3 cursor-pointer"
-                  onClick={() =>
-                    setshowPassword({
-                      ...showPassword,
-                      password2: !showPassword.password2,
-                    })
-                  }
+                  onClick={() => handleVisibility(2)}
                 >
                   <path
                     strokeLinecap="round"
@@ -152,12 +152,7 @@ function ResertPassword() {
                   strokeWidth={1.5}
                   stroke="grey"
                   className="w-5 h-5 absolute right-3 cursor-pointer"
-                  onClick={() =>
-                    setshowPassword({
-                      ...showPassword,
-                      password2: !showPassword.password2,
-                    })
-                  }
+                  onClick={() => handleVisibility(2)}
                 >
                   <path
                     strokeLinecap="round"
@@ -173,6 +168,12 @@ function ResertPassword() {
               )}
             </div>
             <button
+              disabled={
+                (password.length < 8 && password.length >= 1) ||
+                (password2.length < 8 && password2.length >= 1)
+                  ? true
+                  : false
+              }
               type="submit"
               className="w-full text-white bg-primary hover:opacity-70 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-center rounded-xl mt-8"
             >
