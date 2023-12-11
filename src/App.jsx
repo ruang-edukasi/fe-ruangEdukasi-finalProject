@@ -16,6 +16,7 @@ import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 import SearchCourse from "./Pages/SearchCourse";
 import DetailCourse from "./Pages/DetailCourse";
 import PaymentSucces from "./Pages/PaymentSucces";
+import Notification from "./Pages/Notification";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/search" element={<SearchCourse />} />
           <Route path="/detail-course" element={<DetailCourse />} />
           <Route path="/payment-succes" element={<PaymentSucces />} />
+          <Route path="/notifikasi" element={<Notification />} />
 
           {/* Admin Pages */}
           <Route path="/login-admin" element={<LoginAdmin />} />
