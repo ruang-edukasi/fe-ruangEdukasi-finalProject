@@ -117,9 +117,9 @@ const Header = () => {
                 <li role="none" className="flex justify-center">
                   <div className="flex items-center gap-2 py-4">
                     <Link
-                      to="/notification"
+                      to="/notifikasi"
                       className={`inline-flex items-center justify-center h-12 w-14 gap-2 px-5 text-sm font-bold tracking-wide transition duration-300 rounded-lg whitespace-nowrap hover:bg-indigo-800 text-white ${isActive(
-                        "/notification"
+                        "/notifikasi"
                       )}`}
                     >
                       <FontAwesomeIcon
@@ -139,7 +139,7 @@ const Header = () => {
                     >
                       <FontAwesomeIcon
                         icon={faUser}
-                        className="text-white text-lg"
+                        className="text-white text-xl"
                       />
                     </Link>
                   </div>

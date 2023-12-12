@@ -5,7 +5,7 @@ import CourseItem from "../Components/Card/CourseItem";
 import Footer from "../Components/Footer/Footer";
 import Header from "../Components/Header/Header";
 
-function AllCourse() {
+function KategoryCourse() {
   const dispatch = useDispatch();
 
   const { course } = useSelector((state) => state.course);
@@ -47,4 +47,4 @@ function AllCourse() {
   );
 }
 
-export default AllCourse;
+export default KategoryCourse;
