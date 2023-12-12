@@ -16,6 +16,8 @@ import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 import SearchCourse from "./Pages/SearchCourse";
 import Notification from "./Pages/Notification";
 import KelolaKelas from "./Admin/Pages/KelolaKelas";
+import DetailCourse from "./Pages/DetailCourse";
+import PaymentSucces from "./Pages/PaymentSucces";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
           <Route path="/otp/:verifId" element={<Otp />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/search" element={<SearchCourse />} />
+          <Route path="/detail-course" element={<DetailCourse />} />
+          <Route path="/payment-succes" element={<PaymentSucces />} />
           <Route path="/notifikasi" element={<Notification />} />
 
           {/* Admin Pages */}
