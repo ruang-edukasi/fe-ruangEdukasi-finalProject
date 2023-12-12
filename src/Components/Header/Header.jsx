@@ -132,9 +132,9 @@ const Header = () => {
                 <li role="none" className="flex justify-center">
                   <div className="flex items-center gap-2 py-4 font-bold">
                     <Link
-                      to="/profile"
+                      to="/profile-akun"
                       className={`inline-flex items-center justify-center h-12 w-14 gap-2 px-5 text-sm font-bold tracking-wide transition duration-300 rounded-lg whitespace-nowrap hover:bg-indigo-800 text-white ${isActive(
-                        "/profile"
+                        "/profile-akun"
                       )}`}
                     >
                       <FontAwesomeIcon

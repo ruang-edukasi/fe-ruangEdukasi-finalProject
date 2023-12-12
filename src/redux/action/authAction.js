@@ -1,6 +1,12 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import { setError, setSucces, setToken, setUser, setVerifEmail } from "../reducer/authReducer";
+import {
+  setError,
+  setSucces,
+  setToken,
+  setUser,
+  setVerifEmail,
+} from "../reducer/authReducer";
 
 export const login = (email, password, navigate) => async (dispatch) => {
   try {
@@ -106,11 +112,9 @@ export const register =
 
       console.log(verifEmail);
       console.log(verifId);
-        dispatch(setVerifEmail(verifEmail));
-     
-     
-      navigate(`/otp/${verifId}`);
+      dispatch(setVerifEmail(verifEmail));
 
+      navigate(`/otp/${verifId}`);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         alert(error?.response?.data?.message);
@@ -161,10 +165,10 @@ export const renewOTP = (verifId, navigate) => async (dispatch) => {
     );
     const { response } = renewResponse.data;
 
-     Swal.fire({
-       title: renewResponse.data.message,
-       icon: "success",
-     });
+    Swal.fire({
+      title: renewResponse.data.message,
+      icon: "success",
+    });
   } catch (error) {
     if (axios.isAxiosError(error)) {
       alert(error?.response?.data?.message);
@@ -174,7 +178,7 @@ export const renewOTP = (verifId, navigate) => async (dispatch) => {
   }
 };
 
- export const logout = () => (dispatch) => {
+export const logout = () => (dispatch) => {
   dispatch(setToken(null));
   dispatch(setUser(null));
 };
@@ -195,7 +199,6 @@ export const profile =
       );
 
       const { response } = data.data;
-  
 
       dispatch(setUser(response));
 
@@ -217,42 +220,50 @@ export const profile =
     }
   };
 
-
 export const updateProfile =
-  (full_name,phone_number,city, country,photo, navigate, navigatePathSuccess, navigatePathError) =>
+  (
+    full_name,
+    phone_number,
+    city,
+    country,
+    photo,
+    navigate,
+    navigatePathSuccess,
+    navigatePathError
+  ) =>
   async (dispatch, getState) => {
     try {
       let { token } = getState().auth;
 
-       const formData = new FormData();
-       formData.append("full_name", full_name);
-       formData.append("phone_number", phone_number);
-       formData.append("city", city);
-       formData.append("country", country);
-       formData.append("photo", photo);
+      const formData = new FormData();
+      formData.append("full_name", full_name);
+      formData.append("phone_number", phone_number);
+      formData.append("city", city);
+      formData.append("country", country);
+      formData.append("photo", photo);
 
-        const data = await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/v1/user/profile/update`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+      const data = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/v1/user/profile/update`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const { response } = data.data;
-        dispatch(setUser(response));
-         
-           Swal.fire({
-             title: data.data.message,
-             icon: "success",
-           }).then((result) => {
-             if (result.isConfirmed) {
-               navigate("/profile");
-             }
-           });
-           
+      dispatch(setUser(response));
+
+      Swal.fire({
+        title: data.data.message,
+        icon: "success",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/profile-akun");
+        }
+      });
+
       if (navigatePathSuccess) navigate(navigatePathSuccess);
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -264,6 +275,64 @@ export const updateProfile =
         }
 
         alert(error?.data?.response?.message);
+        return;
+      }
+
+      alert(error?.message);
+    }
+  };
+
+export const changePassword =
+  (
+    old_password,
+    new_password,
+    confirm_password,
+    navigate,
+    navigatePathSuccess,
+    navigatePathError
+  ) =>
+  async (dispatch, getState) => {
+    try {
+      let { token } = getState().auth;
+
+      const data = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/v1/user/profile/change-password`,
+        {
+          old_password,
+          new_password,
+          confirm_password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const { response } = data.data;
+
+      dispatch(setUser(response));
+
+      Swal.fire({
+        title: data.data.message,
+        icon: "success",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/ubah-password");
+        }
+      });
+
+      if (navigatePathSuccess) navigate(navigatePathSuccess);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response.status === 401) {
+          dispatch(logout());
+
+          if (navigatePathError) navigate(navigatePathError);
+          return;
+        }
+
+        alert(error?.response?.data?.message);
         return;
       }
 
