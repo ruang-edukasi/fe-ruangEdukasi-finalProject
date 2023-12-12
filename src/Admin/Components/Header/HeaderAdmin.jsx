@@ -18,16 +18,18 @@ function HeaderAdmin() {
   }, [dispatch, navigate, token]);
 
   return (
-    <header className="bg-blue-100 p-7 flex justify-between items-center ">
-      {admin ? (
-        <>
-          <h1 className="font-bold text-3xl text-primary">
-            Hi, {admin?.fullName}
-          </h1>
-        </>
-      ) : (
-        <h1 className="font-bold text-3xl text-primary">Hi, Admin!</h1>
-      )}
+    <header className="bg-blue-100 p-4 flex justify-between items-center ">
+      <div className="pl-16 lg:pl-72">
+        {admin ? (
+          <>
+            <h1 className="font-bold text-3xl text-primary">
+              Hi, {admin?.fullName}
+            </h1>
+          </>
+        ) : (
+          <h1 className="font-bold text-3xl text-primary">Hi, Admin!</h1>
+        )}
+      </div>
       <div className="flex items-center gap-2 py-4">
         <form action="search" className="relative">
           <input
