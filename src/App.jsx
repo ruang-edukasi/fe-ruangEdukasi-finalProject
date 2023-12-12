@@ -14,9 +14,10 @@ import Profile from "./Pages/Profile";
 import LoginAdmin from "./Admin/Pages/LoginAdmin";
 import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 import SearchCourse from "./Pages/SearchCourse";
+import Notification from "./Pages/Notification";
+import KelolaKelas from "./Admin/Pages/KelolaKelas";
 import DetailCourse from "./Pages/DetailCourse";
 import PaymentSucces from "./Pages/PaymentSucces";
-import Notification from "./Pages/Notification";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           {/* Admin Pages */}
           <Route path="/login-admin" element={<LoginAdmin />} />
           <Route path="/dashbord-admin" element={<DashbordAdmin />} />
+          <Route path="/kelolakelas-admin" element={<KelolaKelas />} />
         </Routes>
       </BrowserRouter>
     </Provider>

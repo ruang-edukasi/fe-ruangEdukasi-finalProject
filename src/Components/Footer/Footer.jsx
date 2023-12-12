@@ -24,10 +24,10 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <hr className="my-6 border-primary" />
+        <hr className="my-6 border-white/30" />
         <div className="text-center text-sm">
-          &copy; {new Date().getFullYear()} Ruang Edukasi - Oleh Tim B20 -
-          FEJS-3 x BEJS-2 | Hak Cipta Dilindungi
+          &copy; {new Date().getFullYear()} Ruang Edukasi - Tim B20 - FEJS-3 x
+          BEJS-2 | Hak Cipta Dilindungi
         </div>
       </div>
     </footer>
