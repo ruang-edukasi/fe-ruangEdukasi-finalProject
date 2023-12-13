@@ -23,7 +23,7 @@ function HomePage() {
             <Category />
           </div>
         </section>
-        <section className="container mx-auto pb-10 px-12 sm:px-16">
+        <section className="container mx-auto pb-10 mt-10 px-12 sm:px-16">
           <div className="overflow-hidden">
             <div className="mt-8">
               <h2 className="text-xl font-bold mb-4 sm:mb-0">Kursus Populer</h2>
