@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { verificationOTP } from "../redux/action/authAction"; 
+import { useDispatch, useSelector } from "react-redux";
+import { verificationOTP,renewOTP } from "../redux/action/authAction"; 
 
 
 export const Otp = () => {
@@ -13,6 +13,9 @@ export const Otp = () => {
   const { verifId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+   const { verifEmail } = useSelector((state) => state.auth);
+  
 
   const handleChange = (index, value) => {
     if (value) {
@@ -31,8 +34,15 @@ export const Otp = () => {
     setOtp(newOtp.join(""));
   };
 
+    const handleResendOTP = async () => {
+      try {
+        await dispatch(renewOTP(verifId, navigate));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     const handleSubmit = () => {
-      
       dispatch(verificationOTP(otp, verifId, navigate)); 
     };
 
@@ -66,7 +76,7 @@ export const Otp = () => {
             <div className="flex flex-col gap-2">
               <span className="pb-5 pt-5 text-lg text-center">
                 Ketik 6 digit kode yang dikirim ke{" "}
-                <span className="font-bold">RuangEdukasi@gmail.com</span>
+                <span className="font-bold">{verifEmail}</span>
               </span>
 
               <div className="flex items-center justify-center gap-4">
@@ -88,8 +98,8 @@ export const Otp = () => {
               </div>
 
               {seconds === 0 ? (
-                <span className="py-4 pb-5 text-lg text-red-500 text-center items-center justify-center flex gap-1">
-                  <a href="">Kirim ulang</a>
+                <span className="py-4 pb-5 text-lg text-red-500 text-center hover:opacity-70 items-center justify-center flex gap-1">
+                  <button onClick={handleResendOTP}>Kirim ulang</button>
                 </span>
               ) : (
                 <span className="py-4 pb-5 text-lg text-center items-center justify-center flex gap-1">
