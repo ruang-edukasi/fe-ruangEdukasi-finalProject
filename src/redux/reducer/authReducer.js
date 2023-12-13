@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   errorMessage: "",
   succesMessage: "",
+  verifEmail: "",
 };
 
 const authSlice = createSlice({
@@ -28,7 +29,11 @@ const authSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    setVerifEmail: (state, action) => {
+      state.verifEmail = action.payload;
+    },
   },
 });
-export const { setToken, setUser, setError, setSucces } = authSlice.actions;
+export const { setToken, setUser, setError, setSucces, setVerifEmail } =
+  authSlice.actions;
 export default authSlice.reducer;
