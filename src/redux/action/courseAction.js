@@ -1,6 +1,12 @@
 import axios from "axios";
-import { setCategory, setCourse, setSearch } from "../reducer/courseReducers";
+import {
+  setCategory,
+  setCourse,
+  setDetail,
+  setSearch,
+} from "../reducer/courseReducers";
 
+//get catgory course
 export const getCategory = (setErrors, errors) => async (dispatch) => {
   try {
     const data = await axios.get(
@@ -26,6 +32,7 @@ export const getCategory = (setErrors, errors) => async (dispatch) => {
   }
 };
 
+// get all course
 export const getCourse = (setErrors, errors) => async (dispatch) => {
   try {
     const data = await axios.get(
@@ -51,6 +58,7 @@ export const getCourse = (setErrors, errors) => async (dispatch) => {
   }
 };
 
+// search course
 export const getSearchCourse =
   (setErrors, errors, query) => async (dispatch) => {
     try {
@@ -78,3 +86,18 @@ export const getSearchCourse =
       });
     }
   };
+
+// detail course
+export const getDetail = (id) => async (dispatch) => {
+  try {
+    const detail = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/v1/course/${id}`
+    );
+    const { response } = detail.data;
+    dispatch(setDetail(response));
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(error);
+    }
+  }
+};

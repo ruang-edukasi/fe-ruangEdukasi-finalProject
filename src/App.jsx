@@ -34,7 +34,7 @@ function App() {
           <Route path="/otp/:verifId" element={<Otp />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/search" element={<SearchCourse />} />
-          <Route path="/detail-course" element={<DetailCourse />} />
+          <Route path="/detail-course/:courseId" element={<DetailCourse />} />
           <Route path="/payment-succes" element={<PaymentSucces />} />
           <Route path="/notifikasi" element={<Notification />} />
 

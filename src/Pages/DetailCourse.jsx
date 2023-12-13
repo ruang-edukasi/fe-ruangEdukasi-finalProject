@@ -3,18 +3,32 @@ import {
   faComments,
   faPlay,
   faLock,
+  faBook,
+  faShieldHeart,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../Components/Header/Header";
 import Modal from "../Components/Modal";
-import { Link } from "react-router-dom";
-
-const show = () => {
-  document.getElementById("my_modal_3").showModal();
-};
-
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getDetail } from "../redux/action/courseAction";
 
 function DetailCourse() {
+  const dispatch = useDispatch();
+  const { courseId } = useParams();
+  const { detail } = useSelector((state) => state.course);
+
+  const show = () => {
+    document.getElementById("my_modal_3").showModal();
+  };
+
+  useEffect(() => {
+    dispatch(getDetail(courseId));
+  }, [courseId]);
+
   return (
     <>
       <Header />
@@ -40,9 +54,27 @@ function DetailCourse() {
               by Simon Doe <span></span>
             </h3>
             <div className="w-4/12  flex justify-between mb-6">
-              <p className="font-semibold text-sm">Beginner Level</p>
-              <p className="font-semibold text-sm"> 5 Modul</p>
-              <p className="font-semibold text-sm"> 45 Menit</p>
+              <p className="font-semibold text-sm">
+                <FontAwesomeIcon
+                  icon={faShieldHeart}
+                  className=" mr-1 text-succes inline"
+                />
+                Beginner Level
+              </p>
+              <p className="font-semibold text-sm">
+                <FontAwesomeIcon
+                  icon={faBook}
+                  className=" mr-1 text-succes inline"
+                />
+                5 Modul
+              </p>
+              <p className="font-semibold text-sm">
+                <FontAwesomeIcon
+                  icon={faClock}
+                  className=" mr-1 text-succes inline"
+                />
+                45 Menit
+              </p>
             </div>
             <a
               href="#"
@@ -135,9 +167,9 @@ function DetailCourse() {
               <h2 className="text-primary font-bold mb-2">
                 Chapter 1 - Pendahuluan
               </h2>
-              <ul className="menu w-full space-y-2 bg-white mb-4">
-                <li className="items-start border-b-2  border-[#EBF3FC]">
-                  <a className="self-start ps-0 w-full">
+              <ul className="menu  w-full space-y-2 bg-white mb-4 ">
+                <li className="items-start border-b-2  border-[#EBF3FC] after:block after:border-b-2 hover:border-succes  ease-in duration-200">
+                  <a className="self-start ps-0 w-full hover:bg-[#EBF3FC] ">
                     <span className="px-3.5 py-2 font-semibold bg-[#EBF3FC] rounded-full inline me-2 ">
                       1
                     </span>
@@ -321,7 +353,7 @@ function DetailCourse() {
             </div>
           </div>
         </div>
-        <Modal show={show}/> 
+        <Modal show={show} />
       </section>
     </>
   );
