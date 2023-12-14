@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourse } from "../redux/action/courseAction";
 import CourseItem from "../Components/Card/CourseItem";
+import { getPopular } from "../redux/action/courseAction";
 
 function Course() {
   const dispatch = useDispatch();
-  const { course } = useSelector((state) => state.course);
+  const { popular } = useSelector((state) => state.course);
   const [sliceCourse, setSliceCourse] = useState([]);
   const [errors, setErrors] = useState({
     isError: false,
@@ -13,14 +13,14 @@ function Course() {
   });
 
   useEffect(() => {
-    dispatch(getCourse(setErrors, errors));
+    dispatch(getPopular(setErrors, errors));
   }, [dispatch, errors]);
 
   useEffect(() => {
-    if (course.length > 0) {
-      setSliceCourse(course.slice(0, 9));
+    if (popular.length > 0) {
+      setSliceCourse(popular.slice(0, 9));
     }
-  }, [course]);
+  }, [popular]);
 
   if (errors.isError) {
     return <h1>{errors.message}</h1>;
