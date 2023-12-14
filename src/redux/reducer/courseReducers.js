@@ -5,6 +5,7 @@ const initialState = {
   course: [],
   search: [],
   popular: [],
+  myCourse: [],
 };
 
 const courseSlice = createSlice({
@@ -23,6 +24,13 @@ const courseSlice = createSlice({
     setPopular: (state, action) => {
       state.popular = action.payload;
     },
+    setMyCourse: (state, action) => {
+      state.myCourse = action.payload;
+    },
+  },
+});
+
+export const { setCategory, setCourse, setSearch, setPopular, setMyCourse } =
   },
 });
 

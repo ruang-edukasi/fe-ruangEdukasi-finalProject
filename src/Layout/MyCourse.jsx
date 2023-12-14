@@ -1,42 +1,33 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourse } from "../redux/action/courseAction";
+import { getMyCourse } from "../redux/action/courseAction";
 import CourseItem from "../Components/Card/CourseItem";
 
-function AllCourse() {
+function MyCourse() {
   const dispatch = useDispatch();
-  const { course } = useSelector((state) => state.course);
-  const [sliceCourse, setSliceCourse] = useState([]);
+  const { myCourse } = useSelector((state) => state.course);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
   });
 
   useEffect(() => {
-    dispatch(getCourse(setErrors, errors));
-  }, [dispatch, errors]);
-
-  useEffect(() => {
-    if (course.length > 0) {
-      setSliceCourse(course.slice(0, 12));
-    }
-  }, [course]);
+    dispatch(getMyCourse(setErrors, errors));
+    console.log(myCourse);
+  }, [dispatch, errors, myCourse]);
 
   if (errors.isError) {
     return <h1>{errors.message}</h1>;
   }
   return (
-    <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3 2xl:grid-cols-4">
-      {sliceCourse.map((courses) => (
+    <div>
+      {myCourse.myCourse.map((courses) => (
         <CourseItem
           key={courses?.id}
           id={courses?.id}
           imageURL=""
           courseName={courses?.courseName}
           instructorName={courses?.instructorName}
-          courseDescription={courses?.courseDescription}
-          price={courses?.price}
-          rating={courses?.rating}
           courseType={courses?.courseType}
           courseCategory={courses?.courseCategory}
           courseLevel={courses?.courseLevel}
@@ -46,4 +37,4 @@ function AllCourse() {
   );
 }
 
-export default AllCourse;
+export default MyCourse;
