@@ -10,10 +10,11 @@ import { Otp } from "./Pages/Otp";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import KelasSaya from "./Pages/KelasSaya";
-import Profile from "./Pages/Profile";
 import LoginAdmin from "./Admin/Pages/LoginAdmin";
 import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 import SearchCourse from "./Pages/SearchCourse";
+import UbahPassword from "./Pages/Profile/UbahPassword";
+import ProfileAkun from "./Pages/Profile/ProfileAkun";
 import Notification from "./Pages/Notification";
 import KelolaKelas from "./Admin/Pages/KelolaKelas";
 import DetailCourse from "./Pages/DetailCourse";
@@ -33,8 +34,11 @@ function App() {
           <Route path="/user/reset/:resetId" element={<ResertPassword />} />
           <Route path="/enroll" element={<EnrollClass />} />
           <Route path="/otp/:verifId" element={<Otp />} />
-          <Route path="/profile" element={<Profile />} />
+
           <Route path="/search" element={<SearchCourse />} />
+       
+          <Route path="/ubah-password" element={<UbahPassword />} />
+          <Route path="/profile-akun" element={<ProfileAkun />} />
           <Route path="/detail-course" element={<DetailCourse />} />
           <Route path="/payment-succes" element={<PaymentSucces />} />
           <Route path="/notifikasi" element={<Notification />} />
