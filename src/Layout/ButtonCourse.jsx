@@ -10,31 +10,13 @@ function ButtonCourse({ onFilterChange }) {
     onFilterChange(filter);
   };
   return (
-    <div className="my-4 flex justify-between">
+    <div className="carousel my-4 flex pb-3">
       <Button
         bgColor={
           activeFilter === "All" ? "bg-primary text-white" : "bg-slate-100"
         }
         text="All"
         onClick={() => handleFilterChange("All")}
-      />
-      <Button
-        bgColor={
-          activeFilter === "UI/UX Design"
-            ? "bg-primary text-white"
-            : "bg-slate-100"
-        }
-        text="UI/UX Design"
-        onClick={() => handleFilterChange("UI/UX Design")}
-      />
-      <Button
-        bgColor={
-          activeFilter === "Frontend Development"
-            ? "bg-primary text-white"
-            : "bg-slate-100"
-        }
-        text="Frontend Development"
-        onClick={() => handleFilterChange("Frontend Development")}
       />
       <Button
         bgColor={
@@ -47,12 +29,21 @@ function ButtonCourse({ onFilterChange }) {
       />
       <Button
         bgColor={
-          activeFilter === "Android Development"
+          activeFilter === "Frontend Development"
             ? "bg-primary text-white"
             : "bg-slate-100"
         }
-        text="Android Development"
-        onClick={() => handleFilterChange("Android Development")}
+        text="Frontend Development"
+        onClick={() => handleFilterChange("Frontend Development")}
+      />
+      <Button
+        bgColor={
+          activeFilter === "UI/UX Design"
+            ? "bg-primary text-white"
+            : "bg-slate-100"
+        }
+        text="UI/UX Design"
+        onClick={() => handleFilterChange("UI/UX Design")}
       />
       <Button
         bgColor={
@@ -71,6 +62,15 @@ function ButtonCourse({ onFilterChange }) {
         }
         text="Quality Assurance"
         onClick={() => handleFilterChange("Quality Assurance")}
+      />
+      <Button
+        bgColor={
+          activeFilter === "Android Development"
+            ? "bg-primary text-white"
+            : "bg-slate-100"
+        }
+        text="Android Development"
+        onClick={() => handleFilterChange("Android Development")}
       />
     </div>
   );

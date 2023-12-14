@@ -4,6 +4,7 @@ import {
   setCourse,
   setSearch,
   setPopular,
+  setMyCourse,
 } from "../reducer/courseReducers";
 
 export const getCategory = (setErrors, errors) => async (dispatch) => {
@@ -63,6 +64,31 @@ export const getPopular = (setErrors, errors) => async (dispatch) => {
     );
     const { response } = data.data;
     dispatch(setPopular(response));
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      setErrors({
+        ...errors,
+        isError: true,
+        message: error?.data?.response?.message || error?.message,
+      });
+      return;
+    }
+    alert(error?.message);
+    setErrors({
+      ...errors,
+      isError: true,
+      message: error?.message,
+    });
+  }
+};
+
+export const getMyCourse = (setErrors, errors) => async (dispatch) => {
+  try {
+    const data = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/v1/user/dashboard`
+    );
+    const { response } = data.data;
+    dispatch(setMyCourse(response));
   } catch (error) {
     if (axios.isAxiosError(error)) {
       setErrors({
