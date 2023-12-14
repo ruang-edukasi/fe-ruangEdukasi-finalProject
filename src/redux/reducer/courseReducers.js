@@ -31,6 +31,10 @@ const courseSlice = createSlice({
 });
 
 export const { setCategory, setCourse, setSearch, setPopular, setMyCourse } =
+  },
+});
+
+export const { setCategory, setCourse, setSearch, setPopular } =
   courseSlice.actions;
 
 export default courseSlice.reducer;
