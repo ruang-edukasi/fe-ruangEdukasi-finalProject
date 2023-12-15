@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   setCategory,
   setCourse,
+  setCourseContent,
   setDetail,
   setSearch,
 } from "../reducer/courseReducers";
@@ -94,7 +95,10 @@ export const getDetail = (id) => async (dispatch) => {
       `${import.meta.env.VITE_API_URL}/api/v1/course/${id}`
     );
     const { response } = detail.data;
+    const [content] = response.courseContent;
     dispatch(setDetail(response));
+    dispatch(setCourseContent(content));
+    // console.log(detail);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(error);

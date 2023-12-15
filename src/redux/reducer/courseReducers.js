@@ -5,6 +5,7 @@ const initialState = {
   course: [],
   search: [],
   detail: [],
+  courseContent: [],
 };
 
 const courseSlice = createSlice({
@@ -23,10 +24,18 @@ const courseSlice = createSlice({
     setDetail: (state, action) => {
       state.detail = action.payload;
     },
+    setCourseContent: (state, action) => {
+      state.courseContent = action.payload;
+    },
   },
 });
 
-export const { setCategory, setCourse, setSearch, setDetail } =
-  courseSlice.actions;
+export const {
+  setCategory,
+  setCourse,
+  setSearch,
+  setDetail,
+  setCourseContent,
+} = courseSlice.actions;
 
 export default courseSlice.reducer;
