@@ -23,7 +23,7 @@ function CourseItem({
     <>
       <Link
         to="/detail-course"
-        className="card w-80 bg-base-100 shadow-md flex hover:-translate-y-2"
+        className="card w-80 bg-base-100 shadow-md flex hover:-translate-y-2 duration-500"
       >
         <img src="/course.svg" className="rounded-t-lg w-full" />
         <div className="p-4">
