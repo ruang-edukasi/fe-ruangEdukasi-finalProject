@@ -22,7 +22,7 @@ function CourseItem({
   return (
     <>
       <Link
-        to="/detail-course"
+        to={`/detail-course/${id}`}
         className="card w-80 bg-base-100 shadow-md flex hover:-translate-y-2 duration-500"
       >
         <img src="/course.svg" className="rounded-t-lg w-full" />
@@ -66,7 +66,7 @@ function CourseItem({
               {courseType === "Premium" ? `Rp${price}` : "Mulai Kelas"}
             </p>
           </div>
-          <p className="absolute top-0 left-0 bg-primary text-white p-1 font-bold text-sm">
+          <p className="absolute top-0 left-0 bg-primary text-white p-1 font-bold text-sm rounded-tl-md">
             {courseType}
           </p>
         </div>
