@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function index() {
   return (
     <>
-      <div className=" w-full bg-white shadow-lg rounded-xl p-6 absolute top-[-27%]">
+      <div className=" w-full bg-white shadow-lg rounded-xl p-6 absolute top-[-40%]">
         <div className="flex justify-between mb-3">
           <h1 className="font-bold text-lg">Materi Belajar</h1>
           <progress

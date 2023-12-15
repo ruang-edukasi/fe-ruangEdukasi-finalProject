@@ -4,23 +4,22 @@ import {
   faBook,
   faShieldHeart,
   faUser,
+  faChalkboardUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../Components/Header/Header";
-import Modal from "../Components/Modal";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getDetail } from "../redux/action/courseAction";
 import LearnProgres from "../Components/LearnProgres";
 import ReactPlayer from "react-player/youtube";
+import EnrollClass from "../Components/Modal/EnrollClass";
 
 function DetailCourse() {
   const dispatch = useDispatch();
   const { courseId } = useParams();
   const { detail, courseContent } = useSelector((state) => state.course);
-  // const target = detail.courseTarget;
-
   const show = () => {
     document.getElementById("my_modal_3").showModal();
   };
@@ -33,7 +32,6 @@ function DetailCourse() {
   return (
     <>
       <Header />
-      {detail.map}
       <section className="mb-36">
         <div className=" px-24 content w-full flex flex-col py-8 bg-[#EBF3FC]">
           <Link to={"/"} className="md:w-1/6 sm:2/6 mb-4">
@@ -47,13 +45,13 @@ function DetailCourse() {
           </Link>
           <div className=" ms-5 mb-8 ">
             <h1 className="text-2xl font-bold text-primary">
-              {detail.courseName} <span></span>
+              {detail?.courseName} <span></span>
             </h1>
             <h1 className="text-2xl font-bold">
-              {detail.courseCategory} <span></span>
+              {detail?.courseCategory} <span></span>
             </h1>
             <h3 className="text-base font-bold">
-              {detail.instructorName} <span></span>
+              {detail?.instructorName} <span></span>
             </h3>
             <div className="w-3/12  flex justify-between mb-6">
               <p className="font-semibold text-sm">
@@ -61,26 +59,26 @@ function DetailCourse() {
                   icon={faShieldHeart}
                   className=" mr-1 text-succes inline"
                 />
-                {detail.courseLevel}
+                {detail?.courseLevel}
               </p>
               <p className="font-semibold text-sm">
                 <FontAwesomeIcon
                   icon={faBook}
                   className=" mr-1 text-succes inline"
                 />
-                {detail.contentCount} Modul
+                {detail?.contentCount} Modul
               </p>
               <p className="font-semibold text-sm">
                 <FontAwesomeIcon
                   icon={faUser}
                   className=" mr-1 text-succes inline"
                 />
-                {detail.studentCount} Siswa
+                {detail?.studentCount} Siswa
               </p>
             </div>
             <a
               className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 me-3"
-              href={detail.telegramLink}
+              href={detail?.telegramLink}
             >
               Join Group Telegram
               <FontAwesomeIcon
@@ -91,9 +89,12 @@ function DetailCourse() {
             <a
               onClick={show}
               className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 cursor-pointer"
-              target="_blank"
             >
               Gabung ke kelas
+              <FontAwesomeIcon
+                icon={faChalkboardUser}
+                className=" ms-1 text-white inline"
+              />
             </a>
           </div>
         </div>
@@ -101,9 +102,14 @@ function DetailCourse() {
           <div className="flex-1">
             <div className=" min-h-[54vh] rounded-2xl relative my-5 bg-slate-400">
               <ReactPlayer
-                url="https://www.youtube.com/watch?v=DwTkyMJi890"
+                url={courseContent?.videoLink}
                 width="100%"
                 height="100%"
+                config={{
+                  youtube: {
+                    playerVars: { showinfo: 0 },
+                  },
+                }}
                 className="absolute rounded-2xl"
               />
             </div>
@@ -112,15 +118,15 @@ function DetailCourse() {
                 Tentang kelas <span></span>
               </h1>
               <p className="indent-4 text-justify leading-8">
-                {detail.courseDescription}
+                {detail?.courseDescription}
               </p>
 
               <h1 className="text-2xl font-bold mt-8">
                 Kelas Ini Ditujukan Untuk <span></span>
               </h1>
               <ul className="list-decimal ms-4 space-y-2">
-                {detail.courseTarget &&
-                  detail.courseTarget.map((item) => (
+                {detail?.courseTarget &&
+                  detail?.courseTarget.map((item) => (
                     <li key={item.id} className="mt-1">
                       {item.description}
                     </li>
@@ -132,7 +138,7 @@ function DetailCourse() {
             <LearnProgres />
           </div>
         </div>
-        <Modal show={show} />
+        <EnrollClass show={show} course={detail} />
       </section>
     </>
   );
