@@ -1,3 +1,5 @@
+import { Link } from "react-scroll";
+
 const Hero = () => {
   return (
     <section
@@ -10,12 +12,14 @@ const Hero = () => {
           <h1 className="text-xl sm:text-md md:text-xl lg:text-2xl xl:text-2xl font-bold mb-2 text-left">
             Belajar <br /> <span>dari Praktisi Terbaik!</span>
           </h1>
-          <a
-            href="#allCourse"
-            className="inline-flex items-center justify-center w-48 sm:w-64 h-10 sm:h-12 px-4 sm:px-5 text-sm sm:text-base font-bold tracking-wide text-primary transition duration-300 rounded-2xl whitespace-nowrap bg-white hover:bg-indigo-400 hover:text-white"
+          <Link
+            to="allCourse"
+            smooth
+            duration={500}
+            className="inline-flex items-center justify-center w-48 sm:w-64 h-10 sm:h-12 px-4 sm:px-5 text-sm sm:text-base font-bold tracking-wide text-primary transition duration-300 rounded-2xl whitespace-nowrap bg-white cursor-pointer hover:bg-indigo-400 hover:text-white"
           >
             <span>IKUTI KELAS</span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
