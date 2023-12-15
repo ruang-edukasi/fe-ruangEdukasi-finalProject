@@ -14,7 +14,7 @@ function index() {
         open modal
       </button> */}
       <dialog id="my_modal_3" className="modal w-full content-center">
-        <div className="modal-box text-center w-[50rem]">
+        <div className="modal-box text-center w-8/12 max-w-xl">
           <form
             method="dialog"
             className="border border-transparent border-none"
@@ -32,7 +32,7 @@ function index() {
           </h3>
           <div className="w-full flex justify-center flex-col items-center gap-10">
             <Card />
-            <button className="text-center bg-primary text-white py-2.5  rounded-3xl px-16 flex gap-2 mb-8 shadow-sm">
+            <button className=" bg-primary text-white py-2.5  rounded-3xl w-7/12 flex gap-2 mb-8 shadow-sm text-center">
                 Beli Sekarang
                 <FontAwesomeIcon
                   icon={faArrowRight}

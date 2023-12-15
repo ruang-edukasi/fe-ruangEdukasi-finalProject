@@ -17,7 +17,6 @@ function ResertPassword() {
   const [password2, setpassword2] = useState("");
 
   function handleVisibility(id) {
-    console.log(id);
     if (id == 1) {
       setshowPassword({
         ...showPassword,

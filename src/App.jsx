@@ -35,9 +35,8 @@ function App() {
           <Route path="/user/reset/:resetId" element={<ResertPassword />} />
           <Route path="/enroll" element={<EnrollClass />} />
           <Route path="/otp/:verifId" element={<Otp />} />
-
           <Route path="/search" element={<SearchCourse />} />
-       
+          <Route path="/detail-course/:courseId" element={<DetailCourse />} />
           <Route path="/ubah-password" element={<UbahPassword />} />
           <Route path="/profile-akun" element={<ProfileAkun />} />
           <Route path="/detail-course" element={<DetailCourse />} />
