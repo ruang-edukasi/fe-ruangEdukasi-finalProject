@@ -13,7 +13,6 @@ import KelasSaya from "./Pages/KelasSaya";
 import LoginAdmin from "./Admin/Pages/LoginAdmin";
 import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 import SearchCourse from "./Pages/SearchCourse";
-
 import UbahPassword from "./Pages/Profile/UbahPassword";
 import ProfileAkun from "./Pages/Profile/ProfileAkun";
 import Notification from "./Pages/Notification";
@@ -37,12 +36,12 @@ function App() {
           <Route path="/otp/:verifId" element={<Otp />} />
           <Route path="/search" element={<SearchCourse />} />
           <Route path="/detail-course/:courseId" element={<DetailCourse />} />
-          <Route path="/ubah-password" element={<UbahPassword />} />  
+          <Route path="/ubah-password" element={<UbahPassword />} />
           <Route path="/profile-akun" element={<ProfileAkun />} />
           <Route path="/detail-course" element={<DetailCourse />} />
           <Route path="/payment-succes" element={<PaymentSucces />} />
           <Route path="/notifikasi" element={<Notification />} />
-          
+
           {/* Admin Pages */}
           <Route path="/login-admin" element={<LoginAdmin />} />
           <Route path="/dashbord-admin" element={<DashbordAdmin />} />

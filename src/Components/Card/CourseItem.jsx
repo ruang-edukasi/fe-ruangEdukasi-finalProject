@@ -66,7 +66,7 @@ function CourseItem({
               {courseType === "Premium" ? `Rp${price}` : "Mulai Kelas"}
             </p>
           </div>
-          <p className="absolute top-0 left-0 bg-primary text-white p-1 font-bold text-sm">
+          <p className="absolute top-0 left-0 bg-primary text-white p-1 font-bold text-sm rounded-tl-md">
             {courseType}
           </p>
         </div>
