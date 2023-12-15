@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faPlus,
   faArrowDownShortWide,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
@@ -8,8 +9,9 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 import CardOne from "../Components/Card/CardOne";
 import CardTwo from "../Components/Card/CardTwo";
 import CardThree from "../Components/Card/CardThree";
+import Table from "../Components/Table/KelolaKelas";
 
-function DashbordAdmin() {
+function KelolaKelas() {
   return (
     <div className="flex h-screen">
       <div className="fixed top-0 left-0 z-40 w-64 h-screen pt-20">
@@ -24,8 +26,12 @@ function DashbordAdmin() {
             <CardThree />
           </div>
           <div className="flex justify-between w-full pt-12">
-            <h2 className="text-2xl font-bold">Status Pembayaran</h2>
+            <h2 className="text-2xl font-bold">Kelola Kelas</h2>
             <div className="flex space-x-3 font-bold">
+              <button className="bg-primary text-white rounded-3xl px-4 hover:bg-indigo-800 transition duration-300">
+                <FontAwesomeIcon icon={faPlus} className="mr-1" />
+                Tambah
+              </button>
               <button className="bg-transparent text-primary border border-primary rounded-3xl px-4 hover:bg-primary hover:text-white transition duration-300">
                 <FontAwesomeIcon icon={faArrowDownShortWide} className="mr-1" />
                 Filter
@@ -35,10 +41,13 @@ function DashbordAdmin() {
               </button>
             </div>
           </div>
+          <div className="mt-4">
+            <Table />
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default DashbordAdmin;
+export default KelolaKelas;
