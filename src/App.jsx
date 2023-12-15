@@ -32,7 +32,7 @@ function App() {
           <Route path="/kelas-saya" element={<KelasSaya />} />
           <Route path="/SearchAllCourse" element={<KelasSaya />} />
           <Route path="/user/reset/:resetId" element={<ResertPassword />} />
-          <Route path="/enroll" element={<EnrollClass />} />
+          <Route path="/payment/:courseId" element={<EnrollClass />} />
           <Route path="/otp/:verifId" element={<Otp />} />
           <Route path="/search" element={<SearchCourse />} />
           <Route path="/detail-course/:courseId" element={<DetailCourse />} />
