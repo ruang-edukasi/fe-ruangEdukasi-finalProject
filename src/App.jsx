@@ -19,7 +19,7 @@ import Notification from "./Pages/Notification";
 import KelolaKelas from "./Admin/Pages/KelolaKelas";
 import DetailCourse from "./Pages/DetailCourse";
 import PaymentSucces from "./Pages/PaymentSucces";
-import CategoryCourse from "./Pages/KategoryCourse";
+import CategoryCourse from "./Pages/CategoryCourse";
 
 function App() {
   return (
