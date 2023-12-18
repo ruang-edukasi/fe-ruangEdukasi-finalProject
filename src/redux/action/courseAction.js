@@ -7,6 +7,7 @@ import {
   setMyCourse,
   setDetail,
   setCourseContent,
+  setDetailCategory,
 } from "../reducer/courseReducers";
 
 //get catgory course
@@ -157,3 +158,29 @@ export const getDetail = (id) => async (dispatch) => {
     }
   }
 };
+
+export const getDetailCategory =
+  (id, errors, setErrors) => async (dispatch) => {
+    try {
+      const detail = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/course/category/${id}`
+      );
+      const { response } = detail.data;
+      dispatch(setDetailCategory(response));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setErrors({
+          ...errors,
+          isError: true,
+          message: error?.data?.response?.message || error?.message,
+        });
+        return;
+      }
+      alert(error?.message);
+      setErrors({
+        ...errors,
+        isError: true,
+        message: error?.message,
+      });
+    }
+  };

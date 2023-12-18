@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CourseItem from "../Components/Card/CourseItem";
 import { getPopular } from "../redux/action/courseAction";
 
-function Course() {
+function CoursePopular() {
   const dispatch = useDispatch();
   const { popular } = useSelector((state) => state.course);
   const [sliceCourse, setSliceCourse] = useState([]);
@@ -59,4 +59,4 @@ function Course() {
   );
 }
 
-export default Course;
+export default CoursePopular;
