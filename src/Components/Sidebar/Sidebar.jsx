@@ -6,31 +6,19 @@ function Sidebar() {
           <h3 className="text-xl font-bold">Filter</h3>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
-              <span className="label-text text-lg">Remember me</span>
+              <input type="checkbox" className="checkbox checkbox-primary" />
+              <span className="label-text text-lg">Paling Baru</span>
             </label>
           </div>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
+              <input type="checkbox" className="checkbox checkbox-primary" />
               <span className="label-text text-lg">Paling Popular</span>
             </label>
           </div>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
+              <input type="checkbox" className="checkbox checkbox-primary" />
               <span className="label-text text-lg">Promo</span>
             </label>
           </div>
@@ -40,62 +28,38 @@ function Sidebar() {
           <h3 className="text-xl font-bold">Kategori</h3>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
-              <span className="label-text text-lg">UI/UX Design</span>
-            </label>
-          </div>
-          <div>
-            <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
-              <span className="label-text text-lg">Frontend Development</span>
-            </label>
-          </div>
-          <div>
-            <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
+              <input type="checkbox" className="checkbox checkbox-primary" />
               <span className="label-text text-lg">Backend Development</span>
             </label>
           </div>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
-              <span className="label-text text-lg">Android Development</span>
+              <input type="checkbox" className="checkbox checkbox-primary" />
+              <span className="label-text text-lg">Frontend Development</span>
             </label>
           </div>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
+              <input type="checkbox" className="checkbox checkbox-primary" />
+              <span className="label-text text-lg">UI/UX Design</span>
+            </label>
+          </div>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input type="checkbox" className="checkbox checkbox-primary" />
               <span className="label-text text-lg">Data Science</span>
             </label>
           </div>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
+              <input type="checkbox" className="checkbox checkbox-primary" />
               <span className="label-text text-lg">Quality Asurance</span>
+            </label>
+          </div>
+          <div>
+            <label className="label cursor-pointer flex justify-start gap-2">
+              <input type="checkbox" className="checkbox checkbox-primary" />
+              <span className="label-text text-lg">Android Development</span>
             </label>
           </div>
         </div>
@@ -104,41 +68,25 @@ function Sidebar() {
           <h3 className="text-xl font-bold">Level Kesulitan</h3>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
+              <input type="checkbox" className="checkbox checkbox-primary" />
               <span className="label-text text-lg">Semua Level</span>
             </label>
           </div>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
+              <input type="checkbox" className="checkbox checkbox-primary" />
               <span className="label-text text-lg">Beginner Level</span>
             </label>
           </div>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
+              <input type="checkbox" className="checkbox checkbox-primary" />
               <span className="label-text text-lg">Intermediate Level</span>
             </label>
           </div>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
-              <input
-                type="checkbox"
-                checked="checked"
-                className="checkbox checkbox-primary"
-              />
+              <input type="checkbox" className="checkbox checkbox-primary" />
               <span className="label-text text-lg">Advanced Level</span>
             </label>
           </div>
