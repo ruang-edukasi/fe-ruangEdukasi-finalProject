@@ -8,27 +8,39 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../Components/Header/Header";
-import Modal from "../Components/Modal";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getDetail } from "../redux/action/courseAction";
 import LearnProgres from "../Components/LearnProgres";
 import ReactPlayer from "react-player/youtube";
 import EnrollClass from "../Components/Modal/EnrollClass";
+import playButton from "../assets/playVideo.svg";
 
 function DetailCourse() {
   const dispatch = useDispatch();
   const { courseId } = useParams();
-  const { detail, courseContent } = useSelector((state) => state.course);
+  const [played, setPlayed] = useState(0);
+  const [duration, setduration] = useState(0);
+  const [playVideo, setPlayVideo] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const { detail, courseContent, courseItem } = useSelector(
+    (state) => state.course
+  );
+  const { token } = useSelector((state) => state.auth);
   const show = () => {
     document.getElementById("my_modal_3").showModal();
   };
-
+  const handleNext = () => {
+    setCurrentVideoIndex(currentVideoIndex + 1);
+    setLoading(true);
+  };
   useEffect(() => {
-    dispatch(getDetail(courseId));
-    console.log(courseContent);
-  }, [courseId, dispatch]);
+    if (token) {
+      dispatch(getDetail(courseId, currentVideoIndex));
+    }
+  }, [courseId, dispatch, currentVideoIndex, token]);
 
   return (
     <>
@@ -87,32 +99,76 @@ function DetailCourse() {
                 className=" ms-1 text-white inline"
               />
             </a>
-            <a
-              onClick={show}
-              className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 cursor-pointer"
-            >
-              Gabung ke kelas
-              <FontAwesomeIcon
-                icon={faChalkboardUser}
-                className=" ms-1 text-white inline"
-              />
-            </a>
+            {detail?.alreadyBuy ? (
+              ""
+            ) : (
+              <a
+                onClick={show}
+                className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 cursor-pointer"
+              >
+                Gabung ke kelas
+                <FontAwesomeIcon
+                  icon={faChalkboardUser}
+                  className=" ms-1 text-white inline"
+                />
+              </a>
+            )}
           </div>
         </div>
         <div className="sm:px-28 md:px-32 w-full flex gap-14 justify-between p-10 ">
           <div className="flex-1">
-            <div className=" min-h-[54vh] rounded-2xl relative my-5 bg-slate-400">
+            <div className=" min-h-[54vh] rounded-2xl relative my-5 bg-slate-400 overflow-hidden">
               <ReactPlayer
-                url={courseContent?.videoLink}
+                url={courseItem?.videoLink}
                 width="100%"
                 height="100%"
-                config={{
-                  youtube: {
-                    playerVars: { showinfo: 0 },
-                  },
+                controls={true}
+                playing={playVideo}
+                onProgress={(progress) => {
+                  setPlayed(progress.playedSeconds);
+                  setLoading(false);
                 }}
-                className="absolute rounded-2xl"
+                onDuration={(progress) => {
+                  setduration(progress - 3);
+                }}
+                // controls={true}
+                className="absolute"
               />
+              <div
+                className={`${
+                  playVideo && duration + 1 >= played ? "w-0" : "w-full"
+                } h-full bg-black absolute flex flex-col justify-center items-center cursor-pointer duration-300 ease-linear `}
+                onClick={() => setPlayVideo(!playVideo)}
+              >
+                <img src={playButton} alt="play buton" />
+                {loading && playVideo ? (
+                  <span className="loading loading-bars loading-sm bg-white"></span>
+                ) : (
+                  ""
+                )}
+              </div>
+
+              <div
+                className={`absolute space-x-2 ${
+                  duration >= played
+                    ? "right-5 bottom-[-20%]"
+                    : "right-5 bottom-8"
+                }`}
+              >
+                <button className=" px-9 py-1.5 text-[#489CFF] font-semibold bg-[#EBF3FC] rounded-3xl right-9">
+                  Kelas Lainnya
+                </button>
+                <button
+                  className={`${
+                    currentVideoIndex >= courseContent.length-1
+                      ? "hidden"
+                      : "inline"
+                  } px-9 py-1.5 text-white font-semibold  bg-primary rounded-3xl right-9`}
+                  onClick={() => handleNext()}
+                >
+                  Next
+                </button>
+              </div>
             </div>
             <div className="">
               <h1 className="text-2xl font-bold ">
@@ -136,7 +192,11 @@ function DetailCourse() {
             </div>
           </div>
           <div className="relative w-4/12">
-            <LearnProgres />
+            <LearnProgres
+              courseContent={courseContent}
+              courseId={courseItem?.id}
+              setCurrentVideoIndex={setCurrentVideoIndex}
+            />
           </div>
         </div>
         <EnrollClass show={show} course={detail} />
