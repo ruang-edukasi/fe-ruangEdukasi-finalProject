@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { logout, profile } from "../../../redux/action/authAdminAction";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,9 +9,47 @@ import {
   faPenToSquare,
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 
 const Sidebar = () => {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
+
+  const onLogout = () => {
+    Swal.fire({
+      title: "Logout Confirmation",
+      text: "Are you sure you want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#6148FF",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log me out",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(logout());
+
+        Swal.fire({
+          title: "Logged Out",
+          text: "You have been successfully logged out.",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+
+        setTimeout(() => {
+          navigate("/login-admin");
+        }, 2000);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (token) {
+      dispatch(profile(navigate, null));
+    }
+  }, [dispatch, navigate, token]);
 
   return (
     <>
@@ -89,7 +130,7 @@ const Sidebar = () => {
               </li>
               <li className="px-3">
                 <button
-                  onClick=""
+                  onClick={onLogout}
                   className="flex items-center gap-3 rounded p-3 text-white transition-colors w-full hover:bg-indigo-800 aria-[current=page]:text-white"
                 >
                   <div className="flex items-center self-center ">

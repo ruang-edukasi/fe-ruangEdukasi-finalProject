@@ -27,7 +27,7 @@ function HeaderAdmin() {
             </h1>
           </>
         ) : (
-          <h1 className="font-bold text-3xl text-primary">Hi, Admin!</h1>
+          ""
         )}
       </div>
       <div className="flex items-center gap-2 py-4">
