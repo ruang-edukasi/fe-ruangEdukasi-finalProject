@@ -7,6 +7,8 @@ import {
   setMyCourse,
   setDetail,
   setCourseContent,
+  setCourseItem,
+  setDetailCategory,
 } from "../reducer/courseReducers";
 
 //get catgory course
@@ -168,19 +170,61 @@ export const getSearchCourse =
   };
 
 // detail course
-export const getDetail = (id) => async (dispatch) => {
-  try {
-    const detail = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/course/${id}`
-    );
-    const { response } = detail.data;
-    const [content] = response.courseContent;
-    dispatch(setDetail(response));
-    dispatch(setCourseContent(content));
-    // console.log(detail);
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(error);
+export const getDetail =
+  (id, currentVideoIndex) => async (dispatch, getState) => {
+    try {
+      
+
+      let { token } = getState().auth;
+      const detail = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/course/read/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const { response } = detail.data;
+      const content = response.courseContent;
+      const [contentObject] = content;
+      dispatch(setDetail(response));
+      dispatch(setCourseContent(content));
+      dispatch(setCourseItem(content[contentObject?.id]));
+
+      //get next video
+      if (currentVideoIndex < content.length - 1) {
+        dispatch(setCourseItem(content[currentVideoIndex]));
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        alert(error?.response?.data?.message);
+        return;
+      }
     }
   }
-};
+
+export const getDetailCategory =
+  (id, errors, setErrors) => async (dispatch) => {
+    try {
+      const detail = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/course/category/${id}`
+      );
+      const { response } = detail.data;
+      dispatch(setDetailCategory(response));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setErrors({
+          ...errors,
+          isError: true,
+          message: error?.data?.response?.message || error?.message,
+        });
+        return;
+      }
+      alert(error?.message);
+      setErrors({
+        ...errors,
+        isError: true,
+        message: error?.message,
+      });
+    }
+  };

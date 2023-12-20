@@ -12,11 +12,7 @@ function Dashbord() {
   const [activeFilter, setActiveFilter] = useState("All");
   const dispatch = useDispatch();
   const { course } = useSelector((state) => state.course);
-
-  const handleFilterChange = (filter) => {
-    setActiveFilter(filter);
-  };
-
+  const [filteredKelas, setFilteredKelas] = useState([...course]);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
@@ -25,6 +21,24 @@ function Dashbord() {
   useEffect(() => {
     dispatch(getCourse(setErrors, errors));
   }, [dispatch, errors]);
+
+  useEffect(() => {
+    const filtered = course.filter((item) => {
+      if (activeFilter === "All") {
+        return true;
+      } else if (activeFilter === "kelasPremium") {
+        return item.courseType === "Premium";
+      } else if (activeFilter === "kelasGratis") {
+        return item.courseType === "Gratis";
+      }
+      return true;
+    });
+    setFilteredKelas(filtered);
+  }, [course, activeFilter]);
+
+  const handleFilterChange = (filter) => {
+    setActiveFilter(filter);
+  };
 
   return (
     <>
@@ -72,16 +86,16 @@ function Dashbord() {
                 />
                 <Button
                   bgColor={
-                    activeFilter === "KelasGratis"
+                    activeFilter === "kelasGratis"
                       ? "bg-primary text-white"
                       : "bg-slate-100"
                   }
                   text="Kelas Gratis"
-                  onClick={() => handleFilterChange("KelasGratis")}
+                  onClick={() => handleFilterChange("kelasGratis")}
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
-                {course.map((courses) => (
+                {filteredKelas.map((courses) => (
                   <CourseItem
                     key={courses?.id}
                     id={courses?.id}

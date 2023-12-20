@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "../Components/Header/Header";
 import HeroOne from "../Components/Hero/HeroOne";
-import Course from "../Layout/Course";
 import Footer from "../Components/Footer/Footer";
 import Category from "../Layout/Category";
 import ButtonCourse from "../Layout/ButtonCourse";
@@ -9,6 +8,7 @@ import AllCourse from "../Layout/AllCourse";
 import HeroTwo from "../Components/Hero/HeroTwo";
 import WhyUs from "../Components/Card/WhyUs";
 import Team from "../Components/Card/Team";
+import CoursePopular from "../Layout/CoursePopular";
 
 function HomePage() {
   return (
@@ -35,7 +35,7 @@ function HomePage() {
             </div>
           </div>
           <ButtonCourse />
-          <Course />
+          <CoursePopular />
         </section>
         <section id="allCourse" className="container mx-auto px-12 sm:px-16">
           <div className="mb-4 sm:mb-0">

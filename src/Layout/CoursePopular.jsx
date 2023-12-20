@@ -8,7 +8,7 @@ import {
   faCircleChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Course() {
+function CoursePopular() {
   const dispatch = useDispatch();
   const { popular } = useSelector((state) => state.course);
   const [sliceCourse, setSliceCourse] = useState([]);
@@ -95,4 +95,4 @@ function Course() {
   );
 }
 
-export default Course;
+export default CoursePopular;
