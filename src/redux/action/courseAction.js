@@ -88,6 +88,33 @@ export const getPopular = (setErrors, errors) => async (dispatch) => {
   }
 };
 
+// filter popular course by category
+export const getPopularCourseCategory =
+  (id, errors, setErrors) => async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/popular/${id}`
+      );
+      const { data } = response.data;
+      dispatch(setDetail(data));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setErrors({
+          ...errors,
+          isError: true,
+          message: error?.response?.data?.message || error?.message,
+        });
+        return;
+      }
+      alert(error?.message);
+      setErrors({
+        ...errors,
+        isError: true,
+        message: error?.message,
+      });
+    }
+  };
+
 export const getMyCourse = (setErrors, errors) => async (dispatch) => {
   try {
     const data = await axios.get(

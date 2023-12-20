@@ -7,6 +7,7 @@ import ButtonCourse from "../Layout/ButtonCourse";
 import AllCourse from "../Layout/AllCourse";
 import HeroTwo from "../Components/Hero/HeroTwo";
 import WhyUs from "../Components/Card/WhyUs";
+import Team from "../Components/Card/Team";
 import CoursePopular from "../Layout/CoursePopular";
 
 function HomePage() {
@@ -37,7 +38,7 @@ function HomePage() {
           <CoursePopular />
         </section>
         <section id="allCourse" className="container mx-auto px-12 sm:px-16">
-          <div className="my-8 mb-0">
+          <div className="mb-4 sm:mb-0">
             <h2 className="text-2xl font-bold mb-4 sm:mb-0 text-primary">
               Semua Kursus
             </h2>
@@ -56,14 +57,64 @@ function HomePage() {
             </Link>
           </div>
         </section>
-        <section className="mx-auto pt-6">
+        <section className="mx-auto py-16">
           <HeroTwo />
         </section>
-        <section className="py-20">
-          <div className="container mx-auto px-4 sm:px-8">
-            <h2 className="text-4xl font-bold mb-2">Why Us?</h2>
-            <p className="text-lg mb-8">Mengapa harus pilih Ruang Edukasi?</p>
+        <section className="py-16">
+          <div className="container text-center mx-auto px-4 lg:px-24">
+            <h2 className="text-3xl text-primary font-bold mb-4">
+              Mengapa Harus Pilih Ruang Edukasi?
+            </h2>
+            <p className="text-xl mb-14">
+              Memberikan Pengalaman Belajar Tak Terlupakan
+            </p>
             <WhyUs />
+          </div>
+        </section>
+        <section className="py-16">
+          <div className="container text-center mx-auto px-4 sm:px-8">
+            <h2 className="text-3xl text-primary font-bold mb-4">
+              Jangkauan Pengguna Ruang Edukasi
+            </h2>
+            <h2 className="text-xl mb-14">
+              Tersebar di seluruh provinsi Indonesia
+            </h2>
+            <div className="flex justify-center">
+              <img src="/peta.svg" alt="Peta Indonesia" className="w-9/12" />
+            </div>
+          </div>
+        </section>
+        <section className="py-16">
+          <div className="container text-center mx-auto px-4 sm:px-8">
+            <h2 className="text-3xl text-primary font-bold mb-4">
+              Tim Ruang Edukasi
+            </h2>
+            <h2 className="text-xl mb-14">
+              Mereka adalah tim garda terdepan untuk bimbing kamu belajar skills
+              digital di Ruang Edukasi
+            </h2>
+            <Team />
+          </div>
+        </section>
+        <section className="py-16">
+          <div className="container text-center mx-auto px-4 sm:px-8">
+            <h2 className="text-3xl text-primary font-bold mb-16">
+              Partner Kami
+            </h2>
+            <div className="flex justify-center pb-12">
+              <div className="grid grid-cols-2 justify-items-center">
+                <img
+                  src="/Kampus Merdeka.png"
+                  alt="Logo Kampus Merdeka"
+                  className="h-20"
+                />
+                <img
+                  src="/Binar Academy.png"
+                  alt="Logo Binar Academy"
+                  className="h-20"
+                />
+              </div>
+            </div>
           </div>
         </section>
       </section>

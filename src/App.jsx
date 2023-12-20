@@ -15,10 +15,10 @@ import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 import SearchCourse from "./Pages/SearchCourse";
 import UbahPassword from "./Pages/Profile/UbahPassword";
 import ProfileAkun from "./Pages/Profile/ProfileAkun";
-import Notification from "./Pages/Notification";
 import KelolaKelas from "./Admin/Pages/KelolaKelas";
 import DetailCourse from "./Pages/DetailCourse";
 import PaymentSucces from "./Pages/PaymentSucces";
+import Notification from "./Pages/Notification";
 import CategoryCourse from "./Pages/CategoryCourse";
 
 function App() {

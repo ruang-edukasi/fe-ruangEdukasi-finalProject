@@ -9,6 +9,7 @@ const initialState = {
   courseItem: [],
   popular: [],
   myCourse: [],
+  filterPopularCourse: [],
   detailCategory: [],
 };
 
@@ -37,6 +38,9 @@ const courseSlice = createSlice({
     setMyCourse: (state, action) => {
       state.myCourse = action.payload;
     },
+    setFilterPopularCourse: (state, action) => {
+      state.filterPopularCourse = action.payload;
+    },
     setCourseItem: (state, action) => {
       state.courseItem = action.payload;
     },
@@ -54,6 +58,7 @@ export const {
   setDetail,
   setMyCourse,
   setCourseContent,
+  setFilterPopularCourse,
   setCourseItem,
   setDetailCategory,
 } = courseSlice.actions;
