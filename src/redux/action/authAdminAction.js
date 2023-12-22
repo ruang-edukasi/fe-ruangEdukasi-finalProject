@@ -15,10 +15,10 @@ export const login = (email, password, navigate) => async (dispatch) => {
     );
     const { response } = data.data;
     const { token } = response;
-    // console.log(response);
+    console.log(response);
     dispatch(setToken(token));
     Swal.fire({
-      title: data.data.message,
+      title: "Login berhasil!",
       icon: "success",
     }).then((result) => {
       if (result.isConfirmed) {

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import PropType from "prop-types";
 
-const CategoryItem = ({ imageURL, categoryName }) => {
+const CategoryItem = ({ id, imageURL, categoryName }) => {
   return (
-    <Link>
+    <Link to={`/detail-category-course/${id}`}>
       <div className="card shadow-m mx-3 py-2">
         <img
           src={imageURL}
@@ -18,6 +18,7 @@ const CategoryItem = ({ imageURL, categoryName }) => {
 };
 
 CategoryItem.propTypes = {
+  id: PropType.number.isRequired,
   imageURL: PropType.string.isRequired,
   categoryName: PropType.string.isRequired,
 };

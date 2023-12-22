@@ -15,10 +15,11 @@ import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
 import SearchCourse from "./Pages/SearchCourse";
 import UbahPassword from "./Pages/Profile/UbahPassword";
 import ProfileAkun from "./Pages/Profile/ProfileAkun";
-import Notification from "./Pages/Notification";
 import KelolaKelas from "./Admin/Pages/KelolaKelas";
 import DetailCourse from "./Pages/DetailCourse";
 import PaymentSucces from "./Pages/PaymentSucces";
+import Notification from "./Pages/Notification";
+import CategoryCourse from "./Pages/CategoryCourse";
 
 function App() {
   return (
@@ -32,10 +33,14 @@ function App() {
           <Route path="/kelas-saya" element={<KelasSaya />} />
           <Route path="/SearchAllCourse" element={<KelasSaya />} />
           <Route path="/user/reset/:resetId" element={<ResertPassword />} />
-          <Route path="/enroll" element={<EnrollClass />} />
+          <Route path="/payment/:courseId" element={<EnrollClass />} />
           <Route path="/otp/:verifId" element={<Otp />} />
           <Route path="/search" element={<SearchCourse />} />
           <Route path="/detail-course/:courseId" element={<DetailCourse />} />
+          <Route
+            path="/detail-category-course/:courseId"
+            element={<CategoryCourse />}
+          />
           <Route path="/ubah-password" element={<UbahPassword />} />
           <Route path="/profile-akun" element={<ProfileAkun />} />
           <Route path="/detail-course" element={<DetailCourse />} />

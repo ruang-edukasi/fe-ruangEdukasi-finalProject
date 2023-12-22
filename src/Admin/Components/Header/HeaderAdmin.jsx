@@ -13,7 +13,7 @@ function HeaderAdmin() {
 
   useEffect(() => {
     if (token) {
-      dispatch(profile(navigate, "/dashbord-admin", null));
+      dispatch(profile(navigate, null));
     }
   }, [dispatch, navigate, token]);
 

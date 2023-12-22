@@ -22,7 +22,7 @@ function CourseItem({
   return (
     <>
       <Link
-        to="/detail-course"
+        to={`/detail-course/${id}`}
         className="card w-80 bg-base-100 shadow-md flex hover:-translate-y-2 duration-500"
       >
         <img src="/course.svg" className="rounded-t-lg w-full" />
