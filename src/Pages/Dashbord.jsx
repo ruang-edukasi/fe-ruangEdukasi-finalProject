@@ -5,8 +5,6 @@ import Button from "../Components/Button/Button";
 import Header from "../Components/Header/Header";
 import CourseItem from "../Components/Card/CourseItem";
 import Sidebar from "../Components/Sidebar/Sidebar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function Dashbord() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -47,20 +45,6 @@ function Dashbord() {
         <div className="container mx-auto px-24">
           <div className="flex justify-between py-10">
             <h2 className="text-2xl font-bold">Topik Kelas</h2>
-            <form action="search" className="relative">
-              <input
-                type="text"
-                name="search"
-                placeholder="Cari Kelas..."
-                autoComplete="off"
-                className="outline-none font-semibold text-md  border-none ring-2 ring-white focus:ring-indigo-400 focus:w-40 sm:focus:w-96 focus:ease-in focus:duration-300 rounded-full border-white px-4 py-1 md:py-2 transition-width duration-300 ease-in-out"
-              />
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                <button className="text-white bg-primary hover:bg-indigo-400 rounded-lg w-8 h-7 transition duration-300">
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-              </div>
-            </form>
           </div>
           <div className="flex justify-evenly gap-1">
             <Sidebar />

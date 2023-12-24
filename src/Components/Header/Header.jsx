@@ -69,7 +69,7 @@ const Header = () => {
           </div>
           <div
             aria-label="Select page"
-            className={`absolute top-0 left-0 gap-2 z-[-1] h-96 w-full justify-center overflow-hidden overflow-y-auto overscroll-contain bg-primary/70 px-8 pb-12 pt-24 font-medium transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0  lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0 lg:pt-0 lg:opacity-100 ${
+            className={`absolute top-0 left-0 gap-2 z-[-1] rounded-xl w-full justify-center overflow-hidden overflow-y-auto overscroll-contain bg-primary/70 px-8 pb-12 pt-24 font-medium transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0 lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0 lg:pt-0 lg:opacity-100 ${
               isToggleOpen
                 ? "visible opacity-100 backdrop-blur-sm"
                 : "invisible opacity-0"
@@ -90,7 +90,7 @@ const Header = () => {
                         name="search"
                         placeholder="Cari Kursus terbaik..."
                         autoComplete="off"
-                        className="outline-none font-semibold text-md bg-white border-none ring-2 ring-white focus:ring-indigo-300 rounded-xl border-white px-4 md:py-2 md:w-96"
+                        className="outline-none font-semibold text-md bg-white border-none ring-2 ring-white focus:ring-indigo-300 rounded-xl border-white px-4 py-2 md:w-96"
                         onChange={(event) => setQuery(event.target.value)}
                       />
                       <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -101,49 +101,51 @@ const Header = () => {
                     </form>
                   </div>
                 </li>
-                <li role="none" className="flex justify-center">
-                  <div className="flex items-center gap-2 py-4">
-                    <Link
-                      to="/kelas-saya"
-                      className={`inline-flex items-center justify-center h-8 w-28 gap-2 px-5 text-sm font-bold tracking-wide transition duration-300 rounded-xl whitespace-nowrap hover:bg-indigo-800 text-white ${isActive(
-                        "/kelas-saya"
-                      )}`}
-                    >
-                      <FontAwesomeIcon icon={faBars} />
-                      Kelas
-                    </Link>
-                  </div>
-                </li>
-                <li role="none" className="flex justify-center">
-                  <div className="flex items-center gap-2 py-4">
-                    <Link
-                      to="/notifikasi"
-                      className={`inline-flex items-center justify-center h-12 w-14 gap-2 px-5 text-sm font-bold tracking-wide transition duration-300 rounded-lg whitespace-nowrap hover:bg-indigo-800 text-white ${isActive(
-                        "/notifikasi"
-                      )}`}
-                    >
-                      <FontAwesomeIcon
-                        icon={faBell}
-                        className="text-white text-xl"
-                      />
-                    </Link>
-                  </div>
-                </li>
-                <li role="none" className="flex justify-center">
-                  <div className="flex items-center gap-2 py-4 font-bold">
-                    <Link
-                      to="/profile-akun"
-                      className={`inline-flex items-center justify-center h-12 w-14 gap-2 px-5 text-sm font-bold tracking-wide transition duration-300 rounded-lg whitespace-nowrap hover:bg-indigo-800 text-white ${isActive(
-                        "/profile-akun"
-                      )}`}
-                    >
-                      <FontAwesomeIcon
-                        icon={faUser}
-                        className="text-white text-xl"
-                      />
-                    </Link>
-                  </div>
-                </li>
+                <div className="flex justify-center items-center">
+                  <li role="none" className="flex justify-center">
+                    <div className="flex items-center gap-2 py-4">
+                      <Link
+                        to="/kelas-saya"
+                        className={`inline-flex items-center justify-center h-8 w-28 gap-2 px-5 text-sm font-bold tracking-wide transition duration-300 rounded-xl whitespace-nowrap hover:bg-indigo-800 text-white ${isActive(
+                          "/kelas-saya"
+                        )}`}
+                      >
+                        <FontAwesomeIcon icon={faBars} />
+                        Kelas
+                      </Link>
+                    </div>
+                  </li>
+                  <li role="none" className="flex justify-center">
+                    <div className="flex items-center gap-2 py-4">
+                      <Link
+                        to="/notifikasi"
+                        className={`inline-flex items-center justify-center h-12 w-14 gap-2 px-5 text-sm font-bold tracking-wide transition duration-300 rounded-lg whitespace-nowrap hover:bg-indigo-800 text-white ${isActive(
+                          "/notifikasi"
+                        )}`}
+                      >
+                        <FontAwesomeIcon
+                          icon={faBell}
+                          className="text-white text-xl"
+                        />
+                      </Link>
+                    </div>
+                  </li>
+                  <li role="none" className="flex justify-center">
+                    <div className="flex items-center gap-2 py-4 font-bold">
+                      <Link
+                        to="/profile-akun"
+                        className={`inline-flex items-center justify-center h-12 w-14 gap-2 px-5 text-sm font-bold tracking-wide transition duration-300 rounded-lg whitespace-nowrap hover:bg-indigo-800 text-white ${isActive(
+                          "/profile-akun"
+                        )}`}
+                      >
+                        <FontAwesomeIcon
+                          icon={faUser}
+                          className="text-white text-xl"
+                        />
+                      </Link>
+                    </div>
+                  </li>
+                </div>
               </>
             ) : (
               <>

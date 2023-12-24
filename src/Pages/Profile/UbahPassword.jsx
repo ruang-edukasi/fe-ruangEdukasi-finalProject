@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import Header from "../../Components/Header/Header";
@@ -34,17 +34,15 @@ const UbahPassword = () => {
   return (
     <>
       <Header />
-      <div className="bg-blue-100 h-[10rem] px-80">
-        <div className="flex items-center gap-2 py-8 text-lg font-bold text-primary relative">
-          <FontAwesomeIcon
-            icon={faArrowLeft}
-            size={30}
-            className="cursor-pointer absolute -inset-x-16"
-            onClick={() => {
-              navigate("/");
-            }}
-          />
-          Kembali Ke Beranda
+      <div className="bg-blue-100 h-[10rem] lg:px-80">
+        <div className="flex items-center py-8 lg:px-0 px-2 gap-2 text-lg font-bold text-primary lg:relative">
+          <Link
+            to={"/"}
+            className="cursor-pointer lg:absolute lg:-inset-x-16 hover:opacity-80"
+          >
+            <FontAwesomeIcon icon={faArrowLeft} className="mr-2 inline" />
+          </Link>
+          Kembali ke Beranda
         </div>
 
         {/* Akun */}

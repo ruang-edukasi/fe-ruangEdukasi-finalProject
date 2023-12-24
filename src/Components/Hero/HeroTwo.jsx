@@ -14,9 +14,9 @@ function HeroTwo() {
             <FontAwesomeIcon icon={faCirclePlay} beat />
           </button>
           <dialog id="modals" className="modal bg-black/60">
-            <div className="flex justify-center">
+            <div className="flex justify-center relative">
               <form method="dialog">
-                <button className="btn btn-md btn-circle btn-ghost absolute right-6 top-2 text-xl hover:bg-alert">
+                <button className="btn btn-md btn-circle btn-ghost absolute -top-7 -right-7 text-xl hover:bg-alert">
                   ✕
                 </button>
               </form>

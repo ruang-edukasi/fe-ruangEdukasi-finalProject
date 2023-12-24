@@ -115,30 +115,37 @@ export const getPopularCourseCategory =
     }
   };
 
-export const getMyCourse = (setErrors, errors) => async (dispatch) => {
-  try {
-    const data = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/user/dashboard`
-    );
-    const { response } = data.data;
-    dispatch(setMyCourse(response));
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
+export const getMyCourse =
+  (setErrors, errors) => async (dispatch, getState) => {
+    try {
+      let { token } = getState().auth;
+      const data = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/user/dashboard`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const { response } = data.data;
+      dispatch(setMyCourse(response?.myCourse));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setErrors({
+          ...errors,
+          isError: true,
+          message: error?.data?.response?.message || error?.message,
+        });
+        return;
+      }
+      alert(error?.message);
       setErrors({
         ...errors,
         isError: true,
-        message: error?.data?.response?.message || error?.message,
+        message: error?.message,
       });
-      return;
     }
-    alert(error?.message);
-    setErrors({
-      ...errors,
-      isError: true,
-      message: error?.message,
-    });
-  }
-};
+  };
 
 // search course
 export const getSearchCourse =

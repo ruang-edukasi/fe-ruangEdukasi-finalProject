@@ -9,7 +9,7 @@ const CategoryItem = ({ id, imageURL, categoryName }) => {
           src={imageURL}
           className="rounded-3xl w-52 m-auto transition duration-300 cursor-pointer text-no-underline hover:scale-105"
         />
-        <div className="text-center font-semibold">
+        <div className="text-center font-semibold text-sm mt-1 sm:text-lg">
           <p>{categoryName}</p>
         </div>
       </div>
