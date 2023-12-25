@@ -6,8 +6,12 @@ import Header from "../Components/Header/Header";
 import CourseItem from "../Components/Card/CourseItem";
 import Sidebar from "../Components/Sidebar/Sidebar";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+
 function Dashbord() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [navDashbord, setNavDashbord] = useState(false);
   const dispatch = useDispatch();
   const { course } = useSelector((state) => state.course);
   const [filteredKelas, setFilteredKelas] = useState([...course]);
@@ -42,7 +46,7 @@ function Dashbord() {
     <>
       <Header />
       <section className="bg-blue-100 min-h-screen">
-        <div className="container mx-auto px-24">
+        <div className="container mx-auto px-10 sm:px-5 lg:px-24">
           <div className="flex justify-between py-10">
             <h2 className="text-2xl font-bold">Topik Kelas</h2>
           </div>
@@ -78,7 +82,7 @@ function Dashbord() {
                   onClick={() => handleFilterChange("kelasGratis")}
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-y-3 sm:grid-cols-2 sm:gap-3 lg:gap-4">
                 {filteredKelas.map((courses) => (
                   <CourseItem
                     key={courses?.id}
@@ -97,6 +101,16 @@ function Dashbord() {
               </div>
             </div>
           </div>
+        </div>
+        <div
+          onClick={() => setNavDashbord(!navDashbord)}
+          className="text-white cursor-pointer z-20 fixed left-0 bottom-0 text-lg bg-blue-600 p-2 rounded-r-lg lg:hidden"
+        >
+          {navDashbord ? (
+            <FontAwesomeIcon icon={faEllipsis} />
+          ) : (
+            <FontAwesomeIcon icon={faEllipsis} />
+          )}
         </div>
       </section>
     </>

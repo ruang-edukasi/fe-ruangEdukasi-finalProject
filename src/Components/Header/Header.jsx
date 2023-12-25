@@ -37,7 +37,7 @@ const Header = () => {
   }, [dispatch, navigate, token]);
 
   return (
-    <header className="sticky top-0 z-20 px-5 w-full bg-primary shadow-lg shadow-slate-700/20">
+    <header className="sticky top-0 z-50 px-5 w-full bg-primary shadow-lg shadow-slate-700/20">
       <div className="relative px-4 lg:px-16">
         <nav className="flex h-24 items-stretch justify-between font-medium text-slate-700">
           <div className="flex items-center gap-6 py-4">

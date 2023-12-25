@@ -33,7 +33,7 @@ function HeroTwo() {
             src="/person.svg"
             className="w-auto rounded-lg shadow-2xl md:w-auto"
           />
-          <div className="md:pr-24 text-center">
+          <div className="text-center px-4">
             <h1 className="text-xl font-bold md:text-4xl">
               Butuh Kursus Dengan Kontent Eksklusif? Coba Kursus Premium!
             </h1>

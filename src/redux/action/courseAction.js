@@ -88,7 +88,6 @@ export const getPopular = (setErrors, errors) => async (dispatch) => {
   }
 };
 
-// filter popular course by category
 export const getPopularCourseCategory =
   (id, errors, setErrors) => async (dispatch) => {
     try {
@@ -147,7 +146,6 @@ export const getMyCourse =
     }
   };
 
-// search course
 export const getSearchCourse =
   (setErrors, errors, query) => async (dispatch) => {
     try {
@@ -176,7 +174,6 @@ export const getSearchCourse =
     }
   };
 
-// detail course
 export const getDetail =
   (id, currentVideoIndex) => async (dispatch, getState) => {
     try {
