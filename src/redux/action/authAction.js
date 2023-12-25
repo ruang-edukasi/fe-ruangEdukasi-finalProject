@@ -45,6 +45,9 @@ export const login = (email, password, navigate) => async (dispatch) => {
     alert(error?.message);
   }
 };
+
+
+
 export const forgotPassword = (email) => async (dispatch) => {
   try {
     dispatch(setError(""));
@@ -134,6 +137,27 @@ export const register =
       alert(error?.message);
     }
   };
+export const registerWithGoogle =
+  (navigate) => async (dispatch) => {
+    try {
+      const registrationResponse = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/oauth/user/google`
+      );
+        const { response } = registrationResponse.data;
+        const { token } = response;
+        dispatch(setToken(token));
+        console.log(registrationResponse);
+
+      navigate(`/`);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        alert(error?.response?.data?.message);
+        return;
+      }
+      alert(error?.message);
+    }
+  };
+
 
 export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
   try {
@@ -149,7 +173,7 @@ export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
     const { token } = response;
     dispatch(setToken(token));
 
-    // Mengganti alert dengan SweetAlert2
+    
     Swal.fire({
       title: verifresponse.data.message,
       icon: "success",

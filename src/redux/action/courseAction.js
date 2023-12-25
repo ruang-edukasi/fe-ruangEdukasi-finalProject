@@ -7,9 +7,12 @@ import {
   setMyCourse,
   setDetail,
   setCourseContent,
+  setOrderCourse,
+  setCoupon,
   setCourseItem,
   setDetailCategory,
 } from "../reducer/courseReducers";
+import Swal from "sweetalert2";
 
 //get catgory course
 export const getCategory = (setErrors, errors) => async (dispatch) => {
@@ -207,6 +210,65 @@ export const getDetail =
       }
     }
   };
+
+
+export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
+  try {
+    let { token } = getState().auth;
+
+    const order = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/v1/user/order/course/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const { response } = order.data;
+    dispatch(setOrderCourse(response));
+
+    Swal.fire({
+      title: order.data.message,
+      icon: "success",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/payment-succes");
+      }
+    });
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(error);
+    }
+  }
+};
+
+export const checkCoupon = (id, coupon_code) => async (dispatch, getState) => {
+  try {
+    let { token } = getState().auth;
+
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/v1/check/coupon/course/${id}`,
+      {
+        coupon_code,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response);
+    const { responseCoupon } = response.data;
+      dispatch(setCoupon(responseCoupon));
+
+   
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert.error(error);
+    }
+  }
+};
 
 export const getDetailCategory =
   (id, errors, setErrors) => async (dispatch) => {

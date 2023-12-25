@@ -85,7 +85,7 @@ const SidebarAkun = () => {
         <div className="text-primary">
           <FontAwesomeIcon size={25} icon={faCartShopping} />
         </div>
-        <div className="font-semibold text-md">Riwayat Pembayaran</div>
+        <div className="font-semibold text-md">Riwayat Pembelian</div>
       </div>
       <div
         className="flex items-center gap-3 py-4 border-b-2 cursor-pointer border-slate-300 hover:text-primary"
