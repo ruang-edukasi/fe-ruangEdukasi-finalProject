@@ -9,6 +9,8 @@ import {
   setCourseContent,
   setOrderCourse,
   setCoupon,
+  setCourseItem,
+  setDetailCategory,
 } from "../reducer/courseReducers";
 import Swal from "sweetalert2";
 
@@ -89,6 +91,33 @@ export const getPopular = (setErrors, errors) => async (dispatch) => {
   }
 };
 
+// filter popular course by category
+export const getPopularCourseCategory =
+  (id, errors, setErrors) => async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/popular/${id}`
+      );
+      const { data } = response.data;
+      dispatch(setDetail(data));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setErrors({
+          ...errors,
+          isError: true,
+          message: error?.response?.data?.message || error?.message,
+        });
+        return;
+      }
+      alert(error?.message);
+      setErrors({
+        ...errors,
+        isError: true,
+        message: error?.message,
+      });
+    }
+  };
+
 export const getMyCourse = (setErrors, errors) => async (dispatch) => {
   try {
     const data = await axios.get(
@@ -144,22 +173,39 @@ export const getSearchCourse =
   };
 
 // detail course
-export const getDetail = (id) => async (dispatch) => {
-  try {
-    const detail = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/course/${id}`
-    );
-    const { response } = detail.data;
-    const [content] = response.courseContent;
-    dispatch(setDetail(response));
-    dispatch(setCourseContent(content));
-    // console.log(detail);
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(error);
+export const getDetail =
+  (id, currentVideoIndex) => async (dispatch, getState) => {
+    try {
+      
+
+      let { token } = getState().auth;
+      const detail = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/course/read/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const { response } = detail.data;
+      const content = response.courseContent;
+      const [contentObject] = content;
+      dispatch(setDetail(response));
+      dispatch(setCourseContent(content));
+      dispatch(setCourseItem(content[contentObject?.id]));
+
+      //get next video
+      if (currentVideoIndex < content.length - 1) {
+        dispatch(setCourseItem(content[currentVideoIndex]));
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        alert(error?.response?.data?.message);
+        return;
+      }
     }
   }
-};
+
 
 export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
   try {
@@ -218,3 +264,29 @@ export const checkCoupon = (id, coupon_code) => async (dispatch, getState) => {
     }
   }
 };
+
+export const getDetailCategory =
+  (id, errors, setErrors) => async (dispatch) => {
+    try {
+      const detail = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/course/category/${id}`
+      );
+      const { response } = detail.data;
+      dispatch(setDetailCategory(response));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setErrors({
+          ...errors,
+          isError: true,
+          message: error?.data?.response?.message || error?.message,
+        });
+        return;
+      }
+      alert(error?.message);
+      setErrors({
+        ...errors,
+        isError: true,
+        message: error?.message,
+      });
+    }
+  };
