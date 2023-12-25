@@ -1,8 +1,11 @@
-import { setToken, setAdmin } from "../reducer/authAdminReducer";
+import { setToken, setAdmin, setError } from "../reducer/authAdminReducer";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const login = (email, password, navigate) => async (dispatch) => {
   try {
+    dispatch(setError(""));
+    dispatch(setToken(null));
     const data = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/v1/auth/admin/login`,
       {
@@ -12,15 +15,26 @@ export const login = (email, password, navigate) => async (dispatch) => {
     );
     const { response } = data.data;
     const { token } = response;
-
-    // Save our token
+    console.log(response);
     dispatch(setToken(token));
-    alert("login succesfully");
-    //* Redirect to home or reload the home
-    navigate("/dashbord-admin");
+    Swal.fire({
+      title: "Login berhasil!",
+      icon: "success",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/dashbord-admin");
+      }
+    });
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      alert(error?.data?.response?.message);
+      if (
+        error?.response?.data?.message ===
+        "Email is not registered in our system"
+      ) {
+        dispatch(setError("Alamat email tidak terdaftar!"));
+      } else if (error?.response?.data?.message === "Wrong password") {
+        dispatch(setError("Maaf, kata sandi salah"));
+      }
       return;
     }
     alert(error?.message);
@@ -64,3 +78,8 @@ export const profile =
       alert(error?.message);
     }
   };
+
+export const logout = () => (dispatch) => {
+  dispatch(setToken(null));
+  dispatch(setAdmin(null));
+};
