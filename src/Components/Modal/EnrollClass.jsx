@@ -21,7 +21,7 @@ function EnrollClass({ course }) {
             <h3 className="font-bold text-xl mb-5 block">
               Selangkah lagi
               <div className="font-bold text-xl text-primary">
-                meuju kelas premium
+                menuju kelas premium
               </div>
             </h3>
           ) : (
