@@ -91,7 +91,6 @@ export const getPopular = (setErrors, errors) => async (dispatch) => {
   }
 };
 
-// filter popular course by category
 export const getPopularCourseCategory =
   (id, errors, setErrors) => async (dispatch) => {
     try {
@@ -118,32 +117,38 @@ export const getPopularCourseCategory =
     }
   };
 
-export const getMyCourse = (setErrors, errors) => async (dispatch) => {
-  try {
-    const data = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/user/dashboard`
-    );
-    const { response } = data.data;
-    dispatch(setMyCourse(response));
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
+export const getMyCourse =
+  (setErrors, errors) => async (dispatch, getState) => {
+    try {
+      let { token } = getState().auth;
+      const data = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/user/dashboard`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const { response } = data.data;
+      dispatch(setMyCourse(response?.myCourse));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setErrors({
+          ...errors,
+          isError: true,
+          message: error?.data?.response?.message || error?.message,
+        });
+        return;
+      }
+      alert(error?.message);
       setErrors({
         ...errors,
         isError: true,
-        message: error?.data?.response?.message || error?.message,
+        message: error?.message,
       });
-      return;
     }
-    alert(error?.message);
-    setErrors({
-      ...errors,
-      isError: true,
-      message: error?.message,
-    });
-  }
-};
+  };
 
-// search course
 export const getSearchCourse =
   (setErrors, errors, query) => async (dispatch) => {
     try {
@@ -172,12 +177,9 @@ export const getSearchCourse =
     }
   };
 
-// detail course
 export const getDetail =
   (id, currentVideoIndex) => async (dispatch, getState) => {
     try {
-      
-
       let { token } = getState().auth;
       const detail = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/v1/course/read/${id}`,
@@ -204,7 +206,34 @@ export const getDetail =
         return;
       }
     }
+  };
+
+export const checkCoupon = (id, coupon_code) => async (dispatch, getState) => {
+  try {
+    let { token } = getState().auth;
+
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/v1/check/coupon/course/${id}`,
+      {
+        coupon_code,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response);
+    const { responseCoupon } = response.data;
+      dispatch(setCoupon(responseCoupon));
+
+   
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert.error(error);
+    }
   }
+};
 
 
 export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
@@ -234,33 +263,6 @@ export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(error);
-    }
-  }
-};
-
-export const checkCoupon = (id, coupon_code) => async (dispatch, getState) => {
-  try {
-    let { token } = getState().auth;
-
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/v1/check/coupon/course/${id}`,
-      {
-        coupon_code,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    console.log(response);
-    const { responseCoupon } = response.data;
-      dispatch(setCoupon(responseCoupon));
-
-   
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      alert.error(error);
     }
   }
 };

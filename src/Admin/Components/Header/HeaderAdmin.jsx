@@ -13,7 +13,7 @@ function HeaderAdmin() {
 
   useEffect(() => {
     if (token) {
-      dispatch(profile(navigate, "/dashbord-admin", null));
+      dispatch(profile(navigate, null));
     }
   }, [dispatch, navigate, token]);
 
@@ -27,7 +27,7 @@ function HeaderAdmin() {
             </h1>
           </>
         ) : (
-          <h1 className="font-bold text-3xl text-primary">Hi, Admin!</h1>
+          ""
         )}
       </div>
       <div className="flex items-center gap-2 py-4">
