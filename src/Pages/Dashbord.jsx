@@ -51,7 +51,7 @@ function Dashbord() {
             <h2 className="text-2xl font-bold">Topik Kelas</h2>
           </div>
           <div className="flex justify-evenly gap-1">
-            <Sidebar />
+            <Sidebar navDashbord={navDashbord} />
             <div className="flex flex-col gap-5">
               <div className="flex justify-between">
                 <Button

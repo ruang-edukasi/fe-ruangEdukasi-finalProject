@@ -1,7 +1,11 @@
-function Sidebar() {
+import PropTypes from "prop-types";
+
+function Sidebar({ navDashbord }) {
   return (
     <div
-      className={`bg-slate-100 rounded-xl w-3/4 left-[-500px] h-screen p-6 absolute z-30 lg:static lg:w-72`}
+      className={`bg-slate-100 rounded-xl w-3/4 h-screen p-6 absolute z-30 lg:static lg:w-72 ${
+        navDashbord ? "right-[500px]" : "left-[-500px] sm:left-[-1000px]"
+      }`}
     >
       <div className="form-control">
         <div className="flex flex-col pb-3">
@@ -104,5 +108,9 @@ function Sidebar() {
     </div>
   );
 }
+
+Sidebar.propTypes = {
+  navDashbord: PropTypes.bool,
+};
 
 export default Sidebar;

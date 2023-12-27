@@ -5,68 +5,57 @@ import { getPopular } from "../redux/action/courseAction";
 import ButtonCourse from "./ButtonCourse";
 
 function CoursePopular() {
-  // const [activeFilter, setActiveFilter] = useState("All");
-  // const [filteredKelas, setFilteredKelas] = useState([...sliceCourse]);
-  const [sliceCourse, setSliceCourse] = useState([]);
+  const dispatch = useDispatch();
+  const { popular } = useSelector((state) => state.course);
+
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [filteredKelas, setFilteredKelas] = useState([...popular]);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
   });
-
-  const dispatch = useDispatch();
-  const { popular } = useSelector((state) => state.course);
 
   useEffect(() => {
     dispatch(getPopular(setErrors, errors));
   }, [dispatch, errors]);
 
   useEffect(() => {
-    if (popular.length > 0) {
-      setSliceCourse(popular.slice(0, 7));
-    }
-  }, [popular]);
+    const filtered = popular.filter((item) => {
+      if (activeFilter === "All") {
+        return true;
+      } else if (activeFilter === "Backend Development") {
+        return item.courseCategory === "Backend Development";
+      } else if (activeFilter === "Frontend Development") {
+        return item.courseCategory === "Frontend Development";
+      } else if (activeFilter === "UI/UX Design") {
+        return item.courseCategory === "UI/UX Design";
+      } else if (activeFilter === "Data Science") {
+        return item.courseCategory === "Data Science";
+      } else if (activeFilter === "Quality Assurance") {
+        return item.courseCategory === "Quality Assurance";
+      } else if (activeFilter === "Android Development") {
+        return item.courseCategory === "Android Development";
+      }
+      return true;
+    });
+    setFilteredKelas(filtered);
+  }, [popular, activeFilter]);
 
-  // useEffect(() => {
-  //   const filtered = popular.filter((item) => {
-  //     if (activeFilter === "All") {
-  //       return true;
-  //     } else if (activeFilter === "Backend Development") {
-  //       return item.courseCategory === "Backend Development";
-  //     } else if (activeFilter === "Frontend Development") {
-  //       return item.courseCategory === "Frontend Development";
-  //     } else if (activeFilter === "UI/UX Design") {
-  //       return item.courseCategory === "UI/UX Design";
-  //     } else if (activeFilter === "Data Science") {
-  //       return item.courseCategory === "Data Science";
-  //     } else if (activeFilter === "Quality Assurance") {
-  //       return item.courseCategory === "Quality Assurance";
-  //     } else if (activeFilter === "Android Development") {
-  //       return item.courseCategory === "Android Development";
-  //     }
-  //     return true;
-  //   });
-  //   setFilteredKelas(filtered);
-  // }, [popular, activeFilter]);
-
-  // const handleFilterChange = (filter) => {
-  //   setActiveFilter(filter);
-  // };
+  const handleFilterChange = (filter) => {
+    setActiveFilter(filter);
+  };
 
   if (errors.isError) {
     return <h1>{errors.message}</h1>;
   }
 
-  if (sliceCourse.length === 0) {
-    return <div className="skeleton w-32 h-32"></div>;
-  }
-
   return (
     <>
-      {/* <ButtonCourse onFilterChange={handleFilterChange} /> */}
-      <ButtonCourse />
+      <ButtonCourse onFilterChange={handleFilterChange} />
+      {/* <ButtonCourse /> */}
       <div className="flex flex-wrap">
         <div className="carousel rounded-box py-2 gap-6">
-          {sliceCourse.map((courses) => (
+          {filteredKelas.map((courses) => (
             <>
               <div className="carousel-item">
                 <CourseItem

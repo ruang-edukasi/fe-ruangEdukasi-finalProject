@@ -162,7 +162,7 @@ const Header = () => {
                         name="search"
                         placeholder="Cari Kursus terbaik..."
                         autoComplete="off"
-                        className="outline-none font-semibold text-md bg-white border-none ring-2 ring-white focus:ring-indigo-300 rounded-xl border-white px-4 md:py-2 md:w-96"
+                        className="outline-none font-semibold text-md bg-white border-none ring-2 ring-white focus:ring-indigo-300 rounded-xl border-white px-4 py-2 md:w-96"
                         onChange={(event) => setQuery(event.target.value)}
                       />
                       <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
