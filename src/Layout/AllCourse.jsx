@@ -5,31 +5,24 @@ import CourseItem from "../Components/Card/CourseItem";
 import ButtonCourse from "./ButtonCourse";
 
 function AllCourse() {
-  const [sliceCourse, setSliceCourse] = useState([]);
+  const dispatch = useDispatch();
+  const { course } = useSelector((state) => state.course);
+
   const [activeFilter, setActiveFilter] = useState("All");
-  const [filteredKelas, setFilteredKelas] = useState([...sliceCourse]);
+  const [filteredKelas, setFilteredKelas] = useState([...course]);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
   });
-
-  const dispatch = useDispatch();
-  const { course } = useSelector((state) => state.course);
 
   useEffect(() => {
     dispatch(getCourse(setErrors, errors));
   }, [dispatch, errors]);
 
   useEffect(() => {
-    if (course.length > 0) {
-      setSliceCourse(course.slice(0, 12));
-    }
-  }, [course]);
-
-  useEffect(() => {
     const filtered = course.filter((item) => {
       if (activeFilter === "All") {
-        return filteredKelas;
+        return true;
       } else if (activeFilter === "Backend Development") {
         return item.courseCategory === "Backend Development";
       } else if (activeFilter === "Frontend Development") {
@@ -59,7 +52,7 @@ function AllCourse() {
     <div>
       <ButtonCourse onFilterChange={handleFilterChange} />
       <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3 2xl:grid-cols-4">
-        {filteredKelas.map((courses) => (
+        {filteredKelas.slice(0, 12).map((courses) => (
           <CourseItem
             key={courses?.id}
             id={courses?.id}

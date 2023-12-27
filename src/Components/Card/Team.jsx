@@ -1,8 +1,8 @@
 const Team = () => {
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8 ">
-        <div className="card sm:w-64 md:w-56 lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 ">
+        <div className="card lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
           <figure>
             <img src="/barizi.svg" alt="barizi" />
           </figure>
@@ -11,7 +11,7 @@ const Team = () => {
             <p>Front End JS Development</p>
           </div>
         </div>
-        <div className="card sm:w-64 md:w-56 lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
+        <div className="card lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
           <figure>
             <img src="/ariantika.svg" alt="ariantika" />
           </figure>
@@ -20,7 +20,7 @@ const Team = () => {
             <p>UI/UX Design</p>
           </div>
         </div>
-        <div className="card sm:w-64 md:w-56 lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
+        <div className="card lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
           <figure>
             <img src="/ilham.svg" alt="ilham" />
           </figure>
@@ -29,7 +29,7 @@ const Team = () => {
             <p>Data Science</p>
           </div>
         </div>
-        <div className="card sm:w-64 md:w-56 lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
+        <div className="card lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
           <figure>
             <img src="/rizky.svg" alt="" />
           </figure>
@@ -38,7 +38,7 @@ const Team = () => {
             <p>Front End JS Development</p>
           </div>
         </div>
-        <div className="card sm:w-64 md:w-56 lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
+        <div className="card lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
           <figure>
             <img src="/thufail.svg" alt="thufail" />
           </figure>
@@ -47,7 +47,7 @@ const Team = () => {
             <p>Android Development</p>
           </div>
         </div>
-        <div className="card sm:w-64 md:w-56 lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
+        <div className="card lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
           <figure>
             <img src="/taufik.svg" alt="taufik" />
           </figure>
@@ -56,7 +56,7 @@ const Team = () => {
             <p>Quality Assurance</p>
           </div>
         </div>
-        <div className="card sm:w-64 md:w-56 lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
+        <div className="card lg:w-56 xl:w-64 2xl:w-80 bg-base-100 border shadow-md hover:bg-indigo-700 hover:text-white transition duration-300 cursor-pointer text-no-underline hover:scale-105">
           <figure>
             <img src="/wahyu.svg" alt="wahyu" />
           </figure>

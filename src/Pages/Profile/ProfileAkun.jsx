@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { profile, updateProfile,logout } from "../../redux/action/authAction";
+import { profile, updateProfile, logout } from "../../redux/action/authAction";
 import Swal from "sweetalert2";
 import Header from "../../Components/Header/Header";
 import SidebarAkun from "../../Components/SidebarAkun/Sidebar";
@@ -13,7 +13,7 @@ const ProfileAkun = () => {
   const dispatch = useDispatch();
 
   const { user, token } = useSelector((state) => state.auth);
-   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   const [full_name, setFullName] = useState(user?.fullName || "");
   const [phone_number, setPhoneNumber] = useState(user?.phoneNumber || "");
@@ -82,8 +82,7 @@ const ProfileAkun = () => {
     }
   }, [dispatch, navigate, token]);
 
-
-//handle mobile
+  //handle mobile
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
 
@@ -96,46 +95,46 @@ const ProfileAkun = () => {
   };
 
   useEffect(() => {
-   
     return () => {
       document.body.style.overflow = "auto";
     };
   }, []);
 
-    const onLogout = () => {
-      Swal.fire({
-        title: "Logout Confirmation",
-        text: "Are you sure you want to log out?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#6148FF",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, log me out",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Use dispatch instead of useDispatch here
-          dispatch(logout());
+  const onLogout = () => {
+    Swal.fire({
+      title: "Keluar",
+      text: "Apakah Anda yakin ingin keluar?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#6148FF",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Iya, saya mau keluar",
+      cancelButtonText: "Tidak",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Use dispatch instead of useDispatch here
+        dispatch(logout());
 
-          Swal.fire({
-            title: "Logged Out",
-            text: "You have been successfully logged out.",
-            icon: "success",
-            timer: 2000,
-            showConfirmButton: false,
-          });
+        Swal.fire({
+          title: "Keluar",
+          text: "Kamu berhasil keluar!",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
 
-          // Navigasi ke halaman utama setelah 2 detik
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-        }
-      });
-    };
-     useEffect(() => {
-       if (token) {
-         dispatch(profile(navigate, null));
-       }
-     }, [dispatch, navigate, token]);
+        // Navigasi ke halaman utama setelah 2 detik
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      }
+    });
+  };
+  useEffect(() => {
+    if (token) {
+      dispatch(profile(navigate, null));
+    }
+  }, [dispatch, navigate, token]);
 
   return (
     <>
