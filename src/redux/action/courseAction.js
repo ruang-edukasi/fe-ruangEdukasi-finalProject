@@ -11,6 +11,7 @@ import {
   setCoupon,
   setCourseItem,
   setDetailCategory,
+  setCourseDashbord,
 } from "../reducer/courseReducers";
 import Swal from "sweetalert2";
 
@@ -208,6 +209,22 @@ export const getDetail =
     }
   };
 
+export const getCourseDashbord = () => async (dispatch) => {
+  try {
+    const data = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/v1/search/multi/`
+    );
+
+    const { response } = data.data;
+    dispatch(setCourseDashbord(response));
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert(error?.response?.data?.message);
+      return;
+    }
+  }
+};
+
 export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
   try {
     let { token } = getState().auth;
@@ -256,9 +273,7 @@ export const checkCoupon = (id, coupon_code) => async (dispatch, getState) => {
     );
     console.log(response);
     const { responseCoupon } = response.data;
-      dispatch(setCoupon(responseCoupon));
-
-   
+    dispatch(setCoupon(responseCoupon));
   } catch (error) {
     if (axios.isAxiosError(error)) {
       alert.error(error);
