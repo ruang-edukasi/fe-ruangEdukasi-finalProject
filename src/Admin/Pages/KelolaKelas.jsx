@@ -20,7 +20,6 @@ import TableHead from "../Components/Table/TableHead";
 import TableBody from "../Components/Table/TableBody";
 import { useNavigate } from "react-router-dom";
 
-
 function KelolaKelas() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
