@@ -3,7 +3,6 @@ import Header from "../Components/Header/Header";
 import HeroOne from "../Components/Hero/HeroOne";
 import Footer from "../Components/Footer/Footer";
 import Category from "../Layout/Category";
-import ButtonCourse from "../Layout/ButtonCourse";
 import AllCourse from "../Layout/AllCourse";
 import HeroTwo from "../Components/Hero/HeroTwo";
 import WhyUs from "../Components/Card/WhyUs";
@@ -34,7 +33,6 @@ function HomePage() {
               </h2>
             </div>
           </div>
-          <ButtonCourse />
           <CoursePopular />
         </section>
         <section id="allCourse" className="container mx-auto px-12 sm:px-16">
@@ -46,7 +44,6 @@ function HomePage() {
               Pelajari skills baru sesuai dengan minatmu!
             </p>
           </div>
-          <ButtonCourse />
           <AllCourse />
           <div className="w-full flex justify-center">
             <Link

@@ -18,21 +18,22 @@ const SidebarAkun = () => {
 
   const onLogout = () => {
     Swal.fire({
-      title: "Logout Confirmation",
-      text: "Are you sure you want to log out?",
+      title: "Keluar",
+      text: "Apakah Anda yakin ingin keluar?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#6148FF",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, log me out",
+      confirmButtonText: "Iya, saya mau keluar",
+      cancelButtonText: "Tidak",
     }).then((result) => {
       if (result.isConfirmed) {
         // Use dispatch instead of useDispatch here
         dispatch(logout());
 
         Swal.fire({
-          title: "Logged Out",
-          text: "You have been successfully logged out.",
+          title: "Keluar",
+          text: "Kamu berhasil keluar!",
           icon: "success",
           timer: 2000,
           showConfirmButton: false,
@@ -85,7 +86,7 @@ const SidebarAkun = () => {
         <div className="text-primary">
           <FontAwesomeIcon size={25} icon={faCartShopping} />
         </div>
-        <div className="font-semibold text-md">Riwayat Pembayaran</div>
+        <div className="font-semibold text-md">Riwayat Pembelian</div>
       </div>
       <div
         className="flex items-center gap-3 py-4 border-b-2 cursor-pointer border-slate-300 hover:text-primary"

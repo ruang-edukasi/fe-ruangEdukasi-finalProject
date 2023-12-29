@@ -14,9 +14,9 @@ function HeroTwo() {
             <FontAwesomeIcon icon={faCirclePlay} beat />
           </button>
           <dialog id="modals" className="modal bg-black/60">
-            <div className="flex justify-center">
+            <div className="flex justify-center relative">
               <form method="dialog">
-                <button className="btn btn-md btn-circle btn-ghost absolute right-6 top-2 text-xl hover:bg-alert">
+                <button className="btn btn-md btn-circle btn-ghost absolute -top-7 -right-7 text-xl hover:bg-alert">
                   ✕
                 </button>
               </form>
@@ -33,7 +33,7 @@ function HeroTwo() {
             src="/person.svg"
             className="w-auto rounded-lg shadow-2xl md:w-auto"
           />
-          <div className="md:pr-24 text-center">
+          <div className="text-center px-4">
             <h1 className="text-xl font-bold md:text-4xl">
               Butuh Kursus Dengan Kontent Eksklusif? Coba Kursus Premium!
             </h1>
