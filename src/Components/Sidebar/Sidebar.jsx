@@ -52,7 +52,6 @@ function Sidebar({ navDashbord }) {
 
     setSearchParams(currentParams);
   };
-
   return (
     <div
       className={`bg-slate-100 rounded-xl w-3/4 h-screen p-6 absolute z-30 lg:static lg:w-72 ${
