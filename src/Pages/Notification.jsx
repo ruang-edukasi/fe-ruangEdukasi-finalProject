@@ -21,7 +21,7 @@ const Notification = () => {
           </Link>
           Kembali ke Beranda
         </div>
-        <div className="card-normal bg-base-100 shadow-xl border border-primary rounded-xl">
+        <div className="card-normal bg-base-100 shadow-xl border border-primary rounded-xl mx-2">
           <div className="py-4 bg-primary rounded-t-lg">
             <h1 className="text-center text-white font-bold text-xl">
               Notifikasi

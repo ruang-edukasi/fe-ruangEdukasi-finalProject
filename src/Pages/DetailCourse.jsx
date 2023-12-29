@@ -25,9 +25,14 @@ function DetailCourse() {
   const [playVideo, setPlayVideo] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  const [showTentang, setShowTentang] = useState(true); 
+  
   const { detail, courseContent, courseItem } = useSelector(
     (state) => state.course
   );
+  
+
   const { token } = useSelector((state) => state.auth);
   const show = () => {
     document.getElementById("my_modal_3").showModal();
@@ -46,7 +51,7 @@ function DetailCourse() {
     <>
       <Header />
       <section className="mb-36">
-        <div className=" px-24 content w-full flex flex-col py-8 bg-[#EBF3FC]">
+        <div className=" px-6 md:px-24 content w-full flex flex-col py-8 bg-[#EBF3FC]">
           <Link to={"/"} className="md:w-1/6 sm:2/6 mb-4">
             <div className="text-base font-bold leading-tight tracking-tight text-black md:text-xl">
               <FontAwesomeIcon
@@ -56,7 +61,7 @@ function DetailCourse() {
               Kelas Lainnya
             </div>
           </Link>
-          <div className=" ms-5 mb-8 ">
+          <div className=" mx-auto md:ms-4  mb-8 flex flex-col md:inline ">
             <h1 className="text-2xl font-bold text-primary">
               {detail?.courseName} <span></span>
             </h1>
@@ -66,7 +71,7 @@ function DetailCourse() {
             <h3 className="text-base font-bold">
               {detail?.instructorName} <span></span>
             </h3>
-            <div className="w-3/12  flex justify-between mb-6">
+            <div className="w-full md:w-8/12 border rounded-md flex justify-between mb-6">
               <p className="font-semibold text-sm">
                 <FontAwesomeIcon
                   icon={faShieldHeart}
@@ -89,8 +94,9 @@ function DetailCourse() {
                 {detail?.studentCount} Siswa
               </p>
             </div>
+            
             <a
-              className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 me-3"
+              className="text-center py-2.5 rounded-3xl bg-succes text-white px-6  mb-4 md:me-3"
               href={detail?.telegramLink}
             >
               Join Group Telegram
@@ -160,7 +166,7 @@ function DetailCourse() {
                 </button>
                 <button
                   className={`${
-                    currentVideoIndex >= courseContent.length-1
+                    currentVideoIndex >= courseContent.length - 1
                       ? "hidden"
                       : "inline"
                   } px-9 py-1.5 text-white font-semibold  bg-primary rounded-3xl right-9`}
@@ -170,28 +176,56 @@ function DetailCourse() {
                 </button>
               </div>
             </div>
-            <div className="">
-              <h1 className="text-2xl font-bold ">
-                Tentang kelas <span></span>
-              </h1>
-              <p className="indent-4 text-justify leading-8">
-                {detail?.courseDescription}
-              </p>
 
-              <h1 className="text-2xl font-bold mt-8">
-                Kelas Ini Ditujukan Untuk <span></span>
-              </h1>
-              <ul className="list-decimal ms-4 space-y-2">
-                {detail?.courseTarget &&
-                  detail?.courseTarget.map((item) => (
+            <div className="flex md:hidden">
+              <button
+                onClick={() => {
+                  setShowTentang(true);
+                 
+                }}
+                className="py-5 px-10 bg-blue-100 my-10 text-primary hover:text-white font-semibold hover:bg-primary "
+              >
+                Tentang
+              </button>
+              <button
+                onClick={() => {
+                  setShowTentang(false);
+                }}
+                className="py-5 px-10 bg-blue-100 my-10 text-primary hover:text-white font-semibold hover:bg-primary "
+              >
+                Materi Kelas
+              </button>
+            </div>
+
+            {showTentang ? (
+              <div className="">
+                <h1 className="text-2xl font-bold ">Tentang kelas</h1>
+                <p className=" text-justify leading-8">
+                  {detail?.courseDescription}
+                </p>
+
+                <h1 className="text-2xl font-bold mt-8">
+                  Kelas Ini Ditujukan Untuk <span></span>
+                </h1>
+                <ul className="list-decimal ms-4 space-y-2">
+                  {detail?.courseTarget?.map((item) => (
                     <li key={item.id} className="mt-1">
                       {item.description}
                     </li>
                   ))}
-              </ul>
-            </div>
+                </ul>
+              </div>
+            ) : (
+              <div className="relative w-full">
+                <LearnProgres
+                  courseContent={courseContent}
+                  courseId={courseItem?.id}
+                  setCurrentVideoIndex={setCurrentVideoIndex}
+                />
+              </div>
+            )}
           </div>
-          <div className="relative w-4/12">
+          <div className="hidden md:block md:relative md:w-4/12 ">
             <LearnProgres
               courseContent={courseContent}
               courseId={courseItem?.id}
@@ -199,6 +233,7 @@ function DetailCourse() {
             />
           </div>
         </div>
+
         <EnrollClass show={show} course={detail} />
       </section>
     </>
