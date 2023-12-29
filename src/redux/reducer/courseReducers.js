@@ -9,8 +9,11 @@ const initialState = {
   courseItem: [],
   popular: [],
   myCourse: [],
+  orderCourse: [],
+  coupon: [],
   filterPopularCourse: [],
   detailCategory: [],
+  courseDashbord: [],
 };
 
 const courseSlice = createSlice({
@@ -38,6 +41,12 @@ const courseSlice = createSlice({
     setMyCourse: (state, action) => {
       state.myCourse = action.payload;
     },
+    setOrderCourse: (state, action) => {
+      state.orderCourse = action.payload;
+    },
+    setCoupon: (state, action) => {
+      state.coupon = action.payload;
+    },
     setFilterPopularCourse: (state, action) => {
       state.filterPopularCourse = action.payload;
     },
@@ -46,6 +55,9 @@ const courseSlice = createSlice({
     },
     setDetailCategory: (state, action) => {
       state.detailCategory = action.payload;
+    },
+    setCourseDashbord: (state, action) => {
+      state.courseDashbord = action.payload;
     },
   },
 });
@@ -58,9 +70,12 @@ export const {
   setDetail,
   setMyCourse,
   setCourseContent,
+  setOrderCourse,
+  setCoupon,
   setFilterPopularCourse,
   setCourseItem,
   setDetailCategory,
+  setCourseDashbord,
 } = courseSlice.actions;
 
 export default courseSlice.reducer;

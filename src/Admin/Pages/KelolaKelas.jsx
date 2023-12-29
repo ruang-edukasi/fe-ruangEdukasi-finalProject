@@ -20,6 +20,7 @@ import TableHead from "../Components/Table/TableHead";
 import TableBody from "../Components/Table/TableBody";
 import { useNavigate } from "react-router-dom";
 
+
 function KelolaKelas() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,7 +38,6 @@ function KelolaKelas() {
     dispatch(addCourse(formData, navigate));
     document.getElementById("my_modal_3").close();
   };
-
   const handleSortByPrice = () => {
     const sorted = [...course].sort((a, b) => {
       const priceA = a.price || 0;
@@ -63,7 +63,6 @@ function KelolaKelas() {
   const indexOfLastCourse = currentPage * coursesPerPage;
   const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
   const courses = coursesToDisplay.slice(indexOfFirstCourse, indexOfLastCourse);
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {

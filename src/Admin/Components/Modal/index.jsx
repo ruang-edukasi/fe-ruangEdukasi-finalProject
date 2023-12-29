@@ -1,3 +1,4 @@
+
 import PropType from "prop-types";
 import { useState } from "react";
 
@@ -47,6 +48,7 @@ const Modal = ({ show, onSubmit }) => {
               <div>
                 <label className="block mb-1.5 text-sm font-semibold text-gray-900 ">
                   Nama Instruktur
+
                 </label>
                 <input
                   type="text"
@@ -196,6 +198,62 @@ const Modal = ({ show, onSubmit }) => {
                   <button
                     type="submit"
                     onClick={handleSubmit}
+                    className="bg-primary text-md text-white font-bold rounded-3xl w-full py-2.5 hover:bg-indigo-800 transition duration-300"
+                  >
+                    Simpan
+                  </button>
+                </div>
+              </div>
+              <div className="w-full max-w-xs">
+                <label className="block text-sm font-semibold text-gray-900  p-2">
+                  Level
+                </label>
+                <select className="select select-bordered bg-gray-50 focus:border-2 focus:border-blue-500 w-full focus:outline-none">
+                  <option disabled selected>
+                    Who shot first?
+                  </option>
+                  <option>Han Solo</option>
+                  <option>Greedo</option>
+                </select>
+              </div>
+            </div> */}
+              <div>
+                <label className="block mb-1.5 text-sm font-semibold text-gray-900 ">
+                  Deskripsi
+                </label>
+                <input
+                  type="text"
+                  id="small-input"
+                  placeholder="Deskripsi"
+                  value={courseDescription}
+                  onChange={(event) => setCourseDescription(event.target.value)}
+                  required
+                  className="block w-full p-7 text-gray-900 border border-gray-300 rounded-md bg-gray-50 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block mb-1.5 text-sm font-semibold text-gray-900 ">
+                  Harga
+                </label>
+                <input
+                  type="text"
+                  id="small-input"
+                  placeholder="Harga kelas"
+                  value={price}
+                  onChange={(event) => setPrice(event.target.value)}
+                  required
+                  className="block w-full p-2.5 text-gray-900 border border-gray-300 rounded-md bg-gray-50 sm:text-sm focus:ring-blue-500 focus:border-blue-500  "
+                />
+              </div>
+              <div className="flex flex-row w-full gap-2">
+                <div className="w-full max-w-xs">
+                  <button className="bg-alert text-md text-white font-bold rounded-3xl w-full py-2.5 hover:bg-red-800 transition duration-300">
+                    Upload Video
+                  </button>
+                </div>
+                <div className="w-full max-w-xs">
+                  <button
+                    type="submit"
                     className="bg-primary text-md text-white font-bold rounded-3xl w-full py-2.5 hover:bg-indigo-800 transition duration-300"
                   >
                     Simpan

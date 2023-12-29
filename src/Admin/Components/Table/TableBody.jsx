@@ -74,7 +74,6 @@ const TableBody = ({ item, index }) => {
       }
     });
   };
-
   return (
     <>
       <tbody>

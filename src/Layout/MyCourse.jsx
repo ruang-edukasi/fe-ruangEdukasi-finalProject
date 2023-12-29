@@ -13,15 +13,15 @@ function MyCourse() {
 
   useEffect(() => {
     dispatch(getMyCourse(setErrors, errors));
-    console.log(myCourse);
   }, [dispatch, errors, myCourse]);
 
   if (errors.isError) {
     return <h1>{errors.message}</h1>;
   }
+
   return (
-    <div>
-      {myCourse.myCourse.map((courses) => (
+    <>
+      {myCourse.map((courses) => (
         <CourseItem
           key={courses?.id}
           id={courses?.id}
@@ -33,7 +33,7 @@ function MyCourse() {
           courseLevel={courses?.courseLevel}
         />
       ))}
-    </div>
+    </>
   );
 }
 

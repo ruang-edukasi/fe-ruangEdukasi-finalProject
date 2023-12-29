@@ -1,18 +1,19 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { profile, updateProfile } from "../../redux/action/authAction";
-
+import { profile, updateProfile, logout } from "../../redux/action/authAction";
+import Swal from "sweetalert2";
 import Header from "../../Components/Header/Header";
 import SidebarAkun from "../../Components/SidebarAkun/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 
 const ProfileAkun = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { user, token } = useSelector((state) => state.auth);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   const [full_name, setFullName] = useState(user?.fullName || "");
   const [phone_number, setPhoneNumber] = useState(user?.phoneNumber || "");
@@ -81,6 +82,60 @@ const ProfileAkun = () => {
     }
   }, [dispatch, navigate, token]);
 
+  //handle mobile
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+
+    // Disable scrolling when the off-canvas menu is open
+    if (!isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  const onLogout = () => {
+    Swal.fire({
+      title: "Keluar",
+      text: "Apakah Anda yakin ingin keluar?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#6148FF",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Iya, saya mau keluar",
+      cancelButtonText: "Tidak",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Use dispatch instead of useDispatch here
+        dispatch(logout());
+
+        Swal.fire({
+          title: "Keluar",
+          text: "Kamu berhasil keluar!",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+
+        // Navigasi ke halaman utama setelah 2 detik
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      }
+    });
+  };
+  useEffect(() => {
+    if (token) {
+      dispatch(profile(navigate, null));
+    }
+  }, [dispatch, navigate, token]);
+
   return (
     <>
       <Header />
@@ -95,18 +150,66 @@ const ProfileAkun = () => {
             }}
           />
           Kembali Ke Beranda
+          {window.innerWidth < 1024 && (
+            <>
+              <div className="ml-auto mr-10 cursor-pointer">
+                <FontAwesomeIcon icon={faBars} size={30} onClick={toggleMenu} />
+              </div>
+              {isMenuOpen && (
+                <div className="absolute top-24 left-0 h-full bg-primary opacity-80 w-60 p-4  z-30">
+                  {/* Off-canvas menu content goes here */}
+                  <div onClick={toggleMenu}></div>
+                  {/* Add your menu items and styling here */}
+                  <div className="text-white text-xl font-semibold mb-8">
+                    Menu
+                  </div>
+
+                  <div className="space-y-8">
+                    <div
+                      className="cursor-pointer text-white font-normal mb-2"
+                      onClick={() => {
+                        navigate("/profile-akun");
+                      }}
+                    >
+                      Profil Saya
+                    </div>
+                    <div
+                      className="cursor-pointer text-white font-normal mb-2"
+                      onClick={() => {
+                        navigate("/ubah-password");
+                      }}
+                    >
+                      Ubah Password
+                    </div>
+                    <div
+                      className="cursor-pointer text-white font-normal mb-2"
+                      onClick={() => toggleMenu("purchaseHistory")}
+                    >
+                      Riwayat Pembelian
+                    </div>
+                    <div
+                      className="cursor-pointer text-white font-normal mb-2"
+                      onClick={onLogout}
+                    >
+                      Keluar
+                    </div>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
         </div>
 
         {/* Akun */}
-        <div className="border-2 border-primary rounded-xl">
+        <div className="border-2 border-primary rounded-xl mx-2">
           <div className="py-4 text-xl font-semibold text-center text-white rounded-t-lg bg-primary">
             Akun
           </div>
 
           {/* Isi Akun */}
           <div className="flex py-4 text-center">
-            <SidebarAkun />
-            <div className="flex flex-col items-center w-[60%] gap-4">
+            {window.innerWidth < 1024 ? null : <SidebarAkun />}
+            <div className="flex flex-col items-center w-[60%] gap-4 mx-auto">
               <div className="relative group">
                 <input
                   type="file"
