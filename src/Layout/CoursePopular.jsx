@@ -55,7 +55,7 @@ function CoursePopular() {
       {/* <ButtonCourse /> */}
       <div className="flex flex-wrap">
         <div className="carousel rounded-box py-2 gap-6">
-          {filteredKelas.map((courses) => (
+          {popular.map((courses) => (
             <>
               <div className="carousel-item">
                 <CourseItem

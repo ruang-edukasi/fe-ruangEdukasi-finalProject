@@ -2,8 +2,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CaourseItem from "../Card/CourseItem";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import PropType from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { enrollClass } from "../../redux/action/courseAction";
+import { useDispatch, useSelector } from "react-redux";
+
+
 function EnrollClass({ course }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { courseId } = useParams();
+  const { enrollMesaage } = useSelector((state) => state.course);
+
+  const enrollFreeClass = () => {
+    dispatch(enrollClass(courseId, navigate));
+  };
   return (
     <>
       <dialog id="my_modal_3" className="modal w-full content-center">
@@ -60,18 +72,18 @@ function EnrollClass({ course }) {
                 </button>
               </Link>
             ) : (
-              <Link
-                to={`/detail-course/${course.id}`}
-                className="w-full flex justify-center"
-              >
-                <button className=" bg-primary text-white py-2.5  rounded-3xl w-7/12 flex gap-2 mb-8 shadow-sm justify-center">
+              <div className="w-full flex justify-center">
+                <button
+                  className=" bg-primary text-white py-2.5  rounded-3xl w-7/12 flex gap-2 mb-8 shadow-sm justify-center"
+                  onClick={enrollFreeClass}
+                >
                   Enroll Sekarang
                   <FontAwesomeIcon
                     icon={faArrowRight}
                     className=" text-primary inline bg-white rounded-full px-[5px] py-1 "
                   />
                 </button>
-              </Link>
+              </div>
             )}
           </div>
         </div>

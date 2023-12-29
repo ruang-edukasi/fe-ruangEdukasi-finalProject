@@ -13,6 +13,7 @@ const initialState = {
   coupon:[],
   filterPopularCourse: [],
   detailCategory: [],
+  enrollMessage : "",
 
 };
 
@@ -57,6 +58,9 @@ const courseSlice = createSlice({
     setDetailCategory: (state, action) => {
       state.detailCategory = action.payload;
     },
+    setEnrollMessage: (state, action) => {
+      state.enrollMessage = action.payload;
+    },
   },
 });
 
@@ -74,6 +78,7 @@ export const {
   setFilterPopularCourse,
   setCourseItem,
   setDetailCategory,
+  setEnrollMessage
 } = courseSlice.actions;
 
 export default courseSlice.reducer;

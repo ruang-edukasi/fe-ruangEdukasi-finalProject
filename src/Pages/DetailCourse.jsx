@@ -16,7 +16,6 @@ import LearnProgres from "../Components/LearnProgres";
 import ReactPlayer from "react-player/youtube";
 import EnrollClass from "../Components/Modal/EnrollClass";
 import playButton from "../assets/playVideo.svg";
-
 function DetailCourse() {
   const dispatch = useDispatch();
   const { courseId } = useParams();
@@ -29,21 +28,29 @@ function DetailCourse() {
     (state) => state.course
   );
   const { token } = useSelector((state) => state.auth);
+  const [test, setTest] = useState([]);
   const show = () => {
     document.getElementById("my_modal_3").showModal();
   };
+  useEffect(() => {
+    {
+      setTest(courseContent.filter((item) => item.status.includes("Preview")));
+    }
+    console.log(test);
+  }, [courseContent]);
+
   const handleNext = () => {
     setCurrentVideoIndex(currentVideoIndex + 1);
     setLoading(true);
   };
+
   useEffect(() => {
-    if (token) {
-      dispatch(getDetail(courseId, currentVideoIndex));
-    }
-  }, [courseId, dispatch, currentVideoIndex, token]);
+    dispatch(getDetail(courseId, currentVideoIndex));
+  }, [courseId, dispatch, currentVideoIndex]);
 
   return (
     <>
+      {/* {console.log(courseItem)} */}
       <Header />
       <section className="mb-36">
         <div className=" px-24 content w-full flex flex-col py-8 bg-[#EBF3FC]">
@@ -155,12 +162,16 @@ function DetailCourse() {
                     : "right-5 bottom-8"
                 }`}
               >
-                <button className=" px-9 py-1.5 text-[#489CFF] font-semibold bg-[#EBF3FC] rounded-3xl right-9">
+                <Link
+                  to={"/"}
+                  className=" px-9 py-1.5 text-[#489CFF] font-semibold bg-[#EBF3FC] rounded-3xl right-9"
+                >
                   Kelas Lainnya
-                </button>
+                </Link>
                 <button
                   className={`${
-                    currentVideoIndex >= courseContent.length-1
+                    currentVideoIndex >= courseContent.length-1 ||
+                    !detail.alreadyBuy
                       ? "hidden"
                       : "inline"
                   } px-9 py-1.5 text-white font-semibold  bg-primary rounded-3xl right-9`}
@@ -174,7 +185,7 @@ function DetailCourse() {
               <h1 className="text-2xl font-bold ">
                 Tentang kelas <span></span>
               </h1>
-              <p className="indent-4 text-justify leading-8">
+              <p className="indent-1 text-justify leading-8">
                 {detail?.courseDescription}
               </p>
 
@@ -195,7 +206,9 @@ function DetailCourse() {
             <LearnProgres
               courseContent={courseContent}
               courseId={courseItem?.id}
+              course ={detail}
               setCurrentVideoIndex={setCurrentVideoIndex}
+              token={token}
             />
           </div>
         </div>
