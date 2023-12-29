@@ -8,18 +8,22 @@ import {
 import Header from "../Components/Header/HeaderAdmin";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import CardOne from "../Components/Card/CardOne";
-import CardTwo from "../Components/Card/CardTwo";
-import CardThree from "../Components/Card/CardThree";
 import Modal from "../Components/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourse } from "../../redux/action/courseAdminAction";
+import {
+  addCourse,
+  getCourse,
+  getCourseSummary,
+} from "../../redux/action/courseAdminAction";
 import { useEffect, useState } from "react";
 import TableHead from "../Components/Table/TableHead";
 import TableBody from "../Components/Table/TableBody";
+import { useNavigate } from "react-router-dom";
 
 function KelolaKelas() {
   const dispatch = useDispatch();
-  const { course } = useSelector((state) => state.courseAdmin);
+  const navigate = useNavigate();
+  const { course, courseSummary } = useSelector((state) => state.courseAdmin);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
@@ -28,6 +32,11 @@ function KelolaKelas() {
   const [isDescending, setIsDescending] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const coursesPerPage = 10;
+
+  const handleAddCourse = (formData) => {
+    dispatch(addCourse(formData, navigate));
+    document.getElementById("my_modal_3").close();
+  };
 
   const handleSortByPrice = () => {
     const sorted = [...course].sort((a, b) => {
@@ -45,17 +54,21 @@ function KelolaKelas() {
     setIsDescending(!isDescending);
   };
 
+  const coursesToDisplay = course
+    ? sortedCourses.length > 0
+      ? sortedCourses
+      : course
+    : [];
+
   const indexOfLastCourse = currentPage * coursesPerPage;
   const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
-  const courses =
-    sortedCourses.length > 0
-      ? sortedCourses.slice(indexOfFirstCourse, indexOfLastCourse)
-      : course.slice(indexOfFirstCourse, indexOfLastCourse);
+  const courses = coursesToDisplay.slice(indexOfFirstCourse, indexOfLastCourse);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     dispatch(getCourse(setErrors, errors));
+    dispatch(getCourseSummary(setErrors, errors));
   }, [dispatch, errors]);
 
   function show() {
@@ -70,11 +83,7 @@ function KelolaKelas() {
       <div className="flex-1 overflow-y-auto">
         <Header />
         <div className="p-16 py-12 sm:ml-64">
-          <div className="grid grid-cols-3 gap-4 mb-4 sm:grid-cols-2 md:grid-cols-3">
-            <CardOne />
-            <CardTwo />
-            <CardThree />
-          </div>
+          <CardOne item={courseSummary} />
           <div className="flex justify-between w-full pt-8">
             <h2 className="text-2xl font-bold">Kelola Kelas</h2>
             <div className="flex space-x-3 font-bold">
@@ -83,7 +92,7 @@ function KelolaKelas() {
                 onClick={show}
               >
                 <FontAwesomeIcon icon={faPlus} className="mr-1" />
-                Tambah
+                Tambah Kelas
               </button>
               <button
                 onClick={handleSortByPrice}
@@ -94,7 +103,7 @@ function KelolaKelas() {
                 ) : (
                   <FontAwesomeIcon icon={faArrowUp} className="mr-1" />
                 )}
-                Harga
+                {isDescending ? "Harga Terendah" : "Harga Tertinggi"}
               </button>
               <button className="bg-transparent text-primary text-xl font-bold rounded-3xl w-12 h-10 hover:bg-primary hover:text-white transition duration-300">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -133,7 +142,7 @@ function KelolaKelas() {
           </div>
         </div>
       </div>
-      <Modal show={show} />
+      <Modal show={show} onSubmit={handleAddCourse} />
     </div>
   );
 }
