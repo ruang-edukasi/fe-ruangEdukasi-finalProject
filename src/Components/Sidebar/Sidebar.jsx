@@ -1,6 +1,57 @@
 import PropTypes from "prop-types";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function Sidebar({ navDashbord }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const level = [
+    {
+      id: 1,
+      name: "Beginner Level",
+      levelId: 1,
+    },
+    {
+      id: 2,
+      name: "Advanced Level",
+      levelId: 2,
+    },
+    {
+      id: 3,
+      name: "Intermediate Level",
+      levelId: 3,
+    },
+  ];
+
+  useEffect(() => {
+    handleParamsChange();
+  }, [searchParams]);
+
+  const handleParamsChange = () => {
+    const categoryParams = searchParams.get("catId");
+    const levelParams = searchParams.get("levelId");
+  };
+
+  const handleLevelFilter = (e, levelParams) => {
+    const currentParams = new URLSearchParams(searchParams);
+    const existingLevels = new Set(currentParams.get("levelId").split(""));
+
+    if (e.target.checked) {
+      existingLevels.add(levelParams);
+    } else {
+      existingLevels.delete(levelParams);
+    }
+
+    const updateLevels = [...existingLevels].join("");
+
+    const finalLevels = updateLevels.startsWith(",")
+      ? updateLevels.substring(1)
+      : updateLevels;
+
+    currentParams.set("levelId", finalLevels);
+
+    setSearchParams(currentParams);
+  };
   return (
     <div
       className={`bg-slate-100 rounded-xl w-3/4 h-screen p-6 absolute z-30 lg:static lg:w-72 ${
@@ -75,28 +126,23 @@ function Sidebar({ navDashbord }) {
         <div className="flex flex-col pb-3">
           <h3 className="text-lg sm:text-xl font-bold">Level Kesulitan</h3>
           <div>
-            <label className="label cursor-pointer flex justify-start gap-2">
-              <input type="checkbox" className="checkbox checkbox-primary" />
-              <span className="label-text sm:text-lg">Semua Level</span>
-            </label>
-          </div>
-          <div>
-            <label className="label cursor-pointer flex justify-start gap-2">
-              <input type="checkbox" className="checkbox checkbox-primary" />
-              <span className="label-text sm:text-lg">Beginner Level</span>
-            </label>
-          </div>
-          <div>
-            <label className="label cursor-pointer flex justify-start gap-2">
-              <input type="checkbox" className="checkbox checkbox-primary" />
-              <span className="label-text sm:text-lg">Intermediate Level</span>
-            </label>
-          </div>
-          <div>
-            <label className="label cursor-pointer flex justify-start gap-2">
-              <input type="checkbox" className="checkbox checkbox-primary" />
-              <span className="label-text sm:text-lg">Advanced Level</span>
-            </label>
+            {level.map((level) => (
+              <label
+                key={level.id}
+                className="label cursor-pointer flex justify-start gap-2"
+              >
+                <input
+                  type="checkbox"
+                  className="checkbox checkbox-primary"
+                  checked={searchParams
+                    .get("levelId")
+                    ?.split(",")
+                    .includes(level.levelId)}
+                  onChange={(e) => handleLevelFilter(e, level.levelId)}
+                />
+                <span className="label-text sm:text-lg">{level.name}</span>
+              </label>
+            ))}
           </div>
         </div>
       </div>
