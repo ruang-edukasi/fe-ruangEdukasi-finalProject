@@ -5,6 +5,7 @@ import {
   faShieldHeart,
   faUser,
   faChalkboardUser,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../Components/Header/Header";
@@ -16,7 +17,6 @@ import LearnProgres from "../Components/LearnProgres";
 import ReactPlayer from "react-player/youtube";
 import EnrollClass from "../Components/Modal/EnrollClass";
 import playButton from "../assets/playVideo.svg";
-
 function DetailCourse() {
   const dispatch = useDispatch();
   const { courseId } = useParams();
@@ -25,30 +25,28 @@ function DetailCourse() {
   const [playVideo, setPlayVideo] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-
-  const [showTentang, setShowTentang] = useState(true); 
-  
+  const [showTentang, setShowTentang] = useState(true);
   const { detail, courseContent, courseItem } = useSelector(
     (state) => state.course
   );
-  
 
   const { token } = useSelector((state) => state.auth);
   const show = () => {
     document.getElementById("my_modal_3").showModal();
   };
+
   const handleNext = () => {
     setCurrentVideoIndex(currentVideoIndex + 1);
     setLoading(true);
   };
+
   useEffect(() => {
-    if (token) {
-      dispatch(getDetail(courseId, currentVideoIndex));
-    }
-  }, [courseId, dispatch, currentVideoIndex, token]);
+    dispatch(getDetail(courseId, currentVideoIndex));
+  }, [courseId, dispatch, currentVideoIndex]);
 
   return (
     <>
+      {/* {console.log(courseItem)} */}
       <Header />
       <section className="mb-36">
         <div className=" px-6 md:px-24 content w-full flex flex-col py-8 bg-[#EBF3FC]">
@@ -61,17 +59,24 @@ function DetailCourse() {
               Kelas Lainnya
             </div>
           </Link>
-          <div className=" mx-auto md:ms-4  mb-8 flex flex-col md:inline ">
-            <h1 className="text-2xl font-bold text-primary">
-              {detail?.courseName} <span></span>
+          <div className=" ms-5 mb-8 ">
+            <h1 className="text-2xl font-bold text-primary w-3/5 flex justify-between ">
+              {detail?.courseName}
+              <span className="self-center flex text-black">
+                <FontAwesomeIcon
+                  icon={faStar}
+                  className=" text-yellow-500 inline  text-[15px] self-center me-2"
+                />
+                {detail?.rating ? detail.rating : 0}
+              </span>
             </h1>
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-2xl font-bold ">
               {detail?.courseCategory} <span></span>
             </h1>
             <h3 className="text-base font-bold">
               {detail?.instructorName} <span></span>
             </h3>
-            <div className="w-full md:w-8/12 border rounded-md flex justify-between mb-6">
+            <div className="w-full md:w-4/12 rounded-md flex justify-between mb-6">
               <p className="font-semibold text-sm">
                 <FontAwesomeIcon
                   icon={faShieldHeart}
@@ -94,7 +99,7 @@ function DetailCourse() {
                 {detail?.studentCount} Siswa
               </p>
             </div>
-            
+
             <a
               className="text-center py-2.5 rounded-3xl bg-succes text-white px-6  mb-4 md:me-3"
               href={detail?.telegramLink}
@@ -161,12 +166,16 @@ function DetailCourse() {
                     : "right-5 bottom-8"
                 }`}
               >
-                <button className=" px-9 py-1.5 text-[#489CFF] font-semibold bg-[#EBF3FC] rounded-3xl right-9">
+                <Link
+                  to={"/"}
+                  className=" px-9 py-1.5 text-[#489CFF] font-semibold bg-[#EBF3FC] rounded-3xl right-9"
+                >
                   Kelas Lainnya
-                </button>
+                </Link>
                 <button
                   className={`${
-                    currentVideoIndex >= courseContent.length - 1
+                    currentVideoIndex >= courseContent.length - 1 ||
+                    !detail.alreadyBuy
                       ? "hidden"
                       : "inline"
                   } px-9 py-1.5 text-white font-semibold  bg-primary rounded-3xl right-9`}
@@ -181,7 +190,6 @@ function DetailCourse() {
               <button
                 onClick={() => {
                   setShowTentang(true);
-                 
                 }}
                 className="py-5 px-10 bg-blue-100 my-10 text-primary hover:text-white font-semibold hover:bg-primary "
               >
@@ -225,11 +233,13 @@ function DetailCourse() {
               </div>
             )}
           </div>
-          <div className="hidden md:block md:relative md:w-4/12 ">
+          <div className="hidden lg:block md:relative md:w-4/12 ">
             <LearnProgres
               courseContent={courseContent}
               courseId={courseItem?.id}
+              course={detail}
               setCurrentVideoIndex={setCurrentVideoIndex}
+              token={token}
             />
           </div>
         </div>
