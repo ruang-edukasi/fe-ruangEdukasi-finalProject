@@ -21,13 +21,13 @@ function EnrollClass({ course }) {
 
     try {
       await dispatch(enrollClass(courseId, token,  navigate));
+      document.getElementById("my_modal_3").close();
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(()=>{
     if (token) {
-      console.log("Tokennya ada kok ", token);
       dispatch(enrollClass(courseId, navigate));
     } 
   },[dispatch, token])

@@ -8,7 +8,7 @@ function index({
   setCurrentVideoIndex,
   course,
   token,
-  indexVideo, 
+
 }) {
   return (
     <>

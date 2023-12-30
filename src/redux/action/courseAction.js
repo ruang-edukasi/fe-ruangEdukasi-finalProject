@@ -133,8 +133,9 @@ export const getMyCourse =
           },
         }
       );
+      console.log(data);
       const { response } = data.data;
-      dispatch(setMyCourse(response?.myCourse));
+      dispatch(setMyCourse(response?.riwayatOrder));
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setErrors({
@@ -356,12 +357,14 @@ export const enrollClass = (id, token, navigate) => async (dispatch) => {
     }
   }
 };
-export const addProgres = (id, token, contentId) => async (dispatch) => {
+export const addProgres = (id, contentId) => async (dispatch, getState) => {
   try {
-    const enroll = await axios.post(
+    let { token } = getState().auth;
+    const progress = await axios.post(
       `${
         import.meta.env.VITE_API_URL
       }/api/v1/progress/course/${id}/content/${contentId}`,
+      {},
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -369,17 +372,9 @@ export const addProgres = (id, token, contentId) => async (dispatch) => {
       }
     );
 
-    const { message } = enroll.data;
-    dispatch(setEnrollMessage(message));
-
-    Swal.fire({
-      title: enroll.data.message,
-      icon: "success",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate("/payment-succes");
-      }
-    });
+    const { response } = progress.data;
+    dispatch(setAddprogess(response));
+    // alert("mantap bang id :", contentId, "  udah kamu kelarin");
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log(error?.response?.data);

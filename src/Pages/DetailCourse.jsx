@@ -17,7 +17,6 @@ import LearnProgres from "../Components/LearnProgres";
 import ReactPlayer from "react-player/youtube";
 import EnrollClass from "../Components/Modal/EnrollClass";
 import playButton from "../assets/playVideo.svg";
-
 function DetailCourse() {
   const dispatch = useDispatch();
   const { courseId } = useParams();
@@ -37,12 +36,28 @@ function DetailCourse() {
     document.getElementById("my_modal_3").showModal();
   };
 
-  const handleNext = () => {
-    setCurrentVideoIndex(currentVideoIndex + 1);
-    setLoading(true);
-    dispatch(addProgres(courseId, token, courseItem?.id));
-    console.log(courseItem?.id);
+  const handleNext = async (e) => {
+    e.preventDefault();
+
+    try {
+      await dispatch(addProgres(courseId, courseItem?.id));
+      setCurrentVideoIndex(currentVideoIndex + 1);
+      setLoading(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(addProgres(courseId, courseItem?.id));
+  //   }
+  // }, [courseId, courseItem?.id, dispatch, token]);
+  // const handleNext = () => {
+  //   setCurrentVideoIndex(currentVideoIndex + 1);
+  //   setLoading(true);
+  //   dispatch(addProgres(courseId, token, courseItem?.id));
+  //   console.log(courseItem?.id);
+  // };
 
   useEffect(() => {
     dispatch(getDetail(courseId, currentVideoIndex));
@@ -50,6 +65,7 @@ function DetailCourse() {
 
   return (
     <>
+      {/* {console.log(courseItem)} */}
       <Header />
       <section className="mb-36">
         <div className=" px-6 md:px-24 content w-full flex flex-col py-8 bg-[#EBF3FC]">
@@ -102,7 +118,6 @@ function DetailCourse() {
                 {detail?.studentCount} Siswa
               </p>
             </div>
-
             <a
               className="text-center py-2.5 rounded-3xl bg-succes text-white px-6  mb-4 md:me-3"
               href={detail?.telegramLink}
@@ -178,18 +193,18 @@ function DetailCourse() {
                 <button
                   className={`${
                     currentVideoIndex >= courseContent.length - 1 ||
-                    !detail.alreadyBuy
+                    !detail?.alreadyBuy
                       ? "hidden"
                       : "inline"
                   } px-9 py-1.5 text-white font-semibold  bg-primary rounded-3xl right-9`}
-                  onClick={() => handleNext()}
+                  onClick={handleNext}
                 >
                   Next
                 </button>
               </div>
             </div>
 
-            <div className="flex md:hidden">
+            <div className="flex md:hidden justify-center">
               <button
                 onClick={() => {
                   setShowTentang(true);
@@ -226,6 +241,8 @@ function DetailCourse() {
                   ))}
                 </ul>
               </div>
+
+              
             ) : (
               <div className="relative w-full">
                 <LearnProgres

@@ -6,14 +6,17 @@ import CourseItem from "../Components/Card/CourseItem";
 function MyCourse() {
   const dispatch = useDispatch();
   const { myCourse } = useSelector((state) => state.course);
+  const { token } = useSelector((state) => state.auth);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
   });
 
   useEffect(() => {
-    dispatch(getMyCourse(setErrors, errors));
-  }, [dispatch, errors, myCourse]);
+    if (token) {
+      dispatch(getMyCourse(errors, setErrors));
+    }
+  }, [dispatch, errors, token]);
 
   if (errors.isError) {
     return <h1>{errors.message}</h1>;
@@ -33,6 +36,7 @@ function MyCourse() {
           courseLevel={courses?.courseLevel}
         />
       ))}
+      {/* {console.log(myCourse)} */}
     </>
   );
 }

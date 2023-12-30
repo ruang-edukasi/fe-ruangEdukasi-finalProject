@@ -5,14 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCourseItem } from "../../redux/reducer/courseReducers";
 import { useEffect } from "react";
 
-function CourseItem({ item, courseId, setCurrentVideoIndex, num,  }) {
+function CourseItem({ item, courseId, setCurrentVideoIndex, num }) {
   const { courseContent } = useSelector((state) => state.course);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setCourseItem(item));
   }, [dispatch]);
-
   const halndleSetCourseItem = () => {
     setCurrentVideoIndex(courseContent.indexOf(item));
   };
