@@ -5,7 +5,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../redux/action/authAction";
-import GoogleLogin from "../Components/GoogleLogin/GoogleLogin";
+
 
 const Register = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -254,9 +254,6 @@ const Register = () => {
               </button>
             </form>
 
-            <div className="flex justify-center">
-              <GoogleLogin buttonText={"Sign Up With Google"} />
-            </div>
 
             <p className="text-gray-700 text-center">
               Sudah punya akun?{" "}

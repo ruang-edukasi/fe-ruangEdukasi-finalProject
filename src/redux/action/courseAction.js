@@ -331,6 +331,7 @@ export const enrollClass = (id, token, navigate) => async (dispatch) => {
   try {
     const enroll = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/v1/user/enroll/course/${id}`,
+      {},
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -340,6 +341,7 @@ export const enrollClass = (id, token, navigate) => async (dispatch) => {
 
     const { message } = enroll.data;
     dispatch(setEnrollMessage(message));
+    
 
     Swal.fire({
       title: enroll.data.message,
