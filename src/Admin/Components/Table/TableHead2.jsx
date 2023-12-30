@@ -4,14 +4,13 @@ function TableHead() {
       <thead>
         <tr className="bg-blue-100 text-base text-slate-800">
           <th>No</th>
-          <th>Nama Instruktur</th>
+          <th>ID Pembayaran</th>
           <th>Kategori</th>
-          <th>Nama Kelas</th>
-          <th>Tipe Kelas</th>
-          <th>Level</th>
-          <th>Harga Kelas</th>
+          <th>Kelas Premium</th>
+          <th className="w-36">Status</th>
+          <th>Nomor Akun</th>
+          <th>Tanggal Bayar</th>
           <th>Aksi</th>
-          <th></th>
         </tr>
       </thead>
     </>

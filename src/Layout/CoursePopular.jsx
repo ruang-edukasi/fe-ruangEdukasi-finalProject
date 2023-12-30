@@ -46,10 +46,6 @@ function CoursePopular() {
     return <h1>{errors.message}</h1>;
   }
 
-  if (sliceCourse.length === 0) {
-    return <div className="skeleton w-32 h-32"></div>;
-  }
-
   return (
     <>
       <div className="flex flex-wrap">

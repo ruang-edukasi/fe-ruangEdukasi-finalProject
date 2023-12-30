@@ -2,7 +2,6 @@ import PropType from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShieldHeart,
-  faStar,
   faBook,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
@@ -13,8 +12,7 @@ function CourseItem({
   imageUrl,
   courseName,
   instructorName,
-  price,
-  rating,
+ 
   courseCategory,
   courseLevel,
   courseType,
@@ -23,18 +21,13 @@ function CourseItem({
     <>
       <Link
         to={`/detail-course/${id}`}
-        className="card w-80 bg-base-100 shadow-md flex hover:-translate-y-2 duration-500"
+        className="card w-96 bg-base-100 shadow-md flex"
       >
         <img src="/course.svg" className="rounded-t-lg w-full" />
         <div className="p-4">
           <div className="flex justify-between">
             <h3 className="text-primary font-bold">{courseCategory}</h3>
-            <p className="font-bold">
-              <span>
-                <FontAwesomeIcon icon={faStar} className="text-amber-400" />
-              </span>
-              4.7{rating}
-            </p>
+           
           </div>
           <h3 className="font-bold">{courseName}</h3>
           <p>by {instructorName}</p>
@@ -61,11 +54,7 @@ function CourseItem({
               120 Menit
             </p>
           </div>
-          <div className="flex justify-between items-center">
-            <p className="text-md font-semibold pt-1 text-red-500">
-              {courseType === "Premium" ? `Rp${price}` : "Mulai Kelas"}
-            </p>
-          </div>
+         
           <p className="absolute top-0 left-0 bg-primary text-white p-1 font-bold text-sm rounded-tl-md">
             {courseType}
           </p>
@@ -76,15 +65,15 @@ function CourseItem({
 }
 
 CourseItem.propTypes = {
-  id: PropType.number,
-  imageUrl: PropType.string,
-  courseName: PropType.string,
-  instructorName: PropType.string,
-  price: PropType.number,
-  rating: PropType.number,
-  courseCategory: PropType.string,
-  courseLevel: PropType.string,
-  courseType: PropType.string,
+  id: PropType.number.isRequired,
+  imageUrl: PropType.string.isRequired,
+  courseName: PropType.string.isRequired,
+  instructorName: PropType.string.isRequired,
+  price: PropType.number.isRequired,
+  rating: PropType.number.isRequired,
+  courseCategory: PropType.string.isRequired,
+  courseLevel: PropType.string.isRequired,
+  courseType: PropType.string.isRequired,
 };
 
 export default CourseItem;

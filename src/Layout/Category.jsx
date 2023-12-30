@@ -46,22 +46,16 @@ function Category() {
 
   return (
     <>
-      <div className="container flex flex-wrap">
-        <div className="carousel rounded-box">
-          {category
-            .slice(currentIndex, currentIndex + itemsPerPage)
-            .map((categories) => (
-              <>
-                <div className="carousel-item">
-                  <CategoryItem
-                    key={categories.id}
-                    id={categories?.id}
-                    imageURL={categories?.imageUrl}
-                    categoryName={categories?.categoryName}
-                  />
-                </div>
-              </>
-            ))}
+      <div className="container">
+        <div className="rounded-box grid grid-cols-2 sm:grid-cols-3 lg:flex">
+          {category.map((categories) => (
+            <CategoryItem
+              key={categories.id}
+              id={categories?.id}
+              imageURL={categories?.imageUrl}
+              categoryName={categories?.categoryName}
+            />
+          ))}
         </div>
       </div>
       <div className="hidden lg:flex justify-start text-gray-400 hover:text-indigo-800 duration-300 text-4xl">

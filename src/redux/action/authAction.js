@@ -45,6 +45,7 @@ export const login = (email, password, navigate) => async (dispatch) => {
     alert(error?.message);
   }
 };
+
 export const forgotPassword = (email) => async (dispatch) => {
   try {
     dispatch(setError(""));
@@ -55,12 +56,13 @@ export const forgotPassword = (email) => async (dispatch) => {
         email,
       }
     );
-    const { message } = fetch.data;
     Swal.fire({
       title: fetch.data.message,
       icon: "success",
     });
-    dispatch(setSucces("Tautan reset password terkirim"));
+    dispatch(
+      setSucces("Tautan reset password terkirim, lihat emailmu sekarang!")
+    );
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error?.response?.data?.message === "Email not found") {
@@ -86,8 +88,7 @@ export const reset =
         }
       );
 
-      const { message } = fetch.data;
-      dispatch(setSucces(message));
+      dispatch(setSucces("Reset Password berhasil!"));
       Swal.fire({
         title: fetch.data.message,
         icon: "success",
@@ -121,8 +122,6 @@ export const register =
       const { response } = registrationResponse.data;
       const { verifId, verifEmail } = response;
 
-      console.log(verifEmail);
-      console.log(verifId);
       dispatch(setVerifEmail(verifEmail));
 
       navigate(`/otp/${verifId}`);
@@ -134,6 +133,24 @@ export const register =
       alert(error?.message);
     }
   };
+export const registerWithGoogle = (navigate) => async (dispatch) => {
+  try {
+    const registrationResponse = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/v1/oauth/user/google`
+    );
+    const { response } = registrationResponse.data;
+    const { token } = response;
+    dispatch(setToken(token));
+
+    navigate(`/`);
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert(error?.response?.data?.message);
+      return;
+    }
+    alert(error?.message);
+  }
+};
 
 export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
   try {
@@ -149,7 +166,6 @@ export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
     const { token } = response;
     dispatch(setToken(token));
 
-    // Mengganti alert dengan SweetAlert2
     Swal.fire({
       title: verifresponse.data.message,
       icon: "success",
@@ -167,14 +183,13 @@ export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
   }
 };
 
-export const renewOTP = (verifId, navigate) => async (dispatch) => {
+export const renewOTP = (verifId) => async () => {
   try {
     const renewResponse = await axios.post(
       `${
         import.meta.env.VITE_API_URL
       }/api/v1/auth/user/renew-otp?verification=${verifId}`
     );
-    const { response } = renewResponse.data;
 
     Swal.fire({
       title: renewResponse.data.message,

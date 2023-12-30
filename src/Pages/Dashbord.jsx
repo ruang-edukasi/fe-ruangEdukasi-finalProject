@@ -1,29 +1,27 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourse } from "../redux/action/courseAction";
 import Button from "../Components/Button/Button";
 import Header from "../Components/Header/Header";
 import CourseItem from "../Components/Card/CourseItem";
 import Sidebar from "../Components/Sidebar/Sidebar";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { getCourseDashbord } from "../redux/action/courseAction";
 
 function Dashbord() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [navDashbord, setNavDashbord] = useState(false);
   const dispatch = useDispatch();
-  const { course } = useSelector((state) => state.course);
-  const [filteredKelas, setFilteredKelas] = useState([...course]);
-  const [errors, setErrors] = useState({
-    isError: false,
-    message: null,
-  });
+  const { courseDashbord } = useSelector((state) => state.course);
+  const [filteredKelas, setFilteredKelas] = useState([...courseDashbord]);
 
   useEffect(() => {
-    dispatch(getCourse(setErrors, errors));
-  }, [dispatch, errors]);
+    dispatch(getCourseDashbord());
+  }, [dispatch]);
 
   useEffect(() => {
-    const filtered = course.filter((item) => {
+    const filtered = courseDashbord.filter((item) => {
       if (activeFilter === "All") {
         return true;
       } else if (activeFilter === "kelasPremium") {
@@ -34,7 +32,7 @@ function Dashbord() {
       return true;
     });
     setFilteredKelas(filtered);
-  }, [course, activeFilter]);
+  }, [courseDashbord, activeFilter]);
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
@@ -44,28 +42,18 @@ function Dashbord() {
     <>
       <Header />
       <section className="bg-blue-100 min-h-screen">
-        <div className="container mx-auto px-24">
+        <div className="container mx-auto px-10 sm:px-5 lg:px-24">
           <div className="flex justify-between py-10">
             <h2 className="text-2xl font-bold">Topik Kelas</h2>
-            <form action="search" className="relative">
-              <input
-                type="text"
-                name="search"
-                placeholder="Cari Kelas..."
-                autoComplete="off"
-                className="outline-none font-semibold text-md  border-none ring-2 ring-white focus:ring-indigo-400 focus:w-40 sm:focus:w-96 focus:ease-in focus:duration-300 rounded-full border-white px-4 py-1 md:py-2 transition-width duration-300 ease-in-out"
-              />
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                <button className="text-white bg-primary hover:bg-indigo-400 rounded-lg w-8 h-7 transition duration-300">
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-              </div>
-            </form>
           </div>
           <div className="flex justify-evenly gap-1">
-            <Sidebar />
+            {/* Sidebar */}
+            <Sidebar navDashbord={navDashbord} />
+
+            {/* Main Content */}
             <div className="flex flex-col gap-5">
               <div className="flex justify-between">
+                {/* Filter Buttons */}
                 <Button
                   bgColor={
                     activeFilter === "All"
@@ -94,7 +82,8 @@ function Dashbord() {
                   onClick={() => handleFilterChange("kelasGratis")}
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-y-3 sm:grid-cols-2 sm:gap-3 lg:gap-4">
+                {/* Course Items */}
                 {filteredKelas.map((courses) => (
                   <CourseItem
                     key={courses?.id}
@@ -110,6 +99,164 @@ function Dashbord() {
                     courseLevel={courses?.courseLevel}
                   />
                 ))}
+              </div>
+            </div>
+
+            {/* Offcanvas Button */}
+            <div
+              onClick={() => setNavDashbord(!navDashbord)}
+              className={`text-white cursor-pointer z-20 fixed left-0 bottom-0 text-lg bg-blue-600  hover:opacity-80 p-2 rounded-r-lg lg:hidden transform ${
+                navDashbord ? "translate-x-0" : "translate-x-full"
+              } transition-transform duration-300 ease-in-out`}
+            >
+              <FontAwesomeIcon icon={faEllipsis} />
+            </div>
+          </div>
+        </div>
+
+        {/* Offcanvas Content */}
+        <div
+          className={`bg-blue-100 h-screen w-60 fixed top-0 left-0 overflow-y-auto transform ease-in-out duration-300 ${
+            navDashbord ? "translate-x-0" : "-translate-x-full"
+          } lg:hidden`}
+        >
+          <div className="form-control mt-28 ml-6">
+            <div className="flex flex-col pb-3 ">
+              <h3 className="text-lg sm:text-xl font-bold">Filter</h3>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">Paling Baru</span>
+                </label>
+              </div>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">Paling Popular</span>
+                </label>
+              </div>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">Promo</span>
+                </label>
+              </div>
+            </div>
+
+            <div className="flex flex-col pb-3">
+              <h3 className="text-lg sm:text-xl font-bold">Kategori</h3>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">
+                    Backend Development
+                  </span>
+                </label>
+              </div>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">
+                    Frontend Development
+                  </span>
+                </label>
+              </div>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">UI/UX Design</span>
+                </label>
+              </div>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">Data Science</span>
+                </label>
+              </div>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">
+                    Quality Asurance
+                  </span>
+                </label>
+              </div>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">
+                    Android Development
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div className="flex flex-col pb-3">
+              <h3 className="text-lg sm:text-xl font-bold">Level Kesulitan</h3>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">Semua Level</span>
+                </label>
+              </div>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">Beginner Level</span>
+                </label>
+              </div>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">
+                    Intermediate Level
+                  </span>
+                </label>
+              </div>
+              <div>
+                <label className="label cursor-pointer flex justify-start gap-2">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text sm:text-lg">Advanced Level</span>
+                </label>
               </div>
             </div>
           </div>

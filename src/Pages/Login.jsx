@@ -15,10 +15,11 @@ function Login() {
     setShowpassword(!showPassword);
   }
 
-  const handleLogin = async (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
     dispatch(login(email, password, navigate));
   };
+  
   function handleForgot() {
     dispatch(forgotPassword(email));
   }

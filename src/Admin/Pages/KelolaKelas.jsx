@@ -1,36 +1,97 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
-  faArrowDownShortWide,
+  faArrowDown,
+  faArrowUp,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "../Components/Header/HeaderAdmin";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import CardOne from "../Components/Card/CardOne";
-import CardTwo from "../Components/Card/CardTwo";
-import CardThree from "../Components/Card/CardThree";
 import Modal from "../Components/Modal";
+// import Modal2 from "../Components/Modal/Content";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourse } from "../../redux/action/courseAdminAction";
+import {
+  addCourse,
+  // addCourseContent,
+  getCourse,
+  getCourseSummary,
+} from "../../redux/action/courseAdminAction";
 import { useEffect, useState } from "react";
 import TableHead from "../Components/Table/TableHead";
+import TableBody from "../Components/Table/TableBody";
+import { useNavigate } from "react-router-dom";
 
 function KelolaKelas() {
   const dispatch = useDispatch();
-  const { course } = useSelector((state) => state.courseAdmin);
+  const navigate = useNavigate();
+  const { course, courseSummary } = useSelector((state) => state.courseAdmin);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
   });
+  const [sortedCourses, setSortedCourses] = useState([]);
+  const [isDescending, setIsDescending] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursesPerPage = 10;
+
+  const handleAddCourse = (formData) => {
+    dispatch(addCourse(formData, navigate)).then(() => {
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    });
+    document.getElementById("my_modal_3").close();
+  };
+
+  // const handleAddCourseContent = (formData) => {
+  //   dispatch(addCourseContent(formData, navigate));
+  //   document.getElementById("my_modal_4").close();
+  // };
+
+  const handleSortByPrice = () => {
+    const sorted = [...course].sort((a, b) => {
+      const priceA = a.price || 0;
+      const priceB = b.price || 0;
+
+      if (isDescending) {
+        return priceB - priceA;
+      } else {
+        return priceA - priceB;
+      }
+    });
+
+    setSortedCourses(sorted);
+    setIsDescending(!isDescending);
+  };
+
+  const coursesToDisplay =
+    course && course.length > 0
+      ? sortedCourses.length > 0
+        ? sortedCourses
+        : course
+      : [];
+
+  const indexOfLastCourse = currentPage * coursesPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+  const courses = coursesToDisplay.slice(indexOfFirstCourse, indexOfLastCourse);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     dispatch(getCourse(setErrors, errors));
+    dispatch(getCourseSummary(setErrors, errors));
   }, [dispatch, errors]);
 
-  function show() {
+  function showModalAddCourse() {
     document.getElementById("my_modal_3").showModal();
     console.log(course);
   }
+
+  // function showModalAddContent() {
+  //   document.getElementById("my_modal_4").showModal();
+  //   console.log(course);
+  // }
+
   return (
     <div className="flex h-screen">
       <div className="fixed top-0 left-0 z-40 w-64 h-screen pt-20">
@@ -39,24 +100,34 @@ function KelolaKelas() {
       <div className="flex-1 overflow-y-auto">
         <Header />
         <div className="p-16 py-12 sm:ml-64">
-          <div className="grid grid-cols-3 gap-4 mb-4 sm:grid-cols-2 md:grid-cols-3">
-            <CardOne />
-            <CardTwo />
-            <CardThree />
-          </div>
+          <CardOne item={courseSummary} />
           <div className="flex justify-between w-full pt-8">
             <h2 className="text-2xl font-bold">Kelola Kelas</h2>
             <div className="flex space-x-3 font-bold">
               <button
                 className="bg-primary text-white rounded-3xl px-4 hover:bg-indigo-800 transition duration-300"
-                onClick={show}
+                onClick={showModalAddCourse}
               >
                 <FontAwesomeIcon icon={faPlus} className="mr-1" />
-                Tambah
+                Tambah Kelas
               </button>
-              <button className="bg-transparent text-primary border border-primary rounded-3xl px-4 hover:bg-primary hover:text-white transition duration-300">
-                <FontAwesomeIcon icon={faArrowDownShortWide} className="mr-1" />
-                Filter
+              {/* <button
+                className="bg-primary text-white rounded-3xl px-4 hover:bg-indigo-800 transition duration-300"
+                onClick={showModalAddContent}
+              >
+                <FontAwesomeIcon icon={faPlus} className="mr-1" />
+                Tambah Konten
+              </button> */}
+              <button
+                onClick={handleSortByPrice}
+                className="bg-transparent text-primary border border-primary rounded-3xl px-4 hover:bg-primary hover:text-white transition duration-300"
+              >
+                {isDescending ? (
+                  <FontAwesomeIcon icon={faArrowDown} className="mr-1" />
+                ) : (
+                  <FontAwesomeIcon icon={faArrowUp} className="mr-1" />
+                )}
+                {isDescending ? "Harga Terendah" : "Harga Tertinggi"}
               </button>
               <button className="bg-transparent text-primary text-xl font-bold rounded-3xl w-12 h-10 hover:bg-primary hover:text-white transition duration-300">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -64,11 +135,40 @@ function KelolaKelas() {
             </div>
           </div>
           <div className="mt-4">
-            <TableHead />
+            <div className="flex items-center justify-center mb-4 rounded-xl shadow-md overflow-x-auto">
+              <table className="table">
+                <TableHead />
+                {courses.map((item, index) => (
+                  <TableBody key={item?.id} item={item} index={index + 1} />
+                ))}
+              </table>
+            </div>
+          </div>
+          <div className="flex justify-end w-full mt-4">
+            <ul className="flex">
+              {course &&
+                [...Array(Math.ceil(course.length / coursesPerPage))].map(
+                  (_, index) => (
+                    <li key={index} className="mx-1">
+                      <button
+                        onClick={() => paginate(index + 1)}
+                        className={`${
+                          currentPage === index + 1
+                            ? "bg-primary text-white"
+                            : "bg-white text-primary hover:bg-primary hover:text-white transition duration-300"
+                        } border border-primary rounded-xl w-8 h-8 flex items-center justify-center focus:outline-none`}
+                      >
+                        {index + 1}
+                      </button>
+                    </li>
+                  )
+                )}
+            </ul>
           </div>
         </div>
       </div>
-      <Modal show={show} />
+      <Modal show={showModalAddCourse} onSubmit={handleAddCourse} />
+      {/* <Modal2 show={showModalAddContent} onSubmit={handleAddCourseContent} /> */}
     </div>
   );
 }
