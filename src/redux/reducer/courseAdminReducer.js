@@ -34,7 +34,7 @@ const courseSlice = createSlice({
     setDeleteCourse: (state, action) => {
       state.course = action.payload;
     },
-    setUpdateCourse: (state, action) => {
+    setEditCourse: (state, action) => {
       state.course = action.payload;
     },
   },
@@ -48,7 +48,7 @@ export const {
   setSearch,
   setCreateCourse,
   setDeleteCourse,
-  setUpdateCourse,
+  setEditCourse,
 } = courseSlice.actions;
 
 export default courseSlice.reducer;

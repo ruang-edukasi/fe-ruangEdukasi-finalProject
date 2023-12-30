@@ -5,7 +5,7 @@ import {
   setDeleteCourse,
   setMyOrder,
   setCourseSummary,
-  setUpdateCourse,
+  setEditCourse,
 } from "../reducer/courseAdminReducer";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -117,36 +117,16 @@ export const getCourse = (setErrors, errors) => async (dispatch, getState) => {
   }
 };
 
-export const updateCategory =
-  (
-    id,
-    instructor_name,
-    course_name,
-    price,
-    course_type_id,
-    course_level_id,
-    course_category_id,
-    navigate,
-    navigatePathSuccess,
-    navigatePathError
-  ) => 
+export const editCourse =
+  (id, formData, navigate, navigatePathSuccess, navigatePathError) =>
   async (dispatch, getState) => {
     try {
       let { token } = getState().auth;
 
-      const formData = {
-        instructor_name,
-        course_name,
-        price,
-        course_type_id,
-        course_level_id,
-        course_category_id,
-      };
-
       const data = await axios.put(
         `${
           import.meta.env.VITE_API_URL
-        }/api/v1/admin/course/update-category/${id}`,
+        }/api/v1/admin/course/update-course/${id}`,
         formData,
         {
           headers: {
@@ -156,7 +136,7 @@ export const updateCategory =
       );
 
       const { response } = data.data.response;
-      dispatch(setUpdateCourse(response));
+      dispatch(setEditCourse(response));
       console.log(response);
 
       Swal.fire({

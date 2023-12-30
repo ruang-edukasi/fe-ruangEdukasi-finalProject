@@ -51,21 +51,23 @@ function AllCourse() {
   return (
     <div>
       <ButtonCourse onFilterChange={handleFilterChange} />
-      <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3 2xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2  sm:gap-y-10 xl:grid-cols-3 2xl:grid-cols-4">
         {filteredKelas.slice(0, 12).map((courses) => (
-          <CourseItem
-            key={courses?.id}
-            id={courses?.id}
-            imageURL=""
-            courseName={courses?.courseName}
-            instructorName={courses?.instructorName}
-            courseDescription={courses?.courseDescription}
-            price={courses?.price}
-            rating={courses?.rating}
-            courseType={courses?.courseType}
-            courseCategory={courses?.courseCategory}
-            courseLevel={courses?.courseLevel}
-          />
+          <div key={courses?.id} className="flex justify-center">
+           
+            <CourseItem
+              id={courses?.id}
+              imageURL=""
+              courseName={courses?.courseName}
+              instructorName={courses?.instructorName}
+              courseDescription={courses?.courseDescription}
+              price={courses?.price}
+              rating={courses?.rating}
+              courseType={courses?.courseType}
+              courseCategory={courses?.courseCategory}
+              courseLevel={courses?.courseLevel}
+            />
+          </div>
         ))}
       </div>
     </div>
