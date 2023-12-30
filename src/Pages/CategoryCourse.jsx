@@ -28,19 +28,21 @@ function CategoryCourse() {
         <h2 className="text-3xl font-bold text-center mb-6">{`${detailCategory[0]?.courseCategory} Course`}</h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-5 md:p-0 md:pt-5 lg:gap-0 lg:gap-y-5 xl:grid-cols-3 xl:gap-5 2xl:grid-cols-4 2xl:gap-9">
           {detailCategory.map((courses) => (
-            <CourseItem
-              key={courses?.id}
-              id={courses?.id}
-              imageURL=""
-              courseName={courses?.courseName}
-              instructorName={courses?.instructorName}
-              courseDescription={courses?.courseDescription}
-              price={courses?.price}
-              rating={courses?.rating}
-              courseType={courses?.courseType}
-              courseCategory={courses?.courseCategory}
-              courseLevel={courses?.courseLevel}
-            />
+            <div key={courses?.id} className="flex justify-center">
+              <CourseItem
+                key={courses?.id}
+                id={courses?.id}
+                imageURL=""
+                courseName={courses?.courseName}
+                instructorName={courses?.instructorName}
+                courseDescription={courses?.courseDescription}
+                price={courses?.price}
+                rating={courses?.rating}
+                courseType={courses?.courseType}
+                courseCategory={courses?.courseCategory}
+                courseLevel={courses?.courseLevel}
+              />
+            </div>
           ))}
         </div>
       </div>

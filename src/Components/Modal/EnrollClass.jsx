@@ -7,7 +7,7 @@ function EnrollClass({ course }) {
   return (
     <>
       <dialog id="my_modal_3" className="modal w-full content-center">
-        <div className="modal-box text-center w-8/12 max-w-xl">
+        <div className="modal-box text-center w-full max-w-xl">
           <form
             method="dialog"
             className="border border-transparent border-none"
