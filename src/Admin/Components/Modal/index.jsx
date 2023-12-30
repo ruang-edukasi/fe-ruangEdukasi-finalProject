@@ -186,12 +186,7 @@ const Modal = ({ show, onSubmit }) => {
                   className="block w-full p-2.5 text-gray-900 border border-gray-300 rounded-md bg-gray-50 sm:text-sm focus:ring-blue-500 focus:border-blue-500  "
                 />
               </div>
-              <div className="flex flex-row w-full gap-2">
-                <div className="w-full max-w-xs">
-                  <button className="bg-alert text-md text-white font-bold rounded-3xl w-full py-2.5 hover:bg-red-800 transition duration-300">
-                    Upload Video
-                  </button>
-                </div>
+              <div className="flex justify-center flex-row w-full gap-2">
                 <div className="w-full max-w-xs">
                   <button
                     type="submit"
