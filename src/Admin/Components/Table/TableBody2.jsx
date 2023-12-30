@@ -1,6 +1,25 @@
 import PropType from "prop-types";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { getPaymentVerification } from "../../../redux/action/courseAdminAction";
 
 const TableBody = ({ item, index }) => {
+  const dispatch = useDispatch();
+
+  const handleApprove = (orderTrx, status) => {
+    if (status === "Paid") {
+      dispatch(getPaymentVerification(orderTrx));
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Kelas tidak dapat disetujui. Status pembayaran 'BELUM BAYAR'",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
   const formattedCreatedAt = new Date(item?.createdAt).toLocaleString("ID-en", {
     weekday: "long",
     year: "numeric",
@@ -18,7 +37,7 @@ const TableBody = ({ item, index }) => {
     } else if (status === "Waiting payment") {
       return "BELUM BAYAR";
     } else {
-      return status; // Jika status tidak berubah, kembalikan nilai status asli
+      return status;
     }
   };
 
@@ -40,8 +59,16 @@ const TableBody = ({ item, index }) => {
           <td>{item?.accountNumber}</td>
           <td>{formattedCreatedAt}</td>
           <td>
-            <button className="bg-primary text-white font-semibold rounded-3xl w-28 h-8 hover:bg-indigo-800 transition duration-300">
-              Update Status
+            <button
+              onClick={() => handleApprove(item?.orderTrx, item?.status)}
+              className={`${
+                item?.status === "Waiting payment"
+                  ? "bg-primary text-white"
+                  : "bg-gray-300 text-gray-600 cursor-not-allowed"
+              } font-semibold rounded-3xl w-28 h-8 hover:bg-indigo-800 transition duration-300`}
+              disabled={item?.status !== "Waiting payment"}
+            >
+              {item?.status === "Waiting payment" ? "Tidak Setuju" : "Setuju"}
             </button>
           </td>
         </tr>
