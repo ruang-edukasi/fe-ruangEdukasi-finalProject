@@ -5,7 +5,7 @@ import PropType from "prop-types";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { enrollClass } from "../../redux/action/courseAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+
 
 function EnrollClass({ course }) {
   const dispatch = useDispatch();
@@ -21,16 +21,14 @@ function EnrollClass({ course }) {
 
     try {
       await dispatch(enrollClass(courseId, token,  navigate));
+      document.getElementById("my_modal_3").close();
     } catch (error) {
       console.error(error);
     }
   };
-  useEffect(()=>{
-    if (token) {
-      console.log("Tokennya ada kok ", token);
-      dispatch(enrollClass(courseId, navigate));
-    } 
-  },[dispatch, token])
+
+
+  
 
 
   return (

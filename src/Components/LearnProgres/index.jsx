@@ -25,7 +25,7 @@ function index({
           )}
         </div>
         {/* <h2 className="text-primary font-bold mb-2">Chapter 1 - Pendahuluan</h2> */}
-        {course.alreadyBuy ? (
+        {course?.alreadyBuy && course?.alreadyBuy ? (
           <>
             <ul className="menu  w-full space-y-2 bg-white">
               {courseContent.map((item, num) => (
