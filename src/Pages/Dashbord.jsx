@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourse } from "../redux/action/courseAction";
 import Button from "../Components/Button/Button";
 import Header from "../Components/Header/Header";
 import CourseItem from "../Components/Card/CourseItem";
@@ -8,24 +7,21 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { getCourseDashbord } from "../redux/action/courseAction";
 
 function Dashbord() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [navDashbord, setNavDashbord] = useState(false);
   const dispatch = useDispatch();
-  const { course } = useSelector((state) => state.course);
-  const [filteredKelas, setFilteredKelas] = useState([...course]);
-  const [errors, setErrors] = useState({
-    isError: false,
-    message: null,
-  });
+  const { courseDashbord } = useSelector((state) => state.course);
+  const [filteredKelas, setFilteredKelas] = useState([...courseDashbord]);
 
   useEffect(() => {
-    dispatch(getCourse(setErrors, errors));
-  }, [dispatch, errors]);
+    dispatch(getCourseDashbord());
+  }, [dispatch]);
 
   useEffect(() => {
-    const filtered = course.filter((item) => {
+    const filtered = courseDashbord.filter((item) => {
       if (activeFilter === "All") {
         return true;
       } else if (activeFilter === "kelasPremium") {
@@ -36,7 +32,7 @@ function Dashbord() {
       return true;
     });
     setFilteredKelas(filtered);
-  }, [course, activeFilter]);
+  }, [courseDashbord, activeFilter]);
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);

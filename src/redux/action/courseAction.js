@@ -11,6 +11,7 @@ import {
   setCoupon,
   setCourseItem,
   setDetailCategory,
+  setCourseDashbord,
 } from "../reducer/courseReducers";
 import Swal from "sweetalert2";
 
@@ -208,33 +209,21 @@ export const getDetail =
     }
   };
 
-export const checkCoupon = (id, coupon_code) => async (dispatch, getState) => {
+export const getCourseDashbord = () => async (dispatch) => {
   try {
-    let { token } = getState().auth;
-
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/v1/check/coupon/course/${id}`,
-      {
-        coupon_code,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+    const data = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/v1/search/multi/`
     );
-    console.log(response);
-    const { responseCoupon } = response.data;
-      dispatch(setCoupon(responseCoupon));
 
-   
+    const { response } = data.data;
+    dispatch(setCourseDashbord(response));
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      alert.error(error);
+      alert(error?.response?.data?.message);
+      return;
     }
   }
 };
-
 
 export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
   try {
@@ -263,6 +252,31 @@ export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(error);
+    }
+  }
+};
+
+export const checkCoupon = (id, coupon_code) => async (dispatch, getState) => {
+  try {
+    let { token } = getState().auth;
+
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/v1/check/coupon/course/${id}`,
+      {
+        coupon_code,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response);
+    const { responseCoupon } = response.data;
+    dispatch(setCoupon(responseCoupon));
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert.error(error);
     }
   }
 };

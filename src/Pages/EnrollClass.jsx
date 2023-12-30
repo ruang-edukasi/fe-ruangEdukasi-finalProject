@@ -10,9 +10,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import PaymentItem from "../Components/Card/PaymentItem";
-import BRI from "../assets/bank BRI.svg";
-import BNI from "../assets/bank BNI.svg";
-import MANDIRI from "../assets/Bank Mandiri.svg";
+import BRI from "../assets/BRI.svg";
+import BNI from "../assets/BNI.svg";
+import MANDIRI from "../assets/Mandiri.svg";
 import Indomaret from "../assets/Logo Indomaret.svg";
 import Alfamart from "../assets/Alfamart.svg";
 import Dana from "../assets/Logo DANA.svg";
