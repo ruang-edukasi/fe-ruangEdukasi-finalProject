@@ -1,6 +1,6 @@
 import PropType from "prop-types";
 import CourseItem from "./CourseItem";
-import LockCourse from "./LockCourse";
+// import LockCourse from "./LockCourse";
 
 function index({
   courseContent,
@@ -8,6 +8,7 @@ function index({
   setCurrentVideoIndex,
   course,
   token,
+  indexVideo, 
 }) {
   return (
     <>
@@ -24,29 +25,25 @@ function index({
             ""
           )}
         </div>
+        {courseContent.map((item, num) => (
+          <CourseItem
+            key={item.id}
+            item={item}
+            courseId={courseId}
+            setCurrentVideoIndex={setCurrentVideoIndex}
+            // indexVideo = {indexVideo}
+            num={num + 1}
+          />
+        ))}
+
         {/* <h2 className="text-primary font-bold mb-2">Chapter 1 - Pendahuluan</h2> */}
-        {course.alreadyBuy ? (
+        {/* {course?.alreadyBuy && course?.alreadyBuy ? (
           <>
-            <ul className="menu  w-full space-y-2 bg-white">
-              {courseContent.map((item, num) => (
-                <CourseItem
-                  key={item.id}
-                  item={item}
-                  courseId={courseId}
-                  setCurrentVideoIndex={setCurrentVideoIndex}
-                  num={num + 1}
-                />
-              ))}
-            </ul>
-          </>
-        ) : (
-          <>
-            <ul className="menu  w-full space-y-2 bg-white">
               {courseContent
                 .filter(
                   (filtered) =>
-                    filtered.status.includes("Preview") &&
-                    filtered.infoProgress.includes("Started")
+                    filtered.status.includes("Preview") ||
+                    filtered.infoProgress.includes("Done")
                 )
                 .map((item, num) => (
                   <CourseItem
@@ -57,7 +54,7 @@ function index({
                     num={num + 1}
                   />
                 ))}
-            </ul>
+            
             {courseContent
               .filter(
                 (filtered) =>
@@ -74,7 +71,40 @@ function index({
                 />
               ))}
           </>
-        )}
+        ) : (
+          <>
+              {courseContent
+                .filter(
+                  (filtered) =>
+                    filtered.status.includes("Preview") &&
+                    filtered.infoProgress.includes("Started")
+                )
+                .map((item, num) => (
+                  <CourseItem
+                    key={item.id}
+                    item={item}
+                    courseId={courseId}
+                    setCurrentVideoIndex={setCurrentVideoIndex}
+                    num={num + 1}
+                  />
+                ))}
+            {courseContent
+              .filter(
+                (filtered) =>
+                  filtered.videoLink.includes("#") ||
+                  filtered.infoProgress.includes("Not Started")
+              )
+              .map((item, num) => (
+                <LockCourse
+                  key={item.id}
+                  item={item}
+                  courseId={courseId}
+                  setCurrentVideoIndex={setCurrentVideoIndex}
+                  num={num + 1}
+                />
+              ))}
+          </>
+        )} */}
       </div>
     </>
   );
@@ -85,6 +115,7 @@ index.prototype = {
   courseId: PropType.number.isRequired,
   setCurrentVideoIndex: PropType.func.isRequired,
   token: PropType.string.isRequired,
+  videoIndex:PropType.number.isRequired,
 };
 
 export default index;

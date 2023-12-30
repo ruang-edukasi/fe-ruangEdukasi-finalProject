@@ -12,7 +12,8 @@ import {
   setCourseItem,
   setDetailCategory,
   setCourseDashbord,
-  setEnrollMessage
+  setEnrollMessage,
+  setAddprogess,
 } from "../reducer/courseReducers";
 import Swal from "sweetalert2";
 import { setToken } from "../reducer/authReducer";
@@ -331,6 +332,36 @@ export const enrollClass = (id, token, navigate) => async (dispatch) => {
   try {
     const enroll = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/v1/user/enroll/course/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const { message } = enroll.data;
+    dispatch(setEnrollMessage(message));
+
+    Swal.fire({
+      title: enroll.data.message,
+      icon: "success",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/payment-succes");
+      }
+    });
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log(error?.response?.data);
+    }
+  }
+};
+export const addProgres = (id, token, contentId) => async (dispatch) => {
+  try {
+    const enroll = await axios.post(
+      `${
+        import.meta.env.VITE_API_URL
+      }/api/v1/progress/course/${id}/content/${contentId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

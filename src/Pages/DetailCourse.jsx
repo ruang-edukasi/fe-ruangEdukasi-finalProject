@@ -12,11 +12,12 @@ import Header from "../Components/Header/Header";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getDetail } from "../redux/action/courseAction";
+import { addProgres, getDetail } from "../redux/action/courseAction";
 import LearnProgres from "../Components/LearnProgres";
 import ReactPlayer from "react-player/youtube";
 import EnrollClass from "../Components/Modal/EnrollClass";
 import playButton from "../assets/playVideo.svg";
+
 function DetailCourse() {
   const dispatch = useDispatch();
   const { courseId } = useParams();
@@ -26,6 +27,7 @@ function DetailCourse() {
   const [loading, setLoading] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [showTentang, setShowTentang] = useState(true);
+
   const { detail, courseContent, courseItem } = useSelector(
     (state) => state.course
   );
@@ -38,6 +40,8 @@ function DetailCourse() {
   const handleNext = () => {
     setCurrentVideoIndex(currentVideoIndex + 1);
     setLoading(true);
+    dispatch(addProgres(courseId, token, courseItem?.id));
+    console.log(courseItem?.id);
   };
 
   useEffect(() => {
@@ -46,7 +50,6 @@ function DetailCourse() {
 
   return (
     <>
-      {/* {console.log(courseItem)} */}
       <Header />
       <section className="mb-36">
         <div className=" px-6 md:px-24 content w-full flex flex-col py-8 bg-[#EBF3FC]">
@@ -229,6 +232,8 @@ function DetailCourse() {
                   courseContent={courseContent}
                   courseId={courseItem?.id}
                   setCurrentVideoIndex={setCurrentVideoIndex}
+                  token={token}
+                  indexVideo={currentVideoIndex}
                 />
               </div>
             )}
@@ -240,6 +245,7 @@ function DetailCourse() {
               course={detail}
               setCurrentVideoIndex={setCurrentVideoIndex}
               token={token}
+              indexVideo={currentVideoIndex}
             />
           </div>
         </div>
