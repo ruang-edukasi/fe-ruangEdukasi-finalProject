@@ -209,10 +209,13 @@ export const getDetail =
     }
   };
 
-export const getCourseDashbord = () => async (dispatch) => {
+export const getCourseDashbord = (filters) => async (dispatch) => {
   try {
     const data = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/search/multi/`
+      `${import.meta.env.VITE_API_URL}/api/v1/search/multi/`,
+      {
+        params: filters,
+      }
     );
 
     const { response } = data.data;
