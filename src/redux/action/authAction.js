@@ -141,7 +141,6 @@ export const registerWithGoogle = (navigate) => async (dispatch) => {
     const { response } = registrationResponse.data;
     const { token } = response;
     dispatch(setToken(token));
-    console.log(registrationResponse);
 
     navigate(`/`);
   } catch (error) {

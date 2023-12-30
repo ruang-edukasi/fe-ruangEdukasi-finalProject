@@ -47,7 +47,6 @@ const Modal = ({ show, onSubmit }) => {
               <div>
                 <label className="block mb-1.5 text-sm font-semibold text-gray-900 ">
                   Nama Instruktur
-
                 </label>
                 <input
                   type="text"

@@ -76,15 +76,15 @@ function CourseItem({
 }
 
 CourseItem.propTypes = {
-  id: PropType.number.isRequired,
-  imageUrl: PropType.string.isRequired,
-  courseName: PropType.string.isRequired,
-  instructorName: PropType.string.isRequired,
-  price: PropType.number.isRequired,
-  rating: PropType.number.isRequired,
-  courseCategory: PropType.string.isRequired,
-  courseLevel: PropType.string.isRequired,
-  courseType: PropType.string.isRequired,
+  id: PropType.number,
+  imageUrl: PropType.string,
+  courseName: PropType.string,
+  instructorName: PropType.string,
+  price: PropType.number,
+  rating: PropType.number,
+  courseCategory: PropType.string,
+  courseLevel: PropType.string,
+  courseType: PropType.string,
 };
 
 export default CourseItem;

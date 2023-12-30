@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import {
   deleteCourse,
-  updateCategory,
+  editCourse,
 } from "../../../redux/action/courseAdminAction";
 
 const TableBody = ({ item, index }) => {
@@ -17,12 +17,10 @@ const TableBody = ({ item, index }) => {
   );
   const [course_name, setUpdateCourseName] = useState(item?.courseName);
   const [price, setUpdatePrice] = useState(item?.price);
-  const [course_type_id, setUpdateCourseTypeId] = useState(item?.courseTypeId);
-  const [course_level_id, setUpdateCourseLevelId] = useState(
-    item?.courseLevelId
-  );
+  const [course_type_id, setUpdateCourseTypeId] = useState(item?.courseType);
+  const [course_level_id, setUpdateCourseLevelId] = useState(item?.courseLevel);
   const [course_category_id, setUpdateCourseCategoryId] = useState(
-    item?.courseCategoryId
+    item?.courseCategory
   );
 
   const handleEditClick = () => {
@@ -34,27 +32,26 @@ const TableBody = ({ item, index }) => {
     setUpdateInstructorName(item?.instructorName);
     setUpdateCourseName(item?.courseName);
     setUpdatePrice(item?.price);
-    setUpdateCourseTypeId(item?.courseTypeId);
-    setUpdateCourseLevelId(item?.courseLevelId);
-    setUpdateCourseCategoryId(item?.courseCategoryId);
+    setUpdateCourseTypeId(item?.courseType);
+    setUpdateCourseLevelId(item?.courseLevel);
+    setUpdateCourseCategoryId(item?.courseCategory);
   };
 
   const handleSaveClick = async (e) => {
     e.preventDefault();
 
-    dispatch(
-      updateCategory(
-        item?.id,
-        instructor_name,
-        course_name,
-        price,
-        course_type_id,
-        course_level_id,
-        course_category_id
-      )
-    );
+    const formData = {
+      id: item?.id,
+      instructor_name,
+      course_name,
+      price,
+      course_type_id,
+      course_level_id,
+      course_category_id,
+    };
+    dispatch(editCourse(item?.id, formData));
 
-    console.log(updateCategory);
+    console.log(formData);
     setEditing(false);
   };
 
