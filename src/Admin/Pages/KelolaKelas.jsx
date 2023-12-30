@@ -9,9 +9,11 @@ import Header from "../Components/Header/HeaderAdmin";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import CardOne from "../Components/Card/CardOne";
 import Modal from "../Components/Modal";
+// import Modal2 from "../Components/Modal/Content";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addCourse,
+  // addCourseContent,
   getCourse,
   getCourseSummary,
 } from "../../redux/action/courseAdminAction";
@@ -34,9 +36,19 @@ function KelolaKelas() {
   const coursesPerPage = 10;
 
   const handleAddCourse = (formData) => {
-    dispatch(addCourse(formData, navigate));
+    dispatch(addCourse(formData, navigate)).then(() => {
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    });
     document.getElementById("my_modal_3").close();
   };
+
+  // const handleAddCourseContent = (formData) => {
+  //   dispatch(addCourseContent(formData, navigate));
+  //   document.getElementById("my_modal_4").close();
+  // };
+
   const handleSortByPrice = () => {
     const sorted = [...course].sort((a, b) => {
       const priceA = a.price || 0;
@@ -53,11 +65,12 @@ function KelolaKelas() {
     setIsDescending(!isDescending);
   };
 
-  const coursesToDisplay = course
-    ? sortedCourses.length > 0
-      ? sortedCourses
-      : course
-    : [];
+  const coursesToDisplay =
+    course && course.length > 0
+      ? sortedCourses.length > 0
+        ? sortedCourses
+        : course
+      : [];
 
   const indexOfLastCourse = currentPage * coursesPerPage;
   const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
@@ -69,10 +82,16 @@ function KelolaKelas() {
     dispatch(getCourseSummary(setErrors, errors));
   }, [dispatch, errors]);
 
-  function show() {
+  function showModalAddCourse() {
     document.getElementById("my_modal_3").showModal();
     console.log(course);
   }
+
+  // function showModalAddContent() {
+  //   document.getElementById("my_modal_4").showModal();
+  //   console.log(course);
+  // }
+
   return (
     <div className="flex h-screen">
       <div className="fixed top-0 left-0 z-40 w-64 h-screen pt-20">
@@ -87,11 +106,18 @@ function KelolaKelas() {
             <div className="flex space-x-3 font-bold">
               <button
                 className="bg-primary text-white rounded-3xl px-4 hover:bg-indigo-800 transition duration-300"
-                onClick={show}
+                onClick={showModalAddCourse}
               >
                 <FontAwesomeIcon icon={faPlus} className="mr-1" />
                 Tambah Kelas
               </button>
+              {/* <button
+                className="bg-primary text-white rounded-3xl px-4 hover:bg-indigo-800 transition duration-300"
+                onClick={showModalAddContent}
+              >
+                <FontAwesomeIcon icon={faPlus} className="mr-1" />
+                Tambah Konten
+              </button> */}
               <button
                 onClick={handleSortByPrice}
                 className="bg-transparent text-primary border border-primary rounded-3xl px-4 hover:bg-primary hover:text-white transition duration-300"
@@ -120,27 +146,29 @@ function KelolaKelas() {
           </div>
           <div className="flex justify-end w-full mt-4">
             <ul className="flex">
-              {[...Array(Math.ceil(course.length / coursesPerPage))].map(
-                (_, index) => (
-                  <li key={index} className="mx-1">
-                    <button
-                      onClick={() => paginate(index + 1)}
-                      className={`${
-                        currentPage === index + 1
-                          ? "bg-primary text-white"
-                          : "bg-white text-primary hover:bg-primary hover:text-white transition duration-300"
-                      } border border-primary rounded-xl w-8 h-8 flex items-center justify-center focus:outline-none`}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                )
-              )}
+              {course &&
+                [...Array(Math.ceil(course.length / coursesPerPage))].map(
+                  (_, index) => (
+                    <li key={index} className="mx-1">
+                      <button
+                        onClick={() => paginate(index + 1)}
+                        className={`${
+                          currentPage === index + 1
+                            ? "bg-primary text-white"
+                            : "bg-white text-primary hover:bg-primary hover:text-white transition duration-300"
+                        } border border-primary rounded-xl w-8 h-8 flex items-center justify-center focus:outline-none`}
+                      >
+                        {index + 1}
+                      </button>
+                    </li>
+                  )
+                )}
             </ul>
           </div>
         </div>
       </div>
-      <Modal show={show} onSubmit={handleAddCourse} />
+      <Modal show={showModalAddCourse} onSubmit={handleAddCourse} />
+      {/* <Modal2 show={showModalAddContent} onSubmit={handleAddCourseContent} /> */}
     </div>
   );
 }
