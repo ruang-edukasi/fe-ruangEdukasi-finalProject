@@ -12,6 +12,7 @@ import {
   setCourseItem,
   setDetailCategory,
   setCourseDashbord,
+  setEnrollMessage
 } from "../reducer/courseReducers";
 import Swal from "sweetalert2";
 import { setToken } from "../reducer/authReducer";
@@ -252,7 +253,6 @@ export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
 
     const order = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/v1/user/order/course/${id}`,
-      {},
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -327,9 +327,8 @@ export const getDetailCategory =
     }
   };
 
-export const enrollClass = (id, navigate) => async (dispatch, getState) => {
+export const enrollClass = (id, token, navigate) => async (dispatch) => {
   try {
-    let { token } = getState().auth;
     const enroll = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/v1/user/enroll/course/${id}`,
       {

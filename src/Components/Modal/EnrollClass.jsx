@@ -5,20 +5,38 @@ import PropType from "prop-types";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { enrollClass } from "../../redux/action/courseAction";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useEffect } from "react";
 
 function EnrollClass({ course }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { courseId } = useParams();
+  const { token } = useSelector((state) => state.auth);
 
-  const enrollFreeClass = () => {
-    dispatch(enrollClass(courseId, navigate));
+  // const enrollFreeClass = () => {
+
+  // };
+  const enrollFreeClass = async (e) => {
+    e.preventDefault();
+
+    try {
+      await dispatch(enrollClass(courseId, token,  navigate));
+    } catch (error) {
+      console.error(error);
+    }
   };
+  useEffect(()=>{
+    if (token) {
+      console.log("Tokennya ada kok ", token);
+      dispatch(enrollClass(courseId, navigate));
+    } 
+  },[dispatch, token])
+
+
   return (
     <>
       <dialog id="my_modal_3" className="modal w-full content-center">
-        <div className="modal-box text-center w-8/12 max-w-xl">
+        <div className="modal-box text-center w-full max-w-xl">
           <form
             method="dialog"
             className="border border-transparent border-none"

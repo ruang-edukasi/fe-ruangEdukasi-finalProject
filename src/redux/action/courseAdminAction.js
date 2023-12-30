@@ -129,7 +129,7 @@ export const updateCategory =
     navigate,
     navigatePathSuccess,
     navigatePathError
-  ) => 
+  ) =>
   async (dispatch, getState) => {
     try {
       let { token } = getState().auth;
