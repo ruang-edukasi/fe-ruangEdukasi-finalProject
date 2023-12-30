@@ -15,6 +15,7 @@ function LockCourse({ item, num }) {
             <span className="px-3.5 py-2 font-semibold bg-[#EBF3FC] rounded-full inline me-2 ">
               {num + 1}
             </span>
+            {/* {item.} */}
             <div className=" flex justify-between w-full">
               <h5 className="self-center">
                 {item.contentTitle}

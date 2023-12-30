@@ -11,7 +11,6 @@ function EnrollClass({ course }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { courseId } = useParams();
-  const { enrollMesaage } = useSelector((state) => state.course);
 
   const enrollFreeClass = () => {
     dispatch(enrollClass(courseId, navigate));

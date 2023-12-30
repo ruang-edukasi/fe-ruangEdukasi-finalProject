@@ -5,6 +5,7 @@ import {
   faShieldHeart,
   faUser,
   faChalkboardUser,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../Components/Header/Header";
@@ -64,10 +65,17 @@ function DetailCourse() {
             </div>
           </Link>
           <div className=" ms-5 mb-8 ">
-            <h1 className="text-2xl font-bold text-primary">
-              {detail?.courseName} <span></span>
+            <h1 className="text-2xl font-bold text-primary w-3/5 flex justify-between ">
+              {detail?.courseName}
+              <span className="self-center flex text-black">
+                <FontAwesomeIcon
+                  icon={faStar}
+                  className=" text-yellow-500 inline  text-[15px] self-center me-2"
+                />
+                {detail?.rating ? detail.rating : 0}
+              </span>
             </h1>
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-2xl font-bold ">
               {detail?.courseCategory} <span></span>
             </h1>
             <h3 className="text-base font-bold">
@@ -170,7 +178,7 @@ function DetailCourse() {
                 </Link>
                 <button
                   className={`${
-                    currentVideoIndex >= courseContent.length-1 ||
+                    currentVideoIndex >= courseContent.length - 1 ||
                     !detail.alreadyBuy
                       ? "hidden"
                       : "inline"
@@ -202,11 +210,11 @@ function DetailCourse() {
               </ul>
             </div>
           </div>
-          <div className="relative w-4/12">
+          <div className="relative w-4/12 ">
             <LearnProgres
               courseContent={courseContent}
               courseId={courseItem?.id}
-              course ={detail}
+              course={detail}
               setCurrentVideoIndex={setCurrentVideoIndex}
               token={token}
             />

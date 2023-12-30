@@ -52,7 +52,6 @@ function CoursePopular() {
   return (
     <>
       <ButtonCourse onFilterChange={handleFilterChange} />
-      {/* <ButtonCourse /> */}
       <div className="flex flex-wrap">
         <div className="carousel rounded-box py-2 gap-6">
           {popular.map((courses) => (
