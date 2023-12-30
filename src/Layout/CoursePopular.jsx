@@ -54,7 +54,7 @@ function CoursePopular() {
       <ButtonCourse onFilterChange={handleFilterChange} />
       <div className="flex flex-wrap">
         <div className="carousel rounded-box py-2 gap-6">
-          {popular.map((courses) => (
+          {filteredKelas.map((courses) => (
             <>
               <div className="carousel-item">
                 <CourseItem

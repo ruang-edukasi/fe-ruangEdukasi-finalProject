@@ -45,8 +45,10 @@ function Sidebar({ navDashbord }) {
   };
   return (
     <div
-      className={`bg-slate-100 rounded-xl w-3/4 h-screen p-6 absolute z-30 lg:static lg:w-72 ${
-        navDashbord ? "right-[500px]" : "left-[-500px] sm:left-[-1000px]"
+      className={`bg-slate-100 rounded-xl w-3/4 md:w-2/5 h-screen pl-4 sm:p-6 z-30 lg:static lg:w-72 transform ease-in-out duration-300 ${
+        navDashbord
+          ? "left-[0] fixed top-24"
+          : "left-[-500px] sm:left-[-1000px] absolute"
       }`}
     >
       {console.log(handleParamsChange)}
@@ -60,7 +62,7 @@ function Sidebar({ navDashbord }) {
                 className="checkbox checkbox-primary"
                 disabled
               />
-              <span className="label-text sm:text-lg">Paling Baru</span>
+              <span className="label-text text-sm sm:text-lg">Paling Baru</span>
             </label>
           </div>
           <div>
@@ -70,7 +72,9 @@ function Sidebar({ navDashbord }) {
                 className="checkbox checkbox-primary"
                 disabled
               />
-              <span className="label-text sm:text-lg">Paling Popular</span>
+              <span className="label-text text-sm sm:text-lg">
+                Paling Popular
+              </span>
             </label>
           </div>
           <div>
@@ -80,7 +84,7 @@ function Sidebar({ navDashbord }) {
                 className="checkbox checkbox-primary"
                 disabled
               />
-              <span className="label-text sm:text-lg">Promo</span>
+              <span className="label-text text-sm sm:text-lg">Promo</span>
             </label>
           </div>
         </div>
@@ -95,7 +99,9 @@ function Sidebar({ navDashbord }) {
                 checked={searchParams.getAll("catId").includes("1")}
                 onChange={() => handleChekboxFilter("catId", "1")}
               />
-              <span className="label-text sm:text-lg">Backend Development</span>
+              <span className="label-text text-sm sm:text-lg">
+                Backend Development
+              </span>
             </label>
           </div>
           <div>
@@ -106,7 +112,7 @@ function Sidebar({ navDashbord }) {
                 checked={searchParams.getAll("catId").includes("2")}
                 onChange={() => handleChekboxFilter("catId", "2")}
               />
-              <span className="label-text sm:text-lg">
+              <span className="label-text text-sm sm:text-lg">
                 Frontend Development
               </span>
             </label>
@@ -119,7 +125,9 @@ function Sidebar({ navDashbord }) {
                 checked={searchParams.getAll("catId").includes("3")}
                 onChange={() => handleChekboxFilter("catId", "3")}
               />
-              <span className="label-text sm:text-lg">UI/UX Design</span>
+              <span className="label-text text-sm sm:text-lg">
+                UI/UX Design
+              </span>
             </label>
           </div>
           <div>
@@ -130,7 +138,9 @@ function Sidebar({ navDashbord }) {
                 checked={searchParams.getAll("catId").includes("4")}
                 onChange={() => handleChekboxFilter("catId", "4")}
               />
-              <span className="label-text sm:text-lg">Data Science</span>
+              <span className="label-text text-sm sm:text-lg">
+                Data Science
+              </span>
             </label>
           </div>
           <div>
@@ -141,7 +151,9 @@ function Sidebar({ navDashbord }) {
                 checked={searchParams.getAll("catId").includes("5")}
                 onChange={() => handleChekboxFilter("catId", "5")}
               />
-              <span className="label-text sm:text-lg">Quality Asurance</span>
+              <span className="label-text text-sm sm:text-lg">
+                Quality Asurance
+              </span>
             </label>
           </div>
           <div>
@@ -152,7 +164,9 @@ function Sidebar({ navDashbord }) {
                 checked={searchParams.getAll("catId").includes("6")}
                 onChange={() => handleChekboxFilter("catId", "6")}
               />
-              <span className="label-text sm:text-lg">Android Development</span>
+              <span className="label-text text-sm sm:text-lg">
+                Android Development
+              </span>
             </label>
           </div>
         </div>
@@ -167,7 +181,9 @@ function Sidebar({ navDashbord }) {
                 checked={searchParams.getAll("levelId").includes("1")}
                 onChange={() => handleChekboxFilter("levelId", "1")}
               />
-              <span className="label-text sm:text-lg">Beginner Level</span>
+              <span className="label-text text-sm sm:text-lg">
+                Beginner Level
+              </span>
             </label>
           </div>
           <div>
@@ -178,7 +194,9 @@ function Sidebar({ navDashbord }) {
                 checked={searchParams.getAll("levelId").includes("2")}
                 onChange={() => handleChekboxFilter("levelId", "2")}
               />
-              <span className="label-text sm:text-lg">Intermediate Level</span>
+              <span className="label-text text-sm sm:text-lg">
+                Intermediate Level
+              </span>
             </label>
           </div>
           <div>
@@ -189,18 +207,20 @@ function Sidebar({ navDashbord }) {
                 checked={searchParams.getAll("levelId").includes("3")}
                 onChange={() => handleChekboxFilter("levelId", "3")}
               />
-              <span className="label-text sm:text-lg">Advance Level</span>
+              <span className="label-text text-sm sm:text-lg">
+                Advance Level
+              </span>
             </label>
           </div>
         </div>
-      </div>
-      <div className="py-6 px-14">
-        <button
-          className="text-red-600 hover:text-red-800"
-          onClick={handleRemoveFilter}
-        >
-          Hapus Filter
-        </button>
+        <div className="py-4 px-14">
+          <button
+            className="text-red-600 hover:text-red-800 text-sm"
+            onClick={handleRemoveFilter}
+          >
+            Hapus Filter
+          </button>
+        </div>
       </div>
     </div>
   );
