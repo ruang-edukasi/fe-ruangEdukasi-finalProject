@@ -20,6 +20,7 @@ import DetailCourse from "./Pages/DetailCourse";
 import PaymentSucces from "./Pages/PaymentSucces";
 import Notification from "./Pages/Notification";
 import CategoryCourse from "./Pages/CategoryCourse";
+import WaitingPayment from "./Pages/WaitingPayment";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/profile-akun" element={<ProfileAkun />} />
           <Route path="/detail-course" element={<DetailCourse />} />
           <Route path="/payment-succes" element={<PaymentSucces />} />
+          <Route path="/waiting-payment" element={<WaitingPayment />} />
           <Route path="/notifikasi" element={<Notification />} />
 
           {/* Admin Pages */}

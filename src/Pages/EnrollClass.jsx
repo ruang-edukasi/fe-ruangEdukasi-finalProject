@@ -42,7 +42,7 @@ function EnrollClass() {
     e.preventDefault();
 
     try {
-      await dispatch(getOrderCourse(courseId));
+      await dispatch(getOrderCourse(courseId,navigate));
     } catch (error) {
       console.error(error);
     }
