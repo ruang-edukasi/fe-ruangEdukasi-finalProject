@@ -3,6 +3,8 @@ import {
   faArrowDownShortWide,
   faArrowUpShortWide,
   faMagnifyingGlass,
+  faAngleRight,
+  faAngleLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -28,13 +30,54 @@ function DashbordAdmin() {
 
   const [sortedCourses, setSortedCourses] = useState([]);
   const [isRecentFirst, setIsRecentFirst] = useState(true);
+  const [isSearchActive, setIsSearchActive] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const maxPagesToShow = 3;
 
   const combinedData = myOrder.map((order, index) => ({
     ...order,
     ...myCourse[index],
   }));
+  const totalItems = combinedData.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  let start = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+  let end = Math.min(start + maxPagesToShow - 1, totalPages);
+
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === totalPages;
+
+  if (totalPages <= maxPagesToShow) {
+    start = 1;
+    end = totalPages;
+  } else {
+    if (currentPage <= Math.floor(maxPagesToShow / 2)) {
+      end = maxPagesToShow;
+    } else if (currentPage >= totalPages - Math.floor(maxPagesToShow / 2)) {
+      start = totalPages - maxPagesToShow + 1;
+    }
+  }
+
+  const indexOfLastCourse = currentPage * itemsPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - itemsPerPage;
+  const currentItems =
+    sortedCourses.length > 0
+      ? sortedCourses.slice(indexOfFirstCourse, indexOfLastCourse)
+      : combinedData.slice(indexOfFirstCourse, indexOfLastCourse);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handlePreviousPage = () => {
+    if (!isFirstPage) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (!isLastPage) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   useEffect(() => {
     dispatch(getMyCourse(setErrors, errors));
@@ -57,14 +100,9 @@ function DashbordAdmin() {
     setIsRecentFirst(!isRecentFirst);
   };
 
-  const indexOfLastCourse = currentPage * itemsPerPage;
-  const indexOfFirstCourse = indexOfLastCourse - itemsPerPage;
-  const currentItems =
-    sortedCourses.length > 0
-      ? sortedCourses.slice(indexOfFirstCourse, indexOfLastCourse)
-      : combinedData.slice(indexOfFirstCourse, indexOfLastCourse);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const toggleSearch = () => {
+    setIsSearchActive(!isSearchActive);
+  };
 
   return (
     <div className="flex h-screen">
@@ -92,9 +130,26 @@ function DashbordAdmin() {
                 )}
                 {isRecentFirst ? "Tanggal Terlama" : "Tanggal Terbaru"}
               </button>
-              <button className="bg-transparent text-primary text-xl font-bold rounded-3xl w-12 h-10 hover:bg-primary hover:text-white transition duration-300">
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </button>
+              {isSearchActive ? (
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Cari..."
+                    className="border border-primary rounded-3xl pl-4 pr-4 py-2 focus:outline-none focus:border-blue-500"
+                  />
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="absolute right-4 top-3 text-primary"
+                  />
+                </div>
+              ) : (
+                <button
+                  className="bg-transparent text-primary text-xl font-bold rounded-3xl w-12 h-10 hover:bg-primary hover:text-white transition duration-300"
+                  onClick={toggleSearch}
+                >
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+              )}
             </div>
           </div>
           <div className="mt-4">
@@ -109,22 +164,45 @@ function DashbordAdmin() {
           </div>
           <div className="flex justify-end w-full mt-4">
             <ul className="flex">
-              {Array(Math.ceil(combinedData.length / itemsPerPage))
-                .fill()
-                .map((_, index) => (
-                  <li key={index} className="mx-1">
-                    <button
-                      onClick={() => paginate(index + 1)}
-                      className={`${
-                        currentPage === index + 1
-                          ? "bg-primary text-white"
-                          : "bg-white text-primary hover:bg-primary hover:text-white transition duration-300"
-                      } border border-primary rounded-xl w-8 h-8 flex items-center justify-center focus:outline-none`}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                ))}
+              <li className="mx-1">
+                <button
+                  onClick={handlePreviousPage}
+                  disabled={isLastPage}
+                  className={`${
+                    isLastPage ? "cursor-not-allowed" : ""
+                  } bg-white text-primary hover:bg-primary hover:text-white border border-primary rounded-xl w-8 h-8 flex items-center justify-center focus:outline-none`}
+                >
+                  {<FontAwesomeIcon icon={faAngleLeft} />}
+                </button>
+              </li>
+              {Array.from(
+                { length: end - start + 1 },
+                (_, index) => start + index
+              ).map((pageNumber) => (
+                <li key={pageNumber} className="mx-1">
+                  <button
+                    onClick={() => paginate(pageNumber)}
+                    className={`${
+                      currentPage === pageNumber
+                        ? "bg-primary text-white"
+                        : "bg-white text-primary hover:bg-primary hover:text-white transition duration-300"
+                    } border border-primary rounded-xl w-8 h-8 flex items-center justify-center focus:outline-none`}
+                  >
+                    {pageNumber}
+                  </button>
+                </li>
+              ))}
+              <li className="mx-1">
+                <button
+                  onClick={handleNextPage}
+                  disabled={isLastPage}
+                  className={`${
+                    isLastPage ? "cursor-not-allowed" : ""
+                  } bg-white text-primary hover:bg-primary hover:text-white border border-primary rounded-xl w-8 h-8 flex items-center justify-center focus:outline-none`}
+                >
+                  {<FontAwesomeIcon icon={faAngleRight} />}
+                </button>
+              </li>
             </ul>
           </div>
         </div>

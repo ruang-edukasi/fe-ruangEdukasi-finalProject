@@ -1,5 +1,6 @@
 import PropType from "prop-types";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import {
@@ -9,14 +10,19 @@ import {
 
 const TableBody = ({ item, index }) => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [editing, setEditing] = useState(false);
   const [instructor_name, setUpdateInstructorName] = useState(
     item?.instructorName
   );
   const [course_name, setUpdateCourseName] = useState(item?.courseName);
-  const [price, setUpdatePrice] = useState(item?.price);
+  const [course_description, setUpdateCourseDescription] = useState(
+    item?.courseDescription
+  );
+  const [price, setUpdatePrice] = useState(
+    item?.price == null ? "0" : item?.price
+  );
   const [course_type_id, setUpdateCourseTypeId] = useState(item?.courseType);
   const [course_level_id, setUpdateCourseLevelId] = useState(item?.courseLevel);
   const [course_category_id, setUpdateCourseCategoryId] = useState(
@@ -25,16 +31,17 @@ const TableBody = ({ item, index }) => {
 
   const handleEditClick = () => {
     setEditing(true);
+    setUpdateInstructorName(item?.instructorName);
+    setUpdateCourseName(item?.courseName);
+    setUpdateCourseDescription(item?.courseDescription);
+    setUpdatePrice(item?.price == null ? "0" : item?.price);
+    setUpdateCourseTypeId(item?.courseType);
+    setUpdateCourseLevelId(item?.courseLevel);
+    setUpdateCourseCategoryId(item?.courseCategory);
   };
 
   const handleCancelClick = () => {
     setEditing(false);
-    setUpdateInstructorName(item?.instructorName);
-    setUpdateCourseName(item?.courseName);
-    setUpdatePrice(item?.price);
-    setUpdateCourseTypeId(item?.courseType);
-    setUpdateCourseLevelId(item?.courseLevel);
-    setUpdateCourseCategoryId(item?.courseCategory);
   };
 
   const handleSaveClick = async (e) => {
@@ -44,14 +51,18 @@ const TableBody = ({ item, index }) => {
       id: item?.id,
       instructor_name,
       course_name,
+      course_description,
       price,
       course_type_id,
       course_level_id,
       course_category_id,
     };
-    dispatch(editCourse(item?.id, formData));
-
-    console.log(formData);
+    dispatch(editCourse(item?.id, formData, navigate)).then(() => {
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    });
+    // console.log(formData);
     setEditing(false);
   };
 
@@ -67,7 +78,11 @@ const TableBody = ({ item, index }) => {
       cancelButtonText: "Tidak",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteCourse(id));
+        dispatch(deleteCourse(id)).then(() => {
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        });
       }
     });
   };
@@ -95,9 +110,7 @@ const TableBody = ({ item, index }) => {
                 onChange={(e) => setUpdateCourseCategoryId(e.target.value)}
                 className="select select-bordered border bg-gray-50 w-28 focus:border-2 focus:border-primary focus:outline-none"
               >
-                <option value="" disabled>
-                  Pilih Kategori
-                </option>
+                <option value="">Pilih Kategori</option>
                 <option value="1">Backend Development</option>
                 <option value="2">Frontend Development</option>
                 <option value="3">UI/UX Design</option>
@@ -132,9 +145,7 @@ const TableBody = ({ item, index }) => {
                 onChange={(e) => setUpdateCourseTypeId(e.target.value)}
                 className="select select-bordered border bg-gray-50 w-28 focus:border-2 focus:border-primary focus:outline-none"
               >
-                <option value="" disabled>
-                  Pilih Tipe Kelas
-                </option>
+                <option value="">Pilih Tipe Kelas</option>
                 <option value="1">Premium</option>
                 <option value="2">Gratis</option>
               </select>
@@ -149,9 +160,7 @@ const TableBody = ({ item, index }) => {
                 onChange={(e) => setUpdateCourseLevelId(e.target.value)}
                 className="select select-bordered border bg-gray-50 w-28 focus:border-2 focus:border-primary focus:outline-none"
               >
-                <option value="" disabled>
-                  Pilih Level Kelas
-                </option>
+                <option value="">Pilih Level Kelas</option>
                 <option value="1">Pemula</option>
                 <option value="2">Menengah</option>
                 <option value="3">Lanjut</option>

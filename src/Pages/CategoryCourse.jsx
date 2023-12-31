@@ -33,7 +33,7 @@ function CategoryCourse() {
                 key={courses?.id}
                 id={courses?.id}
                 imageURL=""
-                courseName={courses?.courseName}
+                thumbnailCourse={courses?.thumbnailCourse || "/course.jpg"}
                 instructorName={courses?.instructorName}
                 courseDescription={courses?.courseDescription}
                 price={courses?.price}

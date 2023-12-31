@@ -273,6 +273,7 @@ export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
 
     const order = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/v1/user/order/course/${id}`,
+      {},
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -287,7 +288,7 @@ export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
       icon: "success",
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate("/payment-succes");
+        navigate("/waiting-payment");
       }
     });
   } catch (error) {
