@@ -13,14 +13,17 @@ function Sidebar({ navDashbord }) {
   }, [searchParams, dispatch]);
 
   const handleParamsChange = () => {
-    const categoryParams = searchParams.get("catId");
-    const levelParams = searchParams.get("levelId");
+    const categoryParams = searchParams.getAll("catId");
+    const levelParams = searchParams.getAll("levelId");
 
     const filters = {
-      category: categoryParams,
-      level: levelParams,
+      category: Array.isArray(categoryParams)
+        ? categoryParams
+        : [categoryParams],
+      level: Array.isArray(levelParams) ? levelParams : [levelParams],
     };
 
+    console.log(filters);
     dispatch(getCourseDashbord(filters));
   };
 
@@ -51,7 +54,6 @@ function Sidebar({ navDashbord }) {
           : "left-[-500px] sm:left-[-1000px] absolute"
       }`}
     >
-      {console.log(handleParamsChange)}
       <div className="form-control">
         <div className="flex flex-col pb-3">
           <h3 className="text-lg sm:text-xl font-bold">Filter</h3>
@@ -215,7 +217,7 @@ function Sidebar({ navDashbord }) {
         </div>
         <div className="py-4 px-14">
           <button
-            className="text-red-600 hover:text-red-800 text-sm"
+            className="text-red-600 hover:text-red-800 text-sm md:text-lg"
             onClick={handleRemoveFilter}
           >
             Hapus Filter
