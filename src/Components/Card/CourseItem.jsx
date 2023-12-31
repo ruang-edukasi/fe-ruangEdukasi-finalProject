@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 function CourseItem({
   id,
-  imageUrl,
+  thumbnailCourse,
   courseName,
   instructorName,
   price,
@@ -25,7 +25,7 @@ function CourseItem({
         to={`/detail-course/${id}`}
         className="card w-80 bg-base-100 shadow-md flex hover:-translate-y-2 duration-500"
       >
-        <img src="/course.svg" className="rounded-t-lg w-full" />
+        <img src={thumbnailCourse} className="rounded-t-lg h-40" />
         <div className="p-4">
           <div className="flex justify-between">
             <h3 className="text-primary font-bold">{courseCategory}</h3>
@@ -77,7 +77,7 @@ function CourseItem({
 
 CourseItem.propTypes = {
   id: PropType.number,
-  imageUrl: PropType.string,
+  thumbnailCourse: PropType.string,
   courseName: PropType.string,
   instructorName: PropType.string,
   price: PropType.number,

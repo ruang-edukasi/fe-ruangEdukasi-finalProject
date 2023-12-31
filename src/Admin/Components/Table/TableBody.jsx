@@ -17,6 +17,9 @@ const TableBody = ({ item, index }) => {
     item?.instructorName
   );
   const [course_name, setUpdateCourseName] = useState(item?.courseName);
+  const [course_description, setUpdateCourseDescription] = useState(
+    item?.courseDescription
+  );
   const [price, setUpdatePrice] = useState(
     item?.price == null ? "0" : item?.price
   );
@@ -30,6 +33,7 @@ const TableBody = ({ item, index }) => {
     setEditing(true);
     setUpdateInstructorName(item?.instructorName);
     setUpdateCourseName(item?.courseName);
+    setUpdateCourseDescription(item?.courseDescription);
     setUpdatePrice(item?.price == null ? "0" : item?.price);
     setUpdateCourseTypeId(item?.courseType);
     setUpdateCourseLevelId(item?.courseLevel);
@@ -47,6 +51,7 @@ const TableBody = ({ item, index }) => {
       id: item?.id,
       instructor_name,
       course_name,
+      course_description,
       price,
       course_type_id,
       course_level_id,
