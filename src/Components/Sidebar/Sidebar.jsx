@@ -48,7 +48,7 @@ function Sidebar({ navDashbord }) {
   };
   return (
     <div
-      className={`bg-slate-100 rounded-xl w-3/4 md:w-2/5 h-screen pl-4 sm:p-6 z-30 lg:static lg:w-72 transform ease-in-out duration-300 ${
+      className={`bg-slate-100 rounded-xl w-3/4 md:w-2/5 h-screen pl-4 sm:p-6 z-30 lg:sticky lg:top-20 lg:w-72 transform ease-in-out duration-300 ${
         navDashbord
           ? "left-[0] fixed top-24"
           : "left-[-500px] sm:left-[-1000px] absolute"
