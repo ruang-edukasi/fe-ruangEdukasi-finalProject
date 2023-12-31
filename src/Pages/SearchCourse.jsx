@@ -49,7 +49,7 @@ const SearchCourse = () => {
               <CourseItem
                 key={searchCourse?.id}
                 id={searchCourse?.id}
-                imageURL={searchCourse?.imageUrl}
+                thumbnailCourse={searchCourse?.thumbnailCourse || "/course.jpg"}
                 courseName={searchCourse?.courseName}
                 instructorName={searchCourse?.instructorName}
                 courseDescription={searchCourse?.courseDescription}

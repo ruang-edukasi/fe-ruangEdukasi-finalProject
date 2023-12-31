@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ function HeaderAdmin() {
           ""
         )}
       </div>
-      <div className="flex items-center gap-2 py-4">
+      <div className="flex justify-between items-center gap-2 py-4">
         <form action="search" className="relative">
           <input
             type="text"
@@ -45,6 +45,9 @@ function HeaderAdmin() {
             </button>
           </div>
         </form>
+        <button className="p-2">
+          <FontAwesomeIcon icon={faUser} className="text-primary h-7" />
+        </button>
       </div>
     </header>
   );

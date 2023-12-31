@@ -15,7 +15,7 @@ const CardOnes = ({ item }) => {
               <h2 className="card-title font-normal text-xl">
                 {item?.totalCourse}
               </h2>
-              <h2 className="card-title">Active Users</h2>
+              <h2 className="card-title">Total Kelas</h2>
             </div>
           </div>
         </div>
@@ -28,7 +28,7 @@ const CardOnes = ({ item }) => {
               <h2 className="card-title font-normal text-xl">
                 {item?.freeCourse}
               </h2>
-              <h2 className="card-title">Active Class</h2>
+              <h2 className="card-title">Kelas Gratis</h2>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@ const CardOnes = ({ item }) => {
               <h2 className="card-title font-normal text-xl">
                 {item?.premiumCourse}
               </h2>
-              <h2 className="card-title">Premium Class</h2>
+              <h2 className="card-title">Kelas Premium</h2>
             </div>
           </div>
         </div>
