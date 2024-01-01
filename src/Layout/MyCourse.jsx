@@ -21,7 +21,7 @@ function MyCourse() {
 
   return (
     <>
-      {myCourse.map((courses) => (
+      {myCourse?.myCourse?.map((courses) => (
         <CourseItem
           key={courses?.id}
           id={courses?.id}

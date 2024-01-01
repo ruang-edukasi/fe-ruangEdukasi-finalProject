@@ -8,12 +8,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-function CourseItem({
+function CourseMyClass({
   id,
   thumbnailCourse,
   courseName,
   instructorName,
-  price,
+  progressPercent,
   rating,
   courseCategory,
   courseLevel,
@@ -62,9 +62,11 @@ function CourseItem({
             </p>
           </div>
           <div className="flex justify-between items-center">
-            <p className="text-md font-semibold pt-1 text-red-500">
-              {courseType === "Premium" ? `Rp${price}` : "Mulai Kelas"}
-            </p>
+            <progress
+              className="progress progress-primary w-36 h-3 self-center relative "
+              value={progressPercent}
+              max="100"
+            ></progress>
           </div>
           <p className="absolute top-0 left-0 bg-primary text-white p-1 font-bold text-sm rounded-tl-md">
             {courseType}
@@ -75,7 +77,7 @@ function CourseItem({
   );
 }
 
-CourseItem.propTypes = {
+CourseMyClass.propTypes = {
   id: PropType.number,
   thumbnailCourse: PropType.string,
   courseName: PropType.string,
@@ -85,7 +87,7 @@ CourseItem.propTypes = {
   courseCategory: PropType.string,
   courseLevel: PropType.string,
   courseType: PropType.string,
-  progresPrecent: PropType.string,
+  progressPercent: PropType.number,
 };
 
-export default CourseItem;
+export default CourseMyClass;

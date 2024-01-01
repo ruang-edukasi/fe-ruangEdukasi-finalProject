@@ -133,7 +133,7 @@ export const getMyCourse =
         }
       );
       const { response } = data.data;
-      dispatch(setMyCourse(response?.myCourse));
+      dispatch(setMyCourse(response));
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setErrors({
@@ -254,12 +254,9 @@ export const getCourseDashbord = (filters) => async (dispatch) => {
     const data = await axios.get(apiUrl);
 
     const { response } = data.data;
-    console.log("data get from api", response);
 
     dispatch(setCourseDashbord(response));
   } catch (error) {
-    console.error("Error fetching data:", error);
-
     if (axios.isAxiosError(error)) {
       alert(error?.response?.data?.message);
       return;
@@ -293,7 +290,8 @@ export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
     });
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error(error);
+      alert(error?.response?.data?.message);
+      return;
     }
   }
 };
@@ -373,7 +371,8 @@ export const enrollClass = (id, token, navigate) => async (dispatch) => {
     });
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error?.response?.data);
+      alert(error?.response?.data?.message);
+      return;
     }
   }
 };
