@@ -13,11 +13,12 @@ function CourseMyClass({
   thumbnailCourse,
   courseName,
   instructorName,
-  progressPercent,
+  percentProgress,
   rating,
   courseCategory,
   courseLevel,
   courseType,
+  courseContent,
 }) {
   return (
     <>
@@ -52,7 +53,7 @@ function CourseMyClass({
               <span>
                 <FontAwesomeIcon icon={faBook} className="text-success mr-1" />
               </span>
-              10 Modul
+              {courseContent} modul
             </p>
             <p>
               <span>
@@ -61,10 +62,10 @@ function CourseMyClass({
               120 Menit
             </p>
           </div>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center mt-2">
             <progress
               className="progress progress-primary w-36 h-3 self-center relative "
-              value={progressPercent}
+              value={percentProgress}
               max="100"
             ></progress>
           </div>
@@ -87,7 +88,8 @@ CourseMyClass.propTypes = {
   courseCategory: PropType.string,
   courseLevel: PropType.string,
   courseType: PropType.string,
-  progressPercent: PropType.number,
+  courseContent: PropType.number,
+  percentProgress: PropType.number,
 };
 
 export default CourseMyClass;
