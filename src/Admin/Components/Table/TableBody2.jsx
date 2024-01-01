@@ -45,20 +45,26 @@ const TableBody = ({ item, index }) => {
     <>
       <tbody>
         <tr className="font-bold">
-          <td>{index}</td>
-          <td>{item?.orderTrx}</td>
-          <td>{item?.courseCategory == null ? "-" : item?.courseCategory}</td>
-          <td>{item?.courseName == null ? "-" : item?.courseName}</td>
+          <td className="sm:w-1/12">{index}</td>
+          <td className="p-2 sm:w-2/12">{item?.orderTrx}</td>
+          <td className="p-2 sm:w-2/12">
+            {item?.courseCategory == null ? "-" : item?.courseCategory}
+          </td>
+          <td className="p-2 sm:w-2/12">
+            {item?.courseName == null ? "-" : item?.courseName}
+          </td>
           <td
             className={`${
-              item?.status === "Paid" ? "text-succes" : "text-alert"
+              item?.status === "Paid"
+                ? "sm:w-1/12 text-succes"
+                : "sm:w-1/12 text-alert"
             }`}
           >
             {formatStatus(item?.status)}
           </td>
-          <td>{item?.accountNumber}</td>
-          <td>{formattedCreatedAt}</td>
-          <td>
+          <td className="p-2 sm:w-1/12">{item?.accountNumber}</td>
+          <td className="p-2 sm:w-2/12">{formattedCreatedAt}</td>
+          <td className="p-2 sm:w-1/12">
             <button
               onClick={() => handleApprove(item?.orderTrx, item?.status)}
               className={`${
