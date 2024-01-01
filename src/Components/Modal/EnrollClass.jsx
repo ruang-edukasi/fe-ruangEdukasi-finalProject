@@ -18,7 +18,6 @@ function EnrollClass({ course }) {
   // };
   const enrollFreeClass = async (e) => {
     e.preventDefault();
-
     try {
       await dispatch(enrollClass(courseId, token,  navigate));
       document.getElementById("my_modal_3").close();

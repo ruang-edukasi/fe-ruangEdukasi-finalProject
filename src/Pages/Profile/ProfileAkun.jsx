@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { profile, updateProfile, logout } from "../../redux/action/authAction";
 import Swal from "sweetalert2";
 import Header from "../../Components/Header/Header";
-import SidebarAkun from "../../Components/SidebarAkun/Sidebar";
+import SidebarAkun from "../../Components/SidebarAkun/SidebarAccount";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 

@@ -133,7 +133,6 @@ export const getMyCourse =
           },
         }
       );
-      console.log(data);
       const { response } = data.data;
       dispatch(setMyCourse(response?.riwayatOrder));
     } catch (error) {

@@ -18,8 +18,9 @@ function Login() {
   const handleLogin = (event) => {
     event.preventDefault();
     dispatch(login(email, password, navigate));
+    console.log(errorMessage.toLowerCase().includes("email"));
   };
-  
+
   function handleForgot() {
     dispatch(forgotPassword(email));
   }
@@ -44,7 +45,8 @@ function Login() {
               name="email"
               placeholder="Contoh: johndoee@gmail.com "
               className={`border ${
-                errorMessage === "Alamat email tidak terdaftar!"
+                // errorMessage === "Alamat email tidak terdaftar!"
+                errorMessage.toLowerCase().includes("email")
                   ? "border-alert"
                   : "border-slate-400"
               }  px-5 py-2 w-full rounded-xl focus:outline-none`}
@@ -69,7 +71,7 @@ function Login() {
                 placeholder="Masukkan Password"
                 // className="border border-slate-400 px-5 py-2 w-full rounded-xl focus:outline-none"
                 className={`border ${
-                  errorMessage === "Maaf, kata sandi salah"
+                  errorMessage.toLowerCase().includes("password")
                     ? "border-alert"
                     : "border-slate-400"
                 }  px-5 py-2 w-full rounded-xl focus:outline-none`}

@@ -54,7 +54,6 @@ function AllCourse() {
       <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2  sm:gap-y-10 xl:grid-cols-3 2xl:grid-cols-4">
         {filteredKelas.slice(0, 12).map((courses) => (
           <div key={courses?.id} className="flex justify-center">
-           
             <CourseItem
               id={courses?.id}
               imageURL=""

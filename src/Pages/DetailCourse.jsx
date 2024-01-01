@@ -47,11 +47,11 @@ function DetailCourse() {
       console.error(error);
     }
   };
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(addProgres(courseId, courseItem?.id));
-  //   }
-  // }, [courseId, courseItem?.id, dispatch, token]);
+  useEffect(() => {
+    if (token) {
+      dispatch(addProgres(courseId, courseItem?.id));
+    }
+  }, [courseId, courseItem?.id, dispatch, token]);
   // const handleNext = () => {
   //   setCurrentVideoIndex(currentVideoIndex + 1);
   //   setLoading(true);
@@ -241,8 +241,6 @@ function DetailCourse() {
                   ))}
                 </ul>
               </div>
-
-              
             ) : (
               <div className="relative w-full">
                 <LearnProgres

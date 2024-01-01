@@ -1,6 +1,6 @@
 import PropType from "prop-types";
 import CourseItem from "./CourseItem";
-// import LockCourse from "./LockCourse";
+import LockCourse from "./LockCourse";
 
 function index({
   courseContent,
@@ -15,7 +15,7 @@ function index({
       <div className=" w-full bg-white shadow-lg rounded-xl p-6 absolute top-[-40%]">
         <div className="flex justify-between mb-3">
           <h1 className="font-bold text-lg">Materi Belajar</h1>
-          {token ? (
+          {course?.alreadyBuy ? (
             <progress
               className="progress progress-primary w-36 h-3 self-center relative "
               value={course?.progressPercent}
@@ -25,6 +25,7 @@ function index({
             ""
           )}
         </div>
+        <h2 className="text-primary font-bold mb-2">Chapter 1 - Pendahuluan</h2>
         {courseContent.map((item, num) => (
           <CourseItem
             key={item.id}
@@ -36,7 +37,6 @@ function index({
           />
         ))}
 
-        {/* <h2 className="text-primary font-bold mb-2">Chapter 1 - Pendahuluan</h2> */}
         {/* {course?.alreadyBuy && course?.alreadyBuy ? (
           <>
               {courseContent
