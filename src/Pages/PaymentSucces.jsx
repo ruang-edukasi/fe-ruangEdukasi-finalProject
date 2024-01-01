@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import Header from "../Components/Header/Header";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -5,6 +9,25 @@ import Header from "../Components/Header/Header";
 import succesPayment from "../assets/payment-succes.svg";
 
 function PaymentSucces() {
+  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const userToken = localStorage.getItem("token");
+    const isLoggedIn = userToken !== null;
+
+    if (!token && !isLoggedIn) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Silahkan login terlebih dahulu!",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "OK",
+      }).then(() => {
+        navigate("/login");
+      });
+    }
+  }, [token, navigate]);
   return (
     <>
       <Header />
@@ -29,7 +52,7 @@ function PaymentSucces() {
             <button className="text-center bg-primary text-white py-2.5  rounded-3xl px-16 font-bold">
               Mulai belajar
             </button>
-            <button  className="text-center text-blue-500 mt-3 font-bold ">
+            <button className="text-center text-blue-500 mt-3 font-bold ">
               Kembali ke Beranda
             </button>
           </form>

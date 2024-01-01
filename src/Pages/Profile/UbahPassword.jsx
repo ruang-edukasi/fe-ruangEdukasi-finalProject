@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import Header from "../../Components/Header/Header";
-import SidebarAkun from "../../Components/SidebarAkun/Sidebar";
+import SidebarAkun from "../../Components/SidebarAkun/SidebarAccount";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faBars } from "@fortawesome/free-solid-svg-icons";
 import { changePassword, logout } from "../../redux/action/authAction";

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 function CourseItem({
   id,
-  imageUrl,
+  thumbnailCourse,
   courseName,
   instructorName,
   price,
@@ -19,13 +19,14 @@ function CourseItem({
   courseLevel,
   courseType,
 }) {
+  console.log(thumbnailCourse);
   return (
     <>
       <Link
         to={`/detail-course/${id}`}
         className="card w-80 bg-base-100 shadow-md flex hover:-translate-y-2 duration-500"
       >
-        <img src="/course.svg" className="rounded-t-lg w-full" />
+        <img src={thumbnailCourse} className="rounded-t-lg h-40" />
         <div className="p-4">
           <div className="flex justify-between">
             <h3 className="text-primary font-bold">{courseCategory}</h3>
@@ -36,8 +37,8 @@ function CourseItem({
               4.7{rating}
             </p>
           </div>
-          <h3 className="font-bold">{courseName}</h3>
-          <p>by {instructorName}</p>
+          <h3 className="text-start font-bold">{courseName}</h3>
+          <p className="text-start">by {instructorName}</p>
           <div className="flex justify-between font-semibold text-sm">
             <p className="text-primary">
               <span>
@@ -77,7 +78,7 @@ function CourseItem({
 
 CourseItem.propTypes = {
   id: PropType.number,
-  imageUrl: PropType.string,
+  thumbnailCourse: PropType.string,
   courseName: PropType.string,
   instructorName: PropType.string,
   price: PropType.number,
@@ -85,6 +86,7 @@ CourseItem.propTypes = {
   courseCategory: PropType.string,
   courseLevel: PropType.string,
   courseType: PropType.string,
+  progresPrecent: PropType.string,
 };
 
 export default CourseItem;

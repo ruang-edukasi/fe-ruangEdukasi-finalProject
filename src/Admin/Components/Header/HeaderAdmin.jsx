@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,11 +18,11 @@ function HeaderAdmin() {
   }, [dispatch, navigate, token]);
 
   return (
-    <header className="bg-blue-100 p-4 flex justify-between items-center ">
-      <div className="pl-16 lg:pl-72">
+    <header className="bg-blue-100 p-4 flex justify-between items-center">
+      <div className="flex pl-16 lg:pl-72">
         {admin ? (
           <>
-            <h1 className="font-bold text-3xl text-primary">
+            <h1 className="font-bold text-2xl lg:text-3xl text-primary">
               Hi, {admin?.fullName}
             </h1>
           </>
@@ -30,7 +30,7 @@ function HeaderAdmin() {
           ""
         )}
       </div>
-      <div className="flex items-center gap-2 py-4">
+      <div className="hidden justify-between items-center gap-2 py-4 md:flex">
         <form action="search" className="relative">
           <input
             type="text"
@@ -45,6 +45,9 @@ function HeaderAdmin() {
             </button>
           </div>
         </form>
+        <button className="p-2">
+          <FontAwesomeIcon icon={faUser} className="text-primary h-7" />
+        </button>
       </div>
     </header>
   );

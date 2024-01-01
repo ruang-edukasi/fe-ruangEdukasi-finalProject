@@ -12,7 +12,8 @@ import {
   setCourseItem,
   setDetailCategory,
   setCourseDashbord,
-  setEnrollMessage
+  setEnrollMessage,
+  setAddprogess,
 } from "../reducer/courseReducers";
 import Swal from "sweetalert2";
 import { setToken } from "../reducer/authReducer";
@@ -231,15 +232,34 @@ export const getDetail =
     }
   };
 
-export const getCourseDashbord = () => async (dispatch) => {
+export const getCourseDashbord = (filters) => async (dispatch) => {
   try {
-    const data = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/search/multi/`
-    );
+    const params = new URLSearchParams();
+
+    if (filters.category && filters.category.length > 0) {
+      filters.category.forEach((categoryId) => {
+        params.append("catId", categoryId);
+      });
+    }
+
+    if (filters.level && filters.level.length > 0) {
+      filters.level.forEach((levelId) => {
+        params.append("levelId", levelId);
+      });
+    }
+
+    const apiUrl = `${
+      import.meta.env.VITE_API_URL
+    }/api/v1/search/multi/?${params.toString()}`;
+
+    const data = await axios.get(apiUrl);
 
     const { response } = data.data;
+
     dispatch(setCourseDashbord(response));
   } catch (error) {
+    console.error("Error fetching data:", error);
+
     if (axios.isAxiosError(error)) {
       alert(error?.response?.data?.message);
       return;
@@ -273,7 +293,8 @@ export const getOrderCourse = (id, navigate) => async (dispatch, getState) => {
     });
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error(error);
+      alert(error?.response?.data?.message);
+      return;
     }
   }
 };
@@ -332,7 +353,6 @@ export const enrollClass = (id, token, navigate) => async (dispatch) => {
   try {
     const enroll = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/v1/user/enroll/course/${id}`,
-      {},
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -342,7 +362,6 @@ export const enrollClass = (id, token, navigate) => async (dispatch) => {
 
     const { message } = enroll.data;
     dispatch(setEnrollMessage(message));
-    
 
     Swal.fire({
       title: enroll.data.message,
@@ -352,6 +371,31 @@ export const enrollClass = (id, token, navigate) => async (dispatch) => {
         navigate("/payment-succes");
       }
     });
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert(error?.response?.data?.message);
+      return;
+    }
+  }
+};
+export const addProgres = (id, contentId) => async (dispatch, getState) => {
+  try {
+    let { token } = getState().auth;
+    const progress = await axios.post(
+      `${
+        import.meta.env.VITE_API_URL
+      }/api/v1/progress/course/${id}/content/${contentId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const { response } = progress.data;
+    dispatch(setAddprogess(response));
+    // alert("mantap bang id :", contentId, "  udah kamu kelarin");
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log(error?.response?.data);

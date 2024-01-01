@@ -17,6 +17,9 @@ const TableBody = ({ item, index }) => {
     item?.instructorName
   );
   const [course_name, setUpdateCourseName] = useState(item?.courseName);
+  const [course_description, setUpdateCourseDescription] = useState(
+    item?.courseDescription
+  );
   const [price, setUpdatePrice] = useState(
     item?.price == null ? "0" : item?.price
   );
@@ -30,6 +33,7 @@ const TableBody = ({ item, index }) => {
     setEditing(true);
     setUpdateInstructorName(item?.instructorName);
     setUpdateCourseName(item?.courseName);
+    setUpdateCourseDescription(item?.courseDescription);
     setUpdatePrice(item?.price == null ? "0" : item?.price);
     setUpdateCourseTypeId(item?.courseType);
     setUpdateCourseLevelId(item?.courseLevel);
@@ -47,6 +51,7 @@ const TableBody = ({ item, index }) => {
       id: item?.id,
       instructor_name,
       course_name,
+      course_description,
       price,
       course_type_id,
       course_level_id,
@@ -85,8 +90,8 @@ const TableBody = ({ item, index }) => {
     <>
       <tbody>
         <tr className="font-bold">
-          <td>{index}</td>
-          <td>
+          <td className="sm:w-1/12">{index}</td>
+          <td className="p-2 sm:w-2/12">
             {editing ? (
               <input
                 type="text"
@@ -98,7 +103,7 @@ const TableBody = ({ item, index }) => {
               item?.instructorName
             )}
           </td>
-          <td>
+          <td className="p-2 sm:w-3/12">
             {editing ? (
               <select
                 value={course_category_id}
@@ -117,7 +122,7 @@ const TableBody = ({ item, index }) => {
               item?.courseCategory
             )}
           </td>
-          <td>
+          <td className="p-2 sm:w-3/12">
             {editing ? (
               <input
                 type="text"
@@ -131,7 +136,9 @@ const TableBody = ({ item, index }) => {
           </td>
           <td
             className={`${
-              item?.courseType === "Gratis" ? "text-succes" : "text-primary"
+              item?.courseType === "Gratis"
+                ? "p-2 sm:w-1/12 text-succes"
+                : "p-2 sm:w-1/12 text-primary"
             }`}
           >
             {editing ? (
@@ -148,7 +155,7 @@ const TableBody = ({ item, index }) => {
               item?.courseType
             )}
           </td>
-          <td>
+          <td className="p-2 sm:w-1/12">
             {editing ? (
               <select
                 value={course_level_id}
@@ -164,7 +171,7 @@ const TableBody = ({ item, index }) => {
               item?.courseLevel
             )}
           </td>
-          <td>
+          <td className="p-2 sm:w-1/12">
             {editing ? (
               <input
                 type="text"
@@ -176,7 +183,7 @@ const TableBody = ({ item, index }) => {
               `Rp.${item?.price == null ? "0" : item?.price}`
             )}
           </td>
-          <td>
+          <td className="p-2 sm:w-2/12">
             {editing ? (
               <div className="flex justify-between gap-2">
                 <button
@@ -201,7 +208,7 @@ const TableBody = ({ item, index }) => {
               </button>
             )}
           </td>
-          <td>
+          <td className="p-2 sm:w-2/12">
             <button
               onClick={() => handleDelete(item?.id)}
               className="bg-alert text-white font-semibold rounded-3xl w-16 h-7 hover:bg-red-800 transition duration-300"

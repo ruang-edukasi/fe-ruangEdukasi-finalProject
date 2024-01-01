@@ -5,7 +5,6 @@ const initialState = {
   myOrder: [],
   courseSummary: {},
   course: [],
-  search: [],
   createCourse: [],
   createCourseContent: [],
 };
@@ -26,9 +25,6 @@ const courseSlice = createSlice({
     setCourse: (state, action) => {
       state.course = action.payload;
     },
-    setSearch: (state, action) => {
-      state.search = action.payload;
-    },
     setCreateCourse: (state, action) => {
       state.createCourse = action.payload;
     },
@@ -39,7 +35,7 @@ const courseSlice = createSlice({
       state.course = action.payload;
     },
     setCreateCourseContent: (state, action) => {
-      state.createCourseContent = action.payload;
+      state.course = action.payload;
     },
   },
 });
@@ -49,7 +45,6 @@ export const {
   setMyOrder,
   setCourseSummary,
   setCourse,
-  setSearch,
   setCreateCourse,
   setDeleteCourse,
   setEditCourse,
