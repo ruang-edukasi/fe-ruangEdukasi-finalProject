@@ -258,8 +258,6 @@ export const getCourseDashbord = (filters) => async (dispatch) => {
 
     dispatch(setCourseDashbord(response));
   } catch (error) {
-    console.error("Error fetching data:", error);
-
     if (axios.isAxiosError(error)) {
       alert(error?.response?.data?.message);
       return;
@@ -318,7 +316,8 @@ export const checkCoupon = (id, coupon_code) => async (dispatch, getState) => {
     dispatch(setCoupon(responseCoupon));
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      alert.error(error);
+      alert(error?.response?.data?.message);
+      return;
     }
   }
 };
@@ -353,6 +352,7 @@ export const enrollClass = (id, token, navigate) => async (dispatch) => {
   try {
     const enroll = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/v1/user/enroll/course/${id}`,
+      {},
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -395,10 +395,10 @@ export const addProgres = (id, contentId) => async (dispatch, getState) => {
 
     const { response } = progress.data;
     dispatch(setAddprogess(response));
-    // alert("mantap bang id :", contentId, "  udah kamu kelarin");
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error?.response?.data);
+      alert(error?.response?.data?.message);
+      return;
     }
   }
 };

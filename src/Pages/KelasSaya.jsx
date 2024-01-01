@@ -6,16 +6,19 @@ import CourseMyClass from "../Components/Card/CourseMyClass";
 import { getMyCourse } from "../redux/action/courseAction";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBarsStaggered, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function KelasSaya() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("All");
   const [navDashbord, setNavDashbord] = useState(false);
+  const { user, token } = useSelector((state) => state.auth);
   const { myCourse } = useSelector((state) => state.course);
-  const { token } = useSelector((state) => state.auth);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
@@ -37,10 +40,23 @@ function KelasSaya() {
   }, [myCourse, activeFilter]);
 
   useEffect(() => {
-    if (token) {
-      dispatch(getMyCourse(errors, setErrors));
+    const userToken = localStorage.getItem("token");
+    const isLoggedIn = userToken !== null;
+
+    if (!token && !isLoggedIn) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Silahkan login terlebih dahulu!",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "OK",
+      }).then(() => {
+        navigate("/login");
+      });
+    } else {
+      dispatch(getMyCourse(setErrors, errors));
     }
-  }, [dispatch, errors, token]);
+  }, [dispatch, errors, myCourse, navigate, token, user]);
 
   useEffect(() => {
     dispatch(getMyCourse(setErrors, errors));
@@ -58,14 +74,18 @@ function KelasSaya() {
     <div>
       <Header />
       <section className="bg-blue-100 min-h-screen">
-        <div className="container mx-auto px-24">
+        <div className="container mx-auto px-10 sm:px-5 lg:px-24">
           <div className="flex justify-between py-10">
             <h2 className="text-2xl font-bold">Kelas Berjalan</h2>
           </div>
           <div className="flex justify-evenly gap-1">
+            {/* Sidebar */}
             <Sidebar navDashbord={navDashbord} />
+
+            {/* Main Content */}
             <div className="flex flex-col gap-5">
               <div className="flex justify-between">
+                {/* filter Buttons */}
                 <Button
                   bgColor={
                     activeFilter === "All"
@@ -94,7 +114,7 @@ function KelasSaya() {
                   onClick={() => handleFilterChange("Selesai")}
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-y-3 sm:grid-cols-2 sm:gap-3 lg:gap-4">
                 {filteredKelas.map((courses) => (
                   <CourseMyClass
                     key={courses?.id}

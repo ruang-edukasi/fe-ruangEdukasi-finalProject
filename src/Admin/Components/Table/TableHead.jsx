@@ -3,15 +3,15 @@ function TableHead() {
     <>
       <thead>
         <tr className="bg-blue-100 text-base text-slate-800">
-          <th>No</th>
-          <th>Nama Instruktur</th>
-          <th>Kategori</th>
-          <th>Nama Kelas</th>
-          <th>Tipe Kelas</th>
-          <th>Level</th>
-          <th>Harga Kelas</th>
-          <th>Aksi</th>
-          <th></th>
+          <th className="p-3 sm:w-1/12">No</th>
+          <th className="p-2 sm:w-2/12">Nama Instruktur</th>
+          <th className="p-2 sm:w-2/12">Kategori</th>
+          <th className="p-2 sm:w-2/12">Nama Kelas</th>
+          <th className="p-2 sm:w-1/12">Tipe Kelas</th>
+          <th className="p-2 sm:w-1/12">Level</th>
+          <th className="p-2 sm:w-2/12">Harga Kelas</th>
+          <th className="p-2 sm:w-2/12">Aksi</th>
+          <th className="p-2 sm:w-2/12"></th>
         </tr>
       </thead>
     </>

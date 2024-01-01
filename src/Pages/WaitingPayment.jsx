@@ -1,11 +1,34 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import Header from "../Components/Header/Header";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 // import { Link } from "react-router-dom";
-import waitingPayment from "../assets/waiting-payment.svg"
+import waitingPayment from "../assets/waiting-payment.svg";
 
 function PaymentSucces() {
+  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const userToken = localStorage.getItem("token");
+    const isLoggedIn = userToken !== null;
+
+    if (!token && !isLoggedIn) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Silahkan login terlebih dahulu!",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "OK",
+      }).then(() => {
+        navigate("/login");
+      });
+    }
+  }, [token, navigate]);
   return (
     <>
       <Header />
