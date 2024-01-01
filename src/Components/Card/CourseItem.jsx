@@ -19,6 +19,7 @@ function CourseItem({
   courseLevel,
   courseType,
 }) {
+  console.log(thumbnailCourse);
   return (
     <>
       <Link
@@ -36,8 +37,8 @@ function CourseItem({
               4.7{rating}
             </p>
           </div>
-          <h3 className="font-bold">{courseName}</h3>
-          <p>by {instructorName}</p>
+          <h3 className="text-start font-bold">{courseName}</h3>
+          <p className="text-start">by {instructorName}</p>
           <div className="flex justify-between font-semibold text-sm">
             <p className="text-primary">
               <span>

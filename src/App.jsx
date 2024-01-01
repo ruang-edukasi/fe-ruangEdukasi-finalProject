@@ -21,6 +21,7 @@ import PaymentSucces from "./Pages/PaymentSucces";
 import Notification from "./Pages/Notification";
 import CategoryCourse from "./Pages/CategoryCourse";
 import WaitingPayment from "./Pages/WaitingPayment";
+import OrderHistory from "./Pages/Profile/OrderHistory";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           />
           <Route path="/ubah-password" element={<UbahPassword />} />
           <Route path="/profile-akun" element={<ProfileAkun />} />
+          <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/detail-course" element={<DetailCourse />} />
           <Route path="/payment-succes" element={<PaymentSucces />} />
           <Route path="/waiting-payment" element={<WaitingPayment />} />

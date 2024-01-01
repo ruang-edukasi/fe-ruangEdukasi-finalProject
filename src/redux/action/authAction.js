@@ -32,14 +32,17 @@ export const login = (email, password, navigate) => async (dispatch) => {
     });
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      if (
-        error?.response?.data?.message ===
-        "Email is not registered in our system"
-      ) {
-        dispatch(setError("Alamat email tidak terdaftar!"));
-      } else if (error?.response?.data?.message === "Wrong password") {
-        dispatch(setError("Maaf, kata sandi salah"));
-      }
+      dispatch(setSucces(""));
+      dispatch(setError(error?.response?.data?.message));
+      // if (
+      //   error?.response?.data?.message ===
+      //   "Email is not registered in our system"
+      // ) {
+      //   // dispatch(setSucces(""));
+      // } else if (error?.response?.data?.message === "Wrong password") {
+      //   dispatch(setError("Maaf, kata sandi salah"));
+      //   // dispatch(setSucces(""));
+      // }
       return;
     }
     alert(error?.message);
@@ -60,14 +63,13 @@ export const forgotPassword = (email) => async (dispatch) => {
       title: fetch.data.message,
       icon: "success",
     });
-    dispatch(
-      setSucces("Tautan reset password terkirim, lihat emailmu sekarang!")
-    );
+    dispatch(setSucces(fetch.data.message));
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      if (error?.response?.data?.message === "Email not found") {
-        dispatch(setError("Alamat email tidak terdaftar!"));
-      }
+      dispatch(setSucces(""));
+      dispatch(setError(error?.response?.data?.message));
+      // if (error?.response?.data?.message === "Email not found") {
+      // }
       return;
     }
     alert(error?.message);

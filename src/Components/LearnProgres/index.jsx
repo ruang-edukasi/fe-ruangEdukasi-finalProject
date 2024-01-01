@@ -14,7 +14,7 @@ function index({
       <div className=" w-full bg-white shadow-lg rounded-xl p-6 absolute top-[-40%]">
         <div className="flex justify-between mb-3">
           <h1 className="font-bold text-lg">Materi Belajar</h1>
-          {token ? (
+          {course?.alreadyBuy && token ? (
             <progress
               className="progress progress-primary w-36 h-3 self-center relative "
               value={course?.progressPercent}
@@ -24,11 +24,27 @@ function index({
             ""
           )}
         </div>
-        {/* <h2 className="text-primary font-bold mb-2">Chapter 1 - Pendahuluan</h2> */}
+        <h2 className="text-primary font-bold mb-2">Chapter 1 - Pendahuluan</h2>
+        {/* {courseContent.map((item, num) => (
+          <CourseItem
+            key={item.id}
+            item={item}
+            courseId={courseId}
+            setCurrentVideoIndex={setCurrentVideoIndex}
+            // indexVideo = {indexVideo}
+            num={num + 1}
+          />
+        ))} */}
+
         {course?.alreadyBuy && course?.alreadyBuy ? (
           <>
-            <ul className="menu  w-full space-y-2 bg-white">
-              {courseContent.map((item, num) => (
+            {courseContent
+              .filter(
+                (filtered) =>
+                  filtered.status.includes("Preview") ||
+                  filtered.infoProgress.includes("Done")
+              )
+              .map((item, num) => (
                 <CourseItem
                   key={item.id}
                   item={item}
@@ -37,33 +53,38 @@ function index({
                   num={num + 1}
                 />
               ))}
-            </ul>
-          </>
-        ) : (
-          <>
-            <ul className="menu  w-full space-y-2 bg-white">
-              {courseContent
-                .filter(
-                  (filtered) =>
-                    filtered.status.includes("Preview") &&
-                    filtered.infoProgress.includes("Started")
-                )
-                .map((item, num) => (
-                  <CourseItem
-                    key={item.id}
-                    item={item}
-                    courseId={courseId}
-                    setCurrentVideoIndex={setCurrentVideoIndex}
-                    num={num + 1}
-                  />
-                ))}
-            </ul>
-            {courseContent
+
+            {/* {courseContent
               .filter(
                 (filtered) =>
                   filtered.videoLink.includes("#") ||
                   filtered.infoProgress.includes("Not Started")
               )
+              .map((item, num) => (
+                <LockCourse
+                  key={item.id}
+                  item={item}
+                  courseId={courseId}
+                  setCurrentVideoIndex={setCurrentVideoIndex}
+                  num={num + 1}
+                />
+              ))} */}
+          </>
+        ) : (
+          <>
+            {courseContent
+              .filter((filtered) => filtered.status.includes("Preview"))
+              .map((item, num) => (
+                <CourseItem
+                  key={item.id}
+                  item={item}
+                  courseId={courseId}
+                  setCurrentVideoIndex={setCurrentVideoIndex}
+                  num={num + 1}
+                />
+              ))}
+            {courseContent
+              .filter((filtered) => filtered.videoLink.includes("#"))
               .map((item, num) => (
                 <LockCourse
                   key={item.id}
@@ -85,6 +106,7 @@ index.prototype = {
   courseId: PropType.number.isRequired,
   setCurrentVideoIndex: PropType.func.isRequired,
   token: PropType.string.isRequired,
+  videoIndex: PropType.number.isRequired,
 };
 
 export default index;
