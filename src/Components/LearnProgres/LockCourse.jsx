@@ -45,7 +45,7 @@ function LockCourse({ num, item, courseId }) {
           <li className="items-start border-b-2  border-[#EBF3FC]  cursor-not-allowed">
             <div className="self-start ps-0 w-full cursor-not-allowed">
               <span className="px-3.5 py-2 font-semibold bg-[#EBF3FC] rounded-full inline me-2 ">
-                {num }
+                {num + 1}
               </span>
               <div className=" flex justify-between w-full">
                 <h5 className="self-center">{item.contentTitle}</h5>

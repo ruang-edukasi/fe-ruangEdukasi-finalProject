@@ -42,7 +42,8 @@ function index({
               .filter(
                 (filtered) =>
                   filtered.status.includes("Preview") ||
-                  filtered.infoProgress.includes("Done")
+                  filtered.infoProgress.includes("Done") ||
+                  filtered.videoLink.includes("https://youtu.be")
               )
               .map((item, num) => (
                 <CourseItem
@@ -73,7 +74,11 @@ function index({
         ) : (
           <>
             {courseContent
-              .filter((filtered) => filtered.status.includes("Preview"))
+              .filter(
+                (filtered) =>
+                  filtered.status.includes("Preview") ||
+                  filtered.videoLink.includes("https")
+              )
               .map((item, num) => (
                 <CourseItem
                   key={item.id}
@@ -84,7 +89,11 @@ function index({
                 />
               ))}
             {courseContent
-              .filter((filtered) => filtered.videoLink.includes("#"))
+              .filter(
+                (filtered) =>
+                  filtered.videoLink.includes("#") ||
+                  filtered.infoProgress.includes("Not Started")
+              )
               .map((item, num) => (
                 <LockCourse
                   key={item.id}
