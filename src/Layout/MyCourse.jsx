@@ -1,22 +1,38 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getMyCourse } from "../redux/action/courseAction";
 import CourseItem from "../Components/Card/CourseItem";
+import Swal from "sweetalert2";
 
 function MyCourse() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user, token } = useSelector((state) => state.auth);
   const { myCourse } = useSelector((state) => state.course);
-  const { token } = useSelector((state) => state.auth);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
   });
 
   useEffect(() => {
-    if (token) {
-      dispatch(getMyCourse(errors, setErrors));
+    const userToken = localStorage.getItem("token");
+    const isLoggedIn = userToken !== null;
+
+    if (!token && !isLoggedIn) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Silahkan login terlebih dahulu!",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "OK",
+      }).then(() => {
+        navigate("/login");
+      });
+    } else {
+      dispatch(getMyCourse(setErrors, errors));
     }
-  }, [dispatch, errors, token]);
+  }, [dispatch, errors, myCourse, navigate, token, user]);
 
   if (errors.isError) {
     return <h1>{errors.message}</h1>;
@@ -36,7 +52,6 @@ function MyCourse() {
           courseLevel={courses?.courseLevel}
         />
       ))}
-      {/* {console.log(myCourse)} */}
     </>
   );
 }

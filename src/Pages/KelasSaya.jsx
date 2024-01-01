@@ -2,14 +2,49 @@ import { useState } from "react";
 import Button from "../Components/Button/Button";
 import Header from "../Components/Header/Header";
 import Sidebar from "../Components/Sidebar/Sidebar";
-import MyCourse from "../Layout/MyCourse";
+import CourseMyClass from "../Components/Card/CourseMyClass";
+import { getMyCourse } from "../redux/action/courseAction";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBarsStaggered, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function KelasSaya() {
+  const dispatch = useDispatch();
   const [activeFilter, setActiveFilter] = useState("All");
   const [navDashbord, setNavDashbord] = useState(false);
+  const { myCourse } = useSelector((state) => state.course);
+  const { token } = useSelector((state) => state.auth);
+  const [errors, setErrors] = useState({
+    isError: false,
+    message: null,
+  });
+  const [filteredKelas, setFilteredKelas] = useState([...myCourse]);
+
+  useEffect(() => {
+    const filtered = myCourse.filter((item) => {
+      if (activeFilter === "All") {
+        return true;
+      } else if (activeFilter === "InProgress") {
+        return item.percentProgress < 100;
+      } else if (activeFilter === "Selesai") {
+        return item.percentProgress >= 100;
+      }
+      return true;
+    });
+    setFilteredKelas(filtered);
+  }, [myCourse, activeFilter]);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getMyCourse(errors, setErrors));
+    }
+  }, [dispatch, errors, token]);
+
+  useEffect(() => {
+    dispatch(getMyCourse(setErrors, errors));
+  }, [dispatch, errors, myCourse]);
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
@@ -60,7 +95,20 @@ function KelasSaya() {
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <MyCourse />
+                {filteredKelas.map((courses) => (
+                  <CourseMyClass
+                    key={courses?.id}
+                    id={courses?.id}
+                    thumbnailCourse={courses?.thumbnailCourse || "/course.jpg"}
+                    courseName={courses?.courseName}
+                    instructorName={courses?.instructorName}
+                    courseType={courses?.courseType}
+                    courseCategory={courses?.courseCategory}
+                    courseLevel={courses?.courseLevel}
+                    courseContent={courses?.courseContent}
+                    percentProgress={courses?.percentProgress}
+                  />
+                ))}
               </div>
             </div>
           </div>

@@ -86,6 +86,7 @@ CourseItem.propTypes = {
   courseCategory: PropType.string,
   courseLevel: PropType.string,
   courseType: PropType.string,
+  progresPrecent: PropType.string,
 };
 
 export default CourseItem;

@@ -13,9 +13,6 @@ function EnrollClass({ course }) {
   const { courseId } = useParams();
   const { token } = useSelector((state) => state.auth);
 
-  // const enrollFreeClass = () => {
-
-  // };
   const enrollFreeClass = async (e) => {
     e.preventDefault();
     try {
@@ -59,11 +56,11 @@ function EnrollClass({ course }) {
               </div>
             </h3>
           )}
-          <div className="w-full flex justify-center flex-col items-center gap-10">
+          <div className="w-full flex justify-center flex-col items-center gap-10 text-start">
             <CourseItem
               key={course?.id}
               id={course.id}
-              imageURL={course?.imageUrl}
+              thumbnailCourse={course?.thumbnailCourse || "/course.jpg"}
               courseName={course?.courseName}
               instructorName={course?.instructorName}
               courseDescription={course?.courseDescription}
