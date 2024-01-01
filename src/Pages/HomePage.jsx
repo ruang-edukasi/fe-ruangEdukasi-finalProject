@@ -16,7 +16,7 @@ function HomePage() {
       <section>
         <HeroOne />
         <section className="bg-blue-100">
-          <div className="container mx-auto px-12 sm:px-16 py-4">
+          <div className="container mx-auto px-8 sm:px-16 py-4">
             <div className="overflow-hidden">
               <div className="py-2">
                 <h2 className="text-2xl font-bold">Kategori Belajar</h2>
@@ -25,7 +25,7 @@ function HomePage() {
             <Category />
           </div>
         </section>
-        <section className="container mx-auto pb-10 mt-10 px-12 sm:px-16">
+        <section className="container mx-auto pb-10 mt-10 px-8 sm:px-16">
           <div className="overflow-hidden">
             <div className="mt-8">
               <h2 className="text-2xl font-bold mb-4 sm:mb-0">
@@ -35,7 +35,7 @@ function HomePage() {
           </div>
           <CoursePopular />
         </section>
-        <section id="allCourse" className="container mx-auto px-12 sm:px-16">
+        <section id="allCourse" className="container mx-auto px-8 sm:px-16">
           <div className="mb-4 sm:mb-0">
             <h2 className="text-2xl font-bold mb-4 sm:mb-0 text-primary">
               Semua Kursus

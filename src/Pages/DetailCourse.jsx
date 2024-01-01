@@ -45,7 +45,7 @@ function DetailCourse() {
       setCurrentVideoIndex(currentVideoIndex + 1);
       setLoading(true);
     } catch (error) {
-      console.error(error);
+      alert(error);
     }
   };
   useEffect(() => {
@@ -84,8 +84,8 @@ function DetailCourse() {
       <Header />
       <section className="mb-36">
         <div className=" px-6 md:px-24 content w-full flex flex-col py-8 bg-[#EBF3FC]">
-          <Link to={"/"} className="md:w-1/6 sm:2/6 mb-4">
-            <div className="text-base font-bold leading-tight tracking-tight text-black md:text-xl">
+          <Link to={"/"} className="md:w-1/3 sm:2/6 mb-4">
+            <div className="text-base font-bold leading-tight tracking-tight text-black md:text-lg lg:text-xl">
               <FontAwesomeIcon
                 icon={faArrowLeft}
                 className="mr-6 text-black inline"
@@ -127,32 +127,34 @@ function DetailCourse() {
                 {detail?.studentCount} Siswa
               </p>
             </div>
-            <a
-              className="text-center py-2.5 rounded-3xl bg-succes text-white px-6  mb-4 md:me-3"
-              href={detail?.telegramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Join Group Telegram
-              <FontAwesomeIcon
-                icon={faComments}
-                className=" ms-1 text-white inline"
-              />
-            </a>
-            {detail?.alreadyBuy ? (
-              ""
-            ) : (
+            <div className="flex flex-col justify-start items-start md:flex-row">
               <a
-                onClick={show}
-                className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 cursor-pointer"
+                className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 mb-4 md:me-3 w-full lg:w-64"
+                href={detail?.telegramLink}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Gabung ke kelas
+                Join Group Telegram
                 <FontAwesomeIcon
-                  icon={faChalkboardUser}
+                  icon={faComments}
                   className=" ms-1 text-white inline"
                 />
               </a>
-            )}
+              {detail?.alreadyBuy ? (
+                ""
+              ) : (
+                <a
+                  onClick={show}
+                  className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 cursor-pointer min-h-fit w-full lg:w-64"
+                >
+                  Gabung ke kelas
+                  <FontAwesomeIcon
+                    icon={faChalkboardUser}
+                    className=" ms-1 text-white inline"
+                  />
+                </a>
+              )}
+            </div>
           </div>
         </div>
         <div className="sm:px-28 md:px-32 w-full flex gap-14 justify-between p-10 ">
@@ -215,7 +217,7 @@ function DetailCourse() {
               </div>
             </div>
 
-            <div className="flex md:hidden justify-center">
+            <div className="flex lg:hidden justify-center">
               <button
                 onClick={() => {
                   setShowTentang(true);
