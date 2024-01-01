@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import Header from "../../Components/Header/Header";
-import SidebarAkun from "../../Components/SidebarAkun/Sidebar";
+import SidebarAkun from "../../Components/SidebarAkun/SidebarAccount";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faBars } from "@fortawesome/free-solid-svg-icons";
 import { changePassword, logout } from "../../redux/action/authAction";
@@ -19,8 +19,8 @@ const UbahPassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-    const [isMenuOpen, setMenuOpen] = useState(false);
-   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const handleShowPassword1 = () => {
     setShowPassword1(!showPassword1);
@@ -34,66 +34,65 @@ const UbahPassword = () => {
     setShowPassword3(!showPassword3);
   };
 
-   useEffect(() => {
-     const handleResize = () => {
-       setIsMobile(window.innerWidth <= 768);
-     };
-
-     window.addEventListener("resize", handleResize);
-
-     // Cleanup event listener on component unmount
-     return () => {
-       window.removeEventListener("resize", handleResize);
-     };
-   }, []);
-
-    const toggleMenu = () => {
-      setMenuOpen(!isMenuOpen);
-
-      // Disable scrolling when the off-canvas menu is open
-      if (!isMenuOpen) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "auto";
-      }
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
     };
 
-    useEffect(() => {
-      return () => {
-        document.body.style.overflow = "auto";
-      };
-    }, []);
+    window.addEventListener("resize", handleResize);
 
-     const onLogout = () => {
-       Swal.fire({
-         title: "Logout Confirmation",
-         text: "Are you sure you want to log out?",
-         icon: "warning",
-         showCancelButton: true,
-         confirmButtonColor: "#6148FF",
-         cancelButtonColor: "#d33",
-         confirmButtonText: "Yes, log me out",
-       }).then((result) => {
-         if (result.isConfirmed) {
-           // Use dispatch instead of useDispatch here
-           dispatch(logout());
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-           Swal.fire({
-             title: "Logged Out",
-             text: "You have been successfully logged out.",
-             icon: "success",
-             timer: 2000,
-             showConfirmButton: false,
-           });
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
 
-           // Navigasi ke halaman utama setelah 2 detik
-           setTimeout(() => {
-             navigate("/");
-           }, 2000);
-         }
-       });
-     };
+    // Disable scrolling when the off-canvas menu is open
+    if (!isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  };
 
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  const onLogout = () => {
+    Swal.fire({
+      title: "Logout Confirmation",
+      text: "Are you sure you want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#6148FF",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log me out",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Use dispatch instead of useDispatch here
+        dispatch(logout());
+
+        Swal.fire({
+          title: "Logged Out",
+          text: "You have been successfully logged out.",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+
+        // Navigasi ke halaman utama setelah 2 detik
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      }
+    });
+  };
 
   return (
     <>

@@ -13,7 +13,7 @@ import Header from "../Components/Header/Header";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getDetail } from "../redux/action/courseAction";
+import { addProgres, getDetail } from "../redux/action/courseAction";
 import LearnProgres from "../Components/LearnProgres";
 import ReactPlayer from "react-player/youtube";
 import EnrollClass from "../Components/Modal/EnrollClass";
@@ -27,7 +27,6 @@ function DetailCourse() {
   const [playVideo, setPlayVideo] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-
   const [showTentang, setShowTentang] = useState(true);
 
   const { detail, courseContent, courseItem } = useSelector(
@@ -39,10 +38,28 @@ function DetailCourse() {
     document.getElementById("my_modal_3").showModal();
   };
 
-  const handleNext = () => {
-    setCurrentVideoIndex(currentVideoIndex + 1);
-    setLoading(true);
+  const handleNext = async (e) => {
+    e.preventDefault();
+
+    try {
+      await dispatch(addProgres(courseId, courseItem?.id));
+      setCurrentVideoIndex(currentVideoIndex + 1);
+      setLoading(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  useEffect(() => {
+    if (token) {
+      dispatch(addProgres(courseId, courseItem?.id));
+    }
+  }, [courseId, courseItem?.id, dispatch, token]);
+  // const handleNext = () => {
+  //   setCurrentVideoIndex(currentVideoIndex + 1);
+  //   setLoading(true);
+  //   dispatch(addProgres(courseId, token, courseItem?.id));
+  //   console.log(courseItem?.id);
+  // };
 
   useEffect(() => {
     const userToken = localStorage.getItem("token");
@@ -65,7 +82,6 @@ function DetailCourse() {
 
   return (
     <>
-      {/* {console.log(courseItem)} */}
       <Header />
       <section className="mb-36">
         <div className=" px-6 md:px-24 content w-full flex flex-col py-8 bg-[#EBF3FC]">
@@ -78,9 +94,10 @@ function DetailCourse() {
               Kelas Lainnya
             </div>
           </Link>
-          <div className=" mx-auto md:ms-4  mb-8 flex flex-col md:inline ">
-            <h1 className="text-2xl font-bold text-primary">
-              {detail?.courseName} <span></span>
+          <div className=" ms-5 mb-8 ">
+            <h1 className="text-2xl font-bold text-primary w-3/5 flex justify-between ">
+              {detail?.courseName}
+              <span className="self-center flex text-black"></span>
             </h1>
             <h1 className="text-2xl font-bold ">
               {detail?.courseCategory} <span></span>
@@ -88,7 +105,7 @@ function DetailCourse() {
             <h3 className="text-base font-bold">
               {detail?.instructorName} <span></span>
             </h3>
-            <div className="w-full md:w-8/12 border rounded-md flex justify-between mb-6">
+            <div className="w-full md:w-4/12 rounded-md flex justify-between mb-6">
               <p className="font-semibold text-sm">
                 <FontAwesomeIcon
                   icon={faShieldHeart}
@@ -114,6 +131,8 @@ function DetailCourse() {
             <a
               className="text-center py-2.5 rounded-3xl bg-succes text-white px-6  mb-4 md:me-3"
               href={detail?.telegramLink}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Join Group Telegram
               <FontAwesomeIcon
@@ -190,7 +209,7 @@ function DetailCourse() {
                       ? "hidden"
                       : "inline"
                   } px-9 py-1.5 text-white font-semibold  bg-primary rounded-3xl right-9`}
-                  onClick={() => handleNext()}
+                  onClick={handleNext}
                 >
                   Next
                 </button>
@@ -240,17 +259,20 @@ function DetailCourse() {
                   courseContent={courseContent}
                   courseId={courseItem?.id}
                   setCurrentVideoIndex={setCurrentVideoIndex}
+                  token={token}
+                  indexVideo={currentVideoIndex}
                 />
               </div>
             )}
           </div>
-          <div className="hidden md:block md:relative md:w-4/12 ">
+          <div className="hidden lg:block md:relative md:w-4/12 ">
             <LearnProgres
               courseContent={courseContent}
               courseId={courseItem?.id}
               course={detail}
               setCurrentVideoIndex={setCurrentVideoIndex}
               token={token}
+              indexVideo={currentVideoIndex}
             />
           </div>
         </div>
