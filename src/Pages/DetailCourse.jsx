@@ -8,8 +8,9 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Swal from "sweetalert2";
 import Header from "../Components/Header/Header";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addProgres, getDetail } from "../redux/action/courseAction";
@@ -19,6 +20,7 @@ import EnrollClass from "../Components/Modal/EnrollClass";
 import playButton from "../assets/playVideo.svg";
 function DetailCourse() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { courseId } = useParams();
   const [played, setPlayed] = useState(0);
   const [duration, setduration] = useState(0);
@@ -31,7 +33,7 @@ function DetailCourse() {
     (state) => state.course
   );
 
-  const { token } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
   const show = () => {
     document.getElementById("my_modal_3").showModal();
   };
@@ -60,8 +62,23 @@ function DetailCourse() {
   // };
 
   useEffect(() => {
-    dispatch(getDetail(courseId, currentVideoIndex));
-  }, [courseId, dispatch, currentVideoIndex]);
+    const userToken = localStorage.getItem("token");
+    const isLoggedIn = userToken !== null;
+
+    if (!token && !isLoggedIn) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Silahkan login terlebih dahulu!",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "OK",
+      }).then(() => {
+        navigate("/login");
+      });
+    } else {
+      dispatch(getDetail(courseId, currentVideoIndex));
+    }
+  }, [courseId, dispatch, currentVideoIndex, user, token, navigate]);
 
   return (
     <>
