@@ -5,7 +5,6 @@ import {
   faShieldHeart,
   faUser,
   faChalkboardUser,
-  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../Components/Header/Header";

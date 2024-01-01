@@ -1,7 +1,8 @@
 import PropType from "prop-types";
 import CourseItem from "./CourseItem";
 import LockCourse from "./LockCourse";
-
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function index({
   courseContent,
   courseId,
@@ -15,11 +16,19 @@ function index({
         <div className="flex justify-between mb-3">
           <h1 className="font-bold text-lg">Materi Belajar</h1>
           {course?.alreadyBuy && token ? (
-            <progress
-              className="progress progress-primary w-36 h-3 self-center relative "
-              value={course?.progressPercent}
-              max="100"
-            ></progress>
+            <div className="space-x-1">
+              <FontAwesomeIcon
+                icon={faCircleCheck}
+                className="text-blue-600 self-center border border-dashed rounded-full h-[17px]  "
+              />
+              <progress
+                className="progress progress-primary w-36 h-4 self-center relative "
+                value={course?.progressPercent}
+                max="100"
+              >
+                <p className="absolute top-10 z-1 text-white">30% done</p>
+              </progress>
+            </div>
           ) : (
             ""
           )}
