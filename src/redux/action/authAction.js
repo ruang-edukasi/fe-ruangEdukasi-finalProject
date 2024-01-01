@@ -127,30 +127,26 @@ export const register =
       navigate(`/otp/${verifId}`);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        alert(error?.response?.data?.message);
+        if (error?.response?.status === 409) {
+          // Customize the alert message for email already registered
+          alert(
+            "Email has already been registered. Please use a different email."
+          );
+        } else {
+          // Handle other errors
+          console.error("Registration error:", error);
+          alert("An error occurred during registration. Please try again.");
+        }
         return;
       }
-      alert(error?.message);
+     Swal.fire({
+       icon: "error",
+       title: "Registration Error",
+       text: "Email sudah terdaftar. Silakan gunakan email lain.",
+     });
     }
   };
-export const registerWithGoogle = (navigate) => async (dispatch) => {
-  try {
-    const registrationResponse = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/oauth/user/google`
-    );
-    const { response } = registrationResponse.data;
-    const { token } = response;
-    dispatch(setToken(token));
 
-    navigate(`/`);
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      alert(error?.response?.data?.message);
-      return;
-    }
-    alert(error?.message);
-  }
-};
 
 export const verificationOTP = (otp, verifId, navigate) => async (dispatch) => {
   try {

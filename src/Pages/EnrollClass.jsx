@@ -73,19 +73,16 @@ function EnrollClass() {
             />
             Kembali
           </Link>
-          <div className="mx-auto bg-alert px-28 py-2 text-white rounded-lg">
-            Selesaikan Pembayaran sampai 10 Maret 2023 12:00
-          </div>
         </div>
-        <div className="flex  px-24 mt-10 gap-10">
-          <div className="flex flex-col gap-2 sm:w-full md:w-9/12 ">
+        <div className="flex flex-col md:flex-row px-4 md:px-24 mt-10 gap-10">
+          <div className="flex flex-col gap-2 md:w-full ">
             <div className="  bg-primary px-28 py-4  font-bold text-white rounded-lg text-center">
               Pembayaran Dapat dilakukan melalui
             </div>
 
-            <div className="columns-3 mt-8 px-20">
+            <div className="columns-3 mt-8 px-20 sm:w-full">
               <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
-                <img src={MANDIRI} alt="" className="w-full h-7" />
+                <img src={MANDIRI} alt="" className="w-full h-7 sm:h-7" />
               </div>
               <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
                 <img src={BRI} alt="" className="w-full h-7" />
@@ -106,6 +103,7 @@ function EnrollClass() {
               </div>
             </div>
           </div>
+
           <div>
             <div className=" flex-col bg-base-100 shadow-xl border border-primary rounded-2xl">
               <h2 className="text-lg font-bold p-3">Pembayaran Kelas</h2>
