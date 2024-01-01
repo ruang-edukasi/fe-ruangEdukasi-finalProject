@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function CourseItem({
   id,
-  imageUrl,
+  thumbnailCourse,
   courseName,
   instructorName,
   courseCategory,
@@ -22,11 +22,10 @@ function CourseItem({
         to={`/detail-course/${id}`}
         className="card w-96 bg-base-100 shadow-md flex"
       >
-        <img src="/course.svg" className="rounded-t-lg w-full" />
+        <img src={thumbnailCourse} className="rounded-t-lg w-full" />
         <div className="p-4">
           <div className="flex justify-between">
             <h3 className="text-primary font-bold">{courseCategory}</h3>
-           
           </div>
           <h3 className="font-bold">{courseName}</h3>
           <p>by {instructorName}</p>
@@ -53,7 +52,7 @@ function CourseItem({
               120 Menit
             </p>
           </div>
-         
+
           <p className="absolute top-0 left-0 bg-primary text-white p-1 font-bold text-sm rounded-tl-md">
             {courseType}
           </p>
@@ -65,11 +64,9 @@ function CourseItem({
 
 CourseItem.propTypes = {
   id: PropType.number.isRequired,
-  imageUrl: PropType.string.isRequired,
+  thumbnailCourse: PropType.string.isRequired,
   courseName: PropType.string.isRequired,
   instructorName: PropType.string.isRequired,
-  price: PropType.number.isRequired,
-  rating: PropType.number.isRequired,
   courseCategory: PropType.string.isRequired,
   courseLevel: PropType.string.isRequired,
   courseType: PropType.string.isRequired,

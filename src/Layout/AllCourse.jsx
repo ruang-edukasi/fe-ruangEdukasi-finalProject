@@ -51,7 +51,7 @@ function AllCourse() {
   return (
     <div>
       <ButtonCourse onFilterChange={handleFilterChange} />
-      <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2  sm:gap-y-10 xl:grid-cols-3 2xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-x-2 md:gap-y-4 md:gap-x-4 sm:grid-cols-2 gap-y-5 xl:grid-cols-3 xl:gap-x-0 2xl:grid-cols-4">
         {filteredKelas.slice(0, 12).map((courses) => (
           <div key={courses?.id} className="flex justify-center">
             <CourseItem
