@@ -56,7 +56,7 @@ function AllCourse() {
           <div key={courses?.id} className="flex justify-center">
             <CourseItem
               id={courses?.id}
-              imageURL=""
+              thumbnailCourse={courses?.thumbnailCourse || "/course.jpg"}
               courseName={courses?.courseName}
               instructorName={courses?.instructorName}
               courseDescription={courses?.courseDescription}

@@ -6,7 +6,7 @@ import CourseItem from "../Components/Card/CourseItem";
 import Sidebar from "../Components/Sidebar/Sidebar";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faBarsStaggered, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { getCourseDashbord } from "../redux/action/courseAction";
 
 function Dashbord() {
@@ -36,6 +36,10 @@ function Dashbord() {
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
+  };
+
+  const handleOffCanfas = () => {
+    setNavDashbord(!navDashbord);
   };
 
   return (
@@ -88,7 +92,7 @@ function Dashbord() {
                   <CourseItem
                     key={courses?.id}
                     id={courses?.id}
-                    imageURL=""
+                    thumbnailCourse={courses?.thumbnailCourse || "/course.jpg"}
                     courseName={courses?.courseName}
                     instructorName={courses?.instructorName}
                     courseDescription={courses?.courseDescription}
@@ -104,160 +108,14 @@ function Dashbord() {
 
             {/* Offcanvas Button */}
             <div
-              onClick={() => setNavDashbord(!navDashbord)}
-              className={`text-white cursor-pointer z-20 fixed left-0 bottom-0 text-lg bg-blue-600  hover:opacity-80 p-2 rounded-r-lg lg:hidden transform ${
-                navDashbord ? "translate-x-0" : "translate-x-full"
-              } transition-transform duration-300 ease-in-out`}
+              onClick={handleOffCanfas}
+              className={`text-white cursor-pointer z-20 fixed right-0 bottom-0 text-lg bg-blue-600  hover:opacity-80 p-2 sm:p-3 rounded-l-lg lg:hidden transform transition-transform duration-300 ease-in-out`}
             >
-              <FontAwesomeIcon icon={faEllipsis} />
-            </div>
-          </div>
-        </div>
-
-        {/* Offcanvas Content */}
-        <div
-          className={`bg-blue-100 h-screen w-60 fixed top-0 left-0 overflow-y-auto transform ease-in-out duration-300 ${
-            navDashbord ? "translate-x-0" : "-translate-x-full"
-          } lg:hidden`}
-        >
-          <div className="form-control mt-28 ml-6">
-            <div className="flex flex-col pb-3 ">
-              <h3 className="text-lg sm:text-xl font-bold">Filter</h3>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">Paling Baru</span>
-                </label>
-              </div>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">Paling Popular</span>
-                </label>
-              </div>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">Promo</span>
-                </label>
-              </div>
-            </div>
-
-            <div className="flex flex-col pb-3">
-              <h3 className="text-lg sm:text-xl font-bold">Kategori</h3>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">
-                    Backend Development
-                  </span>
-                </label>
-              </div>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">
-                    Frontend Development
-                  </span>
-                </label>
-              </div>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">UI/UX Design</span>
-                </label>
-              </div>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">Data Science</span>
-                </label>
-              </div>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">
-                    Quality Asurance
-                  </span>
-                </label>
-              </div>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">
-                    Android Development
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            <div className="flex flex-col pb-3">
-              <h3 className="text-lg sm:text-xl font-bold">Level Kesulitan</h3>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">Semua Level</span>
-                </label>
-              </div>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">Beginner Level</span>
-                </label>
-              </div>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">
-                    Intermediate Level
-                  </span>
-                </label>
-              </div>
-              <div>
-                <label className="label cursor-pointer flex justify-start gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
-                  <span className="label-text sm:text-lg">Advanced Level</span>
-                </label>
-              </div>
+              {navDashbord ? (
+                <FontAwesomeIcon icon={faXmark} />
+              ) : (
+                <FontAwesomeIcon icon={faBarsStaggered} />
+              )}
             </div>
           </div>
         </div>
@@ -267,3 +125,14 @@ function Dashbord() {
 }
 
 export default Dashbord;
+
+{
+  /* Offcanvas Content
+<div
+  className={`bg-blue-100 h-screen w-60 fixed top-0 left-0 overflow-y-auto transform ease-in-out duration-300 ${
+    navDashbord ? "translate-x-0" : "-translate-x-full"
+  } lg:hidden`}
+>
+  <Sidebar />
+</div> */
+}

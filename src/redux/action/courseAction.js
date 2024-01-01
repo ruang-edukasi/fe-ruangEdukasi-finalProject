@@ -232,15 +232,35 @@ export const getDetail =
     }
   };
 
-export const getCourseDashbord = () => async (dispatch) => {
+export const getCourseDashbord = (filters) => async (dispatch) => {
   try {
-    const data = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/v1/search/multi/`
-    );
+    const params = new URLSearchParams();
+
+    if (filters.category && filters.category.length > 0) {
+      filters.category.forEach((categoryId) => {
+        params.append("catId", categoryId);
+      });
+    }
+
+    if (filters.level && filters.level.length > 0) {
+      filters.level.forEach((levelId) => {
+        params.append("levelId", levelId);
+      });
+    }
+
+    const apiUrl = `${
+      import.meta.env.VITE_API_URL
+    }/api/v1/search/multi/?${params.toString()}`;
+
+    const data = await axios.get(apiUrl);
 
     const { response } = data.data;
+    console.log("data get from api", response);
+
     dispatch(setCourseDashbord(response));
   } catch (error) {
+    console.error("Error fetching data:", error);
+
     if (axios.isAxiosError(error)) {
       alert(error?.response?.data?.message);
       return;

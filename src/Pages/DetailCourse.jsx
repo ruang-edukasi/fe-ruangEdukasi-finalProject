@@ -65,7 +65,6 @@ function DetailCourse() {
 
   return (
     <>
-      {/* {console.log(courseItem)} */}
       <Header />
       <section className="mb-36">
         <div className=" px-6 md:px-24 content w-full flex flex-col py-8 bg-[#EBF3FC]">
@@ -81,13 +80,7 @@ function DetailCourse() {
           <div className=" ms-5 mb-8 ">
             <h1 className="text-2xl font-bold text-primary w-3/5 flex justify-between ">
               {detail?.courseName}
-              <span className="self-center flex text-black">
-                <FontAwesomeIcon
-                  icon={faStar}
-                  className=" text-yellow-500 inline  text-[15px] self-center me-2"
-                />
-                {detail?.rating ? detail.rating : 0}
-              </span>
+              <span className="self-center flex text-black"></span>
             </h1>
             <h1 className="text-2xl font-bold ">
               {detail?.courseCategory} <span></span>
@@ -121,6 +114,8 @@ function DetailCourse() {
             <a
               className="text-center py-2.5 rounded-3xl bg-succes text-white px-6  mb-4 md:me-3"
               href={detail?.telegramLink}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Join Group Telegram
               <FontAwesomeIcon

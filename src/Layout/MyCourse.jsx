@@ -28,7 +28,7 @@ function MyCourse() {
         <CourseItem
           key={courses?.id}
           id={courses?.id}
-          imageURL=""
+          thumbnailCourse={courses?.thumbnailCourse || "/course.jpg"}
           courseName={courses?.courseName}
           instructorName={courses?.instructorName}
           courseType={courses?.courseType}
