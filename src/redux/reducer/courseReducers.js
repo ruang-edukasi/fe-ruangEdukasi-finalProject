@@ -15,6 +15,7 @@ const initialState = {
   detailCategory: [],
   enrollMessage : "",
   courseDashbord: [],
+  addProgres : [],
 };
 
 const courseSlice = createSlice({
@@ -63,6 +64,9 @@ const courseSlice = createSlice({
     setCourseDashbord: (state, action) => {
       state.courseDashbord = action.payload;
     },
+    setAddprogess: (state, action) => {
+      state.addProgres = action.payload;
+    },
   },
 });
 
@@ -81,6 +85,7 @@ export const {
   setDetailCategory,
   setEnrollMessage,
   setCourseDashbord,
+  setAddprogess,
 } = courseSlice.actions;
 
 export default courseSlice.reducer;

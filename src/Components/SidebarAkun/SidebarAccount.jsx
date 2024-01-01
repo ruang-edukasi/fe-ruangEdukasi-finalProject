@@ -11,7 +11,7 @@ import {
   faArrowRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
-const SidebarAkun = () => {
+const SidebarAccount = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
@@ -80,7 +80,7 @@ const SidebarAkun = () => {
       <div
         className="flex items-center gap-3 py-4 border-b-2 cursor-pointer border-slate-300 hover:text-primary"
         onClick={() => {
-          navigate("#");
+          navigate("/order-history");
         }}
       >
         <div className="text-primary">
@@ -102,4 +102,4 @@ const SidebarAkun = () => {
   );
 };
 
-export default SidebarAkun;
+export default SidebarAccount;

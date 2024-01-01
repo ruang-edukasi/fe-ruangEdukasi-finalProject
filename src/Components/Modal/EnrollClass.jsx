@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CaourseItem from "../Card/CourseItem";
+import CourseItem from "../Card/CourseItem";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import PropType from "prop-types";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { enrollClass } from "../../redux/action/courseAction";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useEffect } from "react";
 
 function EnrollClass({ course }) {
   const dispatch = useDispatch();
@@ -18,18 +18,18 @@ function EnrollClass({ course }) {
   // };
   const enrollFreeClass = async (e) => {
     e.preventDefault();
-
     try {
-      await dispatch(enrollClass(courseId, token,  navigate));
+      await dispatch(enrollClass(courseId, token, navigate));
       document.getElementById("my_modal_3").close();
     } catch (error) {
       console.error(error);
     }
   };
-
-
-  
-
+  useEffect(() => {
+    if (token) {
+      dispatch(enrollClass(courseId, navigate));
+    }
+  }, [dispatch, token]);
 
   return (
     <>
@@ -60,10 +60,10 @@ function EnrollClass({ course }) {
             </h3>
           )}
           <div className="w-full flex justify-center flex-col items-center gap-10">
-            <CaourseItem
+            <CourseItem
               key={course?.id}
               id={course.id}
-              imageURL=""
+              imageURL={course?.imageUrl}
               courseName={course?.courseName}
               instructorName={course?.instructorName}
               courseDescription={course?.courseDescription}

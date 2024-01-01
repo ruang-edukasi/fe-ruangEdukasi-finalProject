@@ -12,7 +12,6 @@ function CourseItem({
   imageUrl,
   courseName,
   instructorName,
- 
   courseCategory,
   courseLevel,
   courseType,
