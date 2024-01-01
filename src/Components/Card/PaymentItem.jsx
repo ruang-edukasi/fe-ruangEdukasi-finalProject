@@ -20,13 +20,12 @@ function CourseItem({
     <>
       <Link
         to={`/detail-course/${id}`}
-        className="card w-96 bg-base-100 shadow-md flex"
+        className="card w-full sm:w-96 bg-base-100 shadow-md flex flex-col"
       >
         <img src="/course.svg" className="rounded-t-lg w-full" />
         <div className="p-4">
           <div className="flex justify-between">
             <h3 className="text-primary font-bold">{courseCategory}</h3>
-           
           </div>
           <h3 className="font-bold">{courseName}</h3>
           <p>by {instructorName}</p>
@@ -53,7 +52,7 @@ function CourseItem({
               120 Menit
             </p>
           </div>
-         
+
           <p className="absolute top-0 left-0 bg-primary text-white p-1 font-bold text-sm rounded-tl-md">
             {courseType}
           </p>

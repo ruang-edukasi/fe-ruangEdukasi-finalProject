@@ -62,7 +62,7 @@ function EnrollClass() {
     <>
       <Header />
       <section className="mb-20">
-        <div className="container px-24 content w-full flex flex-col py-6 drop-shadow-lg">
+        <div className="container px-4 md:px-24 content w-full flex flex-col py-6 drop-shadow-lg">
           <Link
             className="text-base font-semibold leading-tight tracking-tight text-black md:text-2xl"
             onClick={() => navigate(-1)}
@@ -81,13 +81,13 @@ function EnrollClass() {
             </div>
 
             <div className="columns-3 mt-8 px-20 sm:w-full">
-              <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
+              <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center sm:w-full">
                 <img src={MANDIRI} alt="" className="w-full h-7 sm:h-7" />
               </div>
-              <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
+              <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center sm:w-full">
                 <img src={BRI} alt="" className="w-full h-7" />
               </div>
-              <div className="border bg-bse-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
+              <div className="border bg-bse-100 shadow-xl rounded-xl p-3 flex items-center justify-center sm:w-full">
                 <img src={BNI} alt="" className="w-full h-7" />
               </div>
             </div>
