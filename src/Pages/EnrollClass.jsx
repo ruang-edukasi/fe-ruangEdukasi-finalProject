@@ -42,7 +42,7 @@ function EnrollClass() {
     e.preventDefault();
 
     try {
-      await dispatch(getOrderCourse(courseId,navigate));
+      await dispatch(getOrderCourse(courseId, navigate));
     } catch (error) {
       console.error(error);
     }
@@ -111,7 +111,7 @@ function EnrollClass() {
                 <PaymentItem
                   key={detail?.id}
                   id={detail.id}
-                  imageURL=""
+                  thumbnailCourse={detail?.thumbnailCourse || "/course.jpg"}
                   courseName={detail?.courseName}
                   instructorName={detail?.instructorName}
                   courseDescription={detail?.courseDescription}

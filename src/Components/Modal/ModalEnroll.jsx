@@ -27,7 +27,7 @@ function ModalEnroll({ course }) {
             <CourseItem
               key={course?.id}
               id={course.id}
-              imageURL=""
+              thumbnailCourse={course?.thumbnailCourse || "/course.jpg"}
               courseName={course?.courseName}
               instructorName={course?.instructorName}
               courseDescription={course?.courseDescription}
