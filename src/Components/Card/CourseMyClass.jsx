@@ -62,7 +62,7 @@ function CourseMyClass({
               120 Menit
             </p>
           </div>
-          <div className="flex justify-between items-center mt-2">
+          <div className="mt-2">
             <progress
               className="progress progress-primary w-36 h-3 self-center relative "
               value={percentProgress}
