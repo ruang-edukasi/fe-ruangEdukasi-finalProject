@@ -131,17 +131,17 @@ const Modal = ({ show, onSubmit }) => {
                 </div>
               </div>
               <div>
-                <label className="block mb-1.5 text-sm font-semibold text-gray-900 ">
+                <label className="block mb-1.5 text-sm font-semibold text-gray-900">
                   Deskripsi
                 </label>
-                <input
-                  type="text"
+                <textarea
                   id="small-input"
-                  placeholder="Deskripsi"
+                  placeholder="Deskripsi target kursus"
                   value={course_description}
                   onChange={(event) => setCourseDescription(event.target.value)}
                   required
-                  className="block w-full p-7 text-gray-900 border border-gray-300 rounded-md bg-gray-50 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-full p-2.5 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-sm focus:border-blue-500 resize-none"
+                  rows={4} // Mengatur jumlah baris pada textarea
                 />
               </div>
               <div>
