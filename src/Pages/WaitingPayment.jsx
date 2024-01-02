@@ -35,9 +35,11 @@ function PaymentSucces() {
             </h4>
           </div>
           <form className="flex flex-col">
-            <button className="text-center bg-primary text-white py-2.5  rounded-3xl px-16 font-bold">
-              Riwayat Pembelian
-            </button>
+            <Link to={"/order-history"}>
+              <button className="text-center bg-primary text-white py-2.5  rounded-3xl px-16 font-bold">
+                Riwayat Pembelian
+              </button>
+            </Link>
             <Link to={"/"}>
               <div className="text-center text-blue-500 mt-3 font-bold ">
                 Kembali ke Beranda

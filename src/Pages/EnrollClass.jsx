@@ -75,31 +75,35 @@ function EnrollClass() {
           </Link>
         </div>
         <div className="flex flex-col md:flex-row px-4 md:px-24 mt-10 gap-10">
-          <div className="flex flex-col gap-2 md:w-full ">
+          <div className="flex flex-col gap-2 md:w-full sm:w-full ">
             <div className="  bg-primary px-28 py-4  font-bold text-white rounded-lg text-center">
               Pembayaran Dapat dilakukan melalui
             </div>
-
-            <div className="columns-3 mt-8 px-20 sm:w-full">
-              <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center sm:w-full">
-                <img src={MANDIRI} alt="" className="w-full h-7 sm:h-7" />
-              </div>
-              <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center sm:w-full">
-                <img src={BRI} alt="" className="w-full h-7" />
-              </div>
-              <div className="border bg-bse-100 shadow-xl rounded-xl p-3 flex items-center justify-center sm:w-full">
-                <img src={BNI} alt="" className="w-full h-7" />
+            <div className="flex justify-center gap-5">
+              <div className="columns-3 mt-8 px-26 w-96 gap-10">
+                <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center sm:w-full">
+                  <img src={MANDIRI} alt="" className="w-full h-7 sm:h-7" />
+                </div>
+                <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center sm:w-full">
+                  <img src={BRI} alt="" className="w-full h-7" />
+                </div>
+                <div className="border bg-bse-100 shadow-xl rounded-xl p-3 flex items-center justify-center sm:w-full">
+                  <img src={BNI} alt="" className="w-full h-7" />
+                </div>
               </div>
             </div>
-            <div className="columns-3 mt-3 px-20">
-              <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
-                <img src={Alfamart} alt="" className="w-full h-7" />
-              </div>
-              <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
-                <img src={Indomaret} alt="" className="w-full h-7" />
-              </div>
-              <div className="border bg-bse-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
-                <img src={Dana} alt="" className="w-full h-7" />
+
+            <div className="flex justify-center">
+              <div className="columns-3 mt-3 px-26 w-96">
+                <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
+                  <img src={Alfamart} alt="" className="w-full h-7" />
+                </div>
+                <div className="border bg-base-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
+                  <img src={Indomaret} alt="" className="w-full h-7" />
+                </div>
+                <div className="border bg-bse-100 shadow-xl rounded-xl p-3 flex items-center justify-center">
+                  <img src={Dana} alt="" className="w-full h-7" />
+                </div>
               </div>
             </div>
           </div>
