@@ -12,14 +12,6 @@ function EnrollClass({ course }) {
   const { courseId } = useParams();
   const { token } = useSelector((state) => state.auth);
 
-  // const enrollFreeClass = () => {
-  // dispatch(enrollClass(courseId, token, navigate));
-  //   document.getElementById("my_modal_3").close();
-
-  // };
-  // const enrollFreeClass = async () => {
-
-  // };
   const enrollFreeClass = async (e) => {
     e.preventDefault();
     try {
@@ -29,11 +21,7 @@ function EnrollClass({ course }) {
       console.error(error);
     }
   };
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(enrollClass(courseId, navigate));
-  //   }
-  // }, [dispatch, token]);
+ 
 
   return (
     <>
