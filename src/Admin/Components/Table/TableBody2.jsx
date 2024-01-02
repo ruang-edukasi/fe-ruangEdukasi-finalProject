@@ -1,22 +1,35 @@
 import PropType from "prop-types";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getPaymentVerification } from "../../../redux/action/courseAdminAction";
 
 const TableBody = ({ item, index }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleApprove = (orderTrx, status) => {
     if (status === "Paid") {
-      dispatch(getPaymentVerification(orderTrx));
+      dispatch(getPaymentVerification(item?.orderTrx));
     } else {
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Kelas tidak dapat disetujui. Status pembayaran 'BELUM BAYAR'",
-        confirmButtonColor: "#d33",
+        icon: "success",
+        title: "Sukses!",
+        text: "Pembayaran telah disetujui!",
+        confirmButtonColor: "#3085d6",
         confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setTimeout(() => {
+            window.location.reload();
+            navigate("/dashbord-admin");
+          }, 100);
+        }
       });
+
+      if (status === "Waiting payment") {
+        dispatch(getPaymentVerification(orderTrx, "Paid"));
+      }
     }
   };
 
@@ -74,7 +87,7 @@ const TableBody = ({ item, index }) => {
               } font-semibold rounded-3xl w-28 h-8 hover:bg-indigo-800 transition duration-300`}
               disabled={item?.status !== "Waiting payment"}
             >
-              {item?.status === "Waiting payment" ? "Tidak Setuju" : "Setuju"}
+              {item?.status === "Waiting payment" ? "Setujui" : "Selesai"}
             </button>
           </td>
         </tr>

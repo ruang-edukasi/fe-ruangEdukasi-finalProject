@@ -135,7 +135,7 @@ export const getMyCourse =
         }
       );
       const { response } = data.data;
-      dispatch(setMyCourse(response?.myCourse));
+      dispatch(setMyCourse(response?.riwayatOrder));
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setErrors({
@@ -201,8 +201,6 @@ export const getDetail =
         dispatch(setDetail(response));
         dispatch(setCourseContent(content));
         dispatch(setCourseItem(content[contentObject?.id]));
-
-        //get next video
         if (currentVideoIndex < content.length) {
           dispatch(setCourseItem(content[currentVideoIndex]));
         }
@@ -263,6 +261,8 @@ export const getCourseDashbord = (filters) => async (dispatch) => {
 
     dispatch(setCourseDashbord(response));
   } catch (error) {
+    console.error("Error fetching data:", error);
+
     if (axios.isAxiosError(error)) {
       alert(error?.response?.data?.message);
       return;
@@ -365,8 +365,7 @@ export const checkCoupon = (id, coupon_code) => async (dispatch, getState) => {
     dispatch(setCoupon(responseCoupon));
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      alert(error?.response?.data?.message);
-      return;
+      alert.error(error);
     }
   }
 };
@@ -445,10 +444,10 @@ export const addProgres = (id, contentId) => async (dispatch, getState) => {
 
     const { response } = progress.data;
     dispatch(setAddprogess(response));
+    // alert("mantap bang id :", contentId, "  udah kamu kelarin");
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      alert(error?.response?.data?.message);
-      return;
+      console.log(error?.response?.data);
     }
   }
 };

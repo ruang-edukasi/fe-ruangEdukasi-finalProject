@@ -98,7 +98,7 @@ function DetailCourse() {
             <h3 className="text-base font-bold">
               {detail?.instructorName} <span></span>
             </h3>
-            <div className="w-full md:w-4/12 rounded-md flex justify-between mb-6">
+            <div className="w-full md:w-5/12 lg:w-3/12 rounded-md flex justify-between mb-6">
               <p className="font-semibold text-sm">
                 <FontAwesomeIcon
                   icon={faShieldHeart}
@@ -123,7 +123,7 @@ function DetailCourse() {
             </div>
             <div className="flex flex-col justify-start items-start md:flex-row">
               <a
-                className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 mb-4 md:me-3 w-full lg:w-64"
+                className="text-center py-2.5 rounded-3xl bg-succes text-white  px-6 mb-4 hover:scale-105 ease-out duration-300 md:me-3 w-full lg:w-64 "
                 href={detail?.telegramLink}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -139,7 +139,7 @@ function DetailCourse() {
               ) : (
                 <a
                   onClick={show}
-                  className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 cursor-pointer min-h-fit w-full lg:w-64"
+                  className="text-center py-2.5 rounded-3xl bg-succes text-white px-6 cursor-pointer hover:scale-105 ease-out duration-300 min-h-fit w-full lg:w-64"
                 >
                   Gabung ke kelas
                   <FontAwesomeIcon
