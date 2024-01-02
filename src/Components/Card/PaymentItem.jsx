@@ -20,7 +20,7 @@ function CourseItem({
     <>
       <Link
         to={`/detail-course/${id}`}
-        className="card w-96 bg-base-100 shadow-md flex"
+        className="card w-full sm:w-96 bg-base-100 shadow-md flex flex-col"
       >
         <img src={thumbnailCourse} className="rounded-t-lg w-full" />
         <div className="p-4">

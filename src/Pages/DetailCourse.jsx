@@ -98,7 +98,7 @@ function DetailCourse() {
             <h3 className="text-base font-bold">
               {detail?.instructorName} <span></span>
             </h3>
-            <div className="w-full md:w-4/12 rounded-md flex justify-between mb-6">
+            <div className="w-full md:w-5/12 lg:w-3/12 rounded-md flex justify-between mb-6">
               <p className="font-semibold text-sm">
                 <FontAwesomeIcon
                   icon={faShieldHeart}
