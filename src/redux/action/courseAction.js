@@ -14,6 +14,7 @@ import {
   setCourseDashbord,
   setEnrollMessage,
   setAddprogess,
+  setMyCourseDashboard,
 } from "../reducer/courseReducers";
 import Swal from "sweetalert2";
 import { setToken } from "../reducer/authReducer";
@@ -221,18 +222,22 @@ export const getDetail =
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if (error.response.status) {
-          dispatch(setToken(""));
-        }
-        // alert(error?.response?.data?.message);
+        dispatch(setToken(""));
         return;
       }
+      alert(error?.message);
     }
   };
 
 export const getCourseDashbord = (filters) => async (dispatch) => {
   try {
     const params = new URLSearchParams();
+
+    if (filters.type && filters.type.length > 0) {
+      filters.type.forEach((typeId) => {
+        params.append("typeId", typeId);
+      });
+    }
 
     if (filters.category && filters.category.length > 0) {
       filters.category.forEach((categoryId) => {
@@ -258,6 +263,50 @@ export const getCourseDashbord = (filters) => async (dispatch) => {
   } catch (error) {
     console.error("Error fetching data:", error);
 
+    if (axios.isAxiosError(error)) {
+      alert(error?.response?.data?.message);
+      return;
+    }
+  }
+};
+
+export const getMyCourseDashboard = (filters) => async (dispatch, getState) => {
+  try {
+    const params = new URLSearchParams();
+
+    if (filters.type && filters.type.length > 0) {
+      filters.type.forEach((typeId) => {
+        params.append("typeId", typeId);
+      });
+    }
+
+    if (filters.category && filters.category.length > 0) {
+      filters.category.forEach((categoryId) => {
+        params.append("catId", categoryId);
+      });
+    }
+
+    if (filters.level && filters.level.length > 0) {
+      filters.level.forEach((levelId) => {
+        params.append("levelId", levelId);
+      });
+    }
+    const apiUrl = `${
+      import.meta.env.VITE_API_URL
+    }/api/v1/user/dashboard/multi?${params.toString()}`;
+
+    let { token } = getState().auth;
+
+    const data = await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const { response } = data.data;
+
+    dispatch(setMyCourseDashboard(response?.myCourse));
+  } catch (error) {
     if (axios.isAxiosError(error)) {
       alert(error?.response?.data?.message);
       return;

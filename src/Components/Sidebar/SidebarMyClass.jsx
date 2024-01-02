@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { getCourseDashbord } from "../../redux/action/courseAction";
+import { getMyCourseDashboard } from "../../redux/action/courseAction";
 
-function Sidebar({ navDashbord }) {
+function SidebarMyClass({ navDashbord }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ function Sidebar({ navDashbord }) {
       level: Array.isArray(levelParams) ? levelParams : [levelParams],
     };
 
-    dispatch(getCourseDashbord(filters));
+    dispatch(getMyCourseDashboard(filters));
   };
 
   const handleChekboxFilter = (paramName, paramValue) => {
@@ -230,8 +230,8 @@ function Sidebar({ navDashbord }) {
   );
 }
 
-Sidebar.propTypes = {
+SidebarMyClass.propTypes = {
   navDashbord: PropTypes.bool,
 };
 
-export default Sidebar;
+export default SidebarMyClass;
