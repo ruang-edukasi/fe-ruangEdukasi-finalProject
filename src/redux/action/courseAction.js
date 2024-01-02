@@ -223,18 +223,22 @@ export const getDetail =
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if (error.response.status) {
-          dispatch(setToken(""));
-        }
-        // alert(error?.response?.data?.message);
+        dispatch(setToken(""));
         return;
       }
+      alert(error?.message);
     }
   };
 
 export const getCourseDashbord = (filters) => async (dispatch) => {
   try {
     const params = new URLSearchParams();
+
+    if (filters.type && filters.type.length > 0) {
+      filters.type.forEach((typeId) => {
+        params.append("typeId", typeId);
+      });
+    }
 
     if (filters.category && filters.category.length > 0) {
       filters.category.forEach((categoryId) => {

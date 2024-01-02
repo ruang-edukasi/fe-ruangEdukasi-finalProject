@@ -13,17 +13,18 @@ function Sidebar({ navDashbord }) {
   }, [searchParams, dispatch]);
 
   const handleParamsChange = () => {
+    const typeParams = searchParams.getAll("typeId");
     const categoryParams = searchParams.getAll("catId");
     const levelParams = searchParams.getAll("levelId");
 
     const filters = {
+      type: Array.isArray(typeParams) ? typeParams : [typeParams],
       category: Array.isArray(categoryParams)
         ? categoryParams
         : [categoryParams],
       level: Array.isArray(levelParams) ? levelParams : [levelParams],
     };
 
-    console.log(filters);
     dispatch(getCourseDashbord(filters));
   };
 
@@ -62,7 +63,8 @@ function Sidebar({ navDashbord }) {
               <input
                 type="checkbox"
                 className="checkbox checkbox-primary"
-                disabled
+                checked={searchParams.getAll("typeId").includes("1")}
+                onChange={() => handleChekboxFilter("typeId", "1")}
               />
               <span className="label-text text-sm sm:text-lg">Paling Baru</span>
             </label>
