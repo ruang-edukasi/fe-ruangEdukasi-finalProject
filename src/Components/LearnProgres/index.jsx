@@ -51,8 +51,7 @@ function index({
               .filter(
                 (filtered) =>
                   filtered.status.includes("Preview") ||
-                  filtered.infoProgress.includes("Done") ||
-                  filtered.videoLink.includes("https://youtu.be")
+                  filtered.videoLink.includes("http")
               )
               .map((item, num) => (
                 <CourseItem
@@ -100,7 +99,7 @@ function index({
             {courseContent
               .filter(
                 (filtered) =>
-                  filtered.videoLink.includes("#") ||
+                  filtered.videoLink.includes("#") &&
                   filtered.infoProgress.includes("Not Started")
               )
               .map((item, num) => (
@@ -109,7 +108,7 @@ function index({
                   item={item}
                   courseId={courseId}
                   setCurrentVideoIndex={setCurrentVideoIndex}
-                  num={num + 1}
+                  num={num}
                 />
               ))}
           </>

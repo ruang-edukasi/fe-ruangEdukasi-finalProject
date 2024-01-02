@@ -53,12 +53,6 @@ function DetailCourse() {
       dispatch(addProgres(courseId, courseItem?.id));
     }
   }, [courseId, courseItem?.id, dispatch, token]);
-  // const handleNext = () => {
-  //   setCurrentVideoIndex(currentVideoIndex + 1);
-  //   setLoading(true);
-  //   dispatch(addProgres(courseId, token, courseItem?.id));
-  //   console.log(courseItem?.id);
-  // };
 
   useEffect(() => {
     const userToken = localStorage.getItem("token");
