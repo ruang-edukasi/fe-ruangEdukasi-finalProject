@@ -5,7 +5,6 @@ import PropType from "prop-types";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { enrollClass } from "../../redux/action/courseAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 function EnrollClass({ course }) {
   const dispatch = useDispatch();
@@ -14,10 +13,11 @@ function EnrollClass({ course }) {
   const { token } = useSelector((state) => state.auth);
 
   // const enrollFreeClass = () => {
+  // dispatch(enrollClass(courseId, token, navigate));
+  //   document.getElementById("my_modal_3").close();
 
   // };
-  const enrollFreeClass = async (e) => {
-    e.preventDefault();
+  const enrollFreeClass = async () => {
     try {
       await dispatch(enrollClass(courseId, token, navigate));
       document.getElementById("my_modal_3").close();
@@ -25,11 +25,11 @@ function EnrollClass({ course }) {
       console.error(error);
     }
   };
-  useEffect(() => {
-    if (token) {
-      dispatch(enrollClass(courseId, navigate));
-    }
-  }, [dispatch, token, navigate]);
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(enrollClass(courseId, navigate));
+  //   }
+  // }, [dispatch, token]);
 
   return (
     <>
@@ -90,7 +90,7 @@ function EnrollClass({ course }) {
               <div className="w-full flex justify-center">
                 <button
                   className=" bg-primary text-white py-2.5  rounded-3xl w-7/12 flex gap-2 mb-8 shadow-sm justify-center"
-                  onClick={enrollFreeClass}
+                  onClick={() => enrollFreeClass}
                 >
                   Enroll Sekarang
                   <FontAwesomeIcon
