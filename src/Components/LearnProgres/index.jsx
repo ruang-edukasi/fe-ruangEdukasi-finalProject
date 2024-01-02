@@ -21,7 +21,7 @@ function index({
                 max="100"
               ></progress>
               <p className="absolute top-0 left-7 text-white font-semibold text-sm">
-                {course?.progressPercent}% complete
+                {Math.round(course?.progressPercent)}% complete
               </p>
             </div>
           ) : (

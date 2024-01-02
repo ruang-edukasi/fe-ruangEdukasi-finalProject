@@ -4,36 +4,18 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import PropType from "prop-types";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { enrollClass } from "../../redux/action/courseAction";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function EnrollClass({ course }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { courseId } = useParams();
-  const { token } = useSelector((state) => state.auth);
 
-  // const enrollFreeClass = () => {
-  // dispatch(enrollClass(courseId, token, navigate));
-  //   document.getElementById("my_modal_3").close();
-
-  // };
-  // const enrollFreeClass = async () => {
-
-  // };
   const enrollFreeClass = async (e) => {
     e.preventDefault();
-    try {
-      await dispatch(enrollClass(courseId, token, navigate));
-      document.getElementById("my_modal_3").close();
-    } catch (error) {
-      console.error(error);
-    }
+    await dispatch(enrollClass(courseId, navigate));
+    document.getElementById("my_modal_3").close();
   };
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(enrollClass(courseId, navigate));
-  //   }
-  // }, [dispatch, token]);
 
   return (
     <>
@@ -94,7 +76,7 @@ function EnrollClass({ course }) {
               <div className="w-full flex justify-center">
                 <button
                   className=" bg-primary text-white py-2.5  rounded-3xl w-7/12 flex gap-2 mb-8 shadow-sm justify-center"
-                  onClick={() => enrollFreeClass}
+                  onClick={enrollFreeClass}
                 >
                   Enroll Sekarang
                   <FontAwesomeIcon

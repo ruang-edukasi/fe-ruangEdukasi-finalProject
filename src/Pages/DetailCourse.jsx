@@ -161,9 +161,11 @@ function DetailCourse() {
                 controls={true}
                 playing={playVideo}
                 onProgress={(progress) => {
-                  setPlayed(progress.playedSeconds);
+                  setPlayed(progress.playedSeconds); 
                   setLoading(false);
                 }}
+                
+                
                 onDuration={(progress) => {
                   setduration(progress - 3);
                 }}
