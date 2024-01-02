@@ -49,7 +49,7 @@ function KelasSaya() {
 
   useEffect(() => {
     const userToken = localStorage.getItem("token");
-    const isLoggedIn = userToken && userToken ;
+    const isLoggedIn = userToken && userToken;
 
     if (!token && !isLoggedIn) {
       Swal.fire({
@@ -122,7 +122,7 @@ function KelasSaya() {
                 {filteredKelas.map((courses) => (
                   <CourseMyClass
                     key={courses?.id}
-                    id={courses?.id}
+                    id={courses?.courseId}
                     thumbnailCourse={courses?.thumbnailCourse || "/course.jpg"}
                     courseName={courses?.courseName}
                     instructorName={courses?.instructorName}

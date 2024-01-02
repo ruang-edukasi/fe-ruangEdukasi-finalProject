@@ -76,7 +76,7 @@ function EnrollClass({ course }) {
               <div className="w-full flex justify-center">
                 <button
                   className=" bg-primary text-white py-2.5  rounded-3xl w-7/12 flex gap-2 mb-8 shadow-sm justify-center"
-                  onClick={() => enrollFreeClass}
+                  onClick={enrollFreeClass}
                 >
                   Enroll Sekarang
                   <FontAwesomeIcon
