@@ -35,10 +35,14 @@ function DashbordAdmin() {
   const itemsPerPage = 10;
   const maxPagesToShow = 3;
 
-  const combinedData = myOrder.map((order, index) => ({
-    ...order,
-    ...myCourse[index],
-  }));
+  const combinedData =
+    myOrder && myCourse
+      ? myOrder.map((order, index) => ({
+          ...order,
+          ...myCourse[index],
+        }))
+      : [];
+
   const totalItems = combinedData.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   let start = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
@@ -134,7 +138,7 @@ function DashbordAdmin() {
                       className="mr-1"
                     />
                   )}
-                  {isRecentFirst ? "Tanggal Terlama" : "Tanggal Terbaru"}
+                  {isRecentFirst ? "Tanggal Terbaru" : "Tanggal Terlama"}
                 </button>
                 {isSearchActive ? (
                   <div className="relative">
