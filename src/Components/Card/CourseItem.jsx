@@ -19,7 +19,6 @@ function CourseItem({
   courseLevel,
   courseType,
 }) {
-  console.log(thumbnailCourse);
   return (
     <>
       <Link

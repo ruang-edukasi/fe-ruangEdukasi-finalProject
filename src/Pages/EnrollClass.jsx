@@ -115,10 +115,12 @@ function EnrollClass() {
                 <PaymentItem
                   key={detail?.id}
                   id={detail.id}
-                  thumbnailCourse={detail?.thumbnailCourse || "/course.jpg"}
+                  thumbnailCourse={detail?.imageUrl || "/course.jpg"}
                   courseName={detail?.courseName}
                   instructorName={detail?.instructorName}
                   courseDescription={detail?.courseDescription}
+                  price={detail?.price}
+                  rating={detail?.rating}
                   courseType={detail?.courseType}
                   courseCategory={detail?.courseCategory}
                   courseLevel={detail?.courseLevel}

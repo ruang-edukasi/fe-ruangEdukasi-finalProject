@@ -14,7 +14,6 @@ function OrderHistory() {
   const dispatch = useDispatch();
 
   const { myCourse } = useSelector((state) => state.course);
-  console.log(myCourse);
   const { token } = useSelector((state) => state.auth);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [errors, setErrors] = useState({
@@ -154,12 +153,13 @@ function OrderHistory() {
           </div>
 
           {/* Isi Akun */}
-          <div className="flex py-4 text-center max-h-screen">
+          <div className="flex py-4 text-center max-h-screen ">
             {window.innerWidth < 1024 ? null : <SidebarAkun />}
-            <div className="w-full flex flex-col gap-3 justify-center items-center overflow-y-scroll">
-              {myCourse.map((courses) => (
+            <div className="w-full flex flex-col gap-3 justify-center items-center overflow-y-scroll ">
+              {myCourse.map((course) => (
                 <HistoryOrder
-                  key={courses?.id}
+                  key={course?.id}
+                  courses={course}
                 />
               ))}
             </div>
