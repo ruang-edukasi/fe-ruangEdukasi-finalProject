@@ -348,8 +348,9 @@ export const getDetailCategory =
     }
   };
 
-export const enrollClass = (id, token, navigate) => async (dispatch) => {
+export const enrollClass = (id, navigate) => async (dispatch, getState) => {
   try {
+    let { token } = getState().auth;
     const enroll = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/v1/user/enroll/course/${id}`,
       {},
