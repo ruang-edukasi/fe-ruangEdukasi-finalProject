@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./Pages/HomePage";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import Dashbord from "./Pages/Dashbord";
+import ResertPassword from "./Pages/ResertPassword";
+import EnrollClass from "./Pages/EnrollClass";
+import { Otp } from "./Pages/Otp";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import KelasSaya from "./Pages/KelasSaya";
+import LoginAdmin from "./Admin/Pages/LoginAdmin";
+import DashbordAdmin from "./Admin/Pages/DashbordAdmin";
+import SearchCourse from "./Pages/SearchCourse";
+import UbahPassword from "./Pages/Profile/UbahPassword";
+import ProfileAkun from "./Pages/Profile/ProfileAkun";
+import KelolaKelas from "./Admin/Pages/KelolaKelas";
+import DetailCourse from "./Pages/DetailCourse";
+import PaymentSucces from "./Pages/PaymentSucces";
+import Notification from "./Pages/Notification";
+import CategoryCourse from "./Pages/CategoryCourse";
+import WaitingPayment from "./Pages/WaitingPayment";
+import OrderHistory from "./Pages/Profile/OrderHistory";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashbord" element={<Dashbord />} />
+          <Route path="/kelas-saya" element={<KelasSaya />} />
+          <Route path="/SearchAllCourse" element={<KelasSaya />} />
+          <Route path="/user/reset/:resetId" element={<ResertPassword />} />
+          <Route path="/payment/:courseId" element={<EnrollClass />} />
+          <Route path="/otp/:verifId" element={<Otp />} />
+          <Route path="/search" element={<SearchCourse />} />
+          <Route path="/detail-course/:courseId" element={<DetailCourse />} />
+          <Route
+            path="/detail-category-course/:courseId"
+            element={<CategoryCourse />}
+          />
+          <Route path="/ubah-password" element={<UbahPassword />} />
+          <Route path="/profile-akun" element={<ProfileAkun />} />
+          <Route path="/order-history" element={<OrderHistory />} />
+          <Route path="/detail-course" element={<DetailCourse />} />
+          <Route path="/payment-succes" element={<PaymentSucces />} />
+          <Route path="/waiting-payment" element={<WaitingPayment />} />
+          <Route path="/notifikasi" element={<Notification />} />
+
+          {/* Admin Pages */}
+          <Route path="/login-admin" element={<LoginAdmin />} />
+          <Route path="/dashbord-admin" element={<DashbordAdmin />} />
+          <Route path="/kelolakelas-admin" element={<KelolaKelas />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  );
 }
 
-export default App
+export default App;
