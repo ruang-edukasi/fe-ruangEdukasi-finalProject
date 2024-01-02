@@ -18,15 +18,15 @@ function HistoryOrder({ courses }) {
         <img src="/course.svg" className="rounded-t-lg w-full" />
         <div className="p-4">
           <div className="flex justify-between">
-            {/* <h3 className="text-primary font-bold">{courses?.id}</h3> */}
+            <h3 className="text-primary font-bold">{courses?.id}</h3>
             <p className="font-bold">
               <span>
                 <FontAwesomeIcon icon={faStar} className="text-amber-400" />
               </span>
-              {/* 4.7{rating} */}
+              4.7{courses?.rating}
             </p>
           </div>
-          {/* <h3 className="font-bold">{courseName}</h3> */}
+          <h3 className="font-bold">{courses?.courseName}</h3>
           {/* <p>by {instructorName}</p> */}
           <div className="flex justify-between font-semibold text-sm">
             <p className="text-primary">
@@ -36,7 +36,7 @@ function HistoryOrder({ courses }) {
                   className="text-success mr-1"
                 />
               </span>
-              {/* {courseLevel} */}
+              {courses?.courseLevel}
             </p>
             <p>
               <span>
@@ -53,11 +53,11 @@ function HistoryOrder({ courses }) {
           </div>
           <div className="flex justify-between items-center">
             <p className="text-md font-semibold pt-1 text-red-500">
-              {/* {courseType === "Premium" ? `Rp${price}` : "Mulai Kelas"} */}
+              {courses?.courseType === "Premium" ? `Rp${courses?.price}` : "Mulai Kelas"}
             </p>
           </div>
           <p className="absolute top-0 left-0 bg-primary text-white p-1 font-bold text-sm rounded-tl-md">
-            {/* {courseType} */}
+            {courses?.courseType}
           </p>
         </div>
       </Link>
