@@ -12,10 +12,12 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 import CardOne from "../Components/Card/CardOne";
 import Modal from "../Components/Modal";
 import Modal2 from "../Components/Modal/AddContent";
+import Modal3 from "../Components/Modal/AddCourseTarget";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addCourse,
   addCourseContent,
+  addCourseTarget,
   getCourse,
   getCourseSummary,
 } from "../../redux/action/courseAdminAction";
@@ -100,6 +102,15 @@ function KelolaKelas() {
     document.getElementById("my_modal_4").close();
   };
 
+  const handleAddCourseTarget = (formData) => {
+    dispatch(addCourseTarget(formData, navigate)).then(() => {
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    });
+    document.getElementById("my_modal_5").close();
+  };
+
   const handleSortByPrice = () => {
     const sorted = [...course].sort((a, b) => {
       const priceA = a.price || 0;
@@ -133,6 +144,10 @@ function KelolaKelas() {
     document.getElementById("my_modal_4").showModal();
   }
 
+  function showModalAddCourseTarget() {
+    document.getElementById("my_modal_5").showModal();
+  }
+
   return (
     <div className="flex h-screen">
       <div className="sm:fixed sm:top-0 sm:left-0 sm:z-40 sm:w-64 sm:h-screen pt-20">
@@ -163,6 +178,13 @@ function KelolaKelas() {
                   Tambah Konten
                 </button>
                 <button
+                  className="bg-primary text-white rounded-3xl px-4 py-2 lg:px-2 lg:py-2 text-base lg:text-md mb-3 lg:mb-0 hover:bg-indigo-700 transition duration-300"
+                  onClick={showModalAddCourseTarget}
+                >
+                  <FontAwesomeIcon icon={faPlus} className="mr-1" />
+                  Tambah Target
+                </button>
+                <button
                   onClick={handleSortByPrice}
                   className="bg-transparent text-primary border border-primary rounded-3xl px-4 py-2 lg:px-2 lg:py-2 text-base lg:text-md mb-3 lg:mb-0 hover:bg-primary hover:text-white transition duration-300"
                 >
@@ -171,7 +193,7 @@ function KelolaKelas() {
                   ) : (
                     <FontAwesomeIcon icon={faArrowUp} className="mr-1" />
                   )}
-                  {isDescending ? "Harga Terendah" : "Harga Tertinggi"}
+                  {isDescending ? "Harga Tertinggi" : "Harga Terendah"}
                 </button>
                 {isSearchActive ? (
                   <div className="relative">
@@ -256,6 +278,10 @@ function KelolaKelas() {
       </div>
       <Modal show={showModalAddCourse} onSubmit={handleAddCourse} />
       <Modal2 show={showModalAddContent} onSubmit={handleAddCourseContent} />
+      <Modal3
+        show={showModalAddCourseTarget}
+        onSubmit={handleAddCourseTarget}
+      />
     </div>
   );
 }
