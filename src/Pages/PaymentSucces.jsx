@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Header from "../Components/Header/Header";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -32,7 +32,7 @@ function PaymentSucces() {
     <>
       <Header />
       <section className="mb-10">
-        <div className="container px-24 content w-full flex flex-col py-10 drop-shadow-lg border">
+        <div className="w-full flex flex-col py-10 drop-shadow-lg border">
           <div className="mx-auto bg-succes w-4/6 text-center font-semibold py-2 text-white rounded-lg">
             Terimakasih atas pembayaran transaksi
           </div>
@@ -49,12 +49,15 @@ function PaymentSucces() {
             <p className="text-lg ">E-receipt telah dikirimkan ke email.</p>
           </div>
           <form className="flex flex-col">
-            <button className="text-center bg-primary text-white py-2.5  rounded-3xl px-16 font-bold">
+            <Link
+              to="/kelas-saya"
+              className="text-center bg-primary text-white py-2.5  rounded-3xl px-16 font-bold"
+            >
               Mulai belajar
-            </button>
-            <button className="text-center text-blue-500 mt-3 font-bold ">
+            </Link>
+            <Link to="/" className="text-center text-blue-500 mt-3 font-bold ">
               Kembali ke Beranda
-            </button>
+            </Link>
           </form>
         </main>
       </section>
