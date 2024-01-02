@@ -1,9 +1,8 @@
 import { useState } from "react";
 import Button from "../Components/Button/Button";
 import Header from "../Components/Header/Header";
-import Sidebar from "../Components/Sidebar/Sidebar";
 import CourseMyClass from "../Components/Card/CourseMyClass";
-import { getMyCourse } from "../redux/action/courseAction";
+import { getMyCourseDashboard } from "../redux/action/courseAction";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +10,7 @@ import Swal from "sweetalert2";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBarsStaggered, faXmark } from "@fortawesome/free-solid-svg-icons";
+import SidebarMyClass from "../Components/Sidebar/SidebarMyClass";
 
 function KelasSaya() {
   const dispatch = useDispatch();
@@ -18,15 +18,15 @@ function KelasSaya() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [navDashbord, setNavDashbord] = useState(false);
   const { user, token } = useSelector((state) => state.auth);
-  const { myCourse } = useSelector((state) => state.course);
+  const { myCourseDashboard } = useSelector((state) => state.course);
   const [errors, setErrors] = useState({
     isError: false,
     message: null,
   });
-  const [filteredKelas, setFilteredKelas] = useState([...myCourse]);
+  const [filteredKelas, setFilteredKelas] = useState([...myCourseDashboard]);
 
   useEffect(() => {
-    const filtered = myCourse.filter((item) => {
+    const filtered = myCourseDashboard.filter((item) => {
       if (activeFilter === "All") {
         return true;
       } else if (activeFilter === "InProgress") {
@@ -37,7 +37,7 @@ function KelasSaya() {
       return true;
     });
     setFilteredKelas(filtered);
-  }, [myCourse, activeFilter]);
+  }, [myCourseDashboard, activeFilter]);
 
   useEffect(() => {
     const userToken = localStorage.getItem("token");
@@ -54,13 +54,13 @@ function KelasSaya() {
         navigate("/login");
       });
     } else {
-      dispatch(getMyCourse(setErrors, errors));
+      dispatch(getMyCourseDashboard(setErrors, errors));
     }
-  }, [dispatch, errors, myCourse, navigate, token, user]);
+  }, [dispatch, errors, myCourseDashboard, navigate, token, user]);
 
   useEffect(() => {
-    dispatch(getMyCourse(setErrors, errors));
-  }, [dispatch, errors, myCourse]);
+    dispatch(getMyCourseDashboard(setErrors, errors));
+  }, [dispatch, errors, myCourseDashboard]);
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
@@ -80,7 +80,7 @@ function KelasSaya() {
           </div>
           <div className="flex justify-evenly gap-1">
             {/* Sidebar */}
-            <Sidebar navDashbord={navDashbord} />
+            <SidebarMyClass navDashbord={navDashbord} />
 
             {/* Main Content */}
             <div className="flex flex-col gap-5">
