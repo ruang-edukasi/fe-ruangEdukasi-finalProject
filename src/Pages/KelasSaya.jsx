@@ -41,7 +41,7 @@ function KelasSaya() {
 
   useEffect(() => {
     const userToken = localStorage.getItem("token");
-    const isLoggedIn = userToken !== null;
+    const isLoggedIn = userToken && userToken ;
 
     if (!token && !isLoggedIn) {
       Swal.fire({
