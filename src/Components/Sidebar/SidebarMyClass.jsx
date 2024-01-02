@@ -56,7 +56,7 @@ function SidebarMyClass({ navDashbord }) {
       }`}
     >
       <div className="form-control">
-        <div className="flex flex-col pb-3">
+        <div className="flex flex-col sm:pb-3">
           <h3 className="text-lg sm:text-xl font-bold">Filter</h3>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
@@ -93,7 +93,7 @@ function SidebarMyClass({ navDashbord }) {
           </div>
         </div>
 
-        <div className="flex flex-col pb-3">
+        <div className="flex flex-col sm:pb-3">
           <h3 className="text-lg sm:text-xl font-bold">Kategori</h3>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
@@ -175,7 +175,7 @@ function SidebarMyClass({ navDashbord }) {
           </div>
         </div>
 
-        <div className="flex flex-col pb-3">
+        <div className="flex flex-col sm:pb-3">
           <h3 className="text-lg sm:text-xl font-bold">Level Kesulitan</h3>
           <div>
             <label className="label cursor-pointer flex justify-start gap-2">
@@ -217,7 +217,7 @@ function SidebarMyClass({ navDashbord }) {
             </label>
           </div>
         </div>
-        <div className="py-4 px-14">
+        <div className="sm:py-4 px-14">
           <button
             className="text-red-600 hover:text-red-800 text-sm md:text-lg"
             onClick={handleRemoveFilter}
