@@ -52,24 +52,25 @@ export const getMyCourse =
   };
 
 export const getPaymentVerification =
-  (orderTrx, setErrors, errors) => async (dispatch, getState) => {
+  (idPayment, status, setErrors, errors) => async (dispatch, getState) => {
     try {
       let { token } = getState().auth;
 
       const data = await axios.post(
         `${
           import.meta.env.VITE_API_URL
-        }/api/v1/admin/order/verification/${orderTrx}`,
+        }/api/v1/admin/order/verification/${idPayment}`,
+        { status },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      const { response } = data.data.response;
+      const { response } = data.data;
 
       dispatch(setMyOrder(response));
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setErrors({
