@@ -161,11 +161,9 @@ function DetailCourse() {
                 controls={true}
                 playing={playVideo}
                 onProgress={(progress) => {
-                  setPlayed(progress.playedSeconds); 
+                  setPlayed(progress.playedSeconds);
                   setLoading(false);
                 }}
-                
-                
                 onDuration={(progress) => {
                   setduration(progress - 3);
                 }}
@@ -255,6 +253,7 @@ function DetailCourse() {
                 <LearnProgres
                   courseContent={courseContent}
                   courseId={courseItem?.id}
+                  course={detail}
                   setCurrentVideoIndex={setCurrentVideoIndex}
                   token={token}
                   indexVideo={currentVideoIndex}

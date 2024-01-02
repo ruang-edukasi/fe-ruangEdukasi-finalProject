@@ -28,7 +28,9 @@ function index({
             ""
           )}
         </div>
-        <h2 className="text-primary font-bold mb-2">Chapter 1 - Pendahuluan</h2>
+        <h2 className="text-primary font-bold mb-2">
+          Chapter 1 - {course?.courseName}
+        </h2>
 
         {course?.alreadyBuy && course?.alreadyBuy ? (
           <>
