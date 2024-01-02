@@ -134,7 +134,7 @@ export const getMyCourse =
         }
       );
       const { response } = data.data;
-      dispatch(setMyCourse(response?.myCourse));
+      dispatch(setMyCourse(response?.riwayatOrder));
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setErrors({

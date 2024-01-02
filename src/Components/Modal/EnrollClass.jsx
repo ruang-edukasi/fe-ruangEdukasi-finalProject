@@ -17,7 +17,11 @@ function EnrollClass({ course }) {
   //   document.getElementById("my_modal_3").close();
 
   // };
-  const enrollFreeClass = async () => {
+  // const enrollFreeClass = async () => {
+
+  // };
+  const enrollFreeClass = async (e) => {
+    e.preventDefault();
     try {
       await dispatch(enrollClass(courseId, token, navigate));
       document.getElementById("my_modal_3").close();
@@ -63,7 +67,7 @@ function EnrollClass({ course }) {
             <CourseItem
               key={course?.id}
               id={course.id}
-              imageURL={course?.imageUrl}
+              thumbnailCourse={course?.imageUrl || "/course.jpg"}
               courseName={course?.courseName}
               instructorName={course?.instructorName}
               courseDescription={course?.courseDescription}
