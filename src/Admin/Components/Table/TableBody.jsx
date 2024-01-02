@@ -97,7 +97,7 @@ const TableBody = ({ item, index }) => {
                 type="text"
                 value={instructor_name}
                 onChange={(e) => setUpdateInstructorName(e.target.value)}
-                className="border bg-gray-50 w-28 focus:border-2 focus:border-primary focus:outline-none rounded-md p-1"
+                className="border bg-gray-50 w-32 h-10 focus:border-2 focus:border-primary focus:outline-none rounded-md p-1"
               />
             ) : (
               item?.instructorName
@@ -108,9 +108,9 @@ const TableBody = ({ item, index }) => {
               <select
                 value={course_category_id}
                 onChange={(e) => setUpdateCourseCategoryId(e.target.value)}
-                className="select select-bordered border bg-gray-50 w-28 focus:border-2 focus:border-primary focus:outline-none"
+                className="select select-bordered border bg-gray-50 w-36 h-10 focus:border-2 focus:border-primary focus:outline-none"
               >
-                <option value="">Pilih Kategori</option>
+                <option disabled>{item?.courseCategory}</option>
                 <option value="1">Backend Development</option>
                 <option value="2">Frontend Development</option>
                 <option value="3">UI/UX Design</option>
@@ -128,7 +128,7 @@ const TableBody = ({ item, index }) => {
                 type="text"
                 value={course_name}
                 onChange={(e) => setUpdateCourseName(e.target.value)}
-                className="border bg-gray-50 w-28 focus:border-2 focus:border-primary focus:outline-none rounded-md p-1"
+                className="border bg-gray-50 w-38 h-10 focus:border-2 focus:border-primary focus:outline-none rounded-md p-1"
               />
             ) : (
               item?.courseName
@@ -145,9 +145,9 @@ const TableBody = ({ item, index }) => {
               <select
                 value={course_type_id}
                 onChange={(e) => setUpdateCourseTypeId(e.target.value)}
-                className="select select-bordered border bg-gray-50 w-28 focus:border-2 focus:border-primary focus:outline-none"
+                className="select select-bordered border bg-gray-50 w-32 h-10 focus:border-2 focus:border-primary focus:outline-none"
               >
-                <option value="">Pilih Tipe Kelas</option>
+                <option disabled>{item?.courseType}</option>
                 <option value="1">Premium</option>
                 <option value="2">Gratis</option>
               </select>
@@ -160,9 +160,9 @@ const TableBody = ({ item, index }) => {
               <select
                 value={course_level_id}
                 onChange={(e) => setUpdateCourseLevelId(e.target.value)}
-                className="select select-bordered border bg-gray-50 w-28 focus:border-2 focus:border-primary focus:outline-none"
+                className="select select-bordered border bg-gray-50 w-32 h-10 focus:border-2 focus:border-primary focus:outline-none"
               >
-                <option value="">Pilih Level Kelas</option>
+                <option disabled>{item?.courseLevel}</option>
                 <option value="1">Pemula</option>
                 <option value="2">Menengah</option>
                 <option value="3">Lanjut</option>
@@ -177,7 +177,7 @@ const TableBody = ({ item, index }) => {
                 type="text"
                 value={price}
                 onChange={(e) => setUpdatePrice(e.target.value)}
-                className="border bg-gray-50 w-28 focus:border-2 focus:border-primary focus:outline-none rounded-md p-1"
+                className="border bg-gray-50 w-32 h-10 focus:border-2 focus:border-primary focus:outline-none rounded-md p-1"
               />
             ) : (
               `Rp.${item?.price == null ? "0" : item?.price}`

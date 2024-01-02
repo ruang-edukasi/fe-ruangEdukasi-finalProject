@@ -134,7 +134,7 @@ function DashbordAdmin() {
                       className="mr-1"
                     />
                   )}
-                  {isRecentFirst ? "Tanggal Terlama" : "Tanggal Terbaru"}
+                  {isRecentFirst ? "Tanggal Terbaru" : "Tanggal Terlama"}
                 </button>
                 {isSearchActive ? (
                   <div className="relative">

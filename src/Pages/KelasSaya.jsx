@@ -19,11 +19,19 @@ function KelasSaya() {
   const [navDashbord, setNavDashbord] = useState(false);
   const { user, token } = useSelector((state) => state.auth);
   const { myCourseDashboard } = useSelector((state) => state.course);
-  const [errors, setErrors] = useState({
-    isError: false,
-    message: null,
-  });
   const [filteredKelas, setFilteredKelas] = useState([...myCourseDashboard]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getMyCourseDashboard());
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [dispatch]);
 
   useEffect(() => {
     const filtered = myCourseDashboard.filter((item) => {
@@ -54,13 +62,9 @@ function KelasSaya() {
         navigate("/login");
       });
     } else {
-      dispatch(getMyCourseDashboard(setErrors, errors));
+      dispatch(getMyCourseDashboard());
     }
-  }, [dispatch, errors, myCourseDashboard, navigate, token, user]);
-
-  useEffect(() => {
-    dispatch(getMyCourseDashboard(setErrors, errors));
-  }, [dispatch, errors, myCourseDashboard]);
+  }, [dispatch, myCourseDashboard, navigate, token, user]);
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);

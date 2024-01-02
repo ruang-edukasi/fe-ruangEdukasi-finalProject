@@ -304,7 +304,6 @@ export const getMyCourseDashboard = (filters) => async (dispatch, getState) => {
     });
 
     const { response } = data.data;
-
     dispatch(setMyCourseDashboard(response?.myCourse));
   } catch (error) {
     if (axios.isAxiosError(error)) {
